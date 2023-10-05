@@ -1,17 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-const id = Math.floor(Math.random() * 40) + 1;
-const img = `${id}.jpg`;
+// const id = Math.floor(Math.random() * 40) + 1;
+// const img = `${id}.jpg`;
 ---
 
 <Layout title="Intelligent DevOps">
 	<main>
 		<h1>alphab</h1>
 		<div id="bg">
-			<a href={img} target="_blank">
-				<img src={img} />
+			<a id="poster-a" target="_blank">
+				<img id="poster" />
 			</a>
 		</div>
 	</main>
 </Layout>
+
+<script is:inline>
+const id = Math.floor(Math.random() * 40) + 1;
+const img = `${id}.jpg`;
+document.querySelector("#poster").src = img;
+document.querySelector("#poster-a").href = img;
+</script>
