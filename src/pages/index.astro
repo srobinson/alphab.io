@@ -21,4 +21,13 @@ const id = Math.floor(Math.random() * 40) + 1;
 const img = `${id}.jpg`;
 document.querySelector("#poster").src = img;
 document.querySelector("#poster-a").href = img;
+
+function preload_image(i) {
+	let img = new Image();
+	img.src = `${i}.jpg`;
+}
+
+for (let i = 1; i <= 40; i++) {
+	preload_image(i);
+}
 </script>
