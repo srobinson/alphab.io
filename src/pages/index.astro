@@ -3,13 +3,13 @@ import Layout from "../layouts/Layout.astro";
 
 // const id = Math.floor(Math.random() * 40) + 1;
 // const img = `${id}.jpg`;
-const count = 40;
+const count = 40
 ---
 
 <Layout title="Intelligent DevOps">
 	<main>
 		<h1>alphab</h1>
-		<!-- <ul id="icons">
+		<ul id="icons">
 			{
 				new Array(count).fill(count).map((_, i) => (
 					<li>
@@ -19,7 +19,7 @@ const count = 40;
 					</li>
 				))
 			}
-		</ul> -->
+		</ul>
 		<div id="bg">
 			<a id="poster-a" target="_blank">
 				<img id="poster" />
@@ -29,7 +29,7 @@ const count = 40;
 </Layout>
 
 <script is:inline>
-const count = 40;
+const count = 40
 const id = Math.floor(Math.random() * count) + 1;
 const img = `${id}.jpg`;
 document.querySelector("#poster").src = img;
