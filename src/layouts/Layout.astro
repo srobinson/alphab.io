@@ -28,7 +28,70 @@ const { title } = Astro.props;
 	</body>
 </html>
 <style is:global>
-	@import url(https://fonts.googleapis.com/css?family=Lobster+Two:700italic);
+	@import url("https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+JP:wght@900&display=swap");
+
+	/*
+  1. Use a more-intuitive box-sizing model.
+*/
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+	/*
+  2. Remove default margin
+*/
+	* {
+		margin: 0;
+	}
+	/*
+  Typographic tweaks!
+  3. Add accessible line-height
+  4. Improve text rendering
+*/
+	body {
+		line-height: 1.5;
+		-webkit-font-smoothing: antialiased;
+	}
+	/*
+  5. Improve media defaults
+*/
+	img,
+	picture,
+	video,
+	canvas,
+	svg {
+		display: block;
+		max-width: 100%;
+	}
+	/*
+  6. Remove built-in form typography styles
+*/
+	input,
+	button,
+	textarea,
+	select {
+		font: inherit;
+	}
+	/*
+  7. Avoid text overflows
+*/
+	p,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		overflow-wrap: break-word;
+	}
+	/*
+  8. Create a root stacking context
+*/
+	#root,
+	#__next {
+		isolation: isolate;
+	}
 
 	:root {
 		--accent: 136, 58, 234;
@@ -41,20 +104,44 @@ const { title } = Astro.props;
 			white 60%
 		);
 	}
-	html {
+
+	html,
+	body {
+		margin: 0;
+		box-sizing: border-box;
 		font-family: system-ui, sans-serif;
-		background: rgb(30, 130, 230);
-		background-size: 224px;
+		background: #c93c4c;
 	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
+
+	main {
+		margin: 0 auto;
+		line-height: 1.6;
+	}
+
+	@media (width > 2024px) {
+		main {
+			width: 2024px;
+		}
+	}
+	h1 {
+		background: #fff;
+		font-size: 22rem;
+		font-weight: 900;
+		line-height: 1;
+		text-align: right;
+		text-transform: uppercase;
+		font-family: "Anton", sans-serif;
+		color: #c93c4c;
+		padding: 0 1rem 0 0;
+		margin: 0;
+	}
+
+	#bg {
+		width: 100%;
+		height: 100%;
+	}
+
+	#bg img {
+		width: 100%;
 	}
 </style>
