@@ -22,7 +22,7 @@ const count = 40
 		</ul>
 		<div id="bg">
 			<a id="poster-a" target="_blank">
-				<img id="poster" />
+				<img id="poster" src="loading.jpg" />
 			</a>
 		</div>
 	</main>
@@ -30,10 +30,6 @@ const count = 40
 
 <script is:inline>
 const count = 40
-const id = Math.floor(Math.random() * count) + 1;
-const img = `${id}.jpg`;
-document.querySelector("#poster").src = img;
-document.querySelector("#poster-a").href = img;
 
 function preload_image(i) {
 	let img = new Image();
@@ -43,4 +39,10 @@ function preload_image(i) {
 for (let i = 1; i <= count; i++) {
 	preload_image(i);
 }
+
+const id = Math.floor(Math.random() * count) + 1;
+const img = `${id}.jpg`;
+document.querySelector("#poster").src = img;
+document.querySelector("#poster-a").href = img;
+
 </script>
