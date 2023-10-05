@@ -3,11 +3,23 @@ import Layout from "../layouts/Layout.astro";
 
 // const id = Math.floor(Math.random() * 40) + 1;
 // const img = `${id}.jpg`;
+const count = 40;
 ---
 
 <Layout title="Intelligent DevOps">
 	<main>
 		<h1>alphab</h1>
+		<!-- <ul id="icons">
+			{
+				new Array(count).fill(count).map((_, i) => (
+					<li>
+						<a href=`${i + 1}.jpg` target="_blank">
+							{i + 1}
+						</a>
+					</li>
+				))
+			}
+		</ul> -->
 		<div id="bg">
 			<a id="poster-a" target="_blank">
 				<img id="poster" />
@@ -17,7 +29,8 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <script is:inline>
-const id = Math.floor(Math.random() * 40) + 1;
+const count = 40;
+const id = Math.floor(Math.random() * count) + 1;
 const img = `${id}.jpg`;
 document.querySelector("#poster").src = img;
 document.querySelector("#poster-a").href = img;
@@ -27,7 +40,7 @@ function preload_image(i) {
 	img.src = `${i}.jpg`;
 }
 
-for (let i = 1; i <= 40; i++) {
+for (let i = 1; i <= count; i++) {
 	preload_image(i);
 }
 </script>
