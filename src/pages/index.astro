@@ -13,7 +13,7 @@ const count = 140
 			{
 				new Array(count).fill(count).map((_, i) => (
 					<li>
-						<a href=`${i + 1}.jpg` target="_blank">
+						<a href=`o/${i + 1}.jpg` target="_blank">
 							{i + 1}
 						</a>
 					</li>
@@ -43,6 +43,6 @@ for (let i = 1; i <= count; i++) {
 const id = Math.floor(Math.random() * count) + 1;
 const img = `${id}.jpg`;
 document.querySelector("#poster").src = img;
-document.querySelector("#poster-a").href = img;
+document.querySelector("#poster-a").href = `o/${img}`;
 
 </script>
