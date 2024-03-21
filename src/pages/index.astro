@@ -3,46 +3,34 @@ import Layout from "../layouts/Layout.astro";
 
 // const id = Math.floor(Math.random() * 140) + 1;
 // const img = `${id}.jpg`;
-const count = 140
+const count = 140;
 ---
 
-<Layout title="Intelligent DevOps">
+<Layout title="Agent Smart">
 	<main>
 		<h1>alphab</h1>
-		<ul id="icons">
-			{
-				new Array(count).fill(count).map((_, i) => (
-					<li>
-						<a href=`o/${i + 1}.jpg` target="_blank">
-							{i + 1}
-						</a>
-					</li>
-				))
-			}
-		</ul>
 		<div id="bg">
 			<a id="poster-a" target="_blank">
-				<img id="poster" src="loading.jpg" />
+				<img id="poster" src="132.jpg" />
 			</a>
-		</div>
+		</div> -->
 	</main>
 </Layout>
 
-<script is:inline>
-const count = 140
+<!-- <script is:inline>
+	const count = 140;
 
-function preload_image(i) {
-	let img = new Image();
-	img.src = `${i}.jpg`;
-}
+	function preload_image(i) {
+		let img = new Image();
+		img.src = `${i}.jpg`;
+	}
 
-for (let i = 1; i <= count; i++) {
-	preload_image(i);
-}
+	for (let i = 1; i <= count; i++) {
+		preload_image(i);
+	}
 
-const id = Math.floor(Math.random() * count) + 1;
-const img = `${id}.jpg`;
-document.querySelector("#poster").src = img;
-document.querySelector("#poster-a").href = `o/${img}`;
-
-</script>
+	const id = Math.floor(Math.random() * count) + 1;
+	const img = `${id}.jpg`;
+	document.querySelector("#poster").src = img;
+	document.querySelector("#poster-a").href = `o/${img}`;
+</script> -->
