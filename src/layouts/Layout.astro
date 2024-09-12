@@ -235,6 +235,11 @@ const { title } = Astro.props;
 					"--animation-rotate-time",
 					Math.ceil(time * 102) + "s",
 				);
+			if (container)
+				container.style.setProperty(
+					"--animation-grow-time",
+					Math.ceil(time * 33) + "s",
+				);
 		});
 	});
 </script>
