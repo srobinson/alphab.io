@@ -1,36 +1,19 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-// const id = Math.floor(Math.random() * 140) + 1;
-// const img = `${id}.jpg`;
-const count = 140;
 ---
 
 <Layout title="Agent Smart">
 	<main>
 		<h1>alphab</h1>
-		<div id="bg">
-			<a id="poster-a" target="_blank">
-				<img id="poster" src="132.jpg" />
-			</a>
-		</div> -->
+		<div class="cube-container">
+			<div class="cube">
+				<div class="face front"></div>
+				<div class="face back"></div>
+				<div class="face right"></div>
+				<div class="face left"></div>
+				<div class="face top"></div>
+				<div class="face bottom"></div>
+			</div>
+		</div>
 	</main>
 </Layout>
-
-<!-- <script is:inline>
-	const count = 140;
-
-	function preload_image(i) {
-		let img = new Image();
-		img.src = `${i}.jpg`;
-	}
-
-	for (let i = 1; i <= count; i++) {
-		preload_image(i);
-	}
-
-	const id = Math.floor(Math.random() * count) + 1;
-	const img = `${id}.jpg`;
-	document.querySelector("#poster").src = img;
-	document.querySelector("#poster-a").href = `o/${img}`;
-</script> -->
