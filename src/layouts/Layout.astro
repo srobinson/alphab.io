@@ -206,8 +206,8 @@ const { title } = Astro.props;
 		}
 
 		50% {
-			width: 350px;
-			height: 350px;
+			width: 250px;
+			height: 250px;
 		}
 	}
 </style>
@@ -236,6 +236,9 @@ const { title } = Astro.props;
 					"--animation-rotate-time",
 					Math.ceil(time * 102) + "s",
 				);
+			if (time < 0.5) {
+				time = 0.5;
+			}
 			if (container)
 				container.style.setProperty(
 					"--animation-grow-time",
