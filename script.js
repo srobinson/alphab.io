@@ -1,3 +1,4 @@
-document.getElementById('header').addEventListener('click', function() {
-    document.getElementById('content').classList.add('show');
-});
+// Promise polyfill for older browsers
+if (!window.Promise) {
+  window.Promise = require('promise-polyfill');
+}
