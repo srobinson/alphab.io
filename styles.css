@@ -8,3 +8,9 @@
     opacity: 1;
     transform: translateY(0);
 }
+
+#header {
+    background-image: url('clouds.png');
+    background-size: cover;
+    background-position: center;
+}
