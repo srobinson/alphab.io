@@ -80,10 +80,6 @@ const { title } = Astro.props;
 		overflow: hidden;
 	}
 
-	body {
-		border: #6ff solid 8vw;
-	}
-
 	main {
 		/* margin: 0 auto; */
 		line-height: 1.6;
@@ -91,12 +87,6 @@ const { title } = Astro.props;
 	}
 
 	@media (width > 2024px) {
-		/* main {
-			width: 2024px;
-		} */
-		body {
-			border: #6ff solid 8rem;
-		}
 		main h1 {
 			font-size: 3vw;
 		}
@@ -137,6 +127,10 @@ const { title } = Astro.props;
 			rgba(0, 0, 0, 0.09) 0px 8px 4px,
 			rgba(0, 0, 0, 0.09) 0px 16px 8px,
 			rgba(0, 0, 0, 0.09) 0px 32px 16px;
+	}
+
+	h1.hide {
+		display: none;
 	}
 
 	#cube-container {
@@ -227,6 +221,10 @@ const { title } = Astro.props;
 </style>
 <script>
 	document.addEventListener("DOMContentLoaded", function () {
+		document.fonts.load("1em Anton").then(() => {
+			const heading = document.getElementById("heading");
+			if (heading) heading.classList.toggle("hide");
+		});
 		document.addEventListener("mousedown", function (event) {
 			const container = document.getElementById("cube-container");
 			// Get the mouse position relative to the viewport
