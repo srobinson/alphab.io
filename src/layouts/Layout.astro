@@ -80,8 +80,12 @@ const { title } = Astro.props;
 		overflow: hidden;
 	}
 
+	body {
+		border: #6ff solid 8vw;
+	}
+
 	main {
-		margin: 0 auto;
+		/* margin: 0 auto; */
 		line-height: 1.6;
 		position: relative;
 	}
@@ -90,13 +94,20 @@ const { title } = Astro.props;
 		/* main {
 			width: 2024px;
 		} */
+		body {
+			border: #6ff solid 8rem;
+		}
 		main h1 {
 			font-size: 3vw;
 		}
 	}
 	h1 {
-		background-color: #fff;
-		font-size: 6vw;
+		/* transform: translateX(-1rem) translateY(-10rem); */
+
+		background: #fff;
+
+		/* font-size: 6vw; */
+		font-size: 3rem;
 		font-weight: 900;
 		line-height: 1;
 		font-family: "Anton", sans-serif;
@@ -105,13 +116,16 @@ const { title } = Astro.props;
 		/* color: transparent; */
 		opacity: 0.95;
 		padding: 4rem 1rem 1rem;
-		margin: 0;
+		margin: 0.9;
 		position: fixed;
+		/* top: 1rem;
+		left: 1rem; */
 		top: 40vh;
 		left: 10vw;
-		z-index: 2;
+		z-index: 10;
 		/* border: 1rem #c93c4c double; */
 		border: 0.75rem #a11 solid;
+		border: #6ff solid 10px;
 		/* border: 0.75rem #c93c4c solid; */
 		/* border-radius: 4rem; */
 		border-top-left-radius: 4rem;
