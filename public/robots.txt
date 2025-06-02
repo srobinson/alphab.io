@@ -1,0 +1,37 @@
+# Robots.txt for RADE AI Solutions
+# https://aplab.io
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow important crawlable content
+Allow: /blog/
+Allow: /services/
+Allow: /my-approach/
+Allow: /pricing/
+Allow: /contact/
+
+# Sitemap location
+Sitemap: https://aplab.io/sitemap.xml
+
+# Crawl delay (optional - helps with server load)
+Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
