@@ -88,7 +88,7 @@ RADE is a professional AI consulting platform that helps content creators and bu
 
    ```bash
    git clone <repository-url>
-   cd aplab.io
+   cd alphab.io
    ```
 
 2. **Install dependencies**
@@ -234,9 +234,7 @@ This project is proprietary and confidential. All rights reserved.
 
 For questions about this project or AI consulting services:
 
-- **Website**: [Your Website URL]
-- **Email**: [Your Email]
-- **LinkedIn**: [Your LinkedIn Profile]
+- **LinkedIn**: https://www.linkedin.com/in/your-profile
 
 ---
 

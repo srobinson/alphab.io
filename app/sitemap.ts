@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://aplab.io";
+  const baseUrl = "https://alphab.io";
 
   // Static pages
   const staticPages = [

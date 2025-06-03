@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "AI Tech Blog | Daily AI Insights & Technology Analysis",
         description: "Daily insights into cutting-edge AI technologies, research papers, and emerging tech trends.",
-        url: "https://aplab.io/blog",
+        url: "https://alphab.io/blog",
         type: "website",
         images: [
             {
@@ -36,11 +36,11 @@ export const metadata: Metadata = {
         images: ["/images/blog-twitter.jpg"],
     },
     alternates: {
-        canonical: "https://aplab.io/blog",
+        canonical: "https://alphab.io/blog",
         types: {
             "application/rss+xml": [
                 {
-                    url: "https://aplab.io/blog/rss.xml",
+                    url: "https://alphab.io/blog/rss.xml",
                     title: "RADE AI Blog RSS Feed",
                 },
             ],

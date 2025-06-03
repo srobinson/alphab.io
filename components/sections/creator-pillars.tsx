@@ -71,17 +71,17 @@ export function CreatorPillars() {
             initial="hidden"
             whileInView="visible"
             variants={{
-                hidden: { opacity: 0, y: 50 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { duration: 0.5, ease: "easeOut" } },
             }}
             viewport={{ once: true, amount: 0.1 }}
         >
-            <motion.h2
+            {/* <motion.h2
                 variants={{
                     hidden: { opacity: 0, y: 10 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
                 }}
-                className="font-black tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl text-gray-900 dark:text-gray-100"
+                className="font-black tracking-tight text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-gray-900 dark:text-gray-100"
             >
                 <AnimatedUnderlineText
                     pathDefinition={PREDEFINED_UNDERLINE_PATHS.gentleArc}
@@ -92,7 +92,7 @@ export function CreatorPillars() {
                     <span style={{ display: "inline-block" }}>Elevate</span>
                 </AnimatedUnderlineText>{" "}
                 Your Influence.
-            </motion.h2>
+            </motion.h2> */}
 
             <motion.div
                 className="text-center mb-16 mt-12 md:mt-16"
@@ -101,43 +101,107 @@ export function CreatorPillars() {
                 transition={{ duration: 0.6, delay: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
             >
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-blue-600 dark:text-blue-500 mb-4">
-                    How AI Gives You The Creator's Edge
+                <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-gray-900 dark:text-gray-100 mb-6">
+                    Here's what I know
                 </h2>
+                <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-4xl mx-auto leading-relaxed">
+                    I've spent years in the trenches, building systems that actually work.
+                    Not theory. Not hype. Just proven methods that turn content into results.
+                </p>
             </motion.div>
 
             <motion.div
                 className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
                 variants={{
                     hidden: { opacity: 0 },
-                    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0 } },
+                    visible: {
+                        opacity: 1,
+                        transition: {
+                            staggerChildren: 0.15,
+                            delayChildren: 0.3,
+                            duration: 0.6
+                        }
+                    },
                 }}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.1 }}
             >
-                {creatorPillars.map((pillar) => {
+                {creatorPillars.map((pillar, index) => {
                     const IconComponent = pillar.icon
                     return (
                         <motion.div
                             key={pillar.title}
                             variants={{
-                                hidden: { opacity: 0, y: 30, scale: 0.95 },
-                                visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+                                hidden: {
+                                    opacity: 0,
+                                    y: 60,
+                                    scale: 0.8,
+                                    rotateX: -15
+                                },
+                                visible: {
+                                    opacity: 1,
+                                    y: 0,
+                                    scale: 1,
+                                    rotateX: 0,
+                                    transition: {
+                                        type: "spring",
+                                        damping: 20,
+                                        stiffness: 100,
+                                        duration: 0.8,
+                                        ease: [0.25, 0.46, 0.45, 0.94]
+                                    }
+                                },
                             }}
-                            className="group h-full space-y-4 p-5 bg-gray-50/70 dark:bg-gray-900/50 backdrop-blur-sm rounded-xl shadow-xl border border-gray-200/80 dark:border-gray-700/50 transition-all duration-200 ease-out hover:shadow-2xl dark:hover:shadow-blue-500/30 hover:scale-[1.02] hover:border-blue-400 dark:hover:border-blue-500/70"
+                            whileHover={{
+                                y: -8,
+                                scale: 1.05,
+                                rotateY: 5,
+                                transition: {
+                                    type: "spring",
+                                    damping: 15,
+                                    stiffness: 200
+                                }
+                            }}
+                            className="group h-full space-y-4 p-5 bg-gray-50/70 dark:bg-gray-900/50 backdrop-blur-sm rounded-xl shadow-xl border border-gray-200/80 dark:border-gray-700/50 transition-all duration-300 ease-out hover:shadow-2xl dark:hover:shadow-blue-500/30 hover:border-blue-400 dark:hover:border-blue-500/70"
+                            style={{ perspective: "1000px" }}
                         >
-                            <div className="flex items-center space-x-3">
-                                <div className="w-10 h-10 bg-blue-500 dark:bg-blue-600 rounded-lg flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-110">
+                            <motion.div
+                                className="flex items-center space-x-3"
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+                                viewport={{ once: true }}
+                            >
+                                <motion.div
+                                    className="w-10 h-10 bg-blue-500 dark:bg-blue-600 rounded-lg flex items-center justify-center transition-transform duration-200 ease-out group-hover:scale-110"
+                                    whileHover={{
+                                        rotate: 360,
+                                        scale: 1.2,
+                                        transition: { duration: 0.6 }
+                                    }}
+                                >
                                     <IconComponent className="w-5 h-5 text-white transition-transform duration-200 ease-out group-hover:rotate-3" />
-                                </div>
-                                <h3 className="text-lg lg:text-xl font-black tracking-tight text-gray-900 dark:text-white">
+                                </motion.div>
+                                <motion.h3
+                                    className="text-lg lg:text-xl font-black tracking-tight text-gray-900 dark:text-white"
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
+                                    viewport={{ once: true }}
+                                >
                                     {pillar.title}
-                                </h3>
-                            </div>
-                            <p className="text-gray-700 dark:text-gray-300 text-sm lg:text-base leading-relaxed">
+                                </motion.h3>
+                            </motion.div>
+                            <motion.p
+                                className="text-gray-700 dark:text-gray-300 text-sm lg:text-base leading-relaxed"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
+                                viewport={{ once: true }}
+                            >
                                 {pillar.description}
-                            </p>
+                            </motion.p>
                         </motion.div>
                     )
                 })}

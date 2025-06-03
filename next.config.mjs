@@ -6,17 +6,27 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // Allow development origins for both dev and prod
+  experimental: {
+    allowedDevOrigins: [
+      "localhost:3000",
+      "127.0.0.1:3000",
+      "rade.alphab.local:3000",
+      "alphab.io",
+      "www.alphab.io",
+    ],
+  },
   images: {
     // Enable image optimization for better SEO and performance
     unoptimized: false,
     formats: ["image/webp", "image/avif"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    domains: ["aplab.io"],
+    domains: ["alphab.io"],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "aplab.io",
+        hostname: "alphab.io",
         port: "",
         pathname: "/images/**",
       },

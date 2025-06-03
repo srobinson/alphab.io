@@ -6,11 +6,20 @@ import { motion } from "framer-motion"
 export function ClockBackground() {
     const [time, setTime] = useState(new Date())
     const [isVisible, setIsVisible] = useState(false)
+    const [isMobile, setIsMobile] = useState(false)
 
     useEffect(() => {
         const timer = setInterval(() => {
             setTime(new Date())
         }, 1000)
+
+        // Check if mobile
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768)
+        }
+
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
 
         // Clock reveal animation
         const revealTimer = setTimeout(() => {
@@ -20,6 +29,7 @@ export function ClockBackground() {
         return () => {
             clearInterval(timer)
             clearTimeout(revealTimer)
+            window.removeEventListener('resize', checkMobile)
         }
     }, [])
 
@@ -34,18 +44,18 @@ export function ClockBackground() {
 
     return (
         <div
-            className="absolute inset-0 pointer-events-none overflow-hidden"
+            className="absolute top-0 left-0 right-0 pointer-events-none m-0"
             style={{
-                perspective: "3000px",
-                perspectiveOrigin: "center center",
+                perspective: "5000px",
+                perspectiveOrigin: "top center",
             }}
         >
             <motion.div
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                className="absolute top-0 left-0 right-0 transform -translate-x-1/2 md:-translate-y-0 -translate-y-0"
                 style={{
-                    width: "120vw",
-                    height: "120vh",
-                    transformOrigin: "center center",
+                    width: "140vw",
+                    height: "140vh",
+                    transformOrigin: "top top",
                 }}
                 initial={{
                     opacity: 0,
@@ -57,8 +67,8 @@ export function ClockBackground() {
                 }}
                 animate={{
                     opacity: isVisible ? 0.8 : 0,
-                    scale: isVisible ? 1 : 0.6,
-                    rotateX: isVisible ? 45 : -60,
+                    scale: isVisible ? (isMobile ? 1.2 : 1.6) : 0.6,
+                    rotateX: isVisible ? (isMobile ? 30 : 45) : -60,
                     rotateY: isVisible ? -15 : -30,
                     rotateZ: isVisible ? 8 : 15,
                     z: isVisible ? 0 : -500

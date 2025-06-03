@@ -1,16 +1,40 @@
-import { IndustryMoves } from "@/components/industry-moves"
-import { Metadata } from "next"
+"use client"
 
-export const metadata: Metadata = {
-    title: "Industry Moves | RADE - AI Leadership Solutions",
-    description: "Stay ahead with the latest AI developments, strategic insights, and industry trends. Real-time updates from leading tech sources and expert analysis.",
-    keywords: ["AI news", "industry trends", "artificial intelligence", "tech updates", "AI developments", "strategic insights"],
-    openGraph: {
-        title: "Industry Moves | RADE - AI Leadership Solutions",
-        description: "Stay ahead with the latest AI developments, strategic insights, and industry trends.",
-        type: "website",
-    },
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Mail } from "lucide-react"
+
+import { IndustryMoves } from "@/components/industry-moves"
+import { motion } from "framer-motion"
+import { AnimatedUnderlineText, PREDEFINED_UNDERLINE_PATHS } from "@/components/ui/animated_underline_text"
+
+
+// Animation variants
+const sectionVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 }
+
+const createLetterPulseVariants = (baseDelay: number, pulseScale = 1.3) => ({
+    initial: { scale: 1, letterSpacing: "normal" },
+    pulse: (i: number) => ({
+        scale: [1, pulseScale, 1],
+        letterSpacing: ["normal", "2px", "normal"],
+        transition: {
+            delay: baseDelay + i * 0.08,
+            duration: 0.4,
+            ease: "circOut",
+        },
+    }),
+})
+
+const industryLetters = "INDUSTRY".split("")
+const industryBaseDelay = 0
+const industryLetterPulseVariants = createLetterPulseVariants(industryBaseDelay, 1.15)
+
+const movesLetters = "MOVES".split("")
+const movesBaseDelay = 0.2
+const movesLetterPulseVariants = createLetterPulseVariants(movesBaseDelay, 1.1)
 
 export default function IndustryMovesPage() {
     return (
@@ -18,16 +42,70 @@ export default function IndustryMovesPage() {
             {/* Hero Section */}
             <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-b border-gray-200 dark:border-gray-800">
                 <div className="container mx-auto px-6 max-w-6xl text-center">
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white mb-6">
-                        Industry{" "}
-                        <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent">
-                            Moves
-                        </span>
-                    </h1>
-                    <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
+                    <motion.h1
+                        className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white mb-6"
+                        initial="hidden"
+                        animate="visible"
+                        variants={sectionVariants}
+                    >
+                        <AnimatedUnderlineText
+                            pathDefinition={PREDEFINED_UNDERLINE_PATHS.slightCurveUp}
+                            underlineClassName="text-blue-600 dark:text-blue-500"
+                            animationDelay={industryBaseDelay}
+                            animationDuration={0.7}
+                        >
+                            <span style={{ display: "inline-block" }}>
+                                {industryLetters.map((letter, index) => (
+                                    <motion.span
+                                        key={`industry-${index}`}
+                                        custom={index}
+                                        variants={industryLetterPulseVariants}
+                                        initial="initial"
+                                        animate="pulse"
+                                        style={{ display: "inline-block", originY: 0.7 }}
+                                    >
+                                        {letter}
+                                    </motion.span>
+                                ))}
+                            </span>
+                        </AnimatedUnderlineText>{" "}
+                        <AnimatedUnderlineText
+                            pathDefinition={PREDEFINED_UNDERLINE_PATHS.gentleArc}
+                            underlineClassName="text-blue-600 dark:text-blue-500"
+                            animationDelay={movesBaseDelay}
+                            animationDuration={0.7}
+                        >
+                            <span style={{ display: "inline-block" }}>
+                                {movesLetters.map((letter, index) => (
+                                    <motion.span
+                                        key={`moves-${index}`}
+                                        custom={index}
+                                        variants={movesLetterPulseVariants}
+                                        initial="initial"
+                                        animate="pulse"
+                                        style={{ display: "inline-block", originY: 0.7 }}
+                                        className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent"
+                                    >
+                                        {letter}
+                                    </motion.span>
+                                ))}
+                            </span>
+                        </AnimatedUnderlineText>
+                    </motion.h1>
+                    <motion.p
+                        className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                    >
                         Stay ahead of the curve with real-time AI developments, strategic insights, and industry trends from leading tech sources.
-                    </p>
-                    <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+                    </motion.p>
+                    <motion.div
+                        className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 dark:text-gray-400"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.5 }}
+                    >
                         <div className="flex items-center gap-2">
                             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                             <span>Live Updates</span>
@@ -40,7 +118,7 @@ export default function IndustryMovesPage() {
                             <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
                             <span>Expert Analysis</span>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </section>
 
@@ -90,6 +168,39 @@ export default function IndustryMovesPage() {
                     </div>
                 </div>
             </section>
+
+            <motion.section
+                className="container mx-auto px-6 pb-20 p-10 text-center max-w-6xl"
+                initial="hidden"
+                whileInView="visible"
+                variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+                }}
+                viewport={{ once: true, amount: 0.2 }}
+            >
+                <div className="max-w-4xl mx-auto space-y-8">
+                    <Link href="/contact" passHref legacyBehavior>
+                        <a>
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.6, delay: 0 }}
+                                viewport={{ once: true }}
+                            >
+                                <Button
+                                    size="lg"
+                                    className="bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600 font-bold px-12 py-6 text-xl"
+                                >
+                                    START THE CONVERSATION
+                                    <Mail className="ml-3 h-6 w-6" />
+                                </Button>
+                            </motion.div>
+                        </a>
+                    </Link>
+                </div>
+            </motion.section>
+
         </div>
     )
 }

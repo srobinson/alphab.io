@@ -33,7 +33,7 @@ const getBlogPosts = async () => {
 
 export async function GET() {
   const posts = await getBlogPosts();
-  const baseUrl = "https://aplab.io";
+  const baseUrl = "https://alphab.io";
 
   const rssXml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
@@ -42,8 +42,8 @@ export async function GET() {
     <description>Daily insights into cutting-edge AI technologies, research papers, and emerging tech trends</description>
     <link>${baseUrl}/blog</link>
     <language>en-US</language>
-    <managingEditor>contact@aplab.io (RADE AI Solutions)</managingEditor>
-    <webMaster>contact@aplab.io (RADE AI Solutions)</webMaster>
+    <managingEditor>contact@alphab.io (RADE AI Solutions)</managingEditor>
+    <webMaster>contact@alphab.io (RADE AI Solutions)</webMaster>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${baseUrl}/blog/rss.xml" rel="self" type="application/rss+xml"/>
     <image>
@@ -68,7 +68,7 @@ export async function GET() {
       <guid isPermaLink="true">${baseUrl}/blog/${post.slug}</guid>
       <pubDate>${new Date(post.publishedAt).toUTCString()}</pubDate>
       <category><![CDATA[${post.category}]]></category>
-      <author>contact@aplab.io (RADE AI Solutions)</author>
+      <author>contact@alphab.io (RADE AI Solutions)</author>
     </item>`
       )
       .join("")}

@@ -3,9 +3,10 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider" // Make sure this path is correct
-import { Header } from "@/components/layout/header"
+import { ConditionalHeader } from "@/components/layout/conditional-header"
 import ScrollToTop from "@/components/utils/scroll-to-top"
 import { SkipNav } from "@/components/accessibility/skip-nav"
+import { GoogleAnalytics } from "@/components/analytics/google-analytics"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://aplab.io',
+    url: 'https://alphab.io',
     siteName: 'RADE - AI Solutions',
     title: 'RADE - AI Solutions & Consulting | Custom AI Development',
     description: 'Expert AI consulting and custom AI development services. Transform your business with ethical AI solutions and strategic implementation.',
@@ -65,7 +66,7 @@ export const metadata: Metadata = {
     creator: '@rade_ai',
   },
   alternates: {
-    canonical: 'https://aplab.io',
+    canonical: 'https://alphab.io',
   },
   verification: {
     google: 'your-google-verification-code',
@@ -83,12 +84,12 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://aplab.io/#organization",
+        "@id": "https://alphab.io/#organization",
         "name": "RADE AI Solutions",
-        "url": "https://aplab.io",
+        "url": "https://alphab.io",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://aplab.io/images/rade-logo.svg",
+          "url": "https://alphab.io/images/rade-logo.svg",
           "width": 200,
           "height": 200
         },
@@ -109,19 +110,19 @@ export default function RootLayout({
       },
       {
         "@type": "WebSite",
-        "@id": "https://aplab.io/#website",
-        "url": "https://aplab.io",
+        "@id": "https://alphab.io/#website",
+        "url": "https://alphab.io",
         "name": "RADE - AI Solutions",
         "description": "Expert AI consulting and custom AI development services",
         "publisher": {
-          "@id": "https://aplab.io/#organization"
+          "@id": "https://alphab.io/#organization"
         },
         "potentialAction": [
           {
             "@type": "SearchAction",
             "target": {
               "@type": "EntryPoint",
-              "urlTemplate": "https://aplab.io/search?q={search_term_string}"
+              "urlTemplate": "https://alphab.io/search?q={search_term_string}"
             },
             "query-input": "required name=search_term_string"
           }
@@ -129,12 +130,12 @@ export default function RootLayout({
       },
       {
         "@type": "ProfessionalService",
-        "@id": "https://aplab.io/#service",
+        "@id": "https://alphab.io/#service",
         "name": "RADE AI Solutions",
-        "image": "https://aplab.io/images/rade-logo.svg",
+        "image": "https://alphab.io/images/rade-logo.svg",
         "description": "Professional AI consulting and development services",
         "provider": {
-          "@id": "https://aplab.io/#organization"
+          "@id": "https://alphab.io/#organization"
         },
         "areaServed": "Worldwide",
         "hasOfferCatalog": {
@@ -180,10 +181,13 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
+        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
+          <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
+        )}
         <SkipNav />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <ScrollToTop />
-          <Header />
+          <ConditionalHeader />
           <main id="main-content">{children}</main>
         </ThemeProvider>
       </body>

@@ -127,7 +127,7 @@ export default function ServicesPage() {
     "provider": {
       "@type": "Organization",
       "name": "RADE AI Solutions",
-      "url": "https://aplab.io"
+      "url": "https://alphab.io"
     },
     "areaServed": "Worldwide",
     "hasOfferCatalog": {
@@ -152,16 +152,21 @@ export default function ServicesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesStructuredData) }}
       />
-      <div className="min-h-screen bg-white text-gray-900 dark:bg-black dark:text-white transition-colors duration-300">
-        <motion.section
-          className="container mx-auto px-6 py-16 lg:py-24 text-center max-w-6xl"
-          initial="hidden"
-          animate="visible"
-          variants={sectionVariants}
-        >
-          <div className="mb-6">
-            <div className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white tracking-tight leading-none">
-              AI <span className="text-blue-600 dark:text-blue-500">SERVICES</span> TO{" "}
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        {/* Hero Section */}
+        <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-b border-gray-200 dark:border-gray-800">
+          <div className="container mx-auto px-6 max-w-6xl text-center">
+            <motion.h1
+              className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white mb-6"
+              initial="hidden"
+              animate="visible"
+              variants={sectionVariants}
+            >
+              AI{" "}
+              <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent">
+                SERVICES
+              </span>{" "}
+              TO{" "}
               <AnimatedUnderlineText
                 pathDefinition={PREDEFINED_UNDERLINE_PATHS.slightCurveUp}
                 underlineClassName="text-blue-600 dark:text-blue-500"
@@ -183,19 +188,14 @@ export default function ServicesPage() {
                   ))}
                 </span>
               </AnimatedUnderlineText>{" "}
-              YOUR
-            </div>
-            <div className="mt-1 md:mt-2">
+              YOUR{" "}
               <AnimatedUnderlineText
                 pathDefinition={PREDEFINED_UNDERLINE_PATHS.gentleArc}
                 underlineClassName="text-blue-600 dark:text-blue-500"
                 animationDelay={influenceBaseDelay}
                 animationDuration={0.7}
               >
-                <span
-                  className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white tracking-tight leading-none"
-                  style={{ display: "inline-block" }}
-                >
+                <span style={{ display: "inline-block" }}>
                   {influenceLetters.map((letter, index) => (
                     <motion.span
                       key={`influence-${index}`}
@@ -210,17 +210,40 @@ export default function ServicesPage() {
                   ))}
                 </span>
               </AnimatedUnderlineText>
-            </div>
+            </motion.h1>
+            <motion.p
+              className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              I offer a comprehensive suite of AI services designed to empower your business, from strategic ideation to
+              full-scale implementation and beyond. Each service is tailored to deliver measurable impact and sustainable
+              growth.
+            </motion.p>
+            <motion.div
+              className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 dark:text-gray-400"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <span>Strategy & Consulting</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <span>Custom Development</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <span>Implementation & Support</span>
+              </div>
+            </motion.div>
           </div>
+        </section>
 
-          <p className="text-xl lg:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
-            I offer a comprehensive suite of AI services designed to empower your business, from strategic ideation to
-            full-scale implementation and beyond. Each service is tailored to deliver measurable impact and sustainable
-            growth.
-          </p>
-        </motion.section>
-
-        <section className="container mx-auto px-6 pb-16 lg:pb-24 max-w-6xl">
+        <section className="container mx-auto px-6 pt-6 pb-16 lg:pb-24 max-w-6xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
             {services.map((service, index) => {
               const IconComponent = service.icon
@@ -233,8 +256,8 @@ export default function ServicesPage() {
                   variants={cardVariants}
                   viewport={{ once: true, amount: 0.1 }}
                 >
-                  <div className="flex items-center mb-6">
-                    <div className="w-12 h-12 bg-blue-500 dark:bg-blue-600 rounded-lg flex items-center justify-center mr-4 transition-transform duration-200 ease-out group-hover:scale-110">
+                  <div className="flex items-start mb-6">
+                    <div className="w-12 h-12 bg-blue-500 dark:bg-blue-600 rounded-lg flex items-center justify-center mr-4 transition-transform duration-200 ease-out group-hover:scale-110 flex-shrink-0">
                       <IconComponent className="w-6 h-6 text-white transition-transform duration-200 ease-out group-hover:rotate-[-3deg]" />
                     </div>
                     <h2 className="text-2xl font-black text-blue-600 dark:text-blue-400">{service.title}</h2>
@@ -260,7 +283,7 @@ export default function ServicesPage() {
         </section>
 
         <motion.section
-          className="container mx-auto px-6 py-16 text-center max-w-6xl"
+          className="container mx-auto px-6 pb-20 text-center max-w-6xl"
           initial="hidden"
           whileInView="visible"
           variants={{
@@ -281,7 +304,7 @@ export default function ServicesPage() {
               <span className="text-blue-600 dark:text-blue-500"> AI STRATEGY</span>?
             </motion.h3>
             <motion.p
-              className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto"
+              className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto pb-10"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0 }}

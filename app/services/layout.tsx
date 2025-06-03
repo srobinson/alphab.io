@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "AI Services & Solutions | RADE AI Consulting",
         description: "Comprehensive AI services including strategy consulting, custom AI model development, implementation, and ethical AI governance.",
-        url: "https://aplab.io/services",
+        url: "https://alphab.io/services",
         type: "website",
         images: [
             {
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
         images: ["/images/services-twitter.jpg"],
     },
     alternates: {
-        canonical: "https://aplab.io/services",
+        canonical: "https://alphab.io/services",
     },
 }
 

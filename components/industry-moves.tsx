@@ -48,16 +48,18 @@ const categoryNames = {
 export function IndustryMoves() {
     const [industryMoves, setIndustryMoves] = useState<IndustryMove[]>([])
     const [loading, setLoading] = useState(true)
+    const [imagesLoaded, setImagesLoaded] = useState<Set<string>>(new Set())
 
-    // Fetch news from API
+    // Fetch curated news from database
     useEffect(() => {
-        const fetchNews = async () => {
+        const fetchCuratedNews = async () => {
             try {
-                const response = await fetch('/api/news')
+                // Fetch from curated news API (ready for Supabase backend)
+                const response = await fetch('/api/curated-news')
                 const data = await response.json()
 
-                // Convert news items to industry moves format and take first 12
-                const moves: IndustryMove[] = data.items.slice(0, 12).map((item: NewsItem, index: number) => ({
+                // Convert API response to industry moves format
+                const curatedMoves: IndustryMove[] = data.items.map((item: NewsItem, index: number) => ({
                     id: item.id,
                     icon: categoryIcons[item.category] || categoryIcons.default,
                     category: categoryNames[item.category] || item.category,
@@ -69,18 +71,18 @@ export function IndustryMoves() {
                     image: item.image
                 }))
 
-                setIndustryMoves(moves)
+                setIndustryMoves(curatedMoves)
                 setLoading(false)
             } catch (error) {
-                console.error('Failed to fetch news:', error)
-                // Fallback to default content with images
-                setIndustryMoves([
+                console.error('Failed to fetch curated news:', error)
+                // Fallback to sample data if API fails
+                const fallbackMoves: IndustryMove[] = [
                     {
                         id: "1",
                         icon: Brain,
                         category: "AI Leadership",
                         title: "OpenAI Announces GPT-5 Development",
-                        description: "Next-generation AI model promises unprecedented reasoning capabilities",
+                        description: "Next-generation AI model promises unprecedented reasoning capabilities with advanced multimodal understanding",
                         time: "2 hours ago",
                         trending: true,
                         image: "/images/ai-head-design.webp"
@@ -90,7 +92,7 @@ export function IndustryMoves() {
                         icon: Rocket,
                         category: "Enterprise AI",
                         title: "Microsoft Copilot Integration Expands",
-                        description: "AI assistant now available across entire Office 365 suite",
+                        description: "AI assistant now available across entire Office 365 suite, transforming workplace productivity",
                         time: "4 hours ago",
                         trending: false,
                         image: "/images/ai-head-design.webp"
@@ -100,7 +102,7 @@ export function IndustryMoves() {
                         icon: TrendingUp,
                         category: "Creator Tools",
                         title: "AI Content Generation Reaches New Heights",
-                        description: "Latest tools enable creators to produce high-quality content 10x faster",
+                        description: "Latest tools enable creators to produce high-quality content 10x faster with unprecedented quality",
                         time: "6 hours ago",
                         trending: true,
                         image: "/images/ai-head-design.webp"
@@ -110,62 +112,65 @@ export function IndustryMoves() {
                         icon: Lightbulb,
                         category: "Innovation",
                         title: "Revolutionary AI Workflow Automation",
-                        description: "New platforms streamline entire content creation pipelines",
+                        description: "New platforms streamline entire content creation pipelines from ideation to distribution",
                         time: "8 hours ago",
                         trending: false,
                         image: "/images/ai-head-design.webp"
+                    },
+                    {
+                        id: "5",
+                        icon: Globe,
+                        category: "Industry News",
+                        title: "AI Regulation Framework Takes Shape",
+                        description: "Global leaders collaborate on comprehensive AI governance standards for responsible development",
+                        time: "12 hours ago",
+                        trending: false,
+                        image: "/images/ai-head-design.webp"
+                    },
+                    {
+                        id: "6",
+                        icon: BarChart3,
+                        category: "Market Analysis",
+                        title: "AI Investment Reaches Record Highs",
+                        description: "Venture capital funding in AI startups surpasses $50B milestone in 2024",
+                        time: "1 day ago",
+                        trending: true,
+                        image: "/images/ai-head-design.webp"
+                    },
+                    {
+                        id: "7",
+                        icon: Zap,
+                        category: "Technology",
+                        title: "Breakthrough in AI Energy Efficiency",
+                        description: "New chip architecture reduces AI model training costs by 80% while improving performance",
+                        time: "1 day ago",
+                        trending: false,
+                        image: "/images/ai-head-design.webp"
+                    },
+                    {
+                        id: "8",
+                        icon: Brain,
+                        category: "Research",
+                        title: "AI Achieves Human-Level Reasoning",
+                        description: "Latest research demonstrates AI systems matching human performance in complex logical tasks",
+                        time: "2 days ago",
+                        trending: true,
+                        image: "/images/ai-head-design.webp"
                     }
-                ])
+                ]
+
+                setIndustryMoves(fallbackMoves)
                 setLoading(false)
             }
         }
 
-        fetchNews()
+        fetchCuratedNews()
     }, [])
 
-    // Generate fallback image based on category and add variety
+    // Generate fallback image based on category - using only local images to prevent loading issues
     const getFallbackImage = (category: string, index: number) => {
-        const categoryImages: { [key: string]: string[] } = {
-            "Breaking News": [
-                "/images/ai-head-design.webp",
-                "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop&auto=format",
-                "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=300&fit=crop&auto=format"
-            ],
-            "Trending": [
-                "/images/ai-head-design.webp",
-                "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&auto=format",
-                "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop&auto=format"
-            ],
-            "Updates": [
-                "/images/ai-head-design.webp",
-                "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=300&fit=crop&auto=format",
-                "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&h=300&fit=crop&auto=format"
-            ],
-            "Insights": [
-                "/images/ai-head-design.webp",
-                "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&auto=format",
-                "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop&auto=format"
-            ],
-            "AI Leadership": [
-                "/images/ai-head-design.webp",
-                "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop&auto=format"
-            ],
-            "Enterprise AI": [
-                "/images/ai-head-design.webp",
-                "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop&auto=format"
-            ],
-            "Creator Tools": [
-                "/images/ai-head-design.webp",
-                "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop&auto=format"
-            ],
-            "Innovation": [
-                "/images/ai-head-design.webp",
-                "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=300&fit=crop&auto=format"
-            ]
-        };
-
-        const images = categoryImages[category] || categoryImages["AI Leadership"];
-        return images[index % images.length];
+        // Use only local images to prevent external loading issues
+        return "/images/ai-head-design.webp";
     }
 
     if (loading) {
@@ -213,7 +218,12 @@ export function IndustryMoves() {
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr">
+                <motion.div
+                    className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                >
                     {industryMoves.map((move, index) => {
                         const IconComponent = move.icon
                         const isClickable = move.link && move.link !== "#"
@@ -221,11 +231,9 @@ export function IndustryMoves() {
 
                         const cardContent = (
                             <motion.div
-                                key={move.id}
                                 initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: (index % 8) * 0.1 }}
-                                viewport={{ once: true }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.4, delay: index * 0.05 }}
                                 className={`relative rounded-xl border transition-all duration-300 hover:scale-[1.02] hover:shadow-lg overflow-hidden bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 ${isClickable ? 'cursor-pointer' : 'cursor-default'} h-full flex flex-col`}
                             >
                                 {move.trending && (
@@ -235,14 +243,26 @@ export function IndustryMoves() {
                                 )}
 
                                 {/* Image Section */}
-                                <div className="relative w-full h-48 overflow-hidden">
+                                <div className="relative w-full h-48 overflow-hidden bg-gray-200 dark:bg-gray-700">
                                     <img
                                         src={imageUrl}
                                         alt={move.title}
                                         className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                                        loading="lazy"
                                         onError={(e) => {
                                             const target = e.target as HTMLImageElement;
-                                            target.src = "/images/ai-head-design.webp";
+                                            if (target.src !== "/images/ai-head-design.webp") {
+                                                target.src = "/images/ai-head-design.webp";
+                                            }
+                                        }}
+                                        onLoad={(e) => {
+                                            const target = e.target as HTMLImageElement;
+                                            target.style.opacity = "1";
+                                            setImagesLoaded(prev => new Set(prev).add(move.id));
+                                        }}
+                                        style={{
+                                            opacity: imagesLoaded.has(move.id) ? 1 : 0,
+                                            transition: "opacity 0.3s ease-in-out"
                                         }}
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
@@ -289,8 +309,8 @@ export function IndustryMoves() {
                             </a>
                         ) : cardContent
                     })}
-                </div>
+                </motion.div>
             </div>
-        </section>
+        </section >
     )
 }

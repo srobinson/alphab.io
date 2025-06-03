@@ -76,7 +76,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         openGraph: {
             title: post.title,
             description: post.excerpt,
-            url: `https://aplab.io/blog/${post.slug}`,
+            url: `https://alphab.io/blog/${post.slug}`,
             type: "article",
             publishedTime: post.publishedAt,
             authors: [post.author],
@@ -97,7 +97,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             images: [`/images/blog/${post.slug}-twitter.jpg`],
         },
         alternates: {
-            canonical: `https://aplab.io/blog/${post.slug}`,
+            canonical: `https://alphab.io/blog/${post.slug}`,
         },
     }
 }
@@ -114,25 +114,25 @@ export default async function BlogPostPage({ params }: Props) {
         "@type": "BlogPosting",
         "headline": post.title,
         "description": post.excerpt,
-        "image": `https://aplab.io/images/blog/${post.slug}-og.jpg`,
+        "image": `https://alphab.io/images/blog/${post.slug}-og.jpg`,
         "author": {
             "@type": "Person",
             "name": post.author,
-            "url": "https://aplab.io"
+            "url": "https://alphab.io"
         },
         "publisher": {
             "@type": "Organization",
             "name": "RADE AI Solutions",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://aplab.io/images/rade-logo.svg"
+                "url": "https://alphab.io/images/rade-logo.svg"
             }
         },
         "datePublished": post.publishedAt,
         "dateModified": post.publishedAt,
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": `https://aplab.io/blog/${post.slug}`
+            "@id": `https://alphab.io/blog/${post.slug}`
         },
         "keywords": post.tags.join(", "),
         "articleSection": post.category,
@@ -140,7 +140,7 @@ export default async function BlogPostPage({ params }: Props) {
         "timeRequired": post.readTime,
     }
 
-    const shareUrl = `https://aplab.io/blog/${post.slug}`
+    const shareUrl = `https://alphab.io/blog/${post.slug}`
     const shareText = `${post.title} - ${post.excerpt}`
 
     return (

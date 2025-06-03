@@ -17,18 +17,18 @@ export default function HeroReveal() {
     return (
         <div className="relative pt-10 Xmin-h-screen Xoverflow-hidden flex items-center justify-center">
             {/* Subtle Background - Lower z-index so clock shows through */}
-            {/* <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-950/30 via-black/20 to-gray-900/30" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.05),transparent_50%)]" />
-            </div> */}
+            </div>
 
             {/* Very Subtle Grid Pattern - Lower opacity */}
-            {/* <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(255,255,255,0.005)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.005)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" /> */}
+            <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(255,255,255,0.005)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.005)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
             {/* Main Content - Higher z-index, vertically aligned top */}
             <div className="relative z-20 text-center px-6 max-w-7xl mx-auto -mt-2 md:-mt-2">
                 {/* AI: - Powerful, Bold Typography - Snappy Animation */}
-                <div className="mb-4 Xoverflow-hidden">
+                <div className="mb-4">
                     <h1
                         className={`font-black tracking-tighter transition-all duration-600 ease-out
                             text-[8rem] sm:text-[10rem] md:text-[14rem] lg:text-[16rem] xl:text-[18rem]
@@ -60,14 +60,14 @@ export default function HeroReveal() {
                                 letterSpacing: "-0.02em"
                             }}
                         >
-                            <span className="text-white">THE TIME IS</span>
+                            <span className="text-white">Transform Your Business</span>
                         </div>
 
                         {/* NOW - Larger, Blue, Slightly Rotated */}
                         <div
                             className={`font-black tracking-tight transition-all duration-600 ease-out
                                 text-[4rem] sm:text-[5rem] md:text-[6rem] lg:text-[7rem] xl:text-[8rem]
-                                leading-[0.8] ${isVisible ? "transform translate-y-0 opacity-100 rotate-1" : "transform translate-y-8 opacity-0 rotate-0"}`}
+                                leading-[1.0] pb-4 ${isVisible ? "transform translate-y-0 opacity-100 rotate-1" : "transform translate-y-8 opacity-0 rotate-0"}`}
                             style={{
                                 fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
                                 fontWeight: 900,
@@ -75,7 +75,7 @@ export default function HeroReveal() {
                             }}
                         >
                             <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent">
-                                NOW
+                                Today
                             </span>
                         </div>
                     </div>

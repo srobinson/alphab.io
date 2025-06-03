@@ -98,22 +98,22 @@ export default function BlogPage() {
         "@type": "Blog",
         "name": "RADE AI Tech Blog",
         "description": "Daily insights into cutting-edge AI technologies, research papers, and emerging tech trends",
-        "url": "https://aplab.io/blog",
+        "url": "https://alphab.io/blog",
         "author": {
             "@type": "Person",
             "name": "RADE AI Solutions",
-            "url": "https://aplab.io"
+            "url": "https://alphab.io"
         },
         "publisher": {
             "@type": "Organization",
             "name": "RADE AI Solutions",
-            "url": "https://aplab.io"
+            "url": "https://alphab.io"
         },
         "blogPost": [...featuredPosts, ...recentPosts].map(post => ({
             "@type": "BlogPosting",
             "headline": post.title,
             "description": post.excerpt,
-            "url": `https://aplab.io/blog/${post.slug}`,
+            "url": `https://alphab.io/blog/${post.slug}`,
             "datePublished": post.publishedAt,
             "author": {
                 "@type": "Person",
@@ -132,16 +132,16 @@ export default function BlogPage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(blogStructuredData) }}
             />
-            <div className="min-h-screen bg-white text-gray-900 dark:bg-black dark:text-white transition-colors duration-300">
+            <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
                 {/* Hero Section */}
-                <motion.section
-                    className="container mx-auto px-6 py-16 lg:py-24 text-center max-w-6xl"
-                    initial="hidden"
-                    animate="visible"
-                    variants={sectionVariants}
-                >
-                    <div className="mb-6">
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white tracking-tight leading-none">
+                <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-b border-gray-200 dark:border-gray-800">
+                    <div className="container mx-auto px-6 max-w-6xl text-center">
+                        <motion.h1
+                            className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white mb-6 tracking-tight leading-none"
+                            initial="hidden"
+                            animate="visible"
+                            variants={sectionVariants}
+                        >
                             AI{" "}
                             <AnimatedUnderlineText
                                 pathDefinition={PREDEFINED_UNDERLINE_PATHS.slightCurveUp}
@@ -158,7 +158,7 @@ export default function BlogPage() {
                                             initial="initial"
                                             animate="pulse"
                                             style={{ display: "inline-block", originY: 0.7 }}
-                                            className="text-blue-600 dark:text-blue-500"
+                                            className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent"
                                         >
                                             {letter}
                                         </motion.span>
@@ -180,49 +180,69 @@ export default function BlogPage() {
                                             initial="initial"
                                             animate="pulse"
                                             style={{ display: "inline-block", originY: 0.7 }}
-                                            className="text-blue-600 dark:text-blue-500"
+                                            className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent"
                                         >
                                             {letter}
                                         </motion.span>
                                     ))}
                                 </span>
                             </AnimatedUnderlineText>
-                        </h1>
-                    </div>
+                        </motion.h1>
 
-                    <motion.p
-                        className="text-xl lg:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-8"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
-                    >
-                        Daily analysis of cutting-edge AI technologies, research papers, and emerging trends shaping the future of artificial intelligence.
-                    </motion.p>
-
-                    <motion.div
-                        className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.5 }}
-                    >
-                        <Button
-                            size="lg"
-                            className="bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600 font-bold px-8 py-3 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25"
-                            asChild
+                        <motion.p
+                            className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.3 }}
                         >
-                            <Link href="/blog/rss.xml">
-                                <Rss className="mr-2 h-5 w-5" />
-                                Subscribe to RSS
-                            </Link>
-                        </Button>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                            2 new posts daily • Expert AI analysis
-                        </p>
-                    </motion.div>
-                </motion.section>
+                            Daily analysis of cutting-edge AI technologies, research papers, and emerging trends shaping the future of artificial intelligence.
+                        </motion.p>
+
+                        <motion.div
+                            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.5 }}
+                        >
+                            <Button
+                                size="lg"
+                                className="bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600 font-bold px-8 py-3 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25"
+                                asChild
+                            >
+                                <Link href="/blog/rss.xml">
+                                    <Rss className="mr-2 h-5 w-5" />
+                                    Subscribe to RSS
+                                </Link>
+                            </Button>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                                2 new posts daily • Expert AI analysis
+                            </p>
+                        </motion.div>
+
+                        <motion.div
+                            className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 dark:text-gray-400"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: 0.7 }}
+                        >
+                            <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                                <span>Daily Insights</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span>Research Analysis</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                                <span>Emerging Trends</span>
+                            </div>
+                        </motion.div>
+                    </div>
+                </section>
 
                 {/* Featured Posts */}
-                <section className="container mx-auto px-6 pb-16 max-w-6xl">
+                <section className="container mx-auto px-6 pb-16 pt-10 ptmax-w-6xl">
                     <motion.h2
                         className="text-3xl font-black text-gray-900 dark:text-white mb-8"
                         initial={{ opacity: 0, y: 20 }}

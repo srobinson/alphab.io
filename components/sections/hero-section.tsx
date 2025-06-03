@@ -22,41 +22,41 @@ const newsShowVariants = {
     },
 }
 
-// Dispatch data for business AI transformation
+// Real talk about what I actually do
 const dispatchDataForBusiness = {
-    mainHeadline: "Transform Your Business with Strategic AI Implementation & Expert Consulting",
+    mainHeadline: "With years of hands-on experience, I’ve built AI systems that deliver real-world results",
     briefings: [
         {
             id: "brief1",
             icon: BrainCircuit,
-            title: "AI Strategy & Roadmap Development",
+            title: "I cut through the AI hype",
             summary:
-                "Develop comprehensive AI strategies aligned with your business goals. From opportunity assessment to implementation roadmaps, I help you identify high-impact AI use cases and create actionable plans for successful AI adoption.",
-            category: "Strategic Planning",
+                "No buzzwords, no theoretical frameworks. I've seen what works and what doesn't. I'll tell you exactly which AI implementations will move your needle and which ones are just expensive experiments.",
+            category: "Strategic Assessment",
         },
         {
             id: "brief2",
             icon: TrendingUp,
-            title: "Custom AI Model Development & Integration",
+            title: "I build systems that scale",
             summary:
-                "Build bespoke AI solutions tailored to your unique challenges. From NLP and computer vision to predictive analytics, I develop and integrate high-performance AI models that deliver measurable business results.",
-            category: "Technical Implementation",
+                "While others are building demos, I'm architecting production-ready AI that handles real workloads. From computer vision pipelines to NLP systems that understand context—I build for the long haul.",
+            category: "Enterprise Solutions",
         },
         {
             id: "brief3",
             icon: Settings2,
-            title: "AI Operations & Governance Framework",
+            title: "I solve the messy problems",
             summary:
-                "Establish robust AI governance, ethical frameworks, and operational excellence. Ensure responsible AI practices, regulatory compliance, and scalable deployment strategies that grow with your business.",
-            category: "Governance & Scale",
+                "Data quality issues, model drift, integration nightmares—I've debugged it all. The stuff that breaks AI projects? I've already figured out how to prevent it.",
+            category: "Technical Excellence",
         },
         {
             id: "brief4",
             icon: BrainCircuit,
-            title: "AI-Driven Business Intelligence & Analytics",
+            title: "I make data tell the truth",
             summary:
-                "Transform raw data into actionable insights with advanced AI-powered analytics. Implement intelligent dashboards, predictive forecasting, and automated reporting systems that drive data-driven decision making across your organization.",
-            category: "Data & Analytics",
+                "Your data has stories to tell, but most analytics just create pretty charts. I build intelligence that finds the patterns that matter and automates the insights that drive decisions.",
+            category: "Data Intelligence",
         },
     ],
 }

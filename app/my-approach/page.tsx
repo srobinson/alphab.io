@@ -92,25 +92,56 @@ const pillarCardVariants = {
 
 export default function MyApproachPage() {
   return (
-    <div className="min-h-screen bg-white text-gray-900 dark:bg-black dark:text-white transition-colors duration-300">
-      <motion.section
-        className="container mx-auto px-6 py-16 lg:py-24 text-center max-w-6xl"
-        initial="hidden"
-        animate="visible"
-        variants={sectionVariants}
-      >
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white mb-6 leading-tight md:leading-tight lg:leading-tight">
-          MY <span className="text-blue-600 dark:text-blue-500">APPROACH</span> TO AI
-          <span style={{ display: "block", marginTop: "0.1em" }}> LEADERSHIP</span>
-        </h1>
-        <p className="text-xl lg:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
-          Transforming visions into reality requires a meticulous, adaptive, and deeply collaborative methodology. My
-          approach is built upon six foundational pillars, ensuring every AI solution is powerful, purposeful, and
-          precisely aligned with your strategic objectives.
-        </p>
-      </motion.section>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      {/* Hero Section */}
+      <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-b border-gray-200 dark:border-gray-800">
+        <div className="container mx-auto px-6 max-w-6xl text-center">
+          <motion.h1
+            className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white mb-6 leading-tight md:leading-tight lg:leading-tight"
+            initial="hidden"
+            animate="visible"
+            variants={sectionVariants}
+          >
+            MY{" "}
+            <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent">
+              APPROACH
+            </span>{" "}
+            TO AI
+            <span style={{ display: "block", marginTop: "0.1em" }}> LEADERSHIP</span>
+          </motion.h1>
+          <motion.p
+            className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Transforming visions into reality requires a meticulous, adaptive, and deeply collaborative methodology. My
+            approach is built upon six foundational pillars, ensuring every AI solution is powerful, purposeful, and
+            precisely aligned with your strategic objectives.
+          </motion.p>
+          <motion.div
+            className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 dark:text-gray-400"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <span>Six Core Pillars</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span>Collaborative Methodology</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span>Strategic Alignment</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-      <section className="container mx-auto px-6 pb-16 lg:pb-24 max-w-6xl">
+      <section className="container mx-auto px-6 pb-0 pt-10 lg:pb-24 max-w-6xl">
         <div className="space-y-16">
           {pillarDetails.map((pillar) => {
             const IconComponent = pillar.icon
@@ -153,7 +184,7 @@ export default function MyApproachPage() {
 
       {/* Call to Action Section */}
       <motion.section
-        className="container mx-auto px-6 py-16 text-center max-w-6xl"
+        className="container mx-auto px-6 pb-20 text-center max-w-6xl"
         initial="hidden"
         whileInView="visible"
         variants={{
@@ -164,7 +195,7 @@ export default function MyApproachPage() {
       >
         <div className="max-w-4xl mx-auto space-y-8">
           <motion.h3
-            className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white"
+            className="p-0 text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0 }}
@@ -174,7 +205,7 @@ export default function MyApproachPage() {
             <span className="text-blue-600 dark:text-blue-500"> AI SERVICES</span>?
           </motion.h3>
           <motion.p
-            className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto"
+            className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto pb-10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0 }}

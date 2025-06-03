@@ -24,36 +24,64 @@ export default function PricingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 dark:bg-black dark:text-white transition-colors duration-300">
-      {/* Header Section */}
-      <motion.section
-        className="container mx-auto px-6 py-16 lg:py-24 text-center max-w-6xl"
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        <motion.div variants={itemVariants} className="mb-2">
-          <span className="inline-block bg-blue-600 dark:bg-blue-500 text-white px-4 py-1 text-sm font-bold tracking-wider">
-            INVESTMENT
-          </span>
-        </motion.div>
-        <motion.h1
-          variants={itemVariants}
-          className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white mb-6"
-        >
-          DIRECT ACCESS TO <span className="text-blue-600 dark:text-blue-500">EXPERTISE</span>
-        </motion.h1>
-        <motion.p
-          variants={itemVariants}
-          className="text-xl lg:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto"
-        >
-          No agency overhead. No marketing team markups. Just pure AI expertise and implementation power.
-        </motion.p>
-      </motion.section>
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      {/* Hero Section */}
+      <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-b border-gray-200 dark:border-gray-800">
+        <div className="container mx-auto px-6 max-w-6xl text-center">
+          <motion.div
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+            className="mb-2"
+          >
+            <span className="bg-blue-600 dark:bg-blue-500 text-white px-4 py-1 text-sm font-bold tracking-wider">
+              INVESTMENT
+            </span>
+          </motion.div>
+          <motion.h1
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+            className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white mb-6"
+          >
+            DIRECT ACCESS TO{" "}
+            <span className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent">
+              EXPERTISE
+            </span>
+          </motion.h1>
+          <motion.p
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+            className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed"
+          >
+            No agency overhead. No marketing team markups. Just pure AI expertise and implementation power.
+          </motion.p>
+          <motion.div
+            className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 dark:text-gray-400"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <span>Direct Access</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <span>No Overhead</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <span>Pure Expertise</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Statement-inspired Pricing Section */}
       <motion.section
-        className="container mx-auto px-6 pb-16 lg:pb-24 max-w-4xl"
+        className="container mx-auto px-6 pb-16 pt-10 lg:pb-24 max-w-4xl"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.4 }}
@@ -84,7 +112,7 @@ export default function PricingPage() {
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Account Holder</p>
                   <p className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
-                    <User className="inline-block h-5 w-5 mr-2 text-blue-600 dark:text-blue-400" />
+                    <User className="h-5 w-5 mr-2 text-blue-600 dark:text-blue-400" />
                     Your Business
                   </p>
                 </div>
@@ -216,7 +244,7 @@ export default function PricingPage() {
       </motion.section>
 
       {/* Value Proposition Section */}
-      <motion.section
+      {/* <motion.section
         className="container mx-auto px-6 py-16 max-w-4xl"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -230,7 +258,7 @@ export default function PricingPage() {
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-center">
-                <span className="inline-block w-8 h-8 rounded-full bg-blue-600 dark:bg-blue-500 text-white font-bold flex items-center justify-center mr-3">
+                <span className="w-8 h-8 rounded-full bg-blue-600 dark:bg-blue-500 text-white font-bold flex items-center justify-center mr-3">
                   1
                 </span>
                 The Old Way
@@ -258,9 +286,10 @@ export default function PricingPage() {
                 </li>
               </ul>
             </div>
+
             <div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-center">
-                <span className="inline-block w-8 h-8 rounded-full bg-blue-600 dark:bg-blue-500 text-white font-bold flex items-center justify-center mr-3">
+                <span className="w-8 h-8 rounded-full bg-blue-600 dark:bg-blue-500 text-white font-bold flex items-center justify-center mr-3">
                   2
                 </span>
                 The RADE Way
@@ -290,11 +319,11 @@ export default function PricingPage() {
             </div>
           </div>
         </div>
-      </motion.section>
+      </motion.section> */}
 
       {/* Call to Action */}
       <motion.section
-        className="container mx-auto px-6 py-16 text-center max-w-4xl"
+        className="container mx-auto px-6 py-0 pb-10 text-center max-w-4xl"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
