@@ -3,7 +3,7 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { BrainCircuit, TrendingUp, Settings2 } from "lucide-react"
+import { BrainCircuit, TrendingUp, Settings2, ArrowRight } from "lucide-react"
 import { AnimatedParticles } from "@/components/ui/particle-background"
 import { AiDispatch } from "@/components/views/home/ai-dispatch"
 import { ClockBackground } from "@/components/background/clock-background"
@@ -106,16 +106,24 @@ export function HeroSection() {
                     initial="hidden"
                     animate="visible"
                 >
-                    <Link href="/my-approach" passHref legacyBehavior>
-                        <Button
-                            size="lg"
-                            className="group bg-blue-600 hover:bg-blue-700 text-white font-bold px-12 py-6 text-xl w-full sm:w-auto
-                dark:bg-blue-500 dark:hover:bg-blue-600 relative overflow-hidden shadow-2xl"
+                    <Button
+                        asChild
+                        size="lg"
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 border-0 focus:ring-4 focus:ring-blue-500/50 focus:outline-none"
+                        style={{
+                            fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+                            fontWeight: 600
+                        }}
+                    >
+                        <Link
+                            href="/my-approach"
+                            aria-label="Deploy AI Strategy - Get started with RADE AI Solutions"
+                            role="button"
                         >
-                            <span className="relative z-10">DEPLOY AI STRATEGY</span>
-                            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-blue-500 opacity-0 group-hover:opacity-20 transition-opacity duration-200" />
-                        </Button>
-                    </Link>
+                            Deploy AI Strategy
+                            <ArrowRight className="ml-3 w-5 h-5" aria-hidden="true" />
+                        </Link>
+                    </Button>
                 </motion.div>
             </div>
         </motion.section>

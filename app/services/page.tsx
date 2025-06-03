@@ -2,10 +2,9 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Mail } from "lucide-react" // Or Send, ArrowRight etc.
-import { motion } from "framer-motion" // Removed useAnimation as it's no longer needed
-import { BrainCircuit, Bot, LineChart, Settings2, Presentation, ShieldCheck } from "lucide-react"
-import { AnimatedUnderlineText, PREDEFINED_UNDERLINE_PATHS } from "@/components/ui/animated-underline-text"
+import { motion } from "framer-motion"
+import { Mail, BrainCircuit, Bot, LineChart, Settings2, Presentation, ShieldCheck } from "lucide-react"
+import { AnimatedUnderlineText, PREDEFINED_UNDERLINE_PATHS } from "@/components/ui/animated_underline_text"
 
 const services = [
   {
@@ -87,10 +86,12 @@ const services = [
     ],
   },
 ]
+
 const sectionVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 }
+
 const cardVariants = {
   hidden: { opacity: 0, y: 20, scale: 0.98 },
   visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
@@ -99,7 +100,7 @@ const cardVariants = {
 const createLetterPulseVariants = (baseDelay: number, pulseScale = 1.3) => ({
   initial: { scale: 1, letterSpacing: "normal" },
   pulse: (i: number) => ({
-    scale: [1, pulseScale, 1], // Pulse and return to 1
+    scale: [1, pulseScale, 1],
     letterSpacing: ["normal", "2px", "normal"],
     transition: {
       delay: baseDelay + i * 0.08,
@@ -257,7 +258,7 @@ export default function ServicesPage() {
             })}
           </div>
         </section>
-        {/* Call to Action Section - Contact */}
+
         <motion.section
           className="container mx-auto px-6 py-16 text-center max-w-6xl"
           initial="hidden"

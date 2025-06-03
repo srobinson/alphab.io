@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, ArrowRight, Rss } from "lucide-react"
 import { motion } from "framer-motion"
-import { AnimatedUnderlineText, PREDEFINED_UNDERLINE_PATHS } from "@/components/ui/animated-underline-text"
+import { AnimatedUnderlineText, PREDEFINED_UNDERLINE_PATHS } from "@/components/ui/animated_underline_text"
 
 // Animation variants
 const sectionVariants = {
