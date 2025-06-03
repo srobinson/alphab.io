@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
@@ -90,20 +91,24 @@ export default function HeroReveal() {
                     className={`transition-all duration-600 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-20"}`}
                 >
                     <Button
+                        asChild
                         size="lg"
                         className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 border-0 focus:ring-4 focus:ring-blue-500/50 focus:outline-none"
                         style={{
                             fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
                             fontWeight: 600
                         }}
-                        aria-label="Deploy AI Strategy - Get started with RADE AI Solutions"
-                        role="button"
                     >
-                        Deploy AI Strategy
-                        <ArrowRight className="ml-3 w-5 h-5" aria-hidden="true" />
+                        <Link
+                            href="/my-approach"
+                            aria-label="Deploy AI Strategy - Get started with RADE AI Solutions"
+                            role="button"
+                        >
+                            Deploy AI Strategy
+                            <ArrowRight className="ml-3 w-5 h-5" aria-hidden="true" />
+                        </Link>
                     </Button>
                 </div>
-
                 {/* Subtitle - Professional & Clean - Simultaneous */}
                 <div className="mb-2 mt-12 overflow-hidden">
                     <p

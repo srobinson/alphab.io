@@ -1,156 +1,287 @@
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
 import {
-  curatedNews,
+  brandMessages,
   rssFeedSources,
   isRelevantContent,
   categorizeRSSContent,
   formatRSSTitle,
+  fetchAllNewsAPIs,
   type NewsItem,
-} from "@/lib/news-feeds"
+} from "@/lib/news-feeds";
 
 // Simple RSS parser function
-async function parseRSSFeed(url: string, sourceName: string, defaultCategory: NewsItem["category"]) {
+async function parseRSSFeed(
+  url: string,
+  sourceName: string,
+  defaultCategory: NewsItem["category"]
+) {
   try {
     const response = await fetch(url, {
       headers: {
         "User-Agent": "RADE-AI-News-Aggregator/1.0",
       },
       next: { revalidate: 1800 }, // Cache for 30 minutes
-    })
+    });
 
     if (!response.ok) {
-      console.warn(`Failed to fetch RSS from ${sourceName}: ${response.status}`)
-      return []
+      console.warn(
+        `Failed to fetch RSS from ${sourceName}: ${response.status}`
+      );
+      return [];
     }
 
-    const xmlText = await response.text()
+    const xmlText = await response.text();
 
     // Simple XML parsing for RSS items
-    const items: NewsItem[] = []
-    const itemMatches = xmlText.match(/<item[^>]*>[\s\S]*?<\/item>/gi) || []
+    const items: NewsItem[] = [];
+    const itemMatches = xmlText.match(/<item[^>]*>[\s\S]*?<\/item>/gi) || [];
 
-    for (const itemXml of itemMatches.slice(0, 5)) {
-      // Limit to 5 items per feed
+    for (const itemXml of itemMatches.slice(0, 8)) {
+      // Limit to 8 items per feed
       try {
-        const titleMatch = itemXml.match(/<title[^>]*><!\[CDATA\[(.*?)\]\]><\/title>|<title[^>]*>(.*?)<\/title>/i)
-        const linkMatch = itemXml.match(/<link[^>]*>(.*?)<\/link>/i)
+        const titleMatch = itemXml.match(
+          /<title[^>]*><!\[CDATA\[(.*?)\]\]><\/title>|<title[^>]*>(.*?)<\/title>/i
+        );
+        const linkMatch = itemXml.match(/<link[^>]*>(.*?)<\/link>/i);
         const descMatch = itemXml.match(
-          /<description[^>]*><!\[CDATA\[(.*?)\]\]><\/description>|<description[^>]*>(.*?)<\/description>/i,
-        )
-        const pubDateMatch = itemXml.match(/<pubDate[^>]*>(.*?)<\/pubDate>/i)
+          /<description[^>]*><!\[CDATA\[(.*?)\]\]><\/description>|<description[^>]*>(.*?)<\/description>/i
+        );
+        const pubDateMatch = itemXml.match(/<pubDate[^>]*>(.*?)<\/pubDate>/i);
 
-        const title = titleMatch?.[1] || titleMatch?.[2] || ""
-        const link = linkMatch?.[1] || ""
-        const description = descMatch?.[1] || descMatch?.[2] || ""
-        const pubDate = pubDateMatch?.[1] || ""
+        // Extract images from various RSS formats - more comprehensive
+        let imageUrl = "";
+
+        // Try multiple image extraction methods
+        const imagePatterns = [
+          // Media RSS namespace
+          /<media:thumbnail[^>]*url=["']([^"']+)["'][^>]*/i,
+          /<media:content[^>]*url=["']([^"']+\.(?:jpg|jpeg|png|webp|gif))["'][^>]*/i,
+          // Enclosure tags
+          /<enclosure[^>]*type=["']image\/[^"']*["'][^>]*url=["']([^"']+)["'][^>]*/i,
+          /<enclosure[^>]*url=["']([^"']+\.(?:jpg|jpeg|png|webp|gif))["'][^>]*type=["']image/i,
+          // Content and description embedded images
+          /<img[^>]*src=["']([^"']+)["'][^>]*>/i,
+          // iTunes image
+          /<itunes:image[^>]*href=["']([^"']+)["'][^>]*/i,
+          // Standard image tag
+          /<image[^>]*><url[^>]*>([^<]+)<\/url>/i,
+          // Look for image URLs in content
+          /https?:\/\/[^\s<>"]+\.(?:jpg|jpeg|png|webp|gif)(?:\?[^\s<>"]*)?/i,
+        ];
+
+        for (const pattern of imagePatterns) {
+          const match = itemXml.match(pattern);
+          if (match && match[1]) {
+            imageUrl = match[1];
+            break;
+          }
+        }
+
+        const title = titleMatch?.[1] || titleMatch?.[2] || "";
+        const link = linkMatch?.[1] || "";
+        const description = descMatch?.[1] || descMatch?.[2] || "";
+        const pubDate = pubDateMatch?.[1] || "";
+
+        // Clean and validate image URL
+        let cleanImageUrl = imageUrl.trim();
+        if (cleanImageUrl && !cleanImageUrl.startsWith("http")) {
+          cleanImageUrl = ""; // Invalid URL
+        }
 
         if (title && isRelevantContent(title, description)) {
-          const formattedTitle = formatRSSTitle(title)
-          const category = categorizeRSSContent(title, description) || defaultCategory
-          const parsedDate = pubDate ? new Date(pubDate) : new Date()
+          const formattedTitle = formatRSSTitle(title);
+          const category =
+            categorizeRSSContent(title, description) || defaultCategory;
+          const parsedDate = pubDate ? new Date(pubDate) : new Date();
+
+          // Clean description for display
+          const cleanDescription =
+            description
+              .replace(/<[^>]*>/g, "") // Remove HTML tags
+              .replace(/&[^;]+;/g, " ") // Remove HTML entities
+              .trim()
+              .substring(0, 150) + (description.length > 150 ? "..." : "");
 
           items.push({
             id: `rss-${sourceName}-${Date.now()}-${Math.random()}`,
             text: formattedTitle,
             link: link || undefined,
             category,
-            time: parsedDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+            time: parsedDate.toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
             source: sourceName,
             isRSS: true,
             pubDate: parsedDate,
-          })
+            image: cleanImageUrl || undefined,
+            description: cleanDescription || `Latest from ${sourceName}`,
+          });
         }
       } catch (itemError) {
-        console.warn(`Error parsing RSS item from ${sourceName}:`, itemError)
+        console.warn(`Error parsing RSS item from ${sourceName}:`, itemError);
       }
     }
 
-    return items
+    return items;
   } catch (error) {
-    console.warn(`Error fetching RSS from ${sourceName}:`, error)
-    return []
+    console.warn(`Error fetching RSS from ${sourceName}:`, error);
+    return [];
   }
 }
 
 export async function GET() {
   try {
-    // Fetch RSS feeds in parallel
-    const rssPromises = rssFeedSources.map((source) => parseRSSFeed(source.url, source.name, source.category))
+    // Fetch from multiple sources in parallel
+    const [rssResults, newsApiResults] = await Promise.allSettled([
+      // Fetch RSS feeds
+      Promise.allSettled(
+        rssFeedSources.map((source) =>
+          parseRSSFeed(source.url, source.name, source.category)
+        )
+      ),
+      // Fetch from news APIs
+      fetchAllNewsAPIs(),
+    ]);
 
-    const rssResults = await Promise.allSettled(rssPromises)
-    const rssItems: NewsItem[] = []
+    const allItems: NewsItem[] = [];
 
-    // Collect successful RSS results
-    rssResults.forEach((result, index) => {
-      if (result.status === "fulfilled") {
-        rssItems.push(...result.value)
-      } else {
-        console.warn(`RSS feed ${rssFeedSources[index].name} failed:`, result.reason)
-      }
-    })
+    // Collect RSS results
+    if (rssResults.status === "fulfilled") {
+      rssResults.value.forEach((result, index) => {
+        if (result.status === "fulfilled") {
+          allItems.push(...result.value);
+        } else {
+          console.warn(
+            `RSS feed ${rssFeedSources[index].name} failed:`,
+            result.reason
+          );
+        }
+      });
+    }
 
-    // Sort RSS items by publication date (newest first)
-    rssItems.sort((a, b) => {
-      if (!a.pubDate || !b.pubDate) return 0
-      return b.pubDate.getTime() - a.pubDate.getTime()
-    })
+    // Collect News API results
+    if (newsApiResults.status === "fulfilled") {
+      allItems.push(...newsApiResults.value);
+    } else {
+      console.warn("News APIs failed:", newsApiResults.reason);
+    }
 
-    // Take top 8 RSS items
-    const topRSSItems = rssItems.slice(0, 8)
+    // Remove duplicates based on URL and title similarity
+    const uniqueItems = allItems.filter((item, index, self) => {
+      return (
+        index ===
+        self.findIndex(
+          (t) =>
+            t.link === item.link ||
+            (t.text
+              .toLowerCase()
+              .includes(item.text.toLowerCase().substring(0, 30)) &&
+              item.text
+                .toLowerCase()
+                .includes(t.text.toLowerCase().substring(0, 30)))
+        )
+      );
+    });
 
-    // Create curated items with current timestamps
-    const curatedItems: NewsItem[] = curatedNews.map((item, index) => ({
+    // Sort by publication date (newest first)
+    uniqueItems.sort((a, b) => {
+      if (!a.pubDate || !b.pubDate) return 0;
+      return b.pubDate.getTime() - a.pubDate.getTime();
+    });
+
+    // Create brand message items with current timestamps
+    const brandItems: NewsItem[] = brandMessages.map((item, index) => ({
       ...item,
-      id: `curated-${index}`,
-      time: new Date(Date.now() - index * 60000).toLocaleTimeString([], {
+      id: `brand-${index}`,
+      time: new Date(Date.now() - index * 30000).toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
       }),
-    }))
+    }));
 
-    // Mix curated and RSS content (always include some curated content)
-    const mixedItems: NewsItem[] = []
+    // Take top 18 news items to make room for 2 brand messages
+    const topNewsItems = uniqueItems.slice(0, 18);
 
-    // Add curated items first (ensure brand messaging is always present)
-    mixedItems.push(...curatedItems.slice(0, 4))
+    // Mix brand messages strategically into the news feed
+    const finalItems: NewsItem[] = [];
 
-    // Add RSS items
-    mixedItems.push(...topRSSItems)
+    // Add first brand message at position 2 (after first real news item)
+    finalItems.push(...topNewsItems.slice(0, 2));
+    if (brandItems[0]) finalItems.push(brandItems[0]);
 
-    // Add remaining curated items
-    mixedItems.push(...curatedItems.slice(4))
+    // Add more news items
+    finalItems.push(...topNewsItems.slice(2, 10));
 
-    // Shuffle the mixed items while keeping some curated items at the start
-    const finalItems = [
-      ...mixedItems.slice(0, 2), // Keep first 2 curated items at start
-      ...mixedItems.slice(2).sort(() => Math.random() - 0.5), // Shuffle the rest
-    ]
+    // Add second brand message in the middle
+    if (brandItems[1]) finalItems.push(brandItems[1]);
+
+    // Add remaining news items
+    finalItems.push(...topNewsItems.slice(10));
+
+    // Count items by source type
+    const rssItemsCount = finalItems.filter((item) => item.isRSS).length;
+    const apiItemsCount = finalItems.filter(
+      (item) => !item.isRSS && !item.source.includes("RADE")
+    ).length;
+    const brandItemsCount = finalItems.filter((item) =>
+      item.source.includes("RADE")
+    ).length;
 
     return NextResponse.json({
       items: finalItems,
       lastUpdated: new Date().toISOString(),
-      rssItemsCount: topRSSItems.length,
-      curatedItemsCount: curatedItems.length,
-    })
+      rssItemsCount,
+      apiItemsCount,
+      brandItemsCount,
+      totalItems: finalItems.length,
+    });
   } catch (error) {
-    console.error("Error in news API:", error)
+    console.error("Error in news API:", error);
 
-    // Fallback to curated content only
-    const fallbackItems: NewsItem[] = curatedNews.map((item, index) => ({
-      ...item,
-      id: `fallback-${index}`,
-      time: new Date(Date.now() - index * 60000).toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
-    }))
+    // Fallback to RSS feeds only
+    try {
+      const rssPromises = rssFeedSources.map((source) =>
+        parseRSSFeed(source.url, source.name, source.category)
+      );
 
-    return NextResponse.json({
-      items: fallbackItems,
-      lastUpdated: new Date().toISOString(),
-      rssItemsCount: 0,
-      curatedItemsCount: fallbackItems.length,
-      error: "Using fallback content",
-    })
+      const rssResults = await Promise.allSettled(rssPromises);
+      const fallbackItems: NewsItem[] = [];
+
+      rssResults.forEach((result, index) => {
+        if (result.status === "fulfilled") {
+          fallbackItems.push(...result.value);
+        } else {
+          console.warn(
+            `Fallback RSS feed ${rssFeedSources[index].name} failed:`,
+            result.reason
+          );
+        }
+      });
+
+      // Sort and limit fallback items
+      fallbackItems.sort((a, b) => {
+        if (!a.pubDate || !b.pubDate) return 0;
+        return b.pubDate.getTime() - a.pubDate.getTime();
+      });
+
+      return NextResponse.json({
+        items: fallbackItems.slice(0, 15),
+        lastUpdated: new Date().toISOString(),
+        rssItemsCount: fallbackItems.length,
+        apiItemsCount: 0,
+        error: "Using RSS fallback content",
+      });
+    } catch (fallbackError) {
+      console.error("Fallback also failed:", fallbackError);
+
+      return NextResponse.json({
+        items: [],
+        lastUpdated: new Date().toISOString(),
+        rssItemsCount: 0,
+        apiItemsCount: 0,
+        error: "All news sources failed",
+      });
+    }
   }
 }

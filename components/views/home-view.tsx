@@ -3,7 +3,6 @@
 import { HeroSection } from "@/components/sections/hero-section"
 import { CreatorPillars } from "@/components/sections/creator-pillars"
 import { CTASection } from "@/components/sections/cta-section"
-import { IndustryMoves } from "@/components/industry-moves"
 
 export function HomeView() {
   return (
@@ -11,7 +10,6 @@ export function HomeView() {
       <HeroSection />
       <CreatorPillars />
       <CTASection />
-      <IndustryMoves />
     </div>
   )
 }
