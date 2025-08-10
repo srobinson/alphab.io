@@ -1,8 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import { ArrowRight, Zap, Star, Circle, Mail, CheckCircle, User, Lightbulb, Rocket } from 'lucide-react';
-import { createClient } from '@/lib/supabase';
+import { ArrowRight, Zap, Star, Circle, Mail, CheckCircle } from 'lucide-react';
 
 const Index = () => {
     const [time, setTime] = useState(new Date());
@@ -11,7 +10,6 @@ const Index = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [error, setError] = useState('');
-    const supabase = createClient();
 
     useEffect(() => {
         setMounted(true);
@@ -25,17 +23,20 @@ const Index = () => {
         setError('');
 
         try {
-            if (!supabase) {
-                throw new Error('Database connection not available. Please try again later.');
-            }
-
-            const { data, error } = await supabase.rpc('upsert_user_and_subscribe', {
-                p_email: email,
-                p_publication: 'general',
-                p_source: 'landing_page'
+            const res = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email,
+                    publication: 'general',
+                    source: 'landing_page',
+                }),
             });
 
-            if (error) throw error;
+            if (!res.ok) {
+                const data = await res.json().catch(() => ({}));
+                throw new Error(data.error || 'Failed to subscribe');
+            }
 
             setIsSubmitted(true);
             setEmail('');

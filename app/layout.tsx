@@ -12,6 +12,7 @@ import { headers } from "next/headers"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: {
     default: "RADE - AI Solutions & Consulting | Custom AI Development",
     template: "%s | RADE - AI Solutions"
@@ -73,9 +74,9 @@ export const metadata: Metadata = {
     google: 'your-google-verification-code',
     yandex: 'your-yandex-verification-code',
   },
-}
+} satisfies Metadata
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
@@ -174,7 +175,8 @@ export default function RootLayout({
   }
 
   // Determine host to decide whether to render RADE header
-  const host = headers().get("host") || ""
+  const headersList = await headers()
+  const host = headersList.get("host") || ""
   const isRadeHost = host.includes("rade.")
 
   return (

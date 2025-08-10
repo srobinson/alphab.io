@@ -1,14 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase'
+import { createAdminClient } from '@/lib/supabaseAdmin'
 import { Resend } from "resend";
+
+export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
 
 // This API route can be called to send notifications about new contacts
 // You can integrate this with email services like Resend, SendGrid, or Nodemailer
 
 export async function POST(request: NextRequest) {
+  console.log('[notify-contact] API called')
   try {
     const requestBody = await request.json()
-    console.log('Request body:', requestBody);
 
     const { contactId, notificationType = 'new_contact' } = requestBody
 
@@ -19,7 +22,7 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const supabase = createClient()
+    const supabase = createAdminClient()
     if (!supabase) {
       return NextResponse.json(
         { error: 'Database connection not available' },
@@ -35,6 +38,7 @@ export async function POST(request: NextRequest) {
       .single()
 
     if (contactError || !contact) {
+      console.warn('[notify-contact] contact fetch failed:', contactError)
       return NextResponse.json(
         { error: 'Contact not found' },
         { status: 404 }
@@ -79,8 +83,6 @@ export async function POST(request: NextRequest) {
     const resend = new Resend(process.env.RESEND_API_KEY)
     await resend.emails.send(notificationData.emailData)
 
-    console.log('Notification sent:', notificationData)
-
     return NextResponse.json({
       success: true,
       message: 'Notification processed',
@@ -88,7 +90,7 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error: any) {
-    console.error('Notification error:', error)
+    console.error('[notify-contact] Notification error:', error)
     return NextResponse.json(
       { error: 'Failed to process notification' },
       { status: 500 }

@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { createClient } from "@/lib/supabase"
 import { motion } from "framer-motion"
 import { Send, Mail, User, MessageSquare, CheckCircle, AlertCircle, Bell } from "lucide-react"
 
@@ -26,7 +25,6 @@ export default function ContactPage() {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState('')
   const [subscribeToNewsletter, setSubscribeToNewsletter] = useState(false)
-  const supabase = createClient()
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -34,93 +32,63 @@ export default function ContactPage() {
     setError('')
 
     const formData = new FormData(event.currentTarget)
+    // Honeypot spam trap
+    const company = (formData.get('company') as string) || ''
+    if (company.trim().length > 0) {
+      // silently succeed to bots
+      setIsSubmitting(false)
+      return
+    }
     const name = formData.get('name') as string
     const email = formData.get('email') as string
     const message = formData.get('message') as string
 
     try {
-      if (!supabase) {
-        throw new Error('Database connection not available. Please try again later.')
-      }
-
-      // Store contact submission
-      const { data: contactData, error: contactError } = await supabase
-        .from('contacts')
-        .insert({
-          name: name,
-          email: email,
-          message: message,
+      // Store contact submission via secure API (bypasses RLS server-side)
+      const contactResp = await fetch('/api/contacts', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
           source: 'contact_page',
-          ip_address: null,
-          user_agent: navigator.userAgent,
-          subscribed_to_newsletter: subscribeToNewsletter
+          subscribed_to_newsletter: subscribeToNewsletter,
         })
-        .select('id')
-
-      if (contactError) {
-        throw new Error('Failed to store contact submission. Please try again later.')
+      })
+      if (!contactResp.ok) {
+        const data = await contactResp.json().catch(() => ({}))
+        throw new Error(data.error || 'Failed to store contact submission. Please try again later.')
       }
+      const { id: contactId } = await contactResp.json()
+      console.log('Contact stored successfully with ID:', contactId)
 
-      const contactId = contactData[0]?.id;
-
-      // If user wants newsletter subscription, add them
+      // If user wants newsletter subscription, add them via unified API (sends welcome email)
       if (subscribeToNewsletter) {
         try {
-          const { error: subscriptionError } = await supabase.rpc('upsert_user_and_subscribe', {
-            p_email: email,
-            p_publication: 'general',
-            p_source: 'contact_page_signup',
-            p_first_name: name.split(' ')[0] || null,
-            p_last_name: name.split(' ').slice(1).join(' ') || null,
-            p_user_agent: navigator.userAgent
+          const resp = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email,
+              publication: 'general',
+              source: 'contact_page_signup',
+              first_name: name.split(' ')[0] || null,
+              last_name: name.split(' ').slice(1).join(' ') || null,
+            })
           })
-
-          if (subscriptionError) {
-            console.warn('Newsletter subscription failed:', subscriptionError)
-            // Don't fail the whole form if newsletter signup fails
+          if (!resp.ok) {
+            const data = await resp.json().catch(() => ({}))
+            console.warn('Newsletter subscription failed:', data.error || resp.statusText)
           }
         } catch (subscriptionError) {
           console.warn('Newsletter subscription failed:', subscriptionError)
         }
       }
 
-      // Track analytics event
-      try {
-        await supabase.rpc('track_analytics_event', {
-          p_event_type: 'contact_form',
-          p_event_name: 'form_submitted',
-          p_properties: {
-            source: 'contact_page',
-            has_newsletter_signup: subscribeToNewsletter
-          },
-          p_page_url: window.location.href,
-          p_user_agent: navigator.userAgent
-        })
-      } catch (analyticsError) {
-        console.warn('Analytics tracking failed:', analyticsError)
-      }
+      // No client notification needed; /api/contacts triggers /api/notify-contact server-side
 
       setIsSubmitted(true)
-
-      // Send notification (don't fail the form if this fails)
-      try {
-        const response = await fetch('/api/notify-contact', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            contactId: contactId,
-            notificationType: 'new_contact'
-          })
-        })
-
-        if (response.ok) {
-          console.log('Notification sent successfully')
-        }
-      } catch (notificationError) {
-        console.warn('Failed to send notification:', notificationError)
-      }
 
       // Reset form
       event.currentTarget.reset()
@@ -136,13 +104,11 @@ export default function ContactPage() {
 
   return (
     // Root container for the page, ensuring it takes full height and applies base theme colors
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+    <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300 bg-[rgb(17_24_39/_var(--tw-bg-opacity,1))]">
       <motion.div
         className="max-w-2xl w-full space-y-10 p-8 md:p-12 
-                   bg-gray-50 dark:bg-gray-900/50 
                    rounded-xl shadow-2xl 
-                   border border-gray-200 dark:border-gray-700/60 
-                   dark:backdrop-blur-md"
+                   border border-white/10 bg-white/5 backdrop-blur-md"
         initial="hidden"
         animate="visible"
         variants={formVariants}
@@ -161,10 +127,12 @@ export default function ContactPage() {
 
         {!isSubmitted ? (
           <motion.form className="space-y-8" onSubmit={handleSubmit} variants={itemVariants}>
+            {/* Honeypot field */}
+            <input type="text" name="company" autoComplete="off" tabIndex={-1} className="hidden" aria-hidden="true" />
             <motion.div className="relative" variants={itemVariants}>
               <Label
                 htmlFor="name"
-                className="absolute -top-3 left-2.5 bg-gray-50 dark:bg-gray-900/0 px-1 text-sm text-gray-600 dark:text-gray-400"
+                className="absolute -top-3 left-2.5 bg-transparent px-1 text-sm text-gray-400"
               >
                 <User className="inline-block h-4 w-4 mr-1" /> Full Name
               </Label>
@@ -174,7 +142,7 @@ export default function ContactPage() {
                 type="text"
                 required
                 disabled={isSubmitting}
-                className="bg-transparent text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 focus:border-blue-500 ring-offset-white dark:ring-offset-black focus:ring-blue-500 disabled:opacity-50"
+                className="bg-transparent text-white placeholder:text-gray-400 border-white/20 focus:border-blue-400 focus:ring-blue-400/30 disabled:opacity-50"
                 placeholder="Your Name"
               />
             </motion.div>
@@ -182,7 +150,7 @@ export default function ContactPage() {
             <motion.div className="relative" variants={itemVariants}>
               <Label
                 htmlFor="email"
-                className="absolute -top-3 left-2.5 bg-gray-50 dark:bg-gray-900/0 px-1 text-sm text-gray-600 dark:text-gray-400"
+                className="absolute -top-3 left-2.5 bg-transparent px-1 text-sm text-gray-400"
               >
                 <Mail className="inline-block h-4 w-4 mr-1" /> Email Address
               </Label>
@@ -192,7 +160,7 @@ export default function ContactPage() {
                 type="email"
                 required
                 disabled={isSubmitting}
-                className="bg-transparent text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 focus:border-blue-500 ring-offset-white dark:ring-offset-black focus:ring-blue-500 disabled:opacity-50"
+                className="bg-transparent text-white placeholder:text-gray-400 border-white/20 focus:border-blue-400 focus:ring-blue-400/30 disabled:opacity-50"
                 placeholder="you@example.com"
               />
             </motion.div>
@@ -200,17 +168,17 @@ export default function ContactPage() {
             <motion.div className="relative" variants={itemVariants}>
               <Label
                 htmlFor="message"
-                className="absolute -top-3 left-2.5 bg-gray-50 dark:bg-gray-900/0 px-1 text-sm text-gray-600 dark:text-gray-400"
+                className="absolute -top-3 left-2.5 bg-transparent px-1 text-sm text-gray-400"
               >
                 <MessageSquare className="inline-block h-4 w-4 mr-1" /> Your Message
               </Label>
               <Textarea
                 id="message"
                 name="message"
-                rows={5}
+                rows={6}
                 required
                 disabled={isSubmitting}
-                className="bg-transparent text-gray-900 dark:text-white border-gray-300 dark:border-gray-600 focus:border-blue-500 ring-offset-white dark:ring-offset-black focus:ring-blue-500 disabled:opacity-50"
+                className="bg-transparent text-white placeholder:text-gray-400 border-white/20 focus:border-blue-400 focus:ring-blue-400/30 disabled:opacity-50"
                 placeholder="Tell me about your vision or inquiry..."
               />
             </motion.div>

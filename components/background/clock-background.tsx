@@ -7,8 +7,13 @@ export function ClockBackground() {
     const [time, setTime] = useState(new Date())
     const [isVisible, setIsVisible] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
+    const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
+        // Ensure first render after mount uses current client time
+        setTime(new Date())
+        setMounted(true)
+
         const timer = setInterval(() => {
             setTime(new Date())
         }, 1000)
@@ -21,22 +26,19 @@ export function ClockBackground() {
         checkMobile()
         window.addEventListener('resize', checkMobile)
 
-        // Clock reveal animation
-        const revealTimer = setTimeout(() => {
-            setIsVisible(true)
-        }, 200)
+        // Reveal immediately after mount
+        setIsVisible(true)
 
         return () => {
             clearInterval(timer)
-            clearTimeout(revealTimer)
             window.removeEventListener('resize', checkMobile)
         }
     }, [])
 
     // Calculate angles for clock hands
-    const seconds = time.getSeconds()
-    const minutes = time.getMinutes()
-    const hours = time.getHours() % 12
+    const seconds = mounted ? time.getSeconds() : 0
+    const minutes = mounted ? time.getMinutes() : 0
+    const hours = mounted ? (time.getHours() % 12) : 0
 
     const secondAngle = seconds * 6 - 90
     const minuteAngle = minutes * 6 + seconds * 0.1 - 90
@@ -49,7 +51,9 @@ export function ClockBackground() {
                 perspective: "5000px",
                 perspectiveOrigin: "top center",
             }}
+            suppressHydrationWarning
         >
+            {mounted && (
             <motion.div
                 className="absolute top-0 left-0 right-0 transform -translate-x-1/2 md:-translate-y-0 -translate-y-0"
                 style={{
@@ -89,6 +93,7 @@ export function ClockBackground() {
                     style={{
                         filter: "drop-shadow(0 0 80px rgba(59, 130, 246, 0.4))",
                     }}
+                    suppressHydrationWarning
                 >
                     {/* Multiple clock rings for depth */}
                     <circle cx="200" cy="200" r="195" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.3" />
@@ -188,6 +193,7 @@ export function ClockBackground() {
                     <circle cx="200" cy="200" r="4" fill="rgba(59, 130, 246, 0.8)" opacity="1" />
                 </svg>
             </motion.div>
+            )}
         </div>
     )
 }

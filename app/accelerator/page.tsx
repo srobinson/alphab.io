@@ -25,71 +25,18 @@ const TechAccelerator = () => {
         setError('');
 
         try {
-            if (!supabase) {
-                throw new Error('Database connection not available. Please try again later.');
-            }
-
-            console.log('Email:', email, 'Publication:', 'tech_accelerator');
-
-
-            // Try the new function first, fallback to direct table insert
-            try {
-                const { data, error } = await supabase.rpc('upsert_user_and_subscribe', {
-                    p_email: email,
-                    p_publication: 'tech_accelerator',
-                    p_source: 'tech_accelerator_page'
-                });
-
-                console.log('RPC result:', data);
-
-
-                if (error) throw error;
-            } catch (rpcError: any) {
-                // Fallback to direct table insert if function doesn't exist
-                console.log('Function not found, using fallback method');
-
-                // First, try to insert/update user
-                const { data: userData, error: userError } = await supabase
-                    .from('user')
-                    .upsert({
-                        email: email,
-                        source: 'tech_accelerator_page',
-                        status: 'active'
-                    }, {
-                        onConflict: 'email'
-                    })
-                    .select('id')
-                    .single();
-
-                if (userError) {
-                    // If user table doesn't exist, try email_signups table
-                    const { error: signupError } = await supabase
-                        .from('email_signups')
-                        .insert({
-                            email: email,
-                            source: 'tech_accelerator_page',
-                            publication_type: 'tech_accelerator'
-                        });
-
-                    if (signupError && !signupError.message.includes('duplicate')) {
-                        throw signupError;
-                    }
-                } else if (userData) {
-                    // Try to insert newsletter subscription
-                    const { error: newsletterError } = await supabase
-                        .from('newsletter')
-                        .upsert({
-                            user_id: userData.id,
-                            publication: 'tech_accelerator',
-                            source: 'tech_accelerator_page'
-                        }, {
-                            onConflict: 'user_id,publication'
-                        });
-
-                    if (newsletterError && !newsletterError.message.includes('duplicate')) {
-                        console.warn('Newsletter subscription failed:', newsletterError);
-                    }
-                }
+            const resp = await fetch('/api/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email,
+                    publication: 'tech_accelerator',
+                    source: 'tech_accelerator_page',
+                }),
+            })
+            if (!resp.ok) {
+                const data = await resp.json().catch(() => ({}))
+                throw new Error(data.error || 'Failed to subscribe')
             }
 
             setIsSubmitted(true);
