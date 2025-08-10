@@ -1,17 +1,16 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 import {
+    Camera,
+    Layers,
     Lightbulb,
     Megaphone,
-    Rocket,
     Mic,
+    Rocket,
     Target,
-    Layers,
-    Camera,
     Users,
-} from "lucide-react"
-import { AnimatedUnderlineText, PREDEFINED_UNDERLINE_PATHS } from "@/components/ui/animated_underline_text"
+} from "lucide-react";
 
 const creatorPillars = [
     {
@@ -62,7 +61,7 @@ const creatorPillars = [
         description:
             "AI-powered community management responds to comments intelligently, personalizes content recommendations for each viewer, and analyzes sentiment to help you create content that truly resonates.",
     },
-]
+];
 
 export function CreatorPillars() {
     return (
@@ -72,11 +71,15 @@ export function CreatorPillars() {
             whileInView="visible"
             variants={{
                 hidden: { opacity: 0 },
-                visible: { opacity: 1, transition: { duration: 0.5, ease: "easeOut" } },
+                visible: {
+                    opacity: 1,
+                    transition: { duration: 0.5, ease: "easeOut" },
+                },
             }}
             viewport={{ once: true, amount: 0.1 }}
         >
-            {/* <motion.h2
+            {
+                /* <motion.h2
                 variants={{
                     hidden: { opacity: 0, y: 10 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
@@ -92,7 +95,8 @@ export function CreatorPillars() {
                     <span style={{ display: "inline-block" }}>Elevate</span>
                 </AnimatedUnderlineText>{" "}
                 Your Influence.
-            </motion.h2> */}
+            </motion.h2> */
+            }
 
             <motion.div
                 className="text-center mb-16 mt-12 md:mt-16"
@@ -105,8 +109,9 @@ export function CreatorPillars() {
                     Here's what I know
                 </h2>
                 <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-4xl mx-auto leading-relaxed">
-                    I've spent years in the trenches, building systems that actually work.
-                    Not theory. Not hype. Just proven methods that turn content into results.
+                    I've spent years in the trenches, building systems that
+                    actually work. Not theory. Not hype. Just proven methods
+                    that turn content into results.
                 </p>
             </motion.div>
 
@@ -119,8 +124,8 @@ export function CreatorPillars() {
                         transition: {
                             staggerChildren: 0.15,
                             delayChildren: 0.3,
-                            duration: 0.6
-                        }
+                            duration: 0.6,
+                        },
                     },
                 }}
                 initial="hidden"
@@ -128,7 +133,7 @@ export function CreatorPillars() {
                 viewport={{ once: true, amount: 0.1 }}
             >
                 {creatorPillars.map((pillar, index) => {
-                    const IconComponent = pillar.icon
+                    const IconComponent = pillar.icon;
                     return (
                         <motion.div
                             key={pillar.title}
@@ -137,7 +142,7 @@ export function CreatorPillars() {
                                     opacity: 0,
                                     y: 60,
                                     scale: 0.8,
-                                    rotateX: -15
+                                    rotateX: -15,
                                 },
                                 visible: {
                                     opacity: 1,
@@ -149,8 +154,8 @@ export function CreatorPillars() {
                                         damping: 20,
                                         stiffness: 100,
                                         duration: 0.8,
-                                        ease: [0.25, 0.46, 0.45, 0.94]
-                                    }
+                                        ease: [0.25, 0.46, 0.45, 0.94],
+                                    },
                                 },
                             }}
                             whileHover={{
@@ -160,8 +165,8 @@ export function CreatorPillars() {
                                 transition: {
                                     type: "spring",
                                     damping: 15,
-                                    stiffness: 200
-                                }
+                                    stiffness: 200,
+                                },
                             }}
                             className="group h-full space-y-4 p-5 bg-gray-50/70 dark:bg-gray-900/50 backdrop-blur-sm rounded-xl shadow-xl border border-gray-200/80 dark:border-gray-700/50 transition-all duration-300 ease-out hover:shadow-2xl dark:hover:shadow-blue-500/30 hover:border-blue-400 dark:hover:border-blue-500/70"
                             style={{ perspective: "1000px" }}
@@ -170,7 +175,10 @@ export function CreatorPillars() {
                                 className="flex items-center space-x-3"
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
-                                transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+                                transition={{
+                                    delay: 0.2 + index * 0.1,
+                                    duration: 0.5,
+                                }}
                                 viewport={{ once: true }}
                             >
                                 <motion.div
@@ -178,7 +186,7 @@ export function CreatorPillars() {
                                     whileHover={{
                                         rotate: 360,
                                         scale: 1.2,
-                                        transition: { duration: 0.6 }
+                                        transition: { duration: 0.6 },
                                     }}
                                 >
                                     <IconComponent className="w-5 h-5 text-white transition-transform duration-200 ease-out group-hover:rotate-3" />
@@ -187,7 +195,10 @@ export function CreatorPillars() {
                                     className="text-lg lg:text-xl font-black tracking-tight text-gray-900 dark:text-white"
                                     initial={{ opacity: 0 }}
                                     whileInView={{ opacity: 1 }}
-                                    transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
+                                    transition={{
+                                        delay: 0.3 + index * 0.1,
+                                        duration: 0.5,
+                                    }}
                                     viewport={{ once: true }}
                                 >
                                     {pillar.title}
@@ -197,15 +208,18 @@ export function CreatorPillars() {
                                 className="text-gray-700 dark:text-gray-300 text-sm lg:text-base leading-relaxed"
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.4 + index * 0.1, duration: 0.6 }}
+                                transition={{
+                                    delay: 0.4 + index * 0.1,
+                                    duration: 0.6,
+                                }}
                                 viewport={{ once: true }}
                             >
                                 {pillar.description}
                             </motion.p>
                         </motion.div>
-                    )
+                    );
                 })}
             </motion.div>
         </motion.section>
-    )
+    );
 }

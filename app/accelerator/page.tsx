@@ -3,8 +3,6 @@
 import { useState, useEffect } from 'react';
 import { ArrowLeft, Zap, Cpu, Rocket, Code, Lightbulb, Gauge, ChevronRight, Mail, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const TechAccelerator = () => {
     const [time, setTime] = useState(new Date());
@@ -12,7 +10,6 @@ const TechAccelerator = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [error, setError] = useState('');
-    const supabase = createClient();
 
     useEffect(() => {
         const timer = setInterval(() => setTime(new Date()), 1000);

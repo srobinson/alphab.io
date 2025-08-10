@@ -1,64 +1,64 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { createAdminClient } from '@/lib/supabaseAdmin'
+import { createAdminClient } from "@/lib/supabaseAdmin";
+import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-export const dynamic = 'force-dynamic'
-export const runtime = 'nodejs'
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 // This API route can be called to send notifications about new contacts
 // You can integrate this with email services like Resend, SendGrid, or Nodemailer
 
 export async function POST(request: NextRequest) {
-  console.log('[notify-contact] API called')
+  console.log("[notify-contact] API called");
   try {
-    const requestBody = await request.json()
+    const requestBody = await request.json();
 
-    const { contactId, notificationType = 'new_contact' } = requestBody
+    const { contactId, notificationType = "new_contact" } = requestBody;
 
     if (!contactId) {
       return NextResponse.json(
-        { error: 'Contact ID is required' },
-        { status: 400 }
-      )
+        { error: "Contact ID is required" },
+        { status: 400 },
+      );
     }
 
-    const supabase = createAdminClient()
+    const supabase = createAdminClient();
     if (!supabase) {
       return NextResponse.json(
-        { error: 'Database connection not available' },
-        { status: 500 }
-      )
+        { error: "Database connection not available" },
+        { status: 500 },
+      );
     }
 
     // Get contact details
     const { data: contact, error: contactError } = await supabase
-      .from('contacts')
-      .select('*')
-      .eq('id', contactId)
-      .single()
+      .from("contacts")
+      .select("*")
+      .eq("id", contactId)
+      .single();
 
     if (contactError || !contact) {
-      console.warn('[notify-contact] contact fetch failed:', contactError)
+      console.warn("[notify-contact] contact fetch failed:", contactError);
       return NextResponse.json(
-        { error: 'Contact not found' },
-        { status: 404 }
-      )
+        { error: "Contact not found" },
+        { status: 404 },
+      );
     }
 
     // Log the notification activity
     await supabase
-      .from('user_activity_log')
+      .from("user_activity_log")
       .insert({
         user_id: null,
-        activity_type: 'notification_sent',
+        activity_type: "notification_sent",
         activity_data: {
           contact_id: contactId,
           notification_type: notificationType,
           contact_email: contact.email,
           contact_name: contact.name,
-          timestamp: new Date().toISOString()
-        }
-      })
+          timestamp: new Date().toISOString(),
+        },
+      });
 
     const notificationData = {
       type: notificationType,
@@ -69,32 +69,31 @@ export async function POST(request: NextRequest) {
         message: contact.message,
         source: contact.source,
         subscribed_to_newsletter: contact.subscribed_to_newsletter,
-        created_at: contact.created_at
+        created_at: contact.created_at,
       },
       emailData: {
         from: "noreply@alphab.io", // Your verified domain
-        to: process.env.ADMIN_EMAIL || 'admin@alphab.io', // Your admin email
+        to: process.env.ADMIN_EMAIL || "admin@alphab.io", // Your admin email
         subject: `New Contact Form Submission from ${contact.name}`,
         html: generateEmailHTML(contact),
-        text: generateEmailText(contact)
-      }
-    }
+        text: generateEmailText(contact),
+      },
+    };
 
-    const resend = new Resend(process.env.RESEND_API_KEY)
-    await resend.emails.send(notificationData.emailData)
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    await resend.emails.send(notificationData.emailData);
 
     return NextResponse.json({
       success: true,
-      message: 'Notification processed',
-      data: notificationData
-    })
-
+      message: "Notification processed",
+      data: notificationData,
+    });
   } catch (error: any) {
-    console.error('[notify-contact] Notification error:', error)
+    console.error("[notify-contact] Notification error:", error);
     return NextResponse.json(
-      { error: 'Failed to process notification' },
-      { status: 500 }
-    )
+      { error: "Failed to process notification" },
+      { status: 500 },
+    );
   }
 }
 
@@ -122,7 +121,9 @@ function generateEmailHTML(contact: any): string {
         <div class="container">
             <div class="header">
                 <h2 style="margin: 0; color: #007bff;">New Contact Form Submission</h2>
-                <p style="margin: 10px 0 0 0; color: #6c757d;">Received on ${new Date(contact.created_at).toLocaleString()}</p>
+                <p style="margin: 10px 0 0 0; color: #6c757d;">Received on ${
+    new Date(contact.created_at).toLocaleString()
+  }</p>
             </div>
             
             <div class="content">
@@ -135,7 +136,11 @@ function generateEmailHTML(contact: any): string {
                     <div class="label">Email:</div>
                     <div class="value">
                         <a href="mailto:${contact.email}">${contact.email}</a>
-                        ${contact.subscribed_to_newsletter ? '<span class="badge">Newsletter Subscriber</span>' : ''}
+                        ${
+    contact.subscribed_to_newsletter
+      ? '<span class="badge">Newsletter Subscriber</span>'
+      : ""
+  }
                     </div>
                 </div>
                 
@@ -146,7 +151,9 @@ function generateEmailHTML(contact: any): string {
                 
                 <div class="field">
                     <div class="label">Message:</div>
-                    <div class="message">${contact.message.replace(/\n/g, '<br>')}</div>
+                    <div class="message">${
+    contact.message.replace(/\n/g, "<br>")
+  }</div>
                 </div>
             </div>
             
@@ -157,7 +164,7 @@ function generateEmailHTML(contact: any): string {
         </div>
     </body>
     </html>
-  `
+  `;
 }
 
 function generateEmailText(contact: any): string {
@@ -167,7 +174,7 @@ New Contact Form Submission
 Name: ${contact.name}
 Email: ${contact.email}
 Source: ${contact.source}
-Newsletter Subscription: ${contact.subscribed_to_newsletter ? 'Yes' : 'No'}
+Newsletter Subscription: ${contact.subscribed_to_newsletter ? "Yes" : "No"}
 Submitted: ${new Date(contact.created_at).toLocaleString()}
 
 Message:
@@ -176,17 +183,17 @@ ${contact.message}
 ---
 Contact ID: ${contact.id}
 Manage contacts: ${process.env.NEXT_PUBLIC_SITE_URL}/admin/contacts
-  `.trim()
+  `.trim();
 }
 
 // GET endpoint to test the notification system
 export async function GET() {
   return NextResponse.json({
-    message: 'Contact notification API is working',
+    message: "Contact notification API is working",
     endpoints: {
-      POST: 'Send notification for a contact',
-      required_fields: ['contactId'],
-      optional_fields: ['notificationType']
-    }
-  })
+      POST: "Send notification for a contact",
+      required_fields: ["contactId"],
+      optional_fields: ["notificationType"],
+    },
+  });
 }

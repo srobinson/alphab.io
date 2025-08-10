@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import LandingPageView from '@/components/views/landingpage-view';
+import LandingPageView from "@/components/views/landingpage-view";
 
 export default function LandingPage() {
     return <LandingPageView />;

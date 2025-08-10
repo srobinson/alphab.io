@@ -1,25 +1,25 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { X, Check } from "lucide-react"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { Check, X } from "lucide-react";
+import Link from "next/link";
 
 const oldWayItems = [
     "Expensive agency retainers",
     "Multiple layers of account managers",
     "Slow implementation cycles",
     "Generic AI strategies",
-    "Paying for overhead, not expertise"
-]
+    "Paying for overhead, not expertise",
+];
 
 const radeWayItems = [
     "Direct access to senior AI expertise",
     "Focused, high-impact engagements",
     "Immediate implementation and results",
     "Customized AI solutions for your needs",
-    "100% of your investment goes to expertise"
-]
+    "100% of your investment goes to expertise",
+];
 
 export function ParadigmInfographic() {
     return (
@@ -41,14 +41,15 @@ export function ParadigmInfographic() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
             >
-                <span className="text-white">THE </span>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">NEW PARADIGM</span>
-                <span className="text-white"> OF AI CONSULTING</span>
+                <span className="text-white">THE</span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                    NEW PARADIGM
+                </span>
+                <span className="text-white">OF AI CONSULTING</span>
             </motion.h2>
 
             {/* Comparison Grid */}
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-
                 {/* The Old Way */}
                 <motion.div
                     className="space-y-6"
@@ -58,9 +59,13 @@ export function ParadigmInfographic() {
                 >
                     <div className="flex items-center gap-4 mb-8">
                         <div className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full shadow-xl">
-                            <span className="text-white font-black text-xl md:text-2xl">1</span>
+                            <span className="text-white font-black text-xl md:text-2xl">
+                                1
+                            </span>
                         </div>
-                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white">The Old Way</h3>
+                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white">
+                            The Old Way
+                        </h3>
                     </div>
 
                     <div className="space-y-4">
@@ -70,10 +75,15 @@ export function ParadigmInfographic() {
                                 className="flex items-start gap-4 p-4 bg-red-500/10 border border-red-500/20 rounded-xl backdrop-blur-sm"
                                 initial={{ opacity: 0, x: -20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                                transition={{
+                                    duration: 0.5,
+                                    delay: 0.6 + index * 0.1,
+                                }}
                             >
                                 <X className="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-red-100 text-lg font-medium leading-relaxed">{item}</span>
+                                <span className="text-red-100 text-lg font-medium leading-relaxed">
+                                    {item}
+                                </span>
                             </motion.div>
                         ))}
                     </div>
@@ -88,9 +98,13 @@ export function ParadigmInfographic() {
                 >
                     <div className="flex items-center gap-4 mb-8">
                         <div className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full shadow-xl">
-                            <span className="text-white font-black text-xl md:text-2xl">2</span>
+                            <span className="text-white font-black text-xl md:text-2xl">
+                                2
+                            </span>
                         </div>
-                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">The RADE Way</h3>
+                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+                            The RADE Way
+                        </h3>
                     </div>
 
                     <div className="space-y-4">
@@ -100,10 +114,15 @@ export function ParadigmInfographic() {
                                 className="flex items-start gap-4 p-4 bg-green-500/10 border border-green-500/20 rounded-xl backdrop-blur-sm hover:bg-green-500/15 transition-all duration-300"
                                 initial={{ opacity: 0, x: 20 }}
                                 animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                                transition={{
+                                    duration: 0.5,
+                                    delay: 0.6 + index * 0.1,
+                                }}
                             >
                                 <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-0.5" />
-                                <span className="text-green-100 text-lg font-medium leading-relaxed">{item}</span>
+                                <span className="text-green-100 text-lg font-medium leading-relaxed">
+                                    {item}
+                                </span>
                             </motion.div>
                         ))}
                     </div>
@@ -127,5 +146,5 @@ export function ParadigmInfographic() {
                 </Link>
             </motion.div>
         </motion.div>
-    )
+    );
 }

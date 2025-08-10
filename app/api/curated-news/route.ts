@@ -67,7 +67,7 @@ export async function GET() {
     console.error("Error fetching curated news:", error);
     return NextResponse.json(
       { error: "Failed to fetch curated news" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

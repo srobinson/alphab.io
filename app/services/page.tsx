@@ -1,10 +1,21 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
-import { Mail, BrainCircuit, Bot, LineChart, Settings2, Presentation, ShieldCheck } from "lucide-react"
-import { AnimatedUnderlineText, PREDEFINED_UNDERLINE_PATHS } from "@/components/ui/animated_underline_text"
+import {
+  AnimatedUnderlineText,
+  PREDEFINED_UNDERLINE_PATHS,
+} from "@/components/ui/animated_underline_text";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import {
+  Bot,
+  BrainCircuit,
+  LineChart,
+  Mail,
+  Presentation,
+  Settings2,
+  ShieldCheck,
+} from "lucide-react";
+import Link from "next/link";
 
 const services = [
   {
@@ -85,17 +96,22 @@ const services = [
       "Custom BI Dashboard Development",
     ],
   },
-]
+];
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-}
+};
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20, scale: 0.98 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
-}
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
 
 const createLetterPulseVariants = (baseDelay: number, pulseScale = 1.3) => ({
   initial: { scale: 1, letterSpacing: "normal" },
@@ -108,26 +124,33 @@ const createLetterPulseVariants = (baseDelay: number, pulseScale = 1.3) => ({
       ease: "circOut",
     },
   }),
-})
+});
 
-const amplifyLetters = "AMPLIFY".split("")
-const amplifyBaseDelay = 0
-const amplifyLetterPulseVariants = createLetterPulseVariants(amplifyBaseDelay, 1.15)
+const amplifyLetters = "AMPLIFY".split("");
+const amplifyBaseDelay = 0;
+const amplifyLetterPulseVariants = createLetterPulseVariants(
+  amplifyBaseDelay,
+  1.15,
+);
 
-const influenceLetters = "INFLUENCE".split("")
-const influenceBaseDelay = 0.2
-const influenceLetterPulseVariants = createLetterPulseVariants(influenceBaseDelay, 0)
+const influenceLetters = "INFLUENCE".split("");
+const influenceBaseDelay = 0.2;
+const influenceLetterPulseVariants = createLetterPulseVariants(
+  influenceBaseDelay,
+  0,
+);
 
 export default function ServicesPage() {
   const servicesStructuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "RADE AI Services",
-    "description": "Comprehensive AI services including strategy consulting, custom AI model development, implementation, and ethical AI governance.",
+    "description":
+      "Comprehensive AI services including strategy consulting, custom AI model development, implementation, and ethical AI governance.",
     "provider": {
       "@type": "Organization",
       "name": "RADE AI Solutions",
-      "url": "https://alphab.io"
+      "url": "https://alphab.io",
     },
     "areaServed": "Worldwide",
     "hasOfferCatalog": {
@@ -139,18 +162,20 @@ export default function ServicesPage() {
           "@type": "Service",
           "name": service.title,
           "description": service.description,
-          "category": "AI Services"
+          "category": "AI Services",
         },
-        "position": index + 1
-      }))
-    }
-  }
+        "position": index + 1,
+      })),
+    },
+  };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesStructuredData) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(servicesStructuredData),
+        }}
       />
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         {/* Hero Section */}
@@ -217,9 +242,10 @@ export default function ServicesPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              I offer a comprehensive suite of AI services designed to empower your business, from strategic ideation to
-              full-scale implementation and beyond. Each service is tailored to deliver measurable impact and sustainable
-              growth.
+              I offer a comprehensive suite of AI services designed to empower
+              your business, from strategic ideation to full-scale
+              implementation and beyond. Each service is tailored to deliver
+              measurable impact and sustainable growth.
             </motion.p>
             <motion.div
               className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 dark:text-gray-400"
@@ -246,7 +272,7 @@ export default function ServicesPage() {
         <section className="container mx-auto px-6 pt-6 pb-16 lg:pb-24 max-w-6xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
             {services.map((service, index) => {
-              const IconComponent = service.icon
+              const IconComponent = service.icon;
               return (
                 <motion.div
                   key={index}
@@ -260,9 +286,13 @@ export default function ServicesPage() {
                     <div className="w-12 h-12 bg-blue-500 dark:bg-blue-600 rounded-lg flex items-center justify-center mr-4 transition-transform duration-200 ease-out group-hover:scale-110 flex-shrink-0">
                       <IconComponent className="w-6 h-6 text-white transition-transform duration-200 ease-out group-hover:rotate-[-3deg]" />
                     </div>
-                    <h2 className="text-2xl font-black text-blue-600 dark:text-blue-400">{service.title}</h2>
+                    <h2 className="text-2xl font-black text-blue-600 dark:text-blue-400">
+                      {service.title}
+                    </h2>
                   </div>
-                  <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed flex-grow">{service.description}</p>
+                  <p className="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed flex-grow">
+                    {service.description}
+                  </p>
                   <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                     {service.details.map((detail) => (
                       <li
@@ -277,7 +307,7 @@ export default function ServicesPage() {
                     ))}
                   </ul>
                 </motion.div>
-              )
+              );
             })}
           </div>
         </section>
@@ -288,7 +318,11 @@ export default function ServicesPage() {
           whileInView="visible"
           variants={{
             hidden: { opacity: 0, y: 20 },
-            visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+            visible: {
+              opacity: 1,
+              y: 0,
+              transition: { duration: 0.6, ease: "easeOut" },
+            },
           }}
           viewport={{ once: true, amount: 0.2 }}
         >
@@ -301,7 +335,9 @@ export default function ServicesPage() {
               viewport={{ once: true }}
             >
               READY TO IGNITE YOUR
-              <span className="text-blue-600 dark:text-blue-500"> AI STRATEGY</span>?
+              <span className="text-blue-600 dark:text-blue-500">
+                AI STRATEGY
+              </span>?
             </motion.h3>
             <motion.p
               className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto pb-10"
@@ -310,8 +346,8 @@ export default function ServicesPage() {
               transition={{ duration: 0.6, delay: 0 }}
               viewport={{ once: true }}
             >
-              Let's connect. I'm here to understand your vision and architect the AI solutions that will propel your
-              business into the future.
+              Let's connect. I'm here to understand your vision and architect
+              the AI solutions that will propel your business into the future.
             </motion.p>
             <Link href="/contact" passHref legacyBehavior>
               <a>
@@ -335,5 +371,5 @@ export default function ServicesPage() {
         </motion.section>
       </div>
     </>
-  )
+  );
 }

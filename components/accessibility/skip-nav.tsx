@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 export function SkipNav() {
     return (
@@ -9,5 +9,5 @@ export function SkipNav() {
         >
             Skip to main content
         </a>
-    )
+    );
 }

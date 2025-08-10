@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { ThemeToggleButton } from "@/components/ui/theme-toggle-button"
-import { cn } from "@/lib/utils"
-import { useState } from "react"
-import { Menu, X } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { Button } from "@/components/ui/button";
+import { ThemeToggleButton } from "@/components/ui/theme-toggle-button";
+import { cn } from "@/lib/utils";
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 export function Header() {
-  const pathname = usePathname()
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
     { href: "/my-approach", label: "My Approach" },
@@ -19,23 +19,21 @@ export function Header() {
     { href: "/industry-moves", label: "Industry Moves" },
     { href: "/pricing", label: "Pricing" },
     { href: "/blog", label: "Blog" },
-  ]
+  ];
 
   const toggleMobileMenu = () => {
     try {
-      setIsMobileMenuOpen(!isMobileMenuOpen)
+      setIsMobileMenuOpen(!isMobileMenuOpen);
     } catch (error) {
-      console.warn("Error toggling mobile menu:", error)
+      console.warn("Error toggling mobile menu:", error);
     }
-  }
+  };
 
   return (
-    <header
-      className="sticky top-0 z-50 w-full border-b 
+    <header className="sticky top-0 z-50 w-full border-b 
                        bg-white/80 backdrop-blur-lg 
                        border-gray-200/80
-                       dark:bg-black/80 dark:border-gray-700/80"
-    >
+                       dark:bg-black/80 dark:border-gray-700/80">
       <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link href="/" className="mr-6 flex items-center space-x-2 group">
           <svg
@@ -44,9 +42,12 @@ export function Header() {
             viewBox="0 0 331.000000 331.000000"
             className="text-gray-900 dark:text-white transition-colors duration-300 group-hover:text-blue-600 dark:group-hover:text-blue-400"
           >
-            <g transform="translate(0.000000,331.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none">
-              <path
-                d="M3043 3046 c-79 -141 -143 -259 -143 -262 0 -2 9 -4 20 -4 65 0 110
+            <g
+              transform="translate(0.000000,331.000000) scale(0.100000,-0.100000)"
+              fill="currentColor"
+              stroke="none"
+            >
+              <path d="M3043 3046 c-79 -141 -143 -259 -143 -262 0 -2 9 -4 20 -4 65 0 110
 -69 118 -183 l5 -70 -27 7 c-31 8 -33 -2 -5 -38 l21 -27 -46 -457 c-26 -251
 -49 -467 -52 -479 -3 -15 -12 -23 -25 -23 -49 0 -119 -65 -119 -110 0 -12 -76
 -33 -326 -93 -179 -43 -331 -80 -337 -83 -9 -3 -12 38 -13 153 0 142 -3 167
@@ -81,8 +82,7 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
 -5 18 7 36 11 39 7 4 -3 -15 -50 -42 -104 -40 -81 -61 -111 -134 -182 -139
 -138 -287 -200 -481 -200 -119 0 -202 20 -308 72 -132 65 -264 201 -320 332
 -13 29 -12 29 30 -10 197 -181 478 -171 660 24 58 62 67 68 108 71 25 1 47 5
-49 7 7 7 27 5 103 -12z"
-              />
+49 7 7 7 27 5 103 -12z" />
             </g>
           </svg>
           <span
@@ -97,7 +97,7 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1 sm:gap-2">
           {navLinks.map((link) => {
-            const isActive = pathname === link.href
+            const isActive = pathname === link.href;
             return (
               <Link key={link.href} href={link.href} legacyBehavior passHref>
                 <a
@@ -112,12 +112,14 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
                   <span
                     className={cn(
                       "absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 dark:bg-blue-400 transition-transform duration-300 ease-out origin-center",
-                      isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
+                      isActive
+                        ? "scale-x-100"
+                        : "scale-x-0 group-hover:scale-x-100",
                     )}
                   />
                 </a>
               </Link>
-            )
+            );
           })}
 
           <Link href="/contact" legacyBehavior passHref>
@@ -148,27 +150,29 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
             aria-label="Toggle mobile menu"
           >
             <AnimatePresence mode="wait" initial={false}>
-              {isMobileMenuOpen ? (
-                <motion.div
-                  key="close-icon"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="h-6 w-6" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu-icon"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu className="h-6 w-6" />
-                </motion.div>
-              )}
+              {isMobileMenuOpen
+                ? (
+                  <motion.div
+                    key="close-icon"
+                    initial={{ rotate: -90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: 90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <X className="h-6 w-6" />
+                  </motion.div>
+                )
+                : (
+                  <motion.div
+                    key="menu-icon"
+                    initial={{ rotate: 90, opacity: 0 }}
+                    animate={{ rotate: 0, opacity: 1 }}
+                    exit={{ rotate: -90, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <Menu className="h-6 w-6" />
+                  </motion.div>
+                )}
             </AnimatePresence>
           </Button>
         </div>
@@ -186,7 +190,10 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
             className="fixed inset-0 z-40 md:hidden"
           >
             {/* Backdrop */}
-            <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={toggleMobileMenu} />
+            <div
+              className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+              onClick={toggleMobileMenu}
+            />
 
             {/* Menu Panel */}
             <motion.div
@@ -203,7 +210,7 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
                 {/* Navigation Links */}
                 <nav className="flex flex-col space-y-1">
                   {navLinks.map((link, index) => {
-                    const isActive = pathname === link.href
+                    const isActive = pathname === link.href;
                     return (
                       <motion.div
                         key={link.href}
@@ -233,7 +240,7 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
                           </a>
                         </Link>
                       </motion.div>
-                    )
+                    );
                   })}
 
                   {/* Contact Button */}
@@ -245,7 +252,9 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
                   >
                     <Link href="/contact" legacyBehavior passHref>
                       <Button
-                        variant={pathname === "/contact" ? "default" : "outline"}
+                        variant={pathname === "/contact"
+                          ? "default"
+                          : "outline"}
                         size="lg"
                         className={cn(
                           "w-full justify-center text-lg font-medium py-3",
@@ -268,7 +277,9 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
                   transition={{ delay: 0.4 }}
                   className="mt-auto pb-6 text-center"
                 >
-                  <p className="text-sm text-gray-500 dark:text-gray-400">AI Leadership Solutions</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    AI Leadership Solutions
+                  </p>
                 </motion.div>
               </div>
             </motion.div>
@@ -276,5 +287,5 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
         )}
       </AnimatePresence>
     </header>
-  )
+  );
 }

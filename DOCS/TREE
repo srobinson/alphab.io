@@ -1,0 +1,176 @@
+.
+├── app
+│   ├── 404.tsx
+│   ├── accelerator
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── admin
+│   │   └── contacts
+│   │       └── page.tsx
+│   ├── api
+│   │   ├── blog
+│   │   │   └── route.ts
+│   │   ├── contacts
+│   │   │   └── route.ts
+│   │   ├── curated-news
+│   │   │   └── route.ts
+│   │   ├── news
+│   │   │   └── route.ts
+│   │   ├── notify-contact
+│   │   │   └── route.ts
+│   │   └── subscribe
+│   │       └── route.ts
+│   ├── blog
+│   │   ├── [slug]
+│   │   │   └── page.tsx
+│   │   ├── layout.tsx
+│   │   ├── page.tsx
+│   │   └── rss.xml
+│   │       └── route.ts
+│   ├── contact
+│   │   └── page.tsx
+│   ├── globals.css
+│   ├── industry-moves
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── landing
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── layout.tsx
+│   ├── my-approach
+│   │   └── page.tsx
+│   ├── page.tsx
+│   ├── pricing
+│   │   └── page.tsx
+│   ├── services
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   └── sitemap.ts
+├── components
+│   ├── accessibility
+│   │   └── skip-nav.tsx
+│   ├── alphab.home.tsx
+│   ├── analytics
+│   │   └── google-analytics.tsx
+│   ├── background
+│   │   └── clock-background.tsx
+│   ├── hero-reveal.tsx
+│   ├── industry-moves.tsx
+│   ├── layout
+│   │   ├── conditional-header.tsx
+│   │   └── header.tsx
+│   ├── news-ticker.tsx
+│   ├── page-transition.tsx
+│   ├── sections
+│   │   ├── creator-pillars.tsx
+│   │   ├── cta-section.tsx
+│   │   ├── hero-section.tsx
+│   │   └── paradigm-infographic.tsx
+│   ├── theme-provider.tsx
+│   ├── ui
+│   │   ├── accordion.tsx
+│   │   ├── alert-dialog.tsx
+│   │   ├── alert.tsx
+│   │   ├── animated_underline_text.tsx
+│   │   ├── aspect-ratio.tsx
+│   │   ├── avatar.tsx
+│   │   ├── badge.tsx
+│   │   ├── breadcrumb.tsx
+│   │   ├── button.tsx
+│   │   ├── calendar.tsx
+│   │   ├── card.tsx
+│   │   ├── carousel.tsx
+│   │   ├── chart.tsx
+│   │   ├── checkbox.tsx
+│   │   ├── collapsible.tsx
+│   │   ├── command.tsx
+│   │   ├── context-menu.tsx
+│   │   ├── dialog.tsx
+│   │   ├── drawer.tsx
+│   │   ├── dropdown-menu.tsx
+│   │   ├── external-link.tsx
+│   │   ├── form.tsx
+│   │   ├── hover-card.tsx
+│   │   ├── input-otp.tsx
+│   │   ├── input.tsx
+│   │   ├── label.tsx
+│   │   ├── menubar.tsx
+│   │   ├── navigation-menu.tsx
+│   │   ├── pagination.tsx
+│   │   ├── particle-background.tsx
+│   │   ├── popover.tsx
+│   │   ├── progress.tsx
+│   │   ├── radio-group.tsx
+│   │   ├── resizable.tsx
+│   │   ├── scroll-area.tsx
+│   │   ├── select.tsx
+│   │   ├── separator.tsx
+│   │   ├── sheet.tsx
+│   │   ├── sidebar.tsx
+│   │   ├── skeleton.tsx
+│   │   ├── slider.tsx
+│   │   ├── sonner.tsx
+│   │   ├── switch.tsx
+│   │   ├── table.tsx
+│   │   ├── tabs.tsx
+│   │   ├── textarea.tsx
+│   │   ├── theme-toggle-button.tsx
+│   │   ├── toast.tsx
+│   │   ├── toaster.tsx
+│   │   ├── toggle-group.tsx
+│   │   ├── toggle.tsx
+│   │   ├── tooltip.tsx
+│   │   ├── use-mobile.tsx
+│   │   └── use-toast.ts
+│   ├── utils
+│   │   └── scroll-to-top.tsx
+│   └── views
+│       ├── home
+│       │   └── ai-dispatch.tsx
+│       ├── home-view.tsx
+│       └── landingpage-view.tsx
+├── components.json
+├── cspell.config.yaml
+├── hooks
+│   ├── use-analytics.tsx
+│   ├── use-mobile.tsx
+│   ├── use-scroll-reveal.tsx
+│   └── use-toast.ts
+├── lib
+│   ├── news-feeds.ts
+│   ├── server
+│   │   ├── ingest.ts
+│   │   └── summarize.ts
+│   ├── supabase.ts
+│   ├── supabaseAdmin.ts
+│   └── utils.ts
+├── middleware.ts
+├── next.config.mjs
+├── package.json
+├── pnpm-lock.yaml
+├── postcss.config.mjs
+├── public
+│   ├── android-icon-144x144.png
+│   ├── browserconfig.xml
+│   ├── favicon.ico
+│   ├── manifest.json
+│   └── robots.txt
+│   ├── ...
+├── README.md
+├── scripts
+│   ├── apply-migrations-production.sh
+│   ├── generate-static-site.sh
+│   ├── ingest.ts
+│   ├── reset-database.sh
+│   ├── run-migrations.sh
+│   └── test-schema.sql
+├── styles
+│   └── globals.css
+├── supabase
+│   ├── config.toml
+│   ├── migrations
+│   │   └── 20250810_articles.sql
+│   └── schema.sql
+├── tailwind.config.ts
+├── tsconfig.json
+└── vercel.json

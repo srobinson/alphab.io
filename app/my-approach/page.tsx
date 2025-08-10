@@ -1,9 +1,17 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Brain, Cog, Shield, Target, Zap, TrendingUp, ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Brain,
+  Cog,
+  Shield,
+  Target,
+  TrendingUp,
+  Zap,
+} from "lucide-react";
+import Link from "next/link";
 
 const pillarDetails = [
   {
@@ -12,7 +20,12 @@ const pillarDetails = [
     subtitle: "Understanding Your Unique Frequency",
     description:
       "My process begins with a profound dive into your business's core, its operational DNA, market positioning, and specific challenges. I don't just listen; I analyze, question, and immerse myself to truly understand your vision and the nuances of your industry. This phase is about mapping your existing landscape and identifying the most impactful opportunities for AI integration.",
-    keywords: ["Business Analysis", "Requirement Elicitation", "Opportunity Mapping", "Stakeholder Workshops"],
+    keywords: [
+      "Business Analysis",
+      "Requirement Elicitation",
+      "Opportunity Mapping",
+      "Stakeholder Workshops",
+    ],
   },
   {
     icon: Cog,
@@ -34,7 +47,13 @@ const pillarDetails = [
     subtitle: "Integrity at Every Stage",
     description:
       "Building trust is paramount in AI. I am committed to developing and deploying AI solutions that are not only powerful but also transparent, fair, and accountable. This includes robust data governance, bias detection and mitigation strategies, and clear explanations of AI decision-making processes to ensure your AI initiatives are a force for good.",
-    keywords: ["AI Ethics", "Data Privacy", "Bias Mitigation", "Transparency", "Regulatory Compliance"],
+    keywords: [
+      "AI Ethics",
+      "Data Privacy",
+      "Bias Mitigation",
+      "Transparency",
+      "Regulatory Compliance",
+    ],
   },
   {
     icon: Target,
@@ -78,17 +97,22 @@ const pillarDetails = [
       "Long-term Partnership",
     ],
   },
-]
+];
 
 const sectionVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-}
+};
 
 const pillarCardVariants = {
   hidden: { opacity: 0, scale: 0.95, y: 20 },
-  visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
-}
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
 
 export default function MyApproachPage() {
   return (
@@ -107,7 +131,9 @@ export default function MyApproachPage() {
               APPROACH
             </span>{" "}
             TO AI
-            <span style={{ display: "block", marginTop: "0.1em" }}> LEADERSHIP</span>
+            <span style={{ display: "block", marginTop: "0.1em" }}>
+              LEADERSHIP
+            </span>
           </motion.h1>
           <motion.p
             className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed"
@@ -115,9 +141,10 @@ export default function MyApproachPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Transforming visions into reality requires a meticulous, adaptive, and deeply collaborative methodology. My
-            approach is built upon six foundational pillars, ensuring every AI solution is powerful, purposeful, and
-            precisely aligned with your strategic objectives.
+            Transforming visions into reality requires a meticulous, adaptive,
+            and deeply collaborative methodology. My approach is built upon six
+            foundational pillars, ensuring every AI solution is powerful,
+            purposeful, and precisely aligned with your strategic objectives.
           </motion.p>
           <motion.div
             className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 dark:text-gray-400"
@@ -144,7 +171,7 @@ export default function MyApproachPage() {
       <section className="container mx-auto px-6 pb-0 pt-10 lg:pb-24 max-w-6xl">
         <div className="space-y-16">
           {pillarDetails.map((pillar) => {
-            const IconComponent = pillar.icon
+            const IconComponent = pillar.icon;
             return (
               <motion.div
                 key={pillar.title}
@@ -164,7 +191,9 @@ export default function MyApproachPage() {
                   <h3 className="text-xl md:text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
                     {pillar.subtitle}
                   </h3>
-                  <p className="text-lg text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">{pillar.description}</p>
+                  <p className="text-lg text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+                    {pillar.description}
+                  </p>
                   <div className="flex flex-wrap gap-2">
                     {pillar.keywords.map((keyword) => (
                       <span
@@ -177,7 +206,7 @@ export default function MyApproachPage() {
                   </div>
                 </div>
               </motion.div>
-            )
+            );
           })}
         </div>
       </section>
@@ -189,7 +218,11 @@ export default function MyApproachPage() {
         whileInView="visible"
         variants={{
           hidden: { opacity: 0, y: 20 },
-          visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+          visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.6, ease: "easeOut" },
+          },
         }}
         viewport={{ once: true, amount: 0.2 }}
       >
@@ -202,7 +235,9 @@ export default function MyApproachPage() {
             viewport={{ once: true }}
           >
             READY TO EXPLORE OUR
-            <span className="text-blue-600 dark:text-blue-500"> AI SERVICES</span>?
+            <span className="text-blue-600 dark:text-blue-500">
+              AI SERVICES
+            </span>?
           </motion.h3>
           <motion.p
             className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto pb-10"
@@ -211,8 +246,8 @@ export default function MyApproachPage() {
             transition={{ duration: 0.6, delay: 0 }}
             viewport={{ once: true }}
           >
-            Discover the comprehensive suite of AI services designed to transform your business and amplify your
-            competitive advantage.
+            Discover the comprehensive suite of AI services designed to
+            transform your business and amplify your competitive advantage.
           </motion.p>
           <Link href="/services" passHref legacyBehavior>
             <a>
@@ -235,5 +270,5 @@ export default function MyApproachPage() {
         </div>
       </motion.section>
     </div>
-  )
+  );
 }

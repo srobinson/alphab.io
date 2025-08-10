@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export function CTASection() {
     return (
@@ -13,7 +13,11 @@ export function CTASection() {
             whileInView="visible"
             variants={{
                 hidden: { opacity: 0, y: 10 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeIn" } },
+                visible: {
+                    opacity: 1,
+                    y: 0,
+                    transition: { duration: 0.6, ease: "easeIn" },
+                },
             }}
             viewport={{ once: true, amount: 0.2 }}
         >
@@ -25,7 +29,11 @@ export function CTASection() {
                     transition={{ duration: 0.6, delay: 0 }}
                     viewport={{ once: true }}
                 >
-                    READY TO <span className="text-blue-600 dark:text-blue-500">DOMINATE</span> WITH AI-POWERED CONTENT?
+                    READY TO{" "}
+                    <span className="text-blue-600 dark:text-blue-500">
+                        DOMINATE
+                    </span>{" "}
+                    WITH AI-POWERED CONTENT?
                 </motion.h3>
                 <motion.p
                     className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto"
@@ -34,10 +42,16 @@ export function CTASection() {
                     transition={{ duration: 0.6, delay: 0 }}
                     viewport={{ once: true }}
                 >
-                    Let's engineer your AI strategy to crush your content goals, captivate your ideal audience, and build your
-                    creator empire.
+                    Let's engineer your AI strategy to crush your content goals,
+                    captivate your ideal audience, and build your creator
+                    empire.
                 </motion.p>
-                <Link href="/my-approach" passHref legacyBehavior className="pt-10 block">
+                <Link
+                    href="/my-approach"
+                    passHref
+                    legacyBehavior
+                    className="pt-10 block"
+                >
                     <a>
                         <motion.div
                             initial={{ opacity: 0, y: 10, padding: 20 }}
@@ -57,5 +71,5 @@ export function CTASection() {
                 </Link>
             </div>
         </motion.section>
-    )
+    );
 }

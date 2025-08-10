@@ -1,8 +1,9 @@
-import type { Metadata } from "next"
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "AI Services & Solutions | Custom AI Development & Consulting",
-    description: "Comprehensive AI services including strategy consulting, custom AI model development, implementation, and ethical AI governance. Transform your business with expert AI solutions.",
+    description:
+        "Comprehensive AI services including strategy consulting, custom AI model development, implementation, and ethical AI governance. Transform your business with expert AI solutions.",
     keywords: [
         "AI services",
         "AI consulting",
@@ -15,11 +16,12 @@ export const metadata: Metadata = {
         "ethical AI",
         "AI governance",
         "business intelligence",
-        "AI analytics"
+        "AI analytics",
     ],
     openGraph: {
         title: "AI Services & Solutions | RADE AI Consulting",
-        description: "Comprehensive AI services including strategy consulting, custom AI model development, implementation, and ethical AI governance.",
+        description:
+            "Comprehensive AI services including strategy consulting, custom AI model development, implementation, and ethical AI governance.",
         url: "https://alphab.io/services",
         type: "website",
         images: [
@@ -34,18 +36,19 @@ export const metadata: Metadata = {
     twitter: {
         card: "summary_large_image",
         title: "AI Services & Solutions | RADE AI Consulting",
-        description: "Comprehensive AI services including strategy consulting, custom AI model development, implementation, and ethical AI governance.",
+        description:
+            "Comprehensive AI services including strategy consulting, custom AI model development, implementation, and ethical AI governance.",
         images: ["/images/services-twitter.jpg"],
     },
     alternates: {
         canonical: "https://alphab.io/services",
     },
-}
+};
 
 export default function ServicesLayout({
     children,
 }: {
-    children: React.ReactNode
+    children: React.ReactNode;
 }) {
-    return children
+    return children;
 }

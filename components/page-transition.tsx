@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { usePathname } from 'next/navigation';
-import { ReactNode } from 'react';
+import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { ReactNode } from "react";
 
 interface PageTransitionProps {
     children: ReactNode;
@@ -24,7 +24,7 @@ const pageVariants = {
             duration: 0.8,
             ease: [0.25, 0.46, 0.45, 0.94],
             staggerChildren: 0.1,
-        }
+        },
     },
     exit: {
         opacity: 0,
@@ -34,8 +34,8 @@ const pageVariants = {
         transition: {
             duration: 0.6,
             ease: [0.55, 0.06, 0.68, 0.19],
-        }
-    }
+        },
+    },
 };
 
 const unpackVariants = {
@@ -52,8 +52,8 @@ const unpackVariants = {
             clipPath: {
                 duration: 1.0,
                 ease: [0.25, 0.46, 0.45, 0.94],
-            }
-        }
+            },
+        },
     },
     exit: {
         clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
@@ -61,8 +61,8 @@ const unpackVariants = {
         transition: {
             duration: 0.8,
             ease: [0.55, 0.06, 0.68, 0.19],
-        }
-    }
+        },
+    },
 };
 
 const overlayVariants = {
@@ -76,8 +76,8 @@ const overlayVariants = {
             duration: 1.2,
             times: [0, 0.5, 1],
             ease: [0.25, 0.46, 0.45, 0.94],
-        }
-    }
+        },
+    },
 };
 
 export default function PageTransition({ children }: PageTransitionProps) {

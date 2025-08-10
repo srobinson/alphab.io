@@ -1,27 +1,27 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { motion } from "framer-motion"
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 interface AnimatedUnderlineTextProps {
-  children: React.ReactNode
-  className?: string
-  underlineClassName?: string
-  pathDefinition: string
-  animationDelay?: number
-  animationDuration?: number
-  viewBox?: string
-  strokeWidth?: number
-  onUnderlineComplete?: () => void // New prop
+  children: React.ReactNode;
+  className?: string;
+  underlineClassName?: string;
+  pathDefinition: string;
+  animationDelay?: number;
+  animationDuration?: number;
+  viewBox?: string;
+  strokeWidth?: number;
+  onUnderlineComplete?: () => void; // New prop
 }
 
 export const PREDEFINED_UNDERLINE_PATHS = {
   gentleArc: "M2 3 Q50 1, 98 3", // Gentle dip, good for shorter words
   subtleWave: "M2 3 C 20 1, 40 5, 60 3 S 80 1, 98 3", // More dynamic, good for longer words
   slightCurveUp: "M2 2 Q50 4, 98 2", // Gentle curve upwards
-}
+};
 
 export function AnimatedUnderlineText({
   children,
@@ -38,7 +38,10 @@ export function AnimatedUnderlineText({
     <span className={cn("relative inline-block", className)}>
       {children}
       <motion.svg
-        className={cn("absolute bottom-[-4px] left-0 w-full h-[10px]", underlineClassName)} // Adjust height & bottom as needed
+        className={cn(
+          "absolute bottom-[-4px] left-0 w-full h-[10px]",
+          underlineClassName,
+        )} // Adjust height & bottom as needed
         viewBox={viewBox}
         preserveAspectRatio="none" // Allows stretching
         aria-hidden="true"
@@ -61,5 +64,5 @@ export function AnimatedUnderlineText({
         />
       </motion.svg>
     </span>
-  )
+  );
 }

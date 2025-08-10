@@ -1,19 +1,19 @@
-import { NextResponse } from "next/server";
 import {
   brandMessages,
-  rssFeedSources,
-  isRelevantContent,
   categorizeRSSContent,
-  formatRSSTitle,
   fetchAllNewsAPIs,
+  formatRSSTitle,
+  isRelevantContent,
   type NewsItem,
+  rssFeedSources,
 } from "@/lib/news-feeds";
+import { NextResponse } from "next/server";
 
 // Simple RSS parser function
 async function parseRSSFeed(
   url: string,
   sourceName: string,
-  defaultCategory: NewsItem["category"]
+  defaultCategory: NewsItem["category"],
 ) {
   try {
     const response = await fetch(url, {
@@ -25,7 +25,7 @@ async function parseRSSFeed(
 
     if (!response.ok) {
       console.warn(
-        `Failed to fetch RSS from ${sourceName}: ${response.status}`
+        `Failed to fetch RSS from ${sourceName}: ${response.status}`,
       );
       return [];
     }
@@ -40,11 +40,11 @@ async function parseRSSFeed(
       // Limit to 8 items per feed
       try {
         const titleMatch = itemXml.match(
-          /<title[^>]*><!\[CDATA\[(.*?)\]\]><\/title>|<title[^>]*>(.*?)<\/title>/i
+          /<title[^>]*><!\[CDATA\[(.*?)\]\]><\/title>|<title[^>]*>(.*?)<\/title>/i,
         );
         const linkMatch = itemXml.match(/<link[^>]*>(.*?)<\/link>/i);
         const descMatch = itemXml.match(
-          /<description[^>]*><!\[CDATA\[(.*?)\]\]><\/description>|<description[^>]*>(.*?)<\/description>/i
+          /<description[^>]*><!\[CDATA\[(.*?)\]\]><\/description>|<description[^>]*>(.*?)<\/description>/i,
         );
         const pubDateMatch = itemXml.match(/<pubDate[^>]*>(.*?)<\/pubDate>/i);
 
@@ -90,17 +90,16 @@ async function parseRSSFeed(
 
         if (title && isRelevantContent(title, description)) {
           const formattedTitle = formatRSSTitle(title);
-          const category =
-            categorizeRSSContent(title, description) || defaultCategory;
+          const category = categorizeRSSContent(title, description) ||
+            defaultCategory;
           const parsedDate = pubDate ? new Date(pubDate) : new Date();
 
           // Clean description for display
-          const cleanDescription =
-            description
-              .replace(/<[^>]*>/g, "") // Remove HTML tags
-              .replace(/&[^;]+;/g, " ") // Remove HTML entities
-              .trim()
-              .substring(0, 150) + (description.length > 150 ? "..." : "");
+          const cleanDescription = description
+            .replace(/<[^>]*>/g, "") // Remove HTML tags
+            .replace(/&[^;]+;/g, " ") // Remove HTML entities
+            .trim()
+            .substring(0, 150) + (description.length > 150 ? "..." : "");
 
           items.push({
             id: `rss-${sourceName}-${Date.now()}-${Math.random()}`,
@@ -138,7 +137,7 @@ export async function GET() {
       Promise.allSettled(
         rssFeedSources.map((source) =>
           parseRSSFeed(source.url, source.name, source.category)
-        )
+        ),
       ),
       // Fetch from news APIs
       fetchAllNewsAPIs(),
@@ -154,7 +153,7 @@ export async function GET() {
         } else {
           console.warn(
             `RSS feed ${rssFeedSources[index].name} failed:`,
-            result.reason
+            result.reason,
           );
         }
       });
@@ -171,16 +170,16 @@ export async function GET() {
     const uniqueItems = allItems.filter((item, index, self) => {
       return (
         index ===
-        self.findIndex(
-          (t) =>
-            t.link === item.link ||
-            (t.text
-              .toLowerCase()
-              .includes(item.text.toLowerCase().substring(0, 30)) &&
-              item.text
+          self.findIndex(
+            (t) =>
+              t.link === item.link ||
+              (t.text
                 .toLowerCase()
-                .includes(t.text.toLowerCase().substring(0, 30)))
-        )
+                .includes(item.text.toLowerCase().substring(0, 30)) &&
+                item.text
+                  .toLowerCase()
+                  .includes(t.text.toLowerCase().substring(0, 30))),
+          )
       );
     });
 
@@ -222,7 +221,7 @@ export async function GET() {
     // Count items by source type
     const rssItemsCount = finalItems.filter((item) => item.isRSS).length;
     const apiItemsCount = finalItems.filter(
-      (item) => !item.isRSS && !item.source.includes("RADE")
+      (item) => !item.isRSS && !item.source.includes("RADE"),
     ).length;
     const brandItemsCount = finalItems.filter((item) =>
       item.source.includes("RADE")
@@ -254,7 +253,7 @@ export async function GET() {
         } else {
           console.warn(
             `Fallback RSS feed ${rssFeedSources[index].name} failed:`,
-            result.reason
+            result.reason,
           );
         }
       });

@@ -1,19 +1,25 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Mail } from "lucide-react"
+import { Button } from "@/components/ui/button";
+import { Mail } from "lucide-react";
+import Link from "next/link";
 
-import { IndustryMoves } from "@/components/industry-moves"
-import { motion } from "framer-motion"
-import { AnimatedUnderlineText, PREDEFINED_UNDERLINE_PATHS } from "@/components/ui/animated_underline_text"
-
+import { IndustryMoves } from "@/components/industry-moves";
+import {
+    AnimatedUnderlineText,
+    PREDEFINED_UNDERLINE_PATHS,
+} from "@/components/ui/animated_underline_text";
+import { motion } from "framer-motion";
 
 // Animation variants
 const sectionVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-}
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.6, ease: "easeOut" },
+    },
+};
 
 const createLetterPulseVariants = (baseDelay: number, pulseScale = 1.3) => ({
     initial: { scale: 1, letterSpacing: "normal" },
@@ -26,15 +32,18 @@ const createLetterPulseVariants = (baseDelay: number, pulseScale = 1.3) => ({
             ease: "circOut",
         },
     }),
-})
+});
 
-const industryLetters = "INDUSTRY".split("")
-const industryBaseDelay = 0
-const industryLetterPulseVariants = createLetterPulseVariants(industryBaseDelay, 1.15)
+const industryLetters = "INDUSTRY".split("");
+const industryBaseDelay = 0;
+const industryLetterPulseVariants = createLetterPulseVariants(
+    industryBaseDelay,
+    1.15,
+);
 
-const movesLetters = "MOVES".split("")
-const movesBaseDelay = 0.2
-const movesLetterPulseVariants = createLetterPulseVariants(movesBaseDelay, 1.1)
+const movesLetters = "MOVES".split("");
+const movesBaseDelay = 0.2;
+const movesLetterPulseVariants = createLetterPulseVariants(movesBaseDelay, 1.1);
 
 export default function IndustryMovesPage() {
     return (
@@ -49,7 +58,8 @@ export default function IndustryMovesPage() {
                         variants={sectionVariants}
                     >
                         <AnimatedUnderlineText
-                            pathDefinition={PREDEFINED_UNDERLINE_PATHS.slightCurveUp}
+                            pathDefinition={PREDEFINED_UNDERLINE_PATHS
+                                .slightCurveUp}
                             underlineClassName="text-blue-600 dark:text-blue-500"
                             animationDelay={industryBaseDelay}
                             animationDuration={0.7}
@@ -62,7 +72,10 @@ export default function IndustryMovesPage() {
                                         variants={industryLetterPulseVariants}
                                         initial="initial"
                                         animate="pulse"
-                                        style={{ display: "inline-block", originY: 0.7 }}
+                                        style={{
+                                            display: "inline-block",
+                                            originY: 0.7,
+                                        }}
                                     >
                                         {letter}
                                     </motion.span>
@@ -70,7 +83,8 @@ export default function IndustryMovesPage() {
                             </span>
                         </AnimatedUnderlineText>{" "}
                         <AnimatedUnderlineText
-                            pathDefinition={PREDEFINED_UNDERLINE_PATHS.gentleArc}
+                            pathDefinition={PREDEFINED_UNDERLINE_PATHS
+                                .gentleArc}
                             underlineClassName="text-blue-600 dark:text-blue-500"
                             animationDelay={movesBaseDelay}
                             animationDuration={0.7}
@@ -83,7 +97,10 @@ export default function IndustryMovesPage() {
                                         variants={movesLetterPulseVariants}
                                         initial="initial"
                                         animate="pulse"
-                                        style={{ display: "inline-block", originY: 0.7 }}
+                                        style={{
+                                            display: "inline-block",
+                                            originY: 0.7,
+                                        }}
                                         className="bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent"
                                     >
                                         {letter}
@@ -98,7 +115,9 @@ export default function IndustryMovesPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.3 }}
                     >
-                        Stay ahead of the curve with real-time AI developments, strategic insights, and industry trends from leading tech sources.
+                        Stay ahead of the curve with real-time AI developments,
+                        strategic insights, and industry trends from leading
+                        tech sources.
                     </motion.p>
                     <motion.div
                         className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 dark:text-gray-400"
@@ -107,15 +126,18 @@ export default function IndustryMovesPage() {
                         transition={{ duration: 0.6, delay: 0.5 }}
                     >
                         <div className="flex items-center gap-2">
-                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse">
+                            </div>
                             <span>Live Updates</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                            <div className="w-2 h-2 bg-blue-500 rounded-full">
+                            </div>
                             <span>Curated Sources</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                            <div className="w-2 h-2 bg-purple-500 rounded-full">
+                            </div>
                             <span>Expert Analysis</span>
                         </div>
                     </motion.div>
@@ -134,35 +156,75 @@ export default function IndustryMovesPage() {
                     <div className="grid md:grid-cols-3 gap-8">
                         <div className="p-6">
                             <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
-                                <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                <svg
+                                    className="w-6 h-6 text-blue-600 dark:text-blue-400"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M13 10V3L4 14h7v7l9-11h-7z"
+                                    />
                                 </svg>
                             </div>
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Real-Time Intelligence</h3>
+                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                                Real-Time Intelligence
+                            </h3>
                             <p className="text-gray-600 dark:text-gray-400">
-                                Get instant access to breaking AI developments and industry shifts as they happen.
+                                Get instant access to breaking AI developments
+                                and industry shifts as they happen.
                             </p>
                         </div>
                         <div className="p-6">
                             <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
-                                <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                <svg
+                                    className="w-6 h-6 text-green-600 dark:text-green-400"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                                    />
                                 </svg>
                             </div>
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Strategic Insights</h3>
+                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                                Strategic Insights
+                            </h3>
                             <p className="text-gray-600 dark:text-gray-400">
-                                Understand the implications of industry moves for your AI strategy and competitive positioning.
+                                Understand the implications of industry moves
+                                for your AI strategy and competitive
+                                positioning.
                             </p>
                         </div>
                         <div className="p-6">
                             <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mx-auto mb-4">
-                                <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6" />
+                                <svg
+                                    className="w-6 h-6 text-purple-600 dark:text-purple-400"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth={2}
+                                        d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6"
+                                    />
                                 </svg>
                             </div>
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Curated Sources</h3>
+                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                                Curated Sources
+                            </h3>
                             <p className="text-gray-600 dark:text-gray-400">
-                                Handpicked content from TechCrunch, VentureBeat, The Verge, and other trusted industry sources.
+                                Handpicked content from TechCrunch, VentureBeat,
+                                The Verge, and other trusted industry sources.
                             </p>
                         </div>
                     </div>
@@ -175,7 +237,11 @@ export default function IndustryMovesPage() {
                 whileInView="visible"
                 variants={{
                     hidden: { opacity: 0, y: 20 },
-                    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+                    visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { duration: 0.6, ease: "easeOut" },
+                    },
                 }}
                 viewport={{ once: true, amount: 0.2 }}
             >
@@ -200,7 +266,6 @@ export default function IndustryMovesPage() {
                     </Link>
                 </div>
             </motion.section>
-
         </div>
-    )
+    );
 }

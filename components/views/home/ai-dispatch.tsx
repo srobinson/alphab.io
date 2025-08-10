@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState, useEffect, useRef } from "react"
-import { motion } from "framer-motion"
-import { Newspaper } from "lucide-react"
+import { motion } from "framer-motion";
+import { Newspaper } from "lucide-react";
+import type React from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface BriefingItem {
-  id: string
-  title: string
-  summary: string
-  icon?: React.ElementType
-  category?: string
+  id: string;
+  title: string;
+  summary: string;
+  icon?: React.ElementType;
+  category?: string;
 }
 
 interface AiDispatchProps {
-  mainHeadline: string
-  briefings: BriefingItem[]
-  dispatchSource?: string
-  dispatchDate?: string
+  mainHeadline: string;
+  briefings: BriefingItem[];
+  dispatchSource?: string;
+  dispatchDate?: string;
 }
 
 const formatDate = (date: Date): string => {
@@ -25,74 +25,76 @@ const formatDate = (date: Date): string => {
     year: "numeric",
     month: "long",
     day: "numeric",
-  })
-}
+  });
+};
 
-export function AiDispatch({ mainHeadline, briefings, dispatchSource = "RADE AI CORE" }: AiDispatchProps) {
-  const currentDate = formatDate(new Date())
-  const [showHeader, setShowHeader] = useState(false)
-  const [creatorIntelText, setCreatorIntelText] = useState("")
-  const [dateText, setDateText] = useState("")
-  const headlineRef = useRef<HTMLHeadingElement>(null)
+export function AiDispatch(
+  { mainHeadline, briefings, dispatchSource = "RADE AI CORE" }: AiDispatchProps,
+) {
+  const currentDate = formatDate(new Date());
+  const [showHeader, setShowHeader] = useState(false);
+  const [creatorIntelText, setCreatorIntelText] = useState("");
+  const [dateText, setDateText] = useState("");
+  const headlineRef = useRef<HTMLHeadingElement>(null);
 
-  const fullCreatorIntelText = "CREATOR INTEL"
-  const fullDateText = `${dispatchSource} // ${currentDate}`
+  const fullCreatorIntelText = "CREATOR INTEL";
+  const fullDateText = `${dispatchSource} // ${currentDate}`;
 
   // Typewriter effect for Creator Intel
   useEffect(() => {
-    if (!showHeader) return
+    if (!showHeader) return;
 
-    let currentIndex = 0
+    let currentIndex = 0;
     const interval = setInterval(() => {
       if (currentIndex <= fullCreatorIntelText.length) {
-        setCreatorIntelText(fullCreatorIntelText.slice(0, currentIndex))
-        currentIndex++
+        setCreatorIntelText(fullCreatorIntelText.slice(0, currentIndex));
+        currentIndex++;
       } else {
-        clearInterval(interval)
+        clearInterval(interval);
         // Start date text after Creator Intel is complete
         setTimeout(() => {
-          let dateIndex = 0
+          let dateIndex = 0;
           const dateInterval = setInterval(() => {
             if (dateIndex <= fullDateText.length) {
-              setDateText(fullDateText.slice(0, dateIndex))
-              dateIndex++
+              setDateText(fullDateText.slice(0, dateIndex));
+              dateIndex++;
             } else {
-              clearInterval(dateInterval)
+              clearInterval(dateInterval);
             }
-          }, 30)
-        }, 200)
+          }, 30);
+        }, 200);
       }
-    }, 50)
+    }, 50);
 
-    return () => clearInterval(interval)
-  }, [showHeader, fullCreatorIntelText, fullDateText])
+    return () => clearInterval(interval);
+  }, [showHeader, fullCreatorIntelText, fullDateText]);
 
   // Trigger header reveal when headline comes into view
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        const entry = entries[0]
+        const entry = entries[0];
         // When headline comes into view, start the typewriter effect
         if (entry.isIntersecting) {
-          setShowHeader(true)
+          setShowHeader(true);
         }
       },
       {
         threshold: 0.1, // Trigger when 10% of headline is visible
-        rootMargin: '0px'
-      }
-    )
+        rootMargin: "0px",
+      },
+    );
 
     if (headlineRef.current) {
-      observer.observe(headlineRef.current)
+      observer.observe(headlineRef.current);
     }
 
     return () => {
       if (headlineRef.current) {
-        observer.unobserve(headlineRef.current)
+        observer.unobserve(headlineRef.current);
       }
-    }
-  }, [])
+    };
+  }, []);
 
   return (
     <motion.div
@@ -158,7 +160,7 @@ export function AiDispatch({ mainHeadline, briefings, dispatchSource = "RADE AI 
       {/* Briefings List */}
       <div className="relative z-10 space-y-6 md:space-y-8">
         {briefings.map((briefing, index) => {
-          const IconComponent = briefing.icon
+          const IconComponent = briefing.icon;
 
           return (
             <motion.article
@@ -170,7 +172,6 @@ export function AiDispatch({ mainHeadline, briefings, dispatchSource = "RADE AI 
               viewport={{ once: true, amount: 0.3 }}
             >
               <div className="relative p-6 md:p-8 lg:p-10 bg-gradient-to-r from-slate-800/90 via-blue-900/30 to-slate-800/90 backdrop-blur-sm rounded-xl md:rounded-2xl border border-blue-400/20 shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:border-blue-400/40 overflow-hidden">
-
                 {/* Card Background Effects */}
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-cyan-500/5 pointer-events-none" />
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400/10 rounded-full blur-2xl pointer-events-none" />
@@ -204,7 +205,10 @@ export function AiDispatch({ mainHeadline, briefings, dispatchSource = "RADE AI 
                           className="inline-block px-3 py-1 text-xs md:text-sm font-bold text-blue-900 bg-gradient-to-r from-blue-200 to-cyan-200 rounded-full uppercase tracking-wider shadow-lg flex-shrink-0"
                           initial={{ opacity: 0 }}
                           whileInView={{ opacity: 1 }}
-                          transition={{ duration: 0.4, delay: index * 0.2 + 0.3 }}
+                          transition={{
+                            duration: 0.4,
+                            delay: index * 0.2 + 0.3,
+                          }}
                           viewport={{ once: true, amount: 0.3 }}
                         >
                           {briefing.category}
@@ -225,9 +229,9 @@ export function AiDispatch({ mainHeadline, briefings, dispatchSource = "RADE AI 
                 </div>
               </div>
             </motion.article>
-          )
+          );
         })}
       </div>
     </motion.div>
-  )
+  );
 }

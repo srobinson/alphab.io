@@ -1,9 +1,17 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Clock, Calendar, CheckCircle, Receipt, User, Banknote, Heart } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import {
+  Banknote,
+  Calendar,
+  CheckCircle,
+  Clock,
+  Heart,
+  Receipt,
+  User,
+} from "lucide-react";
+import Link from "next/link";
 
 export default function PricingPage() {
   // Animation variants
@@ -16,12 +24,16 @@ export default function PricingPage() {
         delayChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-  }
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
@@ -55,7 +67,8 @@ export default function PricingPage() {
             animate="visible"
             className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed"
           >
-            No agency overhead. No marketing team markups. Just pure AI expertise and implementation power.
+            No agency overhead. No marketing team markups. Just pure AI
+            expertise and implementation power.
           </motion.p>
           <motion.div
             className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 dark:text-gray-400"
@@ -88,7 +101,8 @@ export default function PricingPage() {
       >
         <div className="relative">
           {/* Background texture */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black rounded-xl opacity-80"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black rounded-xl opacity-80">
+          </div>
 
           {/* Statement header */}
           <div className="relative bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden shadow-2xl">
@@ -96,13 +110,19 @@ export default function PricingPage() {
               <div className="flex items-center">
                 <Receipt className="h-8 w-8 mr-4" />
                 <div>
-                  <h2 className="text-2xl font-bold tracking-tight">INVESTMENT STATEMENT</h2>
-                  <p className="text-blue-100 text-sm">Direct value transfer. No middlemen.</p>
+                  <h2 className="text-2xl font-bold tracking-tight">
+                    INVESTMENT STATEMENT
+                  </h2>
+                  <p className="text-blue-100 text-sm">
+                    Direct value transfer. No middlemen.
+                  </p>
                 </div>
               </div>
               <div className="text-right">
                 <p className="text-sm text-blue-100">Statement Date</p>
-                <p className="font-mono font-bold">{new Date().toLocaleDateString()}</p>
+                <p className="font-mono font-bold">
+                  {new Date().toLocaleDateString()}
+                </p>
               </div>
             </div>
 
@@ -110,15 +130,21 @@ export default function PricingPage() {
             <div className="p-8 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
               <div className="flex justify-between items-start mb-8">
                 <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Account Holder</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Account Holder
+                  </p>
                   <p className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
                     <User className="h-5 w-5 mr-2 text-blue-600 dark:text-blue-400" />
                     Your Business
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Service Provider</p>
-                  <p className="text-xl font-bold text-gray-900 dark:text-white">RADE AI Consulting</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">
+                    Service Provider
+                  </p>
+                  <p className="text-xl font-bold text-gray-900 dark:text-white">
+                    RADE AI Consulting
+                  </p>
                 </div>
               </div>
 
@@ -129,7 +155,9 @@ export default function PricingPage() {
                       <Clock className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-xl text-gray-900 dark:text-white">Half-Day Engagement</h3>
+                      <h3 className="font-bold text-xl text-gray-900 dark:text-white">
+                        Half-Day Engagement
+                      </h3>
                       <p className="text-gray-600 dark:text-gray-300 mt-1">
                         5 hours of focused expertise and implementation
                       </p>
@@ -147,8 +175,12 @@ export default function PricingPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-mono text-2xl font-bold text-gray-900 dark:text-white">$1,000</div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">$200/hour value</div>
+                    <div className="font-mono text-2xl font-bold text-gray-900 dark:text-white">
+                      $1,000
+                    </div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      $200/hour value
+                    </div>
                   </div>
                 </div>
 
@@ -158,7 +190,9 @@ export default function PricingPage() {
                       <Calendar className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-xl text-gray-900 dark:text-white">Full-Day Immersion</h3>
+                      <h3 className="font-bold text-xl text-gray-900 dark:text-white">
+                        Full-Day Immersion
+                      </h3>
                       <p className="text-gray-600 dark:text-gray-300 mt-1">
                         12 hours of comprehensive AI transformation
                       </p>
@@ -176,8 +210,12 @@ export default function PricingPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-mono text-2xl font-bold text-gray-900 dark:text-white">$1,500</div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">$125/hour value</div>
+                    <div className="font-mono text-2xl font-bold text-gray-900 dark:text-white">
+                      $1,500
+                    </div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      $125/hour value
+                    </div>
                   </div>
                 </div>
 
@@ -187,9 +225,12 @@ export default function PricingPage() {
                       <Heart className="h-5 w-5 text-red-600 dark:text-red-400" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-xl text-gray-900 dark:text-white">Community Projects</h3>
+                      <h3 className="font-bold text-xl text-gray-900 dark:text-white">
+                        Community Projects
+                      </h3>
                       <p className="text-gray-600 dark:text-gray-300 mt-1">
-                        I regularly contribute to worthy causes and community initiatives
+                        I regularly contribute to worthy causes and community
+                        initiatives
                       </p>
                       <div className="mt-2">
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
@@ -199,8 +240,12 @@ export default function PricingPage() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className="font-mono text-xl font-bold text-gray-900 dark:text-white">Let's Talk</div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">Flexible arrangements</div>
+                    <div className="font-mono text-xl font-bold text-gray-900 dark:text-white">
+                      Let's Talk
+                    </div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">
+                      Flexible arrangements
+                    </div>
                   </div>
                 </div>
               </div>
@@ -212,15 +257,21 @@ export default function PricingPage() {
                 <div className="space-y-2">
                   <div className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
-                    <span className="text-gray-700 dark:text-gray-300">Direct access to expertise</span>
+                    <span className="text-gray-700 dark:text-gray-300">
+                      Direct access to expertise
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
-                    <span className="text-gray-700 dark:text-gray-300">No agency overhead</span>
+                    <span className="text-gray-700 dark:text-gray-300">
+                      No agency overhead
+                    </span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
-                    <span className="text-gray-700 dark:text-gray-300">Immediate implementation</span>
+                    <span className="text-gray-700 dark:text-gray-300">
+                      Immediate implementation
+                    </span>
                   </div>
                 </div>
                 <Link href="/contact" passHref legacyBehavior>
@@ -238,13 +289,16 @@ export default function PricingPage() {
 
           {/* Watermark */}
           <div className="absolute -rotate-12 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none">
-            <div className="text-black dark:text-white text-[180px] font-black tracking-tighter">PREMIUM</div>
+            <div className="text-black dark:text-white text-[180px] font-black tracking-tighter">
+              PREMIUM
+            </div>
           </div>
         </div>
       </motion.section>
 
       {/* Value Proposition Section */}
-      {/* <motion.section
+      {
+        /* <motion.section
         className="container mx-auto px-6 py-16 max-w-4xl"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -319,7 +373,8 @@ export default function PricingPage() {
             </div>
           </div>
         </div>
-      </motion.section> */}
+      </motion.section> */
+      }
 
       {/* Call to Action */}
       <motion.section
@@ -331,11 +386,15 @@ export default function PricingPage() {
       >
         <div className="space-y-8">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white">
-            READY TO <span className="text-blue-600 dark:text-blue-500">INVEST</span> IN YOUR AI FUTURE?
+            READY TO{" "}
+            <span className="text-blue-600 dark:text-blue-500">INVEST</span>
+            {" "}
+            IN YOUR AI FUTURE?
           </h2>
           <p className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
-            Whether you're looking for a strategic consultation, implementation support, or exploring a community
-            collaboration, let's start the conversation.
+            Whether you're looking for a strategic consultation, implementation
+            support, or exploring a community collaboration, let's start the
+            conversation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact" passHref legacyBehavior>
@@ -359,5 +418,5 @@ export default function PricingPage() {
         </div>
       </motion.section>
     </div>
-  )
+  );
 }

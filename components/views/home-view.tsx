@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { HeroSection } from "@/components/sections/hero-section"
-import { CreatorPillars } from "@/components/sections/creator-pillars"
-import { ParadigmInfographic } from "@/components/sections/paradigm-infographic"
-import { CTASection } from "@/components/sections/cta-section"
+import { CreatorPillars } from "@/components/sections/creator-pillars";
+import { CTASection } from "@/components/sections/cta-section";
+import { HeroSection } from "@/components/sections/hero-section";
+import { ParadigmInfographic } from "@/components/sections/paradigm-infographic";
 
 export function HomeView() {
   return (
@@ -17,5 +17,5 @@ export function HomeView() {
       </div>
       <CTASection />
     </div>
-  )
+  );
 }

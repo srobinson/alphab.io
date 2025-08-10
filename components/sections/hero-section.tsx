@@ -1,13 +1,12 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { BrainCircuit, TrendingUp, Settings2, ArrowRight } from "lucide-react"
-import { AnimatedParticles } from "@/components/ui/particle-background"
-import { AiDispatch } from "@/components/views/home/ai-dispatch"
-import { ClockBackground } from "@/components/background/clock-background"
-import HeroReveal from "@/components/hero-reveal"
+import { ClockBackground } from "@/components/background/clock-background";
+import HeroReveal from "@/components/hero-reveal";
+import { Button } from "@/components/ui/button";
+import { AiDispatch } from "@/components/views/home/ai-dispatch";
+import { motion } from "framer-motion";
+import { ArrowRight, BrainCircuit, Settings2, TrendingUp } from "lucide-react";
+import Link from "next/link";
 
 // Animation variants
 const newsShowVariants = {
@@ -20,11 +19,12 @@ const newsShowVariants = {
             delay: 0,
         },
     },
-}
+};
 
 // Real talk about what I actually do
 const dispatchDataForBusiness = {
-    mainHeadline: "With years of hands-on experience, I’ve built AI systems that deliver real-world results",
+    mainHeadline:
+        "With years of hands-on experience, I’ve built AI systems that deliver real-world results",
     briefings: [
         {
             id: "brief1",
@@ -59,21 +59,23 @@ const dispatchDataForBusiness = {
             category: "Data Intelligence",
         },
     ],
-}
+};
 
 export function HeroSection() {
     return (
         <motion.section
-            className="relative flex flex-col text-center overflow-hidden pt-8 pb-10"
+            className="hero relative flex flex-col text-center overflow-hidden pt-8 pb-10"
             initial="hidden"
             animate="visible"
             aria-label="Hero section with AI solutions overview"
         >
-            <div className="absolute inset-0 z-0">
+            {
+                /* <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-950 via-black to-blue-950/20" />
                 <AnimatedParticles delay={0} />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-            </div>
+            </div> */
+            }
 
             {/* Full viewport clock */}
             <ClockBackground />
@@ -92,7 +94,12 @@ export function HeroSection() {
                 </motion.div>
 
                 {/* AI Dispatch section */}
-                <motion.div variants={newsShowVariants} initial="hidden" animate="visible" className="pt-10">
+                <motion.div
+                    variants={newsShowVariants}
+                    initial="hidden"
+                    animate="visible"
+                    className="pt-10"
+                >
                     <AiDispatch
                         mainHeadline={dispatchDataForBusiness.mainHeadline}
                         briefings={dispatchDataForBusiness.briefings}
@@ -111,8 +118,9 @@ export function HeroSection() {
                         size="lg"
                         className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 border-0 focus:ring-4 focus:ring-blue-500/50 focus:outline-none"
                         style={{
-                            fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
-                            fontWeight: 600
+                            fontFamily:
+                                "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
+                            fontWeight: 600,
                         }}
                     >
                         <Link
@@ -121,11 +129,14 @@ export function HeroSection() {
                             role="button"
                         >
                             Deploy AI Strategy
-                            <ArrowRight className="ml-3 w-5 h-5" aria-hidden="true" />
+                            <ArrowRight
+                                className="ml-3 w-5 h-5"
+                                aria-hidden="true"
+                            />
                         </Link>
                     </Button>
                 </motion.div>
             </div>
         </motion.section>
-    )
+    );
 }
