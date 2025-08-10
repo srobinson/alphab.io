@@ -6,9 +6,9 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { createClient } from "@/lib/supabase"
 import { motion } from "framer-motion"
 import { Send, Mail, User, MessageSquare, CheckCircle, AlertCircle, Bell } from "lucide-react"
-import { createClient } from "@/lib/supabase"
 
 // Animation variants remain the same
 const formVariants = {
@@ -44,42 +44,24 @@ export default function ContactPage() {
       }
 
       // Store contact submission
-      const { error: contactError } = await supabase
+      const { data: contactData, error: contactError } = await supabase
         .from('contacts')
         .insert({
           name: name,
           email: email,
           message: message,
           source: 'contact_page',
-          ip_address: null, // Could be populated with actual IP
+          ip_address: null,
           user_agent: navigator.userAgent,
           subscribed_to_newsletter: subscribeToNewsletter
         })
+        .select('id')
 
       if (contactError) {
-        // Fallback: try to store in user_activity_log if contacts table doesn't exist
-        console.log('Contacts table not found, using activity log fallback')
-
-        const { error: logError } = await supabase
-          .from('user_activity_log')
-          .insert({
-            user_id: null,
-            activity_type: 'contact_form_submission',
-            activity_data: {
-              name: name,
-              email: email,
-              message: message,
-              source: 'contact_page',
-              subscribed_to_newsletter: subscribeToNewsletter
-            },
-            ip_address: null,
-            user_agent: navigator.userAgent
-          })
-
-        if (logError && !logError.message.includes('does not exist')) {
-          throw logError
-        }
+        throw new Error('Failed to store contact submission. Please try again later.')
       }
+
+      const contactId = contactData[0]?.id;
 
       // If user wants newsletter subscription, add them
       if (subscribeToNewsletter) {
@@ -128,7 +110,7 @@ export default function ContactPage() {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            contactId: null, // We don't have the contact ID from the fallback method
+            contactId: contactId,
             notificationType: 'new_contact'
           })
         })

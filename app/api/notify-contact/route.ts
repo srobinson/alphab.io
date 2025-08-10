@@ -1,12 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase'
+import { Resend } from "resend";
 
 // This API route can be called to send notifications about new contacts
 // You can integrate this with email services like Resend, SendGrid, or Nodemailer
 
 export async function POST(request: NextRequest) {
   try {
-    const { contactId, notificationType = 'new_contact' } = await request.json()
+    const requestBody = await request.json()
+    console.log('Request body:', requestBody);
+
+    const { contactId, notificationType = 'new_contact' } = requestBody
 
     if (!contactId) {
       return NextResponse.json(
@@ -52,9 +56,6 @@ export async function POST(request: NextRequest) {
         }
       })
 
-    // Here you would integrate with your preferred email service
-    // For now, we'll just return the contact data that would be sent
-
     const notificationData = {
       type: notificationType,
       contact: {
@@ -66,8 +67,8 @@ export async function POST(request: NextRequest) {
         subscribed_to_newsletter: contact.subscribed_to_newsletter,
         created_at: contact.created_at
       },
-      // Email template data
       emailData: {
+        from: "noreply@alphab.io", // Your verified domain
         to: process.env.ADMIN_EMAIL || 'admin@alphab.io', // Your admin email
         subject: `New Contact Form Submission from ${contact.name}`,
         html: generateEmailHTML(contact),
@@ -75,12 +76,10 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // TODO: Integrate with email service here
-    // Example with Resend:
-    // const resend = new Resend(process.env.RESEND_API_KEY)
-    // await resend.emails.send(notificationData.emailData)
+    const resend = new Resend(process.env.RESEND_API_KEY)
+    await resend.emails.send(notificationData.emailData)
 
-    console.log('Notification would be sent:', notificationData)
+    console.log('Notification sent:', notificationData)
 
     return NextResponse.json({
       success: true,

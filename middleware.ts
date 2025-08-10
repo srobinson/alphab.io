@@ -1,17 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// Define special routes that should use the Next.js app instead of landing page
-const SPECIAL_ROUTES = [
-  "/accelerator",
-  "/admin",
-  "/blog",
-  "/contact",
-  "/industry-moves",
-  "/my-approach",
-  "/pricing",
-  "/services"
-];
+// Define routing by hostnames only; no per-path exceptions
 
 export function middleware(request: NextRequest) {
   const hostname = request.headers.get("host") || "";
@@ -19,81 +9,52 @@ export function middleware(request: NextRequest) {
 
   console.log("Middleware - hostname:", hostname, "pathname:", pathname);
 
-  // Check if this is a RADE subdomain request
+  // Check if this is a RADE subdomain request (e.g., rade.alphab.local, rade.alphab.io)
   const isRadeSubdomain = hostname.includes("rade.");
 
-  // For local development (localhost:3000)
+  // Local development (localhost:3000)
   if (hostname.includes("localhost") || hostname.includes(":3000")) {
     if (!isRadeSubdomain) {
-      // Check if this is a special route that should use the Next.js app
-      if (SPECIAL_ROUTES.some((route) => pathname.startsWith(route))) {
-        console.log(
-          "Local: continuing to Next.js app for special route",
-          pathname
-        );
-        return NextResponse.next();
+      if (pathname === "/") {
+        console.log("Local: rewriting root to landing page");
+        return NextResponse.rewrite(new URL("/landing", request.url));
       }
-
-      // Main domain (localhost:3000) - serve landing page for other routes
-      console.log("Local: rewriting to landing page for", pathname);
-      return NextResponse.rewrite(new URL("/landing", request.url));
+      console.log("Local: non-root path on main host -> continue to app (allows 404)");
+      return NextResponse.next();
     }
-    // This shouldn't happen with localhost, but continue to Next.js app
-    console.log("Local: continuing to Next.js app");
+    console.log("Local: continuing to RADE app");
     return NextResponse.next();
   }
 
-  // For local testing with custom domains
+  // Local testing with custom domains (alphab.local, rade.alphab.local)
   if (hostname.includes("alphab.local")) {
     if (!isRadeSubdomain) {
-      // Check if this is a special route that should use the Next.js app
-      if (SPECIAL_ROUTES.some((route) => pathname.startsWith(route))) {
-        console.log(
-          "Local custom domain: continuing to Next.js app for special route",
-          pathname
-        );
-        return NextResponse.next();
+      if (pathname === "/") {
+        console.log("Local custom domain: rewriting root to landing page");
+        return NextResponse.rewrite(new URL("/landing", request.url));
       }
-
-      // Main domain (alphab.local) - serve landing page for other routes
-      console.log(
-        "Local custom domain: rewriting to landing page for",
-        pathname
-      );
-      return NextResponse.rewrite(new URL("/landing", request.url));
+      console.log("Local custom domain: non-root path on main host -> continue to app (allows 404)");
+      return NextResponse.next();
     }
-    // Subdomain (rade.alphab.local) - continue to Next.js app
-    console.log(
-      "Local custom domain: continuing to Next.js app for rade subdomain"
-    );
+    console.log("Local custom domain: continuing to RADE app");
     return NextResponse.next();
   }
 
-  // Production logic for alphab.io
+  // Production logic
   if (hostname.includes("alphab.io")) {
     if (isRadeSubdomain) {
-      // rade.alphab.io - continue to Next.js app
-      console.log("Production: continuing to Next.js app for rade subdomain");
+      // rade.alphab.io -> RADE app
+      console.log("Production: continuing to RADE app for rade subdomain");
       return NextResponse.next();
     } else {
-      // alphab.io (main domain) - check for special routes first
-      if (SPECIAL_ROUTES.some((route) => pathname.startsWith(route))) {
-        console.log(
-          "Production: continuing to Next.js app for special route",
-          pathname
-        );
-        return NextResponse.next();
-      }
-      
-      // For all other routes, serve landing page
+      // alphab.io -> landing page for all routes
       console.log("Production: rewriting to landing page for", pathname);
       return NextResponse.rewrite(new URL("/landing", request.url));
     }
   }
 
-  // For Vercel preview deployments (*.vercel.app)
+  // Vercel preview deployments (*.vercel.app) -> landing
   if (hostname.includes("vercel.app")) {
-    // All Vercel preview deployments serve the landing page
     console.log("Vercel preview: rewriting to landing page for", pathname);
     return NextResponse.rewrite(new URL("/landing", request.url));
   }
@@ -111,7 +72,9 @@ export const config = {
      * - favicon.ico (favicon file)
      * - images (image files)
      * - api routes (to avoid infinite loops)
+     * - landing (rewrite target)
+     * - any file with an extension (e.g., .png, .jpg, .css, .js)
      */
-    "/((?!_next/static|_next/image|favicon.ico|images|api).*)",
+    "/((?!_next/static|_next/image|favicon.ico|images|api|landing|.*\\..*).*)",
   ],
 };

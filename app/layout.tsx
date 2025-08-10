@@ -7,6 +7,7 @@ import { ConditionalHeader } from "@/components/layout/conditional-header"
 import ScrollToTop from "@/components/utils/scroll-to-top"
 import { SkipNav } from "@/components/accessibility/skip-nav"
 import { GoogleAnalytics } from "@/components/analytics/google-analytics"
+import { headers } from "next/headers"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -172,6 +173,10 @@ export default function RootLayout({
     ]
   }
 
+  // Determine host to decide whether to render RADE header
+  const host = headers().get("host") || ""
+  const isRadeHost = host.includes("rade.")
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -187,7 +192,7 @@ export default function RootLayout({
         <SkipNav />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <ScrollToTop />
-          <ConditionalHeader />
+          {isRadeHost ? <ConditionalHeader /> : null}
           <main id="main-content">{children}</main>
         </ThemeProvider>
       </body>

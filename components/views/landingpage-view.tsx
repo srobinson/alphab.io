@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase';
 
 const Index = () => {
     const [time, setTime] = useState(new Date());
+    const [mounted, setMounted] = useState(false);
     const [email, setEmail] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -13,6 +14,7 @@ const Index = () => {
     const supabase = createClient();
 
     useEffect(() => {
+        setMounted(true);
         const timer = setInterval(() => setTime(new Date()), 1000);
         return () => clearInterval(timer);
     }, []);
@@ -84,12 +86,12 @@ const Index = () => {
 
             {/* Top bar with time */}
             <div className="relative z-10 flex justify-between items-center p-6 border-b border-white/10">
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2">
                     <Circle className="w-3 h-3 fill-red-500 text-red-500 animate-pulse" />
                     <span className="text-xs tracking-widest text-gray-400">LIVE</span>
                 </div>
-                <div className="text-xs tracking-widest text-gray-400 font-mono">
-                    {time.toLocaleTimeString()}
+                <div className="text-xs tracking-widest text-gray-400 font-mono" suppressHydrationWarning>
+                    {mounted ? time.toLocaleTimeString() : ""}
                 </div>
             </div>
 
@@ -118,7 +120,7 @@ const Index = () => {
                     </div>
 
                     <h2 className="text-xl sm:text-2xl md:text-4xl font-bold tracking-wider mb-6 sm:mb-8 px-4 sm:px-0">
-                        <span className="text-white">INTERESTING</span>{' '}
+                        <span className="text-white">INTERESTING!</span>{' '}
                         <span className="bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent">
                             LINKS
                         </span>{' '}
