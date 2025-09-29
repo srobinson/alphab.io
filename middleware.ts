@@ -47,9 +47,13 @@ export function middleware(request: NextRequest) {
       console.log("Production: continuing to RADE app for rade subdomain");
       return NextResponse.next();
     } else {
-      // alphab.io -> landing page for all routes
-      console.log("Production: rewriting to landing page for", pathname);
-      return NextResponse.rewrite(new URL("/landing", request.url));
+      // alphab.io -> only rewrite root path to landing page, allow other paths
+      if (pathname === "/") {
+        console.log("Production: rewriting root to landing page");
+        return NextResponse.rewrite(new URL("/landing", request.url));
+      }
+      console.log("Production: non-root path on main host -> continue to app (allows 404)");
+      return NextResponse.next();
     }
   }
 
