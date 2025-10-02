@@ -4,7 +4,7 @@ import { monitor } from '@/lib/monitoring'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
-export const maxDuration = 300 // 5 minutes for cron jobs
+export const maxDuration = 60 // Maximum for hobby plan
 
 export async function GET(request: NextRequest) {
   const startTime = Date.now()

@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase";
 import { NextRequest, NextResponse } from "next/server";
 
 export const revalidate = 300; // 5 minutes
+export const dynamic = 'force-dynamic'; // Required for dynamic content
 
 export async function GET(request: NextRequest) {
   try {

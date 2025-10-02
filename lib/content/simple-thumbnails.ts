@@ -28,6 +28,7 @@ export class SimpleThumbnailService {
    */
   static getUnsplashSearchQuery(title: string, tags: string[] = []): string {
     const keywords = this.extractRelevantKeywords(title, tags)
+    console.log(`🔍 Extracted keywords for "${title}": [${keywords.join(', ')}]`)
     return keywords.join(' ')
   }
 
@@ -73,7 +74,20 @@ export class SimpleThumbnailService {
     ]
     
     // Return top 3-4 keywords for better matching
-    return keywords.slice(0, 4).filter(Boolean)
+    const finalKeywords = keywords.slice(0, 4).filter(Boolean)
+
+    // Fallback: if no keywords found, use first 2 words from title (minimum for Unsplash)
+    if (finalKeywords.length === 0) {
+      const fallbackWords = title
+        .toLowerCase()
+        .replace(/[^\w\s]/g, ' ')
+        .split(/\s+/)
+        .filter(word => word.length > 2)
+        .slice(0, 2)
+      return fallbackWords.length > 0 ? fallbackWords : ['technology', 'business']
+    }
+
+    return finalKeywords
   }
 
   /**
@@ -353,7 +367,7 @@ export class SimpleThumbnailService {
   }) {
     return {
       picsum: this.getPicsumImage(options.title),
-      unsplash: this.getUnsplashImage(options.title, options.tags),
+      unsplash: this.getUnsplashImagePlaceholder(options.title, options.tags),
       category: this.getCategoryImage(options.category, options.title),
       gradient: this.getGradientPlaceholder(options.category, options.source, options.title)
     }

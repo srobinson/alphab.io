@@ -32,6 +32,7 @@ export async function searchUnsplashImages(
   }
 
   try {
+    console.log(`🖼️  Unsplash API call: searching for "${query}"`)
     const url = new URL('https://api.unsplash.com/search/photos')
     url.searchParams.set('query', query)
     url.searchParams.set('per_page', perPage.toString())
@@ -56,9 +57,11 @@ export async function searchUnsplashImages(
       // Add UTM parameters for Unsplash attribution
       const imageUrl = data.results[0].urls.small
       const urlWithAttribution = `${imageUrl}&w=400&h=200&fit=crop`
+      console.log(`✅ Unsplash API success: found image for "${query}"`)
       return urlWithAttribution
     }
 
+    console.log(`❌ Unsplash API: no results for "${query}"`)
     return null
   } catch (error) {
     console.error('Failed to fetch Unsplash image:', error)
