@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { createClient } from '@supabase/supabase-js'
 import { SimpleThumbnailService } from '@/lib/content/simple-thumbnails'
 import { checkRateLimit } from '@/lib/rate-limit'
+import { searchUnsplashImages } from '@/lib/unsplash'
 
 // Enable edge caching - cache responses for 5 minutes
 export const revalidate = 300; // 5 minutes
@@ -28,15 +29,52 @@ function formatTimeAgo(dateString: string | null): string {
 }
 
 // Helper function to generate dynamic thumbnail
-function generateThumbnail(article: any, category: string, trending: boolean): string {
-  // Use SimpleThumbnailService without RSS extracted image (since columns don't exist yet)
-  return SimpleThumbnailService.getBestThumbnail({
+async function generateThumbnail(
+  article: any, 
+  category: string, 
+  trending: boolean,
+  supabase: any
+): Promise<string> {
+  // 1. Check if article already has a cached image_url
+  if (article.image_url && article.image_url.trim().length > 0) {
+    return article.image_url
+  }
+
+  // 2. Generate thumbnail URL using SimpleThumbnailService
+  const thumbnailUrl = SimpleThumbnailService.getBestThumbnail({
     title: article.title,
     source: article.source,
     category: category,
     tags: article.tags || [],
     url: article.url
   })
+
+  // 3. If it's an Unsplash query, resolve it to an actual image
+  let finalImageUrl = thumbnailUrl
+  if (thumbnailUrl.startsWith('unsplash:')) {
+    const query = thumbnailUrl.replace('unsplash:', '')
+    const unsplashImage = await searchUnsplashImages(query, 1)
+    if (unsplashImage) {
+      finalImageUrl = unsplashImage
+    } else {
+      // Fallback to Picsum if Unsplash fails
+      finalImageUrl = SimpleThumbnailService.getPicsumImage(article.title)
+    }
+  }
+
+  // 4. Cache the image URL in the database for future requests
+  if (article.id && finalImageUrl !== thumbnailUrl) {
+    try {
+      await supabase
+        .from('articles')
+        .update({ image_url: finalImageUrl })
+        .eq('id', article.id)
+    } catch (error) {
+      console.error(`Failed to cache image URL for article ${article.id}:`, error)
+    }
+  }
+
+  return finalImageUrl
 }
 
 export async function GET(request: Request) {
@@ -101,7 +139,7 @@ export async function GET(request: Request) {
         priority_score,
         display_order,
         articles (
-          id, title, url, source, summary, published_at, tags
+          id, title, url, source, summary, published_at, tags, image_url
         )
       `, { count: 'exact' })
       .not('articles', 'is', null)
@@ -117,7 +155,8 @@ export async function GET(request: Request) {
       console.log(`Using cached industry moves data (${cachedData.length} items)`)
       totalCount = cachedCount || 0
       
-      items = cachedData.map((item: any) => ({
+      // Process items with async thumbnail generation
+      items = await Promise.all(cachedData.map(async (item: any) => ({
         id: item.articles.id,
         category: item.category,
         text: item.articles.title,
@@ -125,17 +164,17 @@ export async function GET(request: Request) {
         time: formatTimeAgo(item.articles.published_at),
         source: item.articles.source,
         link: item.articles.url,
-        image: generateThumbnail(item.articles, item.category, item.is_trending),
+        image: await generateThumbnail(item.articles, item.category, item.is_trending, supabase),
         isRSS: true,
         trending: item.is_trending || item.category === 'trending'
-      }))
+      })))
     } else {
       // Fallback to direct articles query
       console.log('No cached data found, fetching from articles table')
       
       const { data: articles, error: articlesError, count: articlesCount } = await supabase
         .from('articles')
-        .select('id, title, url, source, summary, published_at, tags', { count: 'exact' })
+        .select('id, title, url, source, summary, published_at, tags, image_url', { count: 'exact' })
         .eq('status', 'published')
         .order('published_at', { ascending: false })
         .range(offset, offset + limit - 1)
@@ -148,7 +187,7 @@ export async function GET(request: Request) {
       
       if (articles && articles.length > 0) {
         // Simple categorization based on recency and keywords
-        items = articles.map((article: any, index: number) => {
+        items = await Promise.all(articles.map(async (article: any, index: number) => {
           const hoursOld = (Date.now() - new Date(article.published_at || article.created_at).getTime()) / (1000 * 60 * 60)
           const title = article.title.toLowerCase()
           
@@ -174,11 +213,11 @@ export async function GET(request: Request) {
             time: formatTimeAgo(article.published_at),
             source: article.source,
             link: article.url,
-            image: generateThumbnail(article, category, trending),
+            image: await generateThumbnail(article, category, trending, supabase),
             isRSS: true,
             trending
           }
-        })
+        }))
       }
     }
     

@@ -11,18 +11,24 @@ export class SimpleThumbnailService {
   }
 
   /**
-   * Generate Unsplash image based on article title and keywords
-   * Uses the title directly for better contextual matching
+   * Generate Unsplash image URL using the API
+   * Returns a placeholder that will be replaced by the API call
    */
-  static getUnsplashImage(title: string, tags: string[] = [], width = 400, height = 200): string {
-    // Extract the most relevant keywords from the title for search
+  static getUnsplashImagePlaceholder(title: string, tags: string[] = []): string {
+    // Extract keywords for the API call
     const keywords = this.extractRelevantKeywords(title, tags)
     
-    // Use the most descriptive keywords, preferring the title content
-    const searchTerm = keywords.join(',')
-    
-    // Use Unsplash Source API with search terms
-    return `https://source.unsplash.com/${width}x${height}/?${encodeURIComponent(searchTerm)}`
+    // Return a marker that the API will use to fetch the actual image
+    // This will be handled server-side in the curated-news API
+    return `unsplash:${keywords.join(',')}`
+  }
+
+  /**
+   * Generate Unsplash search query from title and tags
+   */
+  static getUnsplashSearchQuery(title: string, tags: string[] = []): string {
+    const keywords = this.extractRelevantKeywords(title, tags)
+    return keywords.join(' ')
   }
 
   /**
@@ -112,6 +118,8 @@ export class SimpleThumbnailService {
 
   /**
    * Main method - returns the best available thumbnail
+   * Note: For Unsplash images, this returns a search query that will be
+   * resolved server-side in the curated-news API
    */
   static getBestThumbnail(options: {
     title: string
@@ -128,10 +136,11 @@ export class SimpleThumbnailService {
       return options.imageUrl
     }
     
-    // 2. Use Unsplash with contextual search for better image matching
-    const unsplashUrl = this.getUnsplashImage(options.title, options.tags)
-    if (unsplashUrl) {
-      return unsplashUrl
+    // 2. Return Unsplash search query to be resolved server-side
+    // This allows the API to fetch actual Unsplash images with proper keys
+    const searchQuery = this.getUnsplashSearchQuery(options.title, options.tags)
+    if (searchQuery) {
+      return `unsplash:${searchQuery}`
     }
     
     // 3. Generate rich SVG thumbnail with article info (for branded content)
