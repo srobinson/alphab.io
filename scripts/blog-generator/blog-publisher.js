@@ -131,7 +131,7 @@ ${JSON.stringify({
   keywords: (frontmatter.seo?.keywords || []).join(', '),
   mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id': `https://alphab.io/blog/${slug}`
+    '@id': `https://rade.alphab.io/blog/${slug}`
   }
 }, null, 2)}
 </script>
@@ -277,10 +277,10 @@ ${JSON.stringify({
     const rssItems = index.posts.slice(0, 20).map(post => `
     <item>
       <title>${this.escapeXML(post.title)}</title>
-      <link>https://alphab.io/blog/${post.slug}</link>
+      <link>https://rade.alphab.io/blog/${post.slug}</link>
       <description>${this.escapeXML(post.description)}</description>
       <pubDate>${new Date(post.publishedAt || post.date).toUTCString()}</pubDate>
-      <guid>https://alphab.io/blog/${post.slug}</guid>
+      <guid>https://rade.alphab.io/blog/${post.slug}</guid>
       <category>${this.escapeXML(post.category)}</category>
     </item>`).join('');
 
@@ -288,11 +288,11 @@ ${JSON.stringify({
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>RADE AI Blog</title>
-    <link>https://alphab.io/blog</link>
+    <link>https://rade.alphab.io/blog</link>
     <description>AI insights and analysis from RADE AI Solutions</description>
     <language>en-us</language>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
-    <atom:link href="https://alphab.io/blog/rss.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://rade.alphab.io/blog/rss.xml" rel="self" type="application/rss+xml"/>
     ${rssItems}
   </channel>
 </rss>`;

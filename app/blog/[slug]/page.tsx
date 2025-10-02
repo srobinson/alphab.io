@@ -1,359 +1,344 @@
-import type { Metadata } from "next"
-import { notFound } from "next/navigation"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Calendar, Clock, ArrowLeft, Share2, Twitter, Linkedin } from "lucide-react"
-import { promises as fs } from "fs"
-import path from "path"
-import matter from "gray-matter"
-import MarkdownIt from "markdown-it"
+import { Button } from "@/components/ui/button";
+import { promises as fs } from "fs";
+import matter from "gray-matter";
+import { ArrowLeft, Calendar, Clock } from "lucide-react";
+import MarkdownIt from "markdown-it";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import path from "path";
+import { ShareButtons } from "./share-buttons";
 
-const CONTENT_DIR = path.join(process.cwd(), "content/blog")
+const CONTENT_DIR = path.join(process.cwd(), "content/blog");
 
-const markdown = new MarkdownIt({ html: true, linkify: true, typographer: true })
+const markdown = new MarkdownIt({
+	html: true,
+	linkify: true,
+	typographer: true,
+});
 
 type BlogPost = {
-    slug: string
-    title: string
-    description: string
-    category: string
-    date: string
-    publishedAt?: string
-    readTime: string
-    author: string
-    tags: string[]
-    seoKeywords: string[]
-    generated: boolean
-    contentHtml: string
-    wordCount: number
-}
+	slug: string;
+	title: string;
+	description: string;
+	category: string;
+	date: string;
+	publishedAt?: string;
+	readTime: string;
+	author: string;
+	tags: string[];
+	seoKeywords: string[];
+	generated: boolean;
+	contentHtml: string;
+	wordCount: number;
+};
 
-type Props = {
-    params: { slug: string }
-}
+type ParamsPromise = Promise<{ slug: string }>;
 
 type MetadataShape = {
-    title?: string
-    description?: string
-    category?: string
-    date?: string
-    publishedAt?: string
-    readTime?: string
-    author?: string
-    tags?: unknown
-    seo?: {
-        keywords?: unknown
-    }
-    generated?: boolean
-}
+	title?: string;
+	description?: string;
+	category?: string;
+	date?: string;
+	publishedAt?: string;
+	readTime?: string;
+	author?: string;
+	tags?: unknown;
+	seo?: {
+		keywords?: unknown;
+	};
+	generated?: boolean;
+};
 
 const isObject = (value: unknown): value is Record<string, unknown> =>
-    typeof value === "object" && value !== null
+	typeof value === "object" && value !== null;
 
 const toStringArray = (value: unknown): string[] =>
-    Array.isArray(value) ? value.filter((entry): entry is string => typeof entry === "string") : []
+	Array.isArray(value)
+		? value.filter((entry): entry is string => typeof entry === "string")
+		: [];
 
 async function loadPost(slug: string): Promise<BlogPost | null> {
-    const mdxPath = path.join(CONTENT_DIR, `${slug}.mdx`)
-    const metaPath = path.join(CONTENT_DIR, `${slug}.meta.json`)
+	const mdxPath = path.join(CONTENT_DIR, `${slug}.mdx`);
+	const metaPath = path.join(CONTENT_DIR, `${slug}.meta.json`);
 
-    let rawMdx: string
-    try {
-        rawMdx = await fs.readFile(mdxPath, "utf8")
-    } catch {
-        return null
-    }
+	let rawMdx: string;
+	try {
+		rawMdx = await fs.readFile(mdxPath, "utf8");
+	} catch {
+		return null;
+	}
 
-    const parsed = matter(rawMdx)
-    let metadata: MetadataShape = {}
+	const parsed = matter(rawMdx);
+	let metadata: MetadataShape = {};
 
-    if (isObject(parsed.data)) {
-        metadata = { ...metadata, ...(parsed.data as MetadataShape) }
-    }
+	if (isObject(parsed.data)) {
+		metadata = { ...metadata, ...(parsed.data as MetadataShape) };
+	}
 
-    try {
-        const rawMeta = await fs.readFile(metaPath, "utf8")
-        const parsedMeta = JSON.parse(rawMeta)
-        if (isObject(parsedMeta)) {
-            metadata = { ...metadata, ...(parsedMeta as MetadataShape) }
-        }
-    } catch {
-        // Optional metadata file
-    }
+	try {
+		const rawMeta = await fs.readFile(metaPath, "utf8");
+		const parsedMeta = JSON.parse(rawMeta);
+		if (isObject(parsedMeta)) {
+			metadata = { ...metadata, ...(parsedMeta as MetadataShape) };
+		}
+	} catch {
+		// Optional metadata file
+	}
 
-    const contentHtml = markdown.render(parsed.content)
+	const contentHtml = markdown.render(parsed.content);
 
-    const wordCount = (parsed.content.match(/\w+/g) || []).length
-    const readTime = metadata.readTime || `${Math.max(1, Math.ceil(wordCount / 200))} min read`
+	const wordCount = (parsed.content.match(/\w+/g) || []).length;
+	const readTime =
+		metadata.readTime || `${Math.max(1, Math.ceil(wordCount / 200))} min read`;
 
-    const tags = toStringArray(metadata.tags)
-    const seoKeywords = toStringArray(metadata.seo?.keywords)
-    const author = typeof metadata.author === "string" ? metadata.author : "RADE AI Solutions"
-    const category = typeof metadata.category === "string" ? metadata.category : "AI Insights"
-    const title = typeof metadata.title === "string" ? metadata.title : slug
-    const description = typeof metadata.description === "string" ? metadata.description : ""
-    const date = typeof metadata.date === "string" ? metadata.date : new Date().toISOString()
-    const publishedAt = typeof metadata.publishedAt === "string" ? metadata.publishedAt : metadata.date
+	const tags = toStringArray(metadata.tags);
+	const seoKeywords = toStringArray(metadata.seo?.keywords);
+	const author =
+		typeof metadata.author === "string" ? metadata.author : "RADE AI Solutions";
+	const category =
+		typeof metadata.category === "string" ? metadata.category : "AI Insights";
+	const title = typeof metadata.title === "string" ? metadata.title : slug;
+	const description =
+		typeof metadata.description === "string" ? metadata.description : "";
+	const date =
+		typeof metadata.date === "string"
+			? metadata.date
+			: new Date().toISOString();
+	const publishedAt =
+		typeof metadata.publishedAt === "string"
+			? metadata.publishedAt
+			: metadata.date;
 
-    return {
-        slug,
-        title,
-        description,
-        category,
-        date,
-        publishedAt: publishedAt || date,
-        readTime,
-        author,
-        tags,
-        seoKeywords,
-        generated: Boolean(metadata.generated),
-        contentHtml,
-        wordCount,
-    }
+	return {
+		slug,
+		title,
+		description,
+		category,
+		date,
+		publishedAt: publishedAt || date,
+		readTime,
+		author,
+		tags,
+		seoKeywords,
+		generated: Boolean(metadata.generated),
+		contentHtml,
+		wordCount,
+	};
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const post = await loadPost(params.slug)
+export async function generateMetadata({
+	params,
+}: {
+	params: ParamsPromise;
+}): Promise<Metadata> {
+	const { slug } = await params;
+	const post = await loadPost(slug);
 
-    if (!post) {
-        return {
-            title: "Post Not Found",
-        }
-    }
+	if (!post) {
+		return {
+			title: "Post Not Found",
+		};
+	}
 
-    const published = post.publishedAt || post.date
+	const published = post.publishedAt || post.date;
 
-    return {
-        title: `${post.title} | RADE AI Blog`,
-        description: post.description,
-        keywords: post.seoKeywords.length > 0 ? post.seoKeywords : post.tags,
-        authors: [{ name: post.author }],
-        openGraph: {
-            title: post.title,
-            description: post.description,
-            url: `https://alphab.io/blog/${post.slug}`,
-            type: "article",
-            publishedTime: published,
-            authors: [post.author],
-            tags: post.tags,
-            images: [
-                {
-                    url: `/images/blog/${post.slug}-og.jpg`,
-                    width: 1200,
-                    height: 630,
-                    alt: post.title,
-                },
-            ],
-        },
-        twitter: {
-            card: "summary_large_image",
-            title: post.title,
-            description: post.description,
-            images: [`/images/blog/${post.slug}-twitter.jpg`],
-        },
-        alternates: {
-            canonical: `https://alphab.io/blog/${post.slug}`,
-        },
-    }
+	return {
+		title: `${post.title} | RADE AI Blog`,
+		description: post.description,
+		keywords: post.seoKeywords.length > 0 ? post.seoKeywords : post.tags,
+		authors: [{ name: post.author }],
+		openGraph: {
+			title: post.title,
+			description: post.description,
+			url: `https://rade.alphab.io/blog/${post.slug}`,
+			type: "article",
+			publishedTime: published,
+			authors: [post.author],
+			tags: post.tags,
+			images: [
+				{
+					url: `/images/blog/${post.slug}-og.jpg`,
+					width: 1200,
+					height: 630,
+					alt: post.title,
+				},
+			],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: post.title,
+			description: post.description,
+			images: [`/images/blog/${post.slug}-twitter.jpg`],
+		},
+		alternates: {
+			canonical: `https://rade.alphab.io/blog/${post.slug}`,
+		},
+	};
 }
 
-export default async function BlogPostPage({ params }: Props) {
-    const post = await loadPost(params.slug)
+export default async function BlogPostPage({
+	params,
+}: {
+	params: ParamsPromise;
+}) {
+	const { slug } = await params;
+	const post = await loadPost(slug);
 
-    if (!post) {
-        notFound()
-    }
+	if (!post) {
+		notFound();
+	}
 
-    const published = post.publishedAt || post.date
+	const published = post.publishedAt || post.date;
 
-    const articleStructuredData = {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "headline": post.title,
-        "description": post.description,
-        "image": `https://alphab.io/images/blog/${post.slug}-og.jpg`,
-        "author": {
-            "@type": "Person",
-            "name": post.author,
-            "url": "https://alphab.io",
-        },
-        "publisher": {
-            "@type": "Organization",
-            "name": "RADE AI Solutions",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "https://alphab.io/images/rade-logo.svg",
-            },
-        },
-        "datePublished": published,
-        "dateModified": published,
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": `https://alphab.io/blog/${post.slug}`,
-        },
-        "keywords": post.seoKeywords.length > 0 ? post.seoKeywords.join(", ") : post.tags.join(", "),
-        "articleSection": post.category,
-        "wordCount": post.wordCount,
-        "timeRequired": post.readTime,
-    }
+	const articleStructuredData = {
+		"@context": "https://schema.org",
+		"@type": "BlogPosting",
+		headline: post.title,
+		description: post.description,
+		image: `https://alphab.io/images/blog/${post.slug}-og.jpg`,
+		author: {
+			"@type": "Person",
+			name: post.author,
+			url: "https://alphab.io",
+		},
+		publisher: {
+			"@type": "Organization",
+			name: "RADE AI Solutions",
+			logo: {
+				"@type": "ImageObject",
+				url: "https://alphab.io/images/rade-logo.svg",
+			},
+		},
+		datePublished: published,
+		dateModified: published,
+		mainEntityOfPage: {
+			"@type": "WebPage",
+			"@id": `https://rade.alphab.io/blog/${post.slug}`,
+		},
+		keywords:
+			post.seoKeywords.length > 0
+				? post.seoKeywords.join(", ")
+				: post.tags.join(", "),
+		articleSection: post.category,
+		wordCount: post.wordCount,
+		timeRequired: post.readTime,
+	};
 
-    const shareUrl = `https://alphab.io/blog/${post.slug}`
-    const shareText = `${post.title} - ${post.description}`
+	return (
+		<>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify(articleStructuredData),
+				}}
+			/>
+			<article className="min-h-screen bg-white text-gray-900 dark:bg-black dark:text-white transition-colors duration-300">
+				{/* Navigation */}
+				<nav className="container mx-auto px-6 py-8 max-w-4xl">
+					<Link
+						href="/blog"
+						className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+					>
+						<ArrowLeft className="mr-2 w-4 h-4" />
+						Back to Blog
+					</Link>
+				</nav>
 
-    return (
-        <>
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(articleStructuredData) }}
-            />
-            <article className="min-h-screen bg-white text-gray-900 dark:bg-black dark:text-white transition-colors duration-300">
-                {/* Navigation */}
-                <nav className="container mx-auto px-6 py-8 max-w-4xl">
-                    <Link
-                        href="/blog"
-                        className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
-                    >
-                        <ArrowLeft className="mr-2 w-4 h-4" />
-                        Back to Blog
-                    </Link>
-                </nav>
+				{/* Article Header */}
+				<header className="container mx-auto px-6 pb-8 max-w-4xl">
+					<div className="flex items-center gap-4 mb-6">
+						<span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-semibold rounded-full">
+							{post.category}
+						</span>
+						<div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
+							<Calendar className="w-4 h-4 mr-1" />
+							{new Date(published).toLocaleDateString()}
+						</div>
+						<div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
+							<Clock className="w-4 h-4 mr-1" />
+							{post.readTime}
+						</div>
+					</div>
 
-                {/* Article Header */}
-                <header className="container mx-auto px-6 pb-8 max-w-4xl">
-                    <div className="flex items-center gap-4 mb-6">
-                        <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-sm font-semibold rounded-full">
-                            {post.category}
-                        </span>
-                        <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
-                            <Calendar className="w-4 h-4 mr-1" />
-                            {new Date(published).toLocaleDateString()}
-                        </div>
-                        <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
-                            <Clock className="w-4 h-4 mr-1" />
-                            {post.readTime}
-                        </div>
-                    </div>
+					<h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white leading-tight mb-6">
+						{post.title}
+					</h1>
 
-                    <h1 className="text-4xl md:text-5xl font-black text-gray-900 dark:text-white leading-tight mb-6">
-                        {post.title}
-                    </h1>
+					<p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
+						{post.description}
+					</p>
 
-                    <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
-                        {post.description}
-                    </p>
+					<div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-6">
+						<div className="flex items-center">
+							<span className="text-sm text-gray-600 dark:text-gray-400">
+								By{" "}
+								<strong className="text-gray-900 dark:text-white">
+									{post.author}
+								</strong>
+							</span>
+						</div>
 
-                    <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-6">
-                        <div className="flex items-center">
-                            <span className="text-sm text-gray-600 dark:text-gray-400">
-                                By <strong className="text-gray-900 dark:text-white">{post.author}</strong>
-                            </span>
-                        </div>
+						<ShareButtons
+							slug={post.slug}
+							title={post.title}
+							description={post.description}
+						/>
+					</div>
+				</header>
 
-                        <div className="flex items-center gap-2">
-                            <span className="text-sm text-gray-600 dark:text-gray-400 mr-2">Share:</span>
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                asChild
-                            >
-                                <a
-                                    href={shareUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Copy link"
-                                >
-                                    <Share2 className="w-4 h-4" />
-                                </a>
-                            </Button>
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                asChild
-                            >
-                                <a
-                                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Share on Twitter"
-                                >
-                                    <Twitter className="w-4 h-4" />
-                                </a>
-                            </Button>
-                            <Button
-                                variant="outline"
-                                size="sm"
-                                asChild
-                            >
-                                <a
-                                    href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Share on LinkedIn"
-                                >
-                                    <Linkedin className="w-4 h-4" />
-                                </a>
-                            </Button>
-                        </div>
-                    </div>
-                </header>
+				{/* Article Content */}
+				<main className="container mx-auto px-6 pb-16 max-w-4xl">
+					<div
+						className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-gray-900 dark:prose-headings:text-white prose-h2:mt-10 prose-h3:mt-8 prose-p:leading-relaxed prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-li:marker:text-blue-500 prose-a:text-blue-600 dark:prose-a:text-blue-400"
+						dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+					/>
 
-                {/* Article Content */}
-                <main className="container mx-auto px-6 pb-16 max-w-4xl">
-                    <div
-                        className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-gray-900 dark:prose-headings:text-white prose-h2:mt-10 prose-h3:mt-8 prose-p:leading-relaxed prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-li:marker:text-blue-500 prose-a:text-blue-600 dark:prose-a:text-blue-400"
-                        dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-                    />
+					{/* Tags */}
+					{post.tags.length > 0 && (
+						<div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+							<h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+								Tags
+							</h3>
+							<div className="flex flex-wrap gap-2">
+								{post.tags.map((tag) => (
+									<span
+										key={tag}
+										className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm rounded-full"
+									>
+										{tag}
+									</span>
+								))}
+							</div>
+						</div>
+					)}
+				</main>
 
-                    {/* Tags */}
-                    {post.tags.length > 0 && (
-                        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Tags</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {post.tags.map((tag) => (
-                                    <span
-                                        key={tag}
-                                        className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm rounded-full"
-                                    >
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
-                        </div>
-                    )}
-                </main>
-
-                {/* Related Posts CTA */}
-                <section className="container mx-auto px-6 py-16 text-center max-w-4xl">
-                    <div className="bg-gray-50 dark:bg-gray-900/50 rounded-2xl p-8">
-                        <h2 className="text-2xl font-black text-gray-900 dark:text-white mb-4">
-                            Stay Updated with AI Insights
-                        </h2>
-                        <p className="text-gray-700 dark:text-gray-300 mb-6">
-                            Get the latest AI technology analysis and insights delivered daily.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Button
-                                size="lg"
-                                className="bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600"
-                                asChild
-                            >
-                                <Link href="/blog">
-                                    Read More Articles
-                                </Link>
-                            </Button>
-                            <Button
-                                variant="outline"
-                                size="lg"
-                                asChild
-                            >
-                                <Link href="/blog/rss.xml">
-                                    Subscribe to RSS
-                                </Link>
-                            </Button>
-                        </div>
-                    </div>
-                </section>
-            </article>
-        </>
-    )
+				{/* Related Posts CTA */}
+				<section className="container mx-auto px-6 py-16 text-center max-w-4xl">
+					<div className="bg-gray-50 dark:bg-gray-900/50 rounded-2xl p-8">
+						<h2 className="text-2xl font-black text-gray-900 dark:text-white mb-4">
+							Stay Updated with AI Insights
+						</h2>
+						<p className="text-gray-700 dark:text-gray-300 mb-6">
+							Get the latest AI technology analysis and insights delivered
+							daily.
+						</p>
+						<div className="flex flex-col sm:flex-row gap-4 justify-center">
+							<Button
+								size="lg"
+								className="bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600"
+								asChild
+							>
+								<Link href="/blog">Read More Articles</Link>
+							</Button>
+							<Button variant="outline" size="lg" asChild>
+								<Link href="/blog/rss.xml">Subscribe to RSS</Link>
+							</Button>
+						</div>
+					</div>
+				</section>
+			</article>
+		</>
+	);
 }

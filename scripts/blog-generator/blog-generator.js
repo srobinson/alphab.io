@@ -410,18 +410,40 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
   async assembleBlogPost(data) {
     const { topic, type, style, outline, sections, seoData } = data;
 
+    const sanitize = (value) => {
+      const replaceDash = (str) => str.replace(/\u2014/g, '-');
+
+      if (typeof value === 'string') {
+        return replaceDash(value);
+      }
+
+      if (Array.isArray(value)) {
+        return value.map((item) => sanitize(item));
+      }
+
+      if (value && typeof value === 'object') {
+        return Object.fromEntries(
+          Object.entries(value).map(([key, val]) => [key, sanitize(val)])
+        );
+      }
+
+      return value;
+    };
+
+    const sanitizedSeoData = sanitize(seoData);
+
     // Create frontmatter
     const frontmatter = {
-      title: seoData.title,
-      description: seoData.metaDescription,
+      title: sanitizedSeoData.title,
+      description: sanitizedSeoData.metaDescription,
       date: new Date().toISOString().split('T')[0],
       category: this.mapTypeToCategory(type),
-      tags: seoData.keywords.slice(0, 5),
+      tags: sanitizedSeoData.keywords.slice(0, 5),
       author: "RADE AI Solutions",
       readTime: this.estimateReadTime(sections),
       seo: {
-        keywords: seoData.keywords,
-        schema: seoData.schema
+        keywords: sanitizedSeoData.keywords,
+        schema: sanitizedSeoData.schema
       },
       generated: true,
       generatedAt: new Date().toISOString()
@@ -430,25 +452,25 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
     // Assemble content
     const content = sections.map(section => {
       if (section.type === 'introduction') {
-        return section.content;
+        return sanitize(section.content);
       } else if (section.type === 'section') {
-        return `## ${section.title}\n\n${section.content}`;
+        return `## ${sanitize(section.title)}\n\n${sanitize(section.content)}`;
       } else if (section.type === 'conclusion') {
-        return `## Key Takeaways\n\n${section.content}`;
+        return `## Key Takeaways\n\n${sanitize(section.content)}`;
       }
     }).join('\n\n');
 
     return {
-      frontmatter,
-      content,
-      metadata: {
+      frontmatter: sanitize(frontmatter),
+      content: sanitize(content),
+      metadata: sanitize({
         topic,
         type,
         style,
         outline,
         generatedAt: new Date().toISOString(),
         cost: this.costTracker.totalSpent
-      }
+      })
     };
   }
 
