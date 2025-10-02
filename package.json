@@ -17,7 +17,9 @@
     "blog:list": "node scripts/blog-generator/blog-publisher.js list",
     "blog:preview": "node scripts/blog-generator/blog-publisher.js preview",
     "blog:unpublish": "node scripts/blog-generator/blog-publisher.js unpublish",
-    "blog:reset": "node scripts/blog-generator/blog-publisher.js reset"
+    "blog:reset": "node scripts/blog-generator/blog-publisher.js reset",
+    "images:backfill": "tsx scripts/backfill-article-images.ts",
+    "images:validate": "tsx scripts/validate-curated-news-cache.ts"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",

@@ -389,13 +389,14 @@ export function IndustryMoves() {
 
 								{/* Image Section */}
 								<div className="relative w-full h-48 overflow-hidden bg-gray-200 dark:bg-gray-700">
-									<Image
-										src={resolvedImage}
-										alt={move.title}
-										fill
-										className="object-cover transition-transform duration-300 hover:scale-110"
-										sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
-										onLoad={() => {
+										<Image
+											src={resolvedImage}
+											alt={move.title}
+											fill
+											className="object-cover transition-transform duration-300 hover:scale-110"
+											sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+											priority={index === 0}
+											onLoad={() => {
 											setImagesLoaded((prev) => new Set(prev).add(move.id));
 										}}
 										onError={() => {
