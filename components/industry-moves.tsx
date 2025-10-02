@@ -69,12 +69,9 @@ export function IndustryMoves() {
     useEffect(() => {
         const fetchCuratedNews = async () => {
             try {
-                console.log('📥 Fetching initial page...');
                 // Fetch from curated news API with pagination
                 const response = await fetch(`/api/curated-news?page=1&limit=${ITEMS_PER_PAGE}`);
                 const data = await response.json();
-
-                console.log('✅ Loaded page 1:', data.items.length, 'items, Total:', data.pagination?.total, 'Has more:', data.pagination?.hasMore);
 
                 // Convert API response to industry moves format
                 const curatedMoves: IndustryMove[] = data.items.map((
@@ -204,16 +201,12 @@ export function IndustryMoves() {
     const loadMore = useCallback(async () => {
         if (loadingMore || !hasMore) return;
 
-        console.log('🔄 loadMore called - Page:', page + 1, 'HasMore:', hasMore, 'Loading:', loadingMore);
         setLoadingMore(true);
         
         try {
             const nextPage = page + 1;
-            console.log('📥 Fetching page', nextPage);
             const response = await fetch(`/api/curated-news?page=${nextPage}&limit=${ITEMS_PER_PAGE}`);
             const data = await response.json();
-            
-            console.log('✅ Loaded page', nextPage, ':', data.items.length, 'items');
             
             // Convert API response to industry moves format
             const newMoves: IndustryMove[] = data.items.map((
@@ -232,10 +225,14 @@ export function IndustryMoves() {
                 image: item.image,
             }));
             
-            setDisplayedMoves(prev => [...prev, ...newMoves]);
+            // Filter out duplicates by checking existing IDs
+            setDisplayedMoves(prev => {
+                const existingIds = new Set(prev.map(move => move.id));
+                const uniqueNewMoves = newMoves.filter(move => !existingIds.has(move.id));
+                return [...prev, ...uniqueNewMoves];
+            });
             setPage(nextPage);
             setHasMore(data.pagination?.hasMore ?? false);
-            console.log('📊 Now showing', displayedMoves.length + newMoves.length, 'total items. Has more:', data.pagination?.hasMore);
         } catch (error) {
             console.error("Failed to load more items:", error);
             setHasMore(false);
@@ -249,7 +246,6 @@ export function IndustryMoves() {
         const observer = new IntersectionObserver(
             (entries) => {
                 if (entries[0].isIntersecting && hasMore && !loadingMore) {
-                    console.log('🔄 Loading more content... (Page', page + 1, ')');
                     loadMore();
                 }
             },
@@ -370,6 +366,8 @@ export function IndustryMoves() {
                         const isClickable = move.link && move.link !== "#";
                         const imageUrl = move.image ||
                             getFallbackImage(move.category, move.title);
+                        // Use a unique key combining ID and index to ensure uniqueness
+                        const uniqueKey = `${move.id}-${index}`;
 
                         const cardContent = (
                             <motion.div
@@ -466,7 +464,7 @@ export function IndustryMoves() {
                         return isClickable
                             ? (
                                 <a
-                                    key={move.id}
+                                    key={uniqueKey}
                                     href={move.link}
                                     target="_blank"
                                     rel="noopener noreferrer"
@@ -475,7 +473,7 @@ export function IndustryMoves() {
                                 </a>
                             )
                             : (
-                                <div key={move.id}>
+                                <div key={uniqueKey}>
                                     {cardContent}
                                 </div>
                             );

@@ -11,14 +11,63 @@ export class SimpleThumbnailService {
   }
 
   /**
-   * Generate Unsplash image based on keywords
+   * Generate Unsplash image based on article title and keywords
+   * Uses the title directly for better contextual matching
    */
   static getUnsplashImage(title: string, tags: string[] = [], width = 400, height = 200): string {
-    // Extract keywords for Unsplash search
-    const keywords = this.extractKeywords(title, tags)
-    const searchTerm = keywords.length > 0 ? keywords[0] : 'technology'
+    // Extract the most relevant keywords from the title for search
+    const keywords = this.extractRelevantKeywords(title, tags)
     
-    return `https://source.unsplash.com/${width}x${height}/?${searchTerm}`
+    // Use the most descriptive keywords, preferring the title content
+    const searchTerm = keywords.join(',')
+    
+    // Use Unsplash Source API with search terms
+    return `https://source.unsplash.com/${width}x${height}/?${encodeURIComponent(searchTerm)}`
+  }
+
+  /**
+   * Extract relevant keywords from title for better image matching
+   */
+  private static extractRelevantKeywords(title: string, tags: string[] = []): string[] {
+    // Common words to exclude
+    const stopWords = new Set([
+      'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for',
+      'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'be', 'been',
+      'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could',
+      'should', 'may', 'might', 'can', 'this', 'that', 'these', 'those'
+    ])
+    
+    // Extract meaningful words from title
+    const titleWords = title
+      .toLowerCase()
+      .replace(/[^\w\s]/g, ' ') // Remove punctuation
+      .split(/\s+/)
+      .filter(word => word.length > 3 && !stopWords.has(word))
+    
+    // Prioritize tech/AI related terms
+    const techTerms = ['ai', 'artificial', 'intelligence', 'drone', 'robot', 'technology', 
+                       'tech', 'digital', 'machine', 'learning', 'data', 'computer',
+                       'automation', 'neural', 'quantum', 'cloud', 'cyber', 'crypto']
+    
+    const techKeywords = titleWords.filter(word => 
+      techTerms.some(term => word.includes(term) || term.includes(word))
+    )
+    
+    // Get other important nouns/verbs (longer words tend to be more descriptive)
+    const descriptiveWords = titleWords
+      .filter(word => !techKeywords.includes(word))
+      .sort((a, b) => b.length - a.length)
+      .slice(0, 3)
+    
+    // Combine: tech terms first, then descriptive words, then tags
+    const keywords = [
+      ...techKeywords.slice(0, 2),
+      ...descriptiveWords.slice(0, 2),
+      ...tags.slice(0, 1)
+    ]
+    
+    // Return top 3-4 keywords for better matching
+    return keywords.slice(0, 4).filter(Boolean)
   }
 
   /**
@@ -79,12 +128,18 @@ export class SimpleThumbnailService {
       return options.imageUrl
     }
     
-    // 2. Generate rich SVG thumbnail with article info
+    // 2. Use Unsplash with contextual search for better image matching
+    const unsplashUrl = this.getUnsplashImage(options.title, options.tags)
+    if (unsplashUrl) {
+      return unsplashUrl
+    }
+    
+    // 3. Generate rich SVG thumbnail with article info (for branded content)
     if (this.shouldGenerateSVG(options)) {
       return this.generateRichSVG(options)
     }
     
-    // 3. Use deterministic Picsum for variety (not random!)
+    // 4. Fallback to deterministic Picsum for variety (not random!)
     return this.getPicsumImage(options.title)
   }
 
@@ -249,35 +304,6 @@ export class SimpleThumbnailService {
   private static shouldUseUnsplash(tags: string[] = []): boolean {
     const techKeywords = ['ai', 'artificial-intelligence', 'technology', 'computer', 'data', 'digital', 'robot', 'machine-learning']
     return tags.some(tag => techKeywords.includes(tag.toLowerCase()))
-  }
-
-  /**
-   * Extract relevant keywords for image search
-   */
-  private static extractKeywords(title: string, tags: string[] = []): string[] {
-    const techTerms = ['ai', 'artificial intelligence', 'technology', 'tech', 'computer', 'data', 'digital', 'robot', 'automation']
-    const titleWords = title.toLowerCase().split(' ')
-    
-    // Find tech terms in title
-    const titleKeywords = techTerms.filter(term => 
-      titleWords.some(word => word.includes(term.replace(' ', '')))
-    )
-    
-    // Combine with tags
-    const allKeywords = [...titleKeywords, ...tags]
-    
-    // Map to Unsplash-friendly terms
-    const mappedKeywords = allKeywords.map(keyword => {
-      const mapping: Record<string, string> = {
-        'ai': 'artificial-intelligence',
-        'tech': 'technology',
-        'ml': 'machine-learning',
-        'robot': 'robotics'
-      }
-      return mapping[keyword.toLowerCase()] || keyword
-    })
-    
-    return [...new Set(mappedKeywords)].slice(0, 3)
   }
 
   /**
