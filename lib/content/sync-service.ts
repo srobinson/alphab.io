@@ -155,7 +155,7 @@ export class ContentSyncService {
 				filtered_out: fetchResult.items.length - itemsToProcess.length,
 			});
 
-			// Ingest items into database
+			// Ingest items into database with image URLs
 			let ingestedCount = 0;
 			for (const item of itemsToProcess) {
 				try {
@@ -166,6 +166,7 @@ export class ContentSyncService {
 							tags: item.classification.tags,
 							doSummarize: options.enableSummarization !== false,
 							doSaveContent: options.saveContent || false,
+							imageUrl: item.imageUrl, // Pass through RSS extracted image
 						},
 						this.supabase,
 					);

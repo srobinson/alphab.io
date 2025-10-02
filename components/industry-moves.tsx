@@ -189,10 +189,23 @@ export function IndustryMoves() {
         fetchCuratedNews();
     }, []);
 
-    // Generate fallback image based on category - using only local images to prevent loading issues
-    const getFallbackImage = (category: string, index: number) => {
-        // Use only local images to prevent external loading issues
-        return "/images/ai-head-design.webp";
+    // Generate fallback image based on category with variety
+    const getFallbackImage = (category: string, title: string) => {
+        // Create deterministic fallback based on title hash
+        const hashString = (str: string): number => {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash;
+            }
+            return Math.abs(hash);
+        };
+        
+        const seed = hashString(title);
+        
+        // Use Picsum with deterministic seed for variety
+        return `https://picsum.photos/seed/${seed}/400/200`;
     };
 
     if (loading) {
@@ -261,7 +274,7 @@ export function IndustryMoves() {
                         const IconComponent = move.icon;
                         const isClickable = move.link && move.link !== "#";
                         const imageUrl = move.image ||
-                            getFallbackImage(move.category, index);
+                            getFallbackImage(move.category, move.title);
 
                         const cardContent = (
                             <motion.div
@@ -367,7 +380,11 @@ export function IndustryMoves() {
                                     {cardContent}
                                 </a>
                             )
-                            : cardContent;
+                            : (
+                                <div key={move.id} className="h-full">
+                                    {cardContent}
+                                </div>
+                            );
                     })}
                 </motion.div>
             </div>

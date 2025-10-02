@@ -74,9 +74,10 @@ CREATE INDEX IF NOT EXISTS idx_sync_logs_source_created ON content_sync_logs(sou
 CREATE INDEX IF NOT EXISTS idx_sync_logs_success_created ON content_sync_logs(success, created_at DESC);
 
 CREATE INDEX IF NOT EXISTS idx_industry_moves_cache_expires ON industry_moves_cache(expires_at);
-CREATE INDEX IF NOT EXISTS idx_industry_moves_cache_order ON industry_moves_cache(display_order) WHERE expires_at > NOW();
-CREATE INDEX IF NOT EXISTS idx_industry_moves_cache_trending ON industry_moves_cache(is_trending, display_order) WHERE expires_at > NOW();
-CREATE INDEX IF NOT EXISTS idx_industry_moves_cache_breaking ON industry_moves_cache(is_breaking, display_order) WHERE expires_at > NOW();
+
+CREATE INDEX IF NOT EXISTS idx_industry_moves_cache_order ON industry_moves_cache(display_order, expires_at);
+CREATE INDEX IF NOT EXISTS idx_industry_moves_cache_trending ON industry_moves_cache(is_trending, display_order, expires_at);
+CREATE INDEX IF NOT EXISTS idx_industry_moves_cache_breaking ON industry_moves_cache(is_breaking, display_order, expires_at);
 
 CREATE INDEX IF NOT EXISTS idx_content_classifications_article ON content_classifications(article_id, classification_type);
 CREATE INDEX IF NOT EXISTS idx_content_classifications_relevance ON content_classifications(relevance_score DESC);

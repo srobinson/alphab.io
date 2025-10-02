@@ -91,6 +91,7 @@ export type IngestInput = {
   tags?: string[]
   doSummarize?: boolean
   doSaveContent?: boolean
+  imageUrl?: string // Add support for RSS extracted images
 }
 
 export type IngestResult = {
@@ -167,6 +168,11 @@ export async function ingestUrl(input: IngestInput, sb: SupabaseClient): Promise
     status: 'published' as const,
   }
   if (finalContentHtml) payload.content_html = finalContentHtml
+  
+  // Add image URL if provided (from RSS feed)
+  if (input.imageUrl) {
+    payload.image_url = input.imageUrl
+  }
 
   const { data, error } = await sb
     .from('articles')

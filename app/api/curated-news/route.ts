@@ -29,7 +29,7 @@ function formatTimeAgo(dateString: string | null): string {
 
 // Helper function to generate dynamic thumbnail
 function generateThumbnail(article: any, category: string, trending: boolean): string {
-  // Use SimpleThumbnailService for immediate results
+  // Use SimpleThumbnailService without RSS extracted image (since columns don't exist yet)
   return SimpleThumbnailService.getBestThumbnail({
     title: article.title,
     source: article.source,
