@@ -329,7 +329,12 @@ Write 200-300 words that:
 4. Preview what's coming
 5. Use data or specific examples to build credibility, referencing the correct year (${CURRENT_YEAR}) for current statistics
 
-Make it conversational but authoritative, skeptical but not cynical.`;
+Make it conversational but authoritative, skeptical but not cynical.
+
+Important style rules:
+- Return only the finished introduction prose.
+- Do not include meta commentary, disclaimers, or sentences like "Here’s the introduction".
+- Start directly with the opening sentence of the introduction.`;
 
     const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
     return await this.callOpenRouter(prompt, 'creative', { tools });
@@ -360,7 +365,12 @@ Write 400-600 words that:
 
 Use current data points where possible and state the accurate year (${CURRENT_YEAR}) when describing present-day adoption, revenue, or market stats.
 
-Transition naturally to: ${sectionOutline.transition}`;
+Transition naturally to: ${sectionOutline.transition}
+
+Important style rules:
+- Respond with the complete section content only.
+- Do not add labels, prefaces, or phrases such as "Here’s the blog section" or "Based on the research" before the actual content.
+- Begin with the section heading or first sentence immediately.`;
 
     const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
     return await this.callOpenRouter(prompt, 'analysis', { tools });
@@ -381,7 +391,12 @@ Write 200-250 words that:
 
 Ensure the takeaways feel timely for leaders planning in ${CURRENT_YEAR}.
 
-Use signature phrases: ${this.voiceFramework.signaturePhrases.slice(-2).join(', ')}`;
+Use signature phrases: ${this.voiceFramework.signaturePhrases.slice(-2).join(', ')}
+
+Important style rules:
+- Provide only the conclusion content.
+- Avoid meta statements or framing like "Here’s the conclusion".
+- Start immediately with the concluding sentence or heading.`;
 
     const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
     return await this.callOpenRouter(prompt, 'creative', { tools });
