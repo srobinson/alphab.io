@@ -1,0 +1,527 @@
+{
+  "timeframe": "7 days",
+  "articleCount": 69,
+  "generatedAt": "2025-10-02T13:57:39.831Z",
+  "topics": [
+    {
+      "topic": "google",
+      "count": 15,
+      "percentage": "21.7"
+    },
+    {
+      "topic": "openai",
+      "count": 14,
+      "percentage": "20.3"
+    },
+    {
+      "topic": "gemini",
+      "count": 9,
+      "percentage": "13.0"
+    },
+    {
+      "topic": "startup",
+      "count": 6,
+      "percentage": "8.7"
+    },
+    {
+      "topic": "meta",
+      "count": 5,
+      "percentage": "7.2"
+    },
+    {
+      "topic": "amazon",
+      "count": 5,
+      "percentage": "7.2"
+    },
+    {
+      "topic": "chatbot",
+      "count": 3,
+      "percentage": "4.3"
+    },
+    {
+      "topic": "microsoft",
+      "count": 3,
+      "percentage": "4.3"
+    },
+    {
+      "topic": "funding",
+      "count": 3,
+      "percentage": "4.3"
+    },
+    {
+      "topic": "vision",
+      "count": 2,
+      "percentage": "2.9"
+    },
+    {
+      "topic": "ai safety",
+      "count": 2,
+      "percentage": "2.9"
+    },
+    {
+      "topic": "regulation",
+      "count": 2,
+      "percentage": "2.9"
+    },
+    {
+      "topic": "anthropic",
+      "count": 2,
+      "percentage": "2.9"
+    },
+    {
+      "topic": "automation",
+      "count": 2,
+      "percentage": "2.9"
+    },
+    {
+      "topic": "enterprise",
+      "count": 2,
+      "percentage": "2.9"
+    },
+    {
+      "topic": "artificial general intelligence",
+      "count": 1,
+      "percentage": "1.4"
+    },
+    {
+      "topic": "agi",
+      "count": 1,
+      "percentage": "1.4"
+    },
+    {
+      "topic": "ethics",
+      "count": 1,
+      "percentage": "1.4"
+    },
+    {
+      "topic": "compliance",
+      "count": 1,
+      "percentage": "1.4"
+    },
+    {
+      "topic": "claude",
+      "count": 1,
+      "percentage": "1.4"
+    }
+  ],
+  "themes": [
+    {
+      "name": "Challenges & Limitations",
+      "keywords": [
+        "challenge",
+        "limitation",
+        "problem",
+        "issue",
+        "concern"
+      ],
+      "description": "Problems and limitations in current AI",
+      "articleCount": 7,
+      "percentage": "10.1",
+      "sampleTitles": [
+        "CharacterAI removes Disney characters after receiving cease-and-desist letter | TechCrunch",
+        "OpenAI&#039;s new social app is filled with terrifying Sam Altman deepfakes | TechCrunch",
+        "The UK’s war on Apple encryption is back"
+      ]
+    },
+    {
+      "name": "Technical Innovation",
+      "keywords": [
+        "architecture",
+        "algorithm",
+        "method",
+        "technique",
+        "approach"
+      ],
+      "description": "New technical approaches or methodologies",
+      "articleCount": 6,
+      "percentage": "8.7",
+      "sampleTitles": [
+        "Google: EU&#039;s AI adoption lags China amid regulatory hurdles",
+        "DeepSeek tests “sparse attention” to slash AI processing costs",
+        "The rise of algorithmic agriculture? AI steps in"
+      ]
+    },
+    {
+      "name": "Market Dynamics",
+      "keywords": [
+        "funding",
+        "investment",
+        "competition",
+        "market",
+        "revenue",
+        "growth"
+      ],
+      "description": "Business and market developments in AI",
+      "articleCount": 5,
+      "percentage": "7.2",
+      "sampleTitles": [
+        "California’s newly signed AI law just gave Big Tech exactly what it wanted",
+        "The value gap from AI investments is widening dangerously fast",
+        "Former Microsoft execs launch AI agents to end Excel-led finance | TechCrunch"
+      ]
+    },
+    {
+      "name": "AI Capability Leap",
+      "keywords": [
+        "breakthrough",
+        "advancement",
+        "capability",
+        "performance",
+        "benchmark"
+      ],
+      "description": "Major advances in AI capabilities or performance",
+      "articleCount": 4,
+      "percentage": "5.8",
+      "sampleTitles": [
+        "Google updates its Home app with Gemini smarts | TechCrunch",
+        "Google unveils AI-powered Nest indoor and outdoor cameras, and a new doorbell | TechCrunch",
+        "We Gave Our AI Agents Twitter and Now They"
+      ]
+    },
+    {
+      "name": "Practical Applications",
+      "keywords": [
+        "implementation",
+        "deployment",
+        "use case",
+        "application",
+        "adoption"
+      ],
+      "description": "Real-world AI implementations and use cases",
+      "articleCount": 4,
+      "percentage": "5.8",
+      "sampleTitles": [
+        "Instagram tests opening right onto Reels",
+        "Google: EU&#039;s AI adoption lags China amid regulatory hurdles",
+        "Reply&#039;s pre-built AI apps aim to fast-track AI adoption"
+      ]
+    },
+    {
+      "name": "Industry Impact",
+      "keywords": [
+        "industry",
+        "sector",
+        "transformation",
+        "disruption",
+        "change"
+      ],
+      "description": "How AI is affecting different industries",
+      "articleCount": 4,
+      "percentage": "5.8",
+      "sampleTitles": [
+        "The $22 costume mask that could enable teenagers to hack the social media ban",
+        "California’s newly signed AI law just gave Big Tech exactly what it wanted",
+        "The AI services transformation may be harder than VCs think | TechCrunch"
+      ]
+    }
+  ],
+  "opportunities": [
+    {
+      "type": "Reality Check",
+      "title": "The Other Side of the AI Hype",
+      "description": "Address controversies and limitations being discussed",
+      "confidence": "high",
+      "sampleArticles": [
+        "California’s new AI safety law shows regulation and innovation don’t have to clash  | TechCrunch",
+        "CharacterAI removes Disney characters after receiving cease-and-desist letter | TechCrunch",
+        "OpenAI&#039;s new social app is filled with terrifying Sam Altman deepfakes | TechCrunch"
+      ]
+    },
+    {
+      "type": "Business Impact",
+      "title": "What Recent AI Developments Mean for Business Leaders",
+      "description": "Translate technical advances into business implications",
+      "confidence": "medium",
+      "relevantThemes": [
+        "Market Dynamics",
+        "Practical Applications",
+        "Industry Impact"
+      ]
+    },
+    {
+      "type": "Future Forecast",
+      "title": "Why meta Will Be Huge in 2025",
+      "description": "Early prediction on emerging trend",
+      "confidence": "medium",
+      "emergingTrend": {
+        "topic": "meta",
+        "count": 5,
+        "percentage": "7.2"
+      }
+    }
+  ],
+  "rawData": [
+    {
+      "title": "James Meek · Computers that want things",
+      "summary": "An exploration of artificial intelligence's lack of genuine desires and motivations, centered around the historic 2016 Go match between Lee Sedol and AlphaGo, and the philosophical implications for developing artificial general intelligence (AGI) with genuine wants and ethics.",
+      "tags": [
+        "ai"
+      ],
+      "source": "Hacker News AI",
+      "published_at": "2025-10-09T00:00:00+00:00",
+      "url": "https://www.lrb.co.uk/the-paper/v47/n18/james-meek/computers-that-want-things"
+    },
+    {
+      "title": "Trump admin adds banner attacking ‘Radical Left Democrats’ to government websites",
+      "summary": "The Trump administration has added politically charged banners across federal agency websites blaming Democrats for the government shutdown, while some agencies maintain neutral shutdown notices.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-01T22:23:19+00:00",
+      "url": "https://www.theverge.com/news/790280/trump-admin-government-shutdown-banner-democrats"
+    },
+    {
+      "title": "Apple sidelines lighter Vision Pro to prioritize smart glasses",
+      "summary": "Apple is prioritizing development of smart glasses over a lighter Vision Pro headset, with plans to launch display-equipped glasses that could compete with Meta's offerings as early as 2027.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai",
+        "meta",
+        "apple"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-01T22:22:51+00:00",
+      "url": "https://www.theverge.com/news/790285/apple-smart-glasses-vision-pro"
+    },
+    {
+      "title": "Amazon says its AI will let NBA fans track brand-new stats",
+      "summary": "AWS is launching 'NBA Inside the Game', a new AI-powered platform that will track 29 body parts of players to provide detailed stats like shot difficulty, defensive metrics, and player movement analysis during the 2025-2026 NBA season.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-01T22:21:37+00:00",
+      "url": "https://www.theverge.com/news/790187/amazon-aws-ai-nba-stats"
+    },
+    {
+      "title": "That annoying SMS phish you just got may have come from a box like this",
+      "summary": "Researchers discovered that scammers are exploiting unsecured industrial cellular routers made by Milesight to send SMS phishing messages across multiple countries, with over 18,000 such routers accessible online and at least 572 allowing unauthorized access.",
+      "tags": [
+        "tech",
+        "biz & it",
+        "security",
+        "hacking",
+        "modems",
+        "phishing",
+        "smishing",
+        "sms"
+      ],
+      "source": "Ars Technica AI",
+      "published_at": "2025-10-01T22:16:07+00:00",
+      "url": "https://arstechnica.com/security/2025/10/that-annoying-sms-phish-you-just-got-may-have-come-from-a-box-like-this"
+    },
+    {
+      "title": "Instagram tests opening right onto Reels",
+      "summary": "Instagram is testing a new layout in India that makes Reels and DMs the first two tabs in the app, with Reels becoming the default home tab, similar to its iPad app implementation.",
+      "tags": [
+        "tech",
+        "featured",
+        "meta"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-01T21:39:00+00:00",
+      "url": "https://www.theverge.com/news/790255/instagram-test-reels-home-tab"
+    },
+    {
+      "title": "OpenAI staff grapples with the company&#039;s social media push | TechCrunch",
+      "summary": "OpenAI researchers express mixed feelings about the company's launch of Sora, a TikTok-style AI video app, debating how it aligns with OpenAI's nonprofit mission to develop beneficial AI while balancing commercial success.",
+      "tags": [
+        "ai",
+        "apps",
+        "ai video generator",
+        "meta",
+        "openai",
+        "featured",
+        "apple"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-01T21:33:11+00:00",
+      "url": "https://techcrunch.com/2025/10/01/openai-staff-grapples-with-the-companys-social-media-push"
+    },
+    {
+      "title": "California’s new AI safety law shows regulation and innovation don’t have to clash  | TechCrunch",
+      "summary": "California's new AI safety law SB 53 requires large AI labs to be transparent about safety protocols and prevent catastrophic risks, while mandating compliance with these protocols under state oversight.",
+      "tags": [
+        "ai",
+        "government & policy",
+        "ai policy",
+        "ai safety",
+        "equity",
+        "sb 1047",
+        "sb 53",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-01T20:00:00+00:00",
+      "url": "https://techcrunch.com/2025/10/01/californias-new-ai-safety-law-shows-regulation-and-innovation-dont-have-to-clash"
+    },
+    {
+      "title": "Trump’s solution for high drug prices is a discount portal called TrumpRx",
+      "summary": "The Trump administration plans to launch TrumpRx.gov in 2026, a government website that will direct uninsured consumers to discounted medications on pharmaceutical companies' online stores, starting with Pfizer through a deal that includes tariff relief and Medicaid price reductions.",
+      "tags": [
+        "tech",
+        "featured"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-01T19:45:48+00:00",
+      "url": "https://www.theverge.com/news/790156/trump-healthcare-government-website-trumprx-pfizer"
+    },
+    {
+      "title": "Behold: The Lego Game Boy has already been modded to play games for real",
+      "summary": "An Australian modder has created a working version of the Lego Game Boy that runs real Game Boy cartridges using authentic chips and custom circuit boards, going beyond the official Lego set's display-only functionality.",
+      "tags": [
+        "tech",
+        "featured"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-01T19:36:13+00:00",
+      "url": "https://www.theverge.com/news/790093/lego-game-boy-natalie-the-nerd"
+    },
+    {
+      "title": "The $22 costume mask that could enable teenagers to hack the social media ban",
+      "summary": "Research from University of Melbourne and Princeton shows facial age verification systems for Australia's upcoming social media ban can be fooled by cheap masks and disguises, with every tested system having exploitable weaknesses despite industry claims of effectiveness.",
+      "tags": [
+        "ai"
+      ],
+      "source": "Hacker News AI",
+      "published_at": "2025-10-01T19:33:14+00:00",
+      "url": "https://www.abc.net.au/news/2025-10-02/social-media-ban-vpns-masks-age-checks-disguises/105836134"
+    },
+    {
+      "title": "Plenty of robot vacuums are already discounted ahead of October Prime Day",
+      "summary": "Multiple robot vacuum models are seeing significant discounts ahead of Amazon's October Prime Day, including flagship models from Roborock, Eufy, and Dreame, with deals starting at $149.99.",
+      "tags": [
+        "tech",
+        "featured",
+        "apple"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-01T19:20:41+00:00",
+      "url": "https://www.theverge.com/tech/786897/robot-vacuum-mop-early-deals-amazon-october-prime-day-2025"
+    },
+    {
+      "title": "CharacterAI removes Disney characters after receiving cease-and-desist letter | TechCrunch",
+      "summary": "Character.AI has removed Disney characters from its AI chatbot platform after receiving a cease-and-desist letter from Disney citing copyright infringement and concerns about potentially harmful content involving their characters.",
+      "tags": [
+        "ai",
+        "character.ai",
+        "disney",
+        "in brief",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-01T19:15:01+00:00",
+      "url": "https://techcrunch.com/2025/10/01/character-ai-removes-disney-characters-after-receiving-cease-and-desist-letter"
+    },
+    {
+      "title": "Amazon&#x27;s 2 Best-Selling Espresso Machines are on Sale Before Prime Day",
+      "summary": "Amazon's two best-selling espresso machines, the Ninja Luxe Cafe Premier and Breville Barista Express, are both on sale for $100 off ahead of Prime Day, bringing their prices to $500 and $600 respectively.",
+      "tags": [
+        "tech",
+        "gear",
+        "gear / deals",
+        "gear / products / home",
+        "gear / products / kitchen",
+        "featured"
+      ],
+      "source": "Wired Tech",
+      "published_at": "2025-10-01T18:40:31.112+00:00",
+      "url": "https://www.wired.com/story/barista-express-ninja-cafe-luxe-early-prime-day-deals"
+    },
+    {
+      "title": "OpenAI’s Sora 2 lets users insert themselves into AI videos with sound",
+      "summary": "OpenAI has launched Sora 2, an upgraded AI video generation model that can create videos with synchronized sound and dialogue, along with a new iOS social app that allows users to insert themselves into AI-generated videos through 'cameo' features.",
+      "tags": [
+        "tech",
+        "ai",
+        "biz & it",
+        "ai assistants",
+        "ai development tools",
+        "ai video generator",
+        "generative ai",
+        "image synthesis",
+        "machine learning",
+        "multimodal ai",
+        "openai"
+      ],
+      "source": "Ars Technica AI",
+      "published_at": "2025-10-01T18:37:00+00:00",
+      "url": "https://arstechnica.com/ai/2025/10/openais-sora-2-lets-users-insert-themselves-into-ai-videos-with-sound"
+    },
+    {
+      "title": "US government takes equity stake in one of the world’s largest lithium mines",
+      "summary": "The Trump administration is taking a 5% equity stake in Lithium Americas and another 5% in its joint Nevada mining project with GM, making the US government a significant stakeholder in what will be the Western Hemisphere's largest lithium producer when it opens in 2028.",
+      "tags": [
+        "tech",
+        "featured"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-01T18:31:27+00:00",
+      "url": "https://www.theverge.com/news/790057/lithium-mine-us-trump-us-government-stake-thacker-pass"
+    },
+    {
+      "title": "OpenAI&#039;s new social app is filled with terrifying Sam Altman deepfakes | TechCrunch",
+      "summary": "OpenAI's new social app Sora is facing criticism for enabling easy creation of AI-generated deepfake videos, particularly featuring CEO Sam Altman, raising concerns about disinformation and copyright issues.",
+      "tags": [
+        "ai",
+        "apps",
+        "ai slop",
+        "openai",
+        "sam altman",
+        "slop",
+        "sora",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-01T18:02:17+00:00",
+      "url": "https://techcrunch.com/2025/10/01/openais-new-social-app-is-filled-with-terrifying-sam-altman-deepfakes"
+    },
+    {
+      "title": "Our Favorite Automatic Latte Maker Is $200 Off",
+      "summary": "DeLonghi's Rivelia automatic espresso machine, which can make various milk-based coffee drinks with minimal user input, is currently discounted by $200 to $1,300 on Amazon, featuring a swappable bean hopper and automatic milk frothing system.",
+      "tags": [
+        "tech",
+        "gear",
+        "gear / deals",
+        "gear / products",
+        "gear / products / home",
+        "featured"
+      ],
+      "source": "Wired Tech",
+      "published_at": "2025-10-01T17:48:27.832+00:00",
+      "url": "https://www.wired.com/story/delonghi-rivelia-deal-1025"
+    },
+    {
+      "title": "Adam Mosseri’s ‘we’re totally not spying on you’ video is raising a lot of questions",
+      "summary": "Instagram head Adam Mosseri posted a video denying that Meta listens to users' microphones for ad targeting, offering alternative explanations for why users might see eerily relevant ads after conversations.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai",
+        "meta"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-01T17:13:30+00:00",
+      "url": "https://www.theverge.com/news/789991/meta-instagram-microphone-listen-ads-targeting-adam-mosseri"
+    },
+    {
+      "title": "The UK’s war on Apple encryption is back",
+      "summary": "The UK government has reportedly issued a new secret order demanding Apple provide backdoor access to British citizens' encrypted iCloud data, reviving efforts that were previously thought abandoned in August.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai",
+        "apple"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-01T17:13:18+00:00",
+      "url": "https://www.theverge.com/news/789985/apple-uk-revived-secret-order-encryption-backdoor"
+    }
+  ]
+}

@@ -1,6 +1,24 @@
 {
   "posts": [
     {
+      "slug": "the-rise-of-energy-efficient-ai-a-game-changing-trend",
+      "title": "The Rise of Energy-Efficient AI: A Game-Changing Trend",
+      "description": "Discover how localized, energy-efficient AI models are reshaping technology's future. New data reveals why smaller, smarter AI deployment is outperforming traditional approaches.",
+      "date": "2025-10-02",
+      "publishedAt": "2025-10-02T14:21:00.793Z",
+      "category": "AI Analysis",
+      "tags": [
+        "energy-efficient AI",
+        "localized AI models",
+        "AI energy optimization",
+        "sustainable artificial intelligence",
+        "smart AI scaling"
+      ],
+      "readTime": "10 min read",
+      "generated": true,
+      "draftId": "the-emerging-ai-trend-nobodys-talking-ab-596119"
+    },
+    {
       "slug": "the-hidden-truth-about-ai-adoption-in-2025-leaders-take-note",
       "title": "What Recent AI Developments Mean for Business Leaders in 2025",
       "description": "While 78% of businesses use AI, most struggle with strategic deployment. Discover how to bridge the AI adoption-impact gap and drive real business outcomes in 2025.",
@@ -37,6 +55,6 @@
       "draftId": "the-other-side-of-the-ai-hype-211355"
     }
   ],
-  "lastUpdated": "2025-10-02T13:42:28.254Z",
-  "totalPosts": 2
+  "lastUpdated": "2025-10-02T14:21:00.796Z",
+  "totalPosts": 3
 }
