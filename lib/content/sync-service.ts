@@ -1,5 +1,5 @@
 // Content synchronization service
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { monitor } from "../monitoring";
 import { ingestUrl } from "../server/ingest";
 import { ContentClassifier } from "./classifier";
@@ -25,10 +25,24 @@ export interface SyncOptions {
 	updateIndustryMoves?: boolean;
 }
 
+type GenericDatabase = Record<string, Record<string, unknown>>;
+type DatabaseClient = SupabaseClient<GenericDatabase>;
+
+type ArticleRow = {
+	id: string;
+	title: string;
+	url: string;
+	published_at: string | null;
+	created_at: string;
+	summary: string | null;
+	source: string;
+	tags?: string[] | null;
+};
+
 export class ContentSyncService {
 	private rssParser: RSSParser;
 	private classifier: ContentClassifier;
-	private supabase: any;
+	private supabase: DatabaseClient;
 
 	constructor() {
 		this.rssParser = new RSSParser();
@@ -216,7 +230,7 @@ export class ContentSyncService {
 
 			// Get latest articles from database
 			const { data: articles, error } = await this.supabase
-				.from("articles")
+				.from<ArticleRow>("articles")
 				.select("*")
 				.eq("status", "published")
 				.order("published_at", { ascending: false })
@@ -232,17 +246,17 @@ export class ContentSyncService {
 			}
 
 			// Convert to RSSItem format for classification
-			const rssItems: RSSItem[] = articles.map((article: any) => ({
+			const rssItems: RSSItem[] = articles.map((article) => ({
 				guid: article.id,
 				title: article.title,
 				link: article.url,
-				pubDate: new Date(article.published_at || article.created_at),
-				description: article.summary || "",
+				pubDate: new Date(article.published_at ?? article.created_at),
+				description: article.summary ?? "",
 				source: article.source,
 				sourceId: article.source.toLowerCase().replace(/\s+/g, "-"),
 				category: "ai", // Default category
 				priority: "medium",
-				tags: article.tags || [],
+				tags: Array.isArray(article.tags) ? article.tags : [],
 			}));
 
 			// Classify content
@@ -327,7 +341,7 @@ export class ContentSyncService {
 
 	async testConnection(): Promise<boolean> {
 		try {
-			const { data, error } = await this.supabase
+			const { error } = await this.supabase
 				.from("articles")
 				.select("id")
 				.limit(1);

@@ -1,13 +1,12 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { createClient } from '@/lib/supabase'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Mail, User, Calendar, MessageSquare, Bell, CheckCircle, Archive, Search, Filter } from 'lucide-react'
+import { Card, CardContent } from '@/components/ui/card'
+import { Mail, User, Calendar, MessageSquare, Bell, CheckCircle, Archive, Search } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 interface Contact {
@@ -31,6 +30,8 @@ interface ContactStats {
     newsletter_signups: number
 }
 
+type ContactStatus = Contact['status']
+
 export default function ContactsAdminPage() {
     const [contacts, setContacts] = useState<Contact[]>([])
     const [stats, setStats] = useState<ContactStats>({
@@ -43,36 +44,32 @@ export default function ContactsAdminPage() {
     })
     const [loading, setLoading] = useState(true)
     const [searchTerm, setSearchTerm] = useState('')
-    const [statusFilter, setStatusFilter] = useState<string>('all')
+    const [statusFilter, setStatusFilter] = useState<ContactStatus | 'all'>('all')
     const [error, setError] = useState('')
-    const supabase = createClient()
+    const supabase = useMemo(() => createClient(), [])
 
-    useEffect(() => {
-        fetchContacts()
-    }, [])
-
-    const fetchContacts = async () => {
+    const fetchContacts = useCallback(async () => {
         try {
-            if (!supabase) {
-                throw new Error('Database connection not available')
-            }
+            setLoading(true)
 
             const { data: contactsData, error: contactsError } = await supabase
-                .from('contacts')
+                .from<Contact>('contacts')
                 .select('*')
                 .order('created_at', { ascending: false })
 
             if (contactsError) throw contactsError
 
-            setContacts(contactsData || [])
+            const safeContacts = contactsData ?? []
+
+            setContacts(safeContacts)
 
             // Calculate stats
-            const total = contactsData?.length || 0
-            const newCount = contactsData?.filter(c => c.status === 'new').length || 0
-            const readCount = contactsData?.filter(c => c.status === 'read').length || 0
-            const repliedCount = contactsData?.filter(c => c.status === 'replied').length || 0
-            const archivedCount = contactsData?.filter(c => c.status === 'archived').length || 0
-            const newsletterSignups = contactsData?.filter(c => c.subscribed_to_newsletter).length || 0
+            const total = safeContacts.length
+            const newCount = safeContacts.filter(c => c.status === 'new').length
+            const readCount = safeContacts.filter(c => c.status === 'read').length
+            const repliedCount = safeContacts.filter(c => c.status === 'replied').length
+            const archivedCount = safeContacts.filter(c => c.status === 'archived').length
+            const newsletterSignups = safeContacts.filter(c => c.subscribed_to_newsletter).length
 
             setStats({
                 total,
@@ -83,15 +80,20 @@ export default function ContactsAdminPage() {
                 newsletter_signups: newsletterSignups
             })
 
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Error fetching contacts:', err)
-            setError(err.message || 'Failed to load contacts')
+            const message = err instanceof Error ? err.message : 'Failed to load contacts'
+            setError(message)
         } finally {
             setLoading(false)
         }
-    }
+    }, [supabase])
 
-    const updateContactStatus = async (contactId: string, newStatus: string) => {
+    useEffect(() => {
+        void fetchContacts()
+    }, [fetchContacts])
+
+    const updateContactStatus = async (contactId: string, newStatus: ContactStatus) => {
         try {
             if (!supabase) return
 
@@ -108,14 +110,14 @@ export default function ContactsAdminPage() {
             // Update local state
             setContacts(prev => prev.map(contact =>
                 contact.id === contactId
-                    ? { ...contact, status: newStatus as any }
+                    ? { ...contact, status: newStatus }
                     : contact
             ))
 
             // Refresh stats
-            fetchContacts()
+            await fetchContacts()
 
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Error updating contact status:', err)
         }
     }
@@ -130,7 +132,7 @@ export default function ContactsAdminPage() {
         return matchesSearch && matchesStatus
     })
 
-    const getStatusColor = (status: string) => {
+    const getStatusColor = (status: ContactStatus) => {
         switch (status) {
             case 'new': return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300'
             case 'read': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300'
@@ -258,7 +260,7 @@ export default function ContactsAdminPage() {
                     </div>
                     <select
                         value={statusFilter}
-                        onChange={(e) => setStatusFilter(e.target.value)}
+                        onChange={(e) => setStatusFilter(e.target.value as ContactStatus | 'all')}
                         className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                     >
                         <option value="all">All Status</option>

@@ -18,7 +18,7 @@ class BlogAnalyzer {
   async analyzeRecentTrends(daysBack = 7) {
     console.log(`🔍 Analyzing trends from the last ${daysBack} days...`);
 
-    const { data: articles, error } = await this.supabase
+    const { data: rawArticles, error } = await this.supabase
       .from('articles')
       .select('title, summary, tags, source, published_at, url')
       .eq('status', 'published')
@@ -29,12 +29,14 @@ class BlogAnalyzer {
       throw new Error(`Failed to fetch articles: ${error.message}`);
     }
 
+    const articles = Array.isArray(rawArticles) ? rawArticles : [];
+
     console.log(`📊 Found ${articles.length} articles to analyze`);
 
     // Extract topics and themes
-    const topics = this.extractTopics(articles);
-    const themes = this.identifyThemes(articles);
-    const opportunities = this.findContentOpportunities(articles, topics, themes);
+    const topics = articles.length ? this.extractTopics(articles) : [];
+    const themes = articles.length ? this.identifyThemes(articles) : [];
+    const opportunities = articles.length ? this.findContentOpportunities(articles, topics, themes) : [];
 
     const analysis = {
       timeframe: `${daysBack} days`,
@@ -97,6 +99,10 @@ class BlogAnalyzer {
       });
     });
 
+    if (articles.length === 0) {
+      return [];
+    }
+
     return Object.entries(topicFrequency)
       .sort(([,a], [,b]) => b - a)
       .slice(0, 20)
@@ -104,6 +110,10 @@ class BlogAnalyzer {
   }
 
   identifyThemes(articles) {
+    if (articles.length === 0) {
+      return [];
+    }
+
     const themes = [
       {
         name: "AI Capability Leap",
@@ -154,6 +164,7 @@ class BlogAnalyzer {
 
   findContentOpportunities(articles, topics, themes) {
     const opportunities = [];
+    const currentYear = new Date().getFullYear();
 
     // Look for controversial or contrarian angles
     const controversialKeywords = ["debate", "criticism", "concern", "risk", "limitation", "failure"];
@@ -210,7 +221,7 @@ class BlogAnalyzer {
     if (emergingTopics.length > 0) {
       opportunities.push({
         type: "Future Forecast",
-        title: `Why ${emergingTopics[0].topic} Will Be Huge in 2024`,
+        title: `Why ${emergingTopics[0].topic} Will Be Huge in ${currentYear}`,
         description: "Early prediction on emerging trend",
         confidence: "medium",
         emergingTrend: emergingTopics[0]

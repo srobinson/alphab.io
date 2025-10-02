@@ -11,6 +11,36 @@ export interface NewsItem {
   description?: string;
 }
 
+type ApiSourceInfo = { name?: string | null } | null | undefined
+
+type NewsApiArticle = {
+  title?: string | null
+  url?: string | null
+  description?: string | null
+  publishedAt?: string | null
+  source?: ApiSourceInfo
+  urlToImage?: string | null
+}
+
+type GNewsArticle = {
+  title?: string | null
+  url?: string | null
+  description?: string | null
+  publishedAt?: string | null
+  source?: ApiSourceInfo
+  image?: string | null
+}
+
+type NewsApiResponse = {
+  status?: string
+  message?: string
+  articles?: NewsApiArticle[]
+}
+
+type GNewsResponse = {
+  articles?: GNewsArticle[]
+}
+
 // News API configuration
 export const NEWS_API_CONFIG = {
   // You can get a free API key from https://newsapi.org/
@@ -202,7 +232,7 @@ export async function fetchNewsAPI(
       return [];
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as NewsApiResponse;
 
     if (data.status !== "ok" || !data.articles) {
       console.warn("NewsAPI returned error:", data.message);
@@ -211,29 +241,39 @@ export async function fetchNewsAPI(
 
     return data.articles
       .filter(
-        (article: any) =>
-          article.title &&
-          article.url &&
-          isRelevantContent(article.title, article.description)
+        (article): article is NewsApiArticle & { title: string; url: string } =>
+          typeof article.title === "string" &&
+          article.title.length > 0 &&
+          typeof article.url === "string" &&
+          article.url.length > 0 &&
+          isRelevantContent(article.title, article.description ?? "")
       )
-      .map((article: any, index: number) => ({
-        id: `newsapi-${Date.now()}-${index}`,
-        text: formatRSSTitle(article.title),
-        link: article.url,
-        category: categorizeRSSContent(article.title, article.description),
-        time: new Date(article.publishedAt).toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-        source: article.source?.name || "NewsAPI",
-        isRSS: false,
-        pubDate: new Date(article.publishedAt),
-        image: article.urlToImage || undefined,
-        description:
-          article.description?.substring(0, 150) +
-            (article.description?.length > 150 ? "..." : "") ||
-          `Latest from ${article.source?.name || "NewsAPI"}`,
-      }));
+      .map((article, index) => {
+        const publishedAt = article.publishedAt
+          ? new Date(article.publishedAt)
+          : new Date();
+        const description = article.description ?? "";
+        const sourceName = article.source?.name ?? "NewsAPI";
+
+        return {
+          id: `newsapi-${Date.now()}-${index}`,
+          text: formatRSSTitle(article.title),
+          link: article.url,
+          category: categorizeRSSContent(article.title, description),
+          time: publishedAt.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+          source: sourceName,
+          isRSS: false,
+          pubDate: publishedAt,
+          image: article.urlToImage ?? undefined,
+          description:
+            description.substring(0, 150) +
+              (description.length > 150 ? "..." : "") ||
+            `Latest from ${sourceName}`,
+        };
+      });
   } catch (error) {
     console.warn("Error fetching from NewsAPI:", error);
     return [];
@@ -268,7 +308,7 @@ export async function fetchGNewsAPI(
       return [];
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as GNewsResponse;
 
     if (!data.articles) {
       console.warn("GNews returned no articles");
@@ -277,29 +317,39 @@ export async function fetchGNewsAPI(
 
     return data.articles
       .filter(
-        (article: any) =>
-          article.title &&
-          article.url &&
-          isRelevantContent(article.title, article.description)
+        (article): article is GNewsArticle & { title: string; url: string } =>
+          typeof article.title === "string" &&
+          article.title.length > 0 &&
+          typeof article.url === "string" &&
+          article.url.length > 0 &&
+          isRelevantContent(article.title, article.description ?? "")
       )
-      .map((article: any, index: number) => ({
-        id: `gnews-${Date.now()}-${index}`,
-        text: formatRSSTitle(article.title),
-        link: article.url,
-        category: categorizeRSSContent(article.title, article.description),
-        time: new Date(article.publishedAt).toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-        source: article.source?.name || "GNews",
-        isRSS: false,
-        pubDate: new Date(article.publishedAt),
-        image: article.image || undefined,
-        description:
-          article.description?.substring(0, 150) +
-            (article.description?.length > 150 ? "..." : "") ||
-          `Latest from ${article.source?.name || "GNews"}`,
-      }));
+      .map((article, index) => {
+        const publishedAt = article.publishedAt
+          ? new Date(article.publishedAt)
+          : new Date();
+        const description = article.description ?? "";
+        const sourceName = article.source?.name ?? "GNews";
+
+        return {
+          id: `gnews-${Date.now()}-${index}`,
+          text: formatRSSTitle(article.title),
+          link: article.url,
+          category: categorizeRSSContent(article.title, description),
+          time: publishedAt.toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+          source: sourceName,
+          isRSS: false,
+          pubDate: publishedAt,
+          image: article.image ?? undefined,
+          description:
+            description.substring(0, 150) +
+              (description.length > 150 ? "..." : "") ||
+            `Latest from ${sourceName}`,
+        };
+      });
   } catch (error) {
     console.warn("Error fetching from GNews:", error);
     return [];

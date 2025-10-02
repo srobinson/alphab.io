@@ -42,7 +42,7 @@ export function CTASection() {
                     transition={{ duration: 0.6, delay: 0 }}
                     viewport={{ once: true }}
                 >
-                    Let's engineer your AI strategy to crush your content goals,
+                    Let&rsquo;s engineer your AI strategy to crush your content goals,
                     captivate your ideal audience, and build your creator
                     empire.
                 </motion.p>

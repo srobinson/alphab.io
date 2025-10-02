@@ -8,8 +8,6 @@ import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 
 const TickerItem = ({ item }: { item: NewsItem }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   const handleClick = () => {
     if (item.link) {
       window.open(item.link, "_blank", "noopener,noreferrer");

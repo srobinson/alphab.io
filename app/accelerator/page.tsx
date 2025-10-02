@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import { ArrowLeft, Zap, Cpu, Rocket, Code, Lightbulb, Gauge, ChevronRight, Mail, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Zap, Cpu, Rocket, Code, Lightbulb, Gauge, Mail, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
 const TechAccelerator = () => {
@@ -38,8 +38,9 @@ const TechAccelerator = () => {
 
             setIsSubmitted(true);
             setEmail('');
-        } catch (err: any) {
-            setError(err.message || 'Failed to save email. Please try again.');
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : 'Failed to save email. Please try again.';
+            setError(message);
         } finally {
             setIsSubmitting(false);
         }
@@ -138,7 +139,7 @@ const TechAccelerator = () => {
                     </h2>
 
                     <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-                        BRINGING TOMORROW'S INNOVATIONS TO TODAY'S CHALLENGES
+                        BRINGING TOMORROW&rsquo;S INNOVATIONS TO TODAY&rsquo;S CHALLENGES
                     </p>
                 </div>
 
@@ -241,7 +242,7 @@ const TechAccelerator = () => {
                                     <span className="text-base sm:text-lg font-bold">SUCCESS!</span>
                                 </div>
                                 <p className="text-gray-300 text-sm sm:text-base">
-                                    You'll be the first to know when Tech Accelerator launches.
+                                    You&apos;ll be the first to know when Tech Accelerator launches.
                                 </p>
                             </div>
                         )}

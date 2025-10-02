@@ -64,7 +64,7 @@ export class ContentClassifier {
     const relevanceScore = this.calculateRelevanceScore(text, item)
     
     // Determine category
-    const category = this.determineCategory(text, item)
+	const category = this.determineCategory(text)
     
     // Check if breaking news
     const isBreaking = this.isBreakingNews(text, item)
@@ -124,7 +124,7 @@ export class ContentClassifier {
     return Math.min(100, Math.max(0, score))
   }
 
-  private determineCategory(text: string, item: RSSItem): ContentClassification['category'] {
+	private determineCategory(text: string): ContentClassification['category'] {
     const breakingScore = this.countKeywordMatches(text, this.breakingKeywords)
     const trendingScore = this.countKeywordMatches(text, this.trendingKeywords)
     const updateScore = this.countKeywordMatches(text, this.updateKeywords)
@@ -140,7 +140,8 @@ export class ContentClassifier {
     const maxScore = Math.max(...Object.values(scores))
     if (maxScore === 0) return 'update' // Default category
     
-    return Object.entries(scores).find(([_, score]) => score === maxScore)?.[0] as ContentClassification['category'] || 'update'
+	const bestCategory = Object.entries(scores).find(([, score]) => score === maxScore)?.[0]
+	return (bestCategory as ContentClassification['category']) ?? 'update'
   }
 
   private isBreakingNews(text: string, item: RSSItem): boolean {

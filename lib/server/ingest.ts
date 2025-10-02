@@ -66,7 +66,7 @@ export async function fetchMetadata(url: string): Promise<PageMeta> {
     const res = await fetch(url, { method: 'GET', redirect: 'follow', headers: { 'User-Agent': 'alphab-ingest/1.0' } })
     if (!res.ok) throw new Error(`status ${res.status}`)
     html = await res.text()
-  } catch (e: any) {
+  } catch (e: unknown) {
     console.warn('[ingest] fetchMetadata failed:', url, e)
     return { title: null, description: null, publishedAt: null, contentHtml: null }
   }
@@ -104,6 +104,15 @@ export type IngestResult = {
  * Ingest a single URL into Supabase `articles` table.
  */
 export async function ingestUrl(input: IngestInput, sb: SupabaseClient): Promise<IngestResult> {
+  type ExistingArticleRow = {
+    id: string
+    tags: string[] | null
+    summary: string | null
+    source: string | null
+    content_html: string | null
+    published_at: string | null
+  }
+
   const rawUrl = input.url
   if (!rawUrl) return { id: null, upserted: false, reason: 'missing url' }
 
@@ -112,7 +121,7 @@ export async function ingestUrl(input: IngestInput, sb: SupabaseClient): Promise
 
   // Check if already exists by URL
   const { data: existing, error: findErr } = await sb
-    .from('articles')
+    .from<ExistingArticleRow>('articles')
     .select('id, tags, summary, source, content_html, published_at')
     .eq('url', url)
     .maybeSingle()
@@ -141,8 +150,9 @@ export async function ingestUrl(input: IngestInput, sb: SupabaseClient): Promise
       summary = info.summary || null
       inferredTags = Array.isArray(info.tags) ? info.tags : []
       inferredSourceLabel = info.sourceLabel
-    } catch (e) {
-      console.warn('[ingest] summarizeInfo failed:', (e as any)?.message)
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : String(e)
+      console.warn('[ingest] summarizeInfo failed:', message)
     }
   }
 
@@ -158,7 +168,17 @@ export async function ingestUrl(input: IngestInput, sb: SupabaseClient): Promise
     ? meta.contentHtml
     : (existing?.content_html ?? null)
 
-  const payload: Record<string, any> = {
+  const payload: {
+    title: string | null
+    url: string
+    source: string | null
+    published_at: string | null
+    summary: string | null
+    tags: string[]
+    status: 'published'
+    content_html?: string
+    image_url?: string
+  } = {
     title: meta.title,
     url,
     source: finalSource,
@@ -175,7 +195,7 @@ export async function ingestUrl(input: IngestInput, sb: SupabaseClient): Promise
   }
 
   const { data, error } = await sb
-    .from('articles')
+    .from<{ id: string }>('articles')
     .upsert(payload, { onConflict: 'url' })
     .select('id')
     .single()
@@ -185,5 +205,5 @@ export async function ingestUrl(input: IngestInput, sb: SupabaseClient): Promise
     return { id: null, upserted: false, reason: 'db_error' }
   }
 
-  return { id: (data as any).id, upserted: true, reason: exists ? 'updated' : 'inserted' }
+  return { id: data.id, upserted: true, reason: exists ? 'updated' : 'inserted' }
 }

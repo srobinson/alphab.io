@@ -346,7 +346,7 @@ export default function ServicesPage() {
               transition={{ duration: 0.6, delay: 0 }}
               viewport={{ once: true }}
             >
-              Let's connect. I'm here to understand your vision and architect
+              Let&rsquo;s connect. I&rsquo;m here to understand your vision and architect
               the AI solutions that will propel your business into the future.
             </motion.p>
             <Link href="/contact" passHref legacyBehavior>

@@ -12,8 +12,7 @@ export function ThemeToggleButton() {
 
   React.useEffect(() => {
     setMounted(true)
-    console.log("ThemeToggleButton mounted. Initial theme:", theme, "Initial resolvedTheme:", resolvedTheme)
-  }, []) // Only run on initial mount for this log
+  }, [])
 
   // Log when theme/resolvedTheme actually changes
   React.useEffect(() => {

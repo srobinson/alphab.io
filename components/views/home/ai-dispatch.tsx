@@ -70,31 +70,33 @@ export function AiDispatch(
   }, [showHeader, fullCreatorIntelText, fullDateText]);
 
   // Trigger header reveal when headline comes into view
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        // When headline comes into view, start the typewriter effect
-        if (entry.isIntersecting) {
-          setShowHeader(true);
-        }
-      },
-      {
-        threshold: 0.1, // Trigger when 10% of headline is visible
-        rootMargin: "0px",
-      },
-    );
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			(entries) => {
+				const entry = entries[0];
+				// When headline comes into view, start the typewriter effect
+				if (entry.isIntersecting) {
+					setShowHeader(true);
+				}
+			},
+			{
+				threshold: 0.1, // Trigger when 10% of headline is visible
+				rootMargin: "0px",
+			},
+		);
 
-    if (headlineRef.current) {
-      observer.observe(headlineRef.current);
-    }
+		const currentHeadline = headlineRef.current;
 
-    return () => {
-      if (headlineRef.current) {
-        observer.unobserve(headlineRef.current);
-      }
-    };
-  }, []);
+		if (currentHeadline) {
+			observer.observe(currentHeadline);
+		}
+
+		return () => {
+			if (currentHeadline) {
+				observer.unobserve(currentHeadline);
+			}
+		};
+	}, []);
 
   return (
     <motion.div

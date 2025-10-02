@@ -2,6 +2,32 @@
 import Parser from 'rss-parser'
 import type { ContentSource } from './sources'
 
+type RawFeedItem = {
+  guid?: string
+  title?: string
+  link?: string
+  pubDate?: string
+  isoDate?: string
+  contentSnippet?: string
+  description?: string
+  summary?: string
+  content?: string
+  author?: string
+  categories?: string[]
+  enclosure?: { url?: string }
+  tags?: string[]
+  ['content:encoded']?: string
+  ['dc:creator']?: string
+  ['media:thumbnail']?: { $?: { url?: string } }
+  ['itunes:image']?: { $?: { href?: string } }
+  [key: string]: unknown
+}
+
+type RawFeed = {
+  items?: RawFeedItem[]
+  [key: string]: unknown
+}
+
 export interface RSSItem {
   guid: string
   title: string
@@ -27,10 +53,10 @@ export interface FetchResult {
 }
 
 export class RSSParser {
-  private parser: Parser
+	private parser: Parser<RawFeed, RawFeedItem>
 
-  constructor() {
-    this.parser = new Parser({
+	constructor() {
+		this.parser = new Parser<RawFeed, RawFeedItem>({
       timeout: 15000,
       headers: {
         'User-Agent': 'alphab.io-content-fetcher/1.0 (https://alphab.io)'
@@ -92,23 +118,23 @@ export class RSSParser {
     }
   }
 
-  private processFeedItems(feed: any, source: ContentSource): RSSItem[] {
-    if (!feed.items) return []
-    
-    return feed.items
-      .slice(0, source.maxItems || 10)
-      .map((item: any) => this.createRSSItem(item, feed, source))
-      .filter((item: RSSItem) => this.isValidItem(item))
-  }
+	private processFeedItems(feed: RawFeed, source: ContentSource): RSSItem[] {
+		if (!feed.items) return []
+		
+		return feed.items
+			.slice(0, source.maxItems || 10)
+			.map((item) => this.createRSSItem(item, source))
+			.filter((item: RSSItem) => this.isValidItem(item))
+	}
 
-  private createRSSItem(item: any, feed: any, source: ContentSource): RSSItem {
+	private createRSSItem(item: RawFeedItem, source: ContentSource): RSSItem {
     // Clean and normalize the description
-    const description = this.cleanDescription(
-      item.contentSnippet || 
-      item.description || 
-      item.summary || 
-      ''
-    )
+	const description = this.cleanDescription(
+		item.contentSnippet || 
+		item.description || 
+		item.summary || 
+		''
+	)
 
     // Extract tags from categories or keywords
     const tags = this.extractTags(item, source)
@@ -117,7 +143,7 @@ export class RSSParser {
     const imageUrl = this.extractImageUrl(item)
 
     // Generate a GUID if none exists
-    const guid = item.guid || item.link || `${source.id}-${Date.now()}-${Math.random()}`
+	const guid = item.guid || item.link || `${source.id}-${Date.now()}-${Math.random()}`
 
     return {
       guid,
@@ -129,49 +155,57 @@ export class RSSParser {
       sourceId: source.id,
       category: source.category,
       priority: source.priority,
-      content: item['content:encoded'] || item.content,
-      author: item.author || item['dc:creator'] || undefined,
+		content: (item['content:encoded'] as string | undefined) || (item.content as string | undefined),
+		author: (item.author as string | undefined) || (item['dc:creator'] as string | undefined) || undefined,
       tags,
       imageUrl // Add extracted image URL
     }
   }
 
-  private extractImageUrl(item: any): string | undefined {
-    // Try multiple fields for image extraction
-    
-    // 1. Media thumbnail (common in RSS feeds)
-    if (item['media:thumbnail'] && item['media:thumbnail'].$ && item['media:thumbnail'].$.url) {
-      return item['media:thumbnail'].$.url
-    }
-    
-    // 2. Enclosure (podcast/media feeds)
-    if (item.enclosure && item.enclosure.url && this.isImageUrl(item.enclosure.url)) {
-      return item.enclosure.url
-    }
-    
-    // 3. Content encoded - extract first image
-    if (item['content:encoded']) {
-      const imageMatch = item['content:encoded'].match(/<img[^>]+src="([^">]+)"/i)
-      if (imageMatch && imageMatch[1]) {
-        return imageMatch[1]
-      }
-    }
-    
-    // 4. Description - extract first image
-    if (item.description) {
-      const imageMatch = item.description.match(/<img[^>]+src="([^">]+)"/i)
-      if (imageMatch && imageMatch[1]) {
-        return imageMatch[1]
-      }
-    }
-    
-    // 5. iTunes image (for podcast feeds)
-    if (item['itunes:image'] && item['itunes:image'].$ && item['itunes:image'].$.href) {
-      return item['itunes:image'].$.href
-    }
-    
-    return undefined
-  }
+	private extractImageUrl(item: RawFeedItem): string | undefined {
+		// Try multiple fields for image extraction
+		
+		// 1. Media thumbnail (common in RSS feeds)
+		const mediaThumbnail = item['media:thumbnail']
+		if (mediaThumbnail && typeof mediaThumbnail === 'object' && ' $' in mediaThumbnail) {
+			const attributes = (mediaThumbnail as { $?: { url?: string } }).$
+			if (attributes?.url) {
+				return attributes.url
+			}
+		}
+		
+		// 2. Enclosure (podcast/media feeds)
+		if (item.enclosure?.url && this.isImageUrl(item.enclosure.url)) {
+			return item.enclosure.url
+		}
+		
+		// 3. Content encoded - extract first image
+		if (typeof item['content:encoded'] === 'string') {
+			const imageMatch = item['content:encoded'].match(/<img[^>]+src="([^">]+)"/i)
+			if (imageMatch && imageMatch[1]) {
+				return imageMatch[1]
+			}
+		}
+		
+		// 4. Description - extract first image
+		if (typeof item.description === 'string') {
+			const imageMatch = item.description.match(/<img[^>]+src="([^">]+)"/i)
+			if (imageMatch && imageMatch[1]) {
+				return imageMatch[1]
+			}
+		}
+		
+		// 5. iTunes image (for podcast feeds)
+		const itunesImage = item['itunes:image']
+		if (itunesImage && typeof itunesImage === 'object' && ' $' in itunesImage) {
+			const attributes = (itunesImage as { $?: { href?: string } }).$
+			if (attributes?.href) {
+				return attributes.href
+			}
+		}
+		
+		return undefined
+	}
 
   private isImageUrl(url: string): boolean {
     const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg']
@@ -225,7 +259,7 @@ export class RSSParser {
     }
   }
 
-  private extractTags(item: any, source: ContentSource): string[] {
+	private extractTags(item: RawFeedItem, source: ContentSource): string[] {
     const tags: string[] = []
     
     // Add source-based tags

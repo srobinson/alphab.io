@@ -108,9 +108,8 @@ export class SimpleThumbnailService {
   /**
    * Generate gradient placeholder with category colors
    */
-  static getGradientPlaceholder(category: string, source: string, title: string): string {
-    const hash = this.hashString(title)
-    const colors = this.getCategoryColors(category)
+	static getGradientPlaceholder(category: string, source: string): string {
+		const colors = this.getCategoryColors(category)
     
     // Create SVG with gradient and text
     const svg = `
@@ -215,8 +214,7 @@ export class SimpleThumbnailService {
     tags?: string[]
   }): string {
     const colors = this.getCategoryColors(options.category)
-    const seed = this.hashString(options.title)
-    const angle = seed % 360
+	const seed = this.hashString(options.title)
     
     // Truncate title for display
     const displayTitle = options.title.length > 60 
@@ -369,7 +367,7 @@ export class SimpleThumbnailService {
       picsum: this.getPicsumImage(options.title),
       unsplash: this.getUnsplashImagePlaceholder(options.title, options.tags),
       category: this.getCategoryImage(options.category, options.title),
-      gradient: this.getGradientPlaceholder(options.category, options.source, options.title)
+		gradient: this.getGradientPlaceholder(options.category, options.source)
     }
   }
 }

@@ -2,6 +2,7 @@ import { SimpleThumbnailService } from "@/lib/content/simple-thumbnails";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { searchUnsplashImages } from "@/lib/unsplash";
 import { createClient } from "@supabase/supabase-js";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
 // Enable edge caching - cache responses for 5 minutes
@@ -30,12 +31,46 @@ function formatTimeAgo(dateString: string | null): string {
 	return date.toLocaleDateString();
 }
 
+type ArticleRecord = {
+	id: string;
+	title: string;
+	url: string;
+	source: string;
+	summary: string | null;
+	published_at: string | null;
+	created_at?: string | null;
+	tags: string[] | null;
+	image_url: string | null;
+};
+
+type IndustryMoveCacheRow = {
+	id: string;
+	category: string;
+	is_trending: boolean | null;
+	is_breaking: boolean | null;
+	priority_score: number | null;
+	display_order: number | null;
+	articles: ArticleRecord;
+};
+
+type CuratedNewsItem = {
+	id: string;
+	category: string;
+	text: string;
+	description: string;
+	time: string;
+	source: string;
+	link: string;
+	image: string;
+	isRSS: boolean;
+	trending: boolean;
+};
+
 // Helper function to generate dynamic thumbnail
 async function generateThumbnail(
-	article: any,
+	article: ArticleRecord,
 	category: string,
-	trending: boolean,
-	supabase: any,
+	supabase: SupabaseClient,
 ): Promise<string> {
 	// 1. Check if article already has a cached image_url
 	if (article.image_url && article.image_url.trim().length > 0) {
@@ -152,7 +187,7 @@ export async function GET(request: Request) {
 			error: cacheError,
 			count: cachedCount,
 		} = await supabase
-			.from("industry_moves_cache")
+			.from<IndustryMoveCacheRow>("industry_moves_cache")
 			.select(
 				`
         id,
@@ -172,7 +207,11 @@ export async function GET(request: Request) {
 			.order("display_order", { ascending: true })
 			.range(offset, offset + limit - 1);
 
-		let items: any[] = [];
+		if (cacheError) {
+			console.warn("Failed to fetch cached industry moves:", cacheError);
+		}
+
+		let items: CuratedNewsItem[] = [];
 		let totalCount = 0;
 
 		if (cachedData && cachedData.length > 0) {
@@ -184,7 +223,7 @@ export async function GET(request: Request) {
 
 			// Process items with async thumbnail generation
 			items = await Promise.all(
-				cachedData.map(async (item: any) => ({
+				cachedData.map(async (item) => ({
 					id: item.articles.id,
 					category: item.category,
 					text: item.articles.title,
@@ -196,11 +235,10 @@ export async function GET(request: Request) {
 					image: await generateThumbnail(
 						item.articles,
 						item.category,
-						item.is_trending,
 						supabase,
 					),
 					isRSS: true,
-					trending: item.is_trending || item.category === "trending",
+					trending: Boolean(item.is_trending) || item.category === "trending",
 				})),
 			);
 		} else {
@@ -212,7 +250,7 @@ export async function GET(request: Request) {
 				error: articlesError,
 				count: articlesCount,
 			} = await supabase
-				.from("articles")
+				.from<ArticleRecord>("articles")
 				.select(
 					"id, title, url, source, summary, published_at, tags, image_url",
 					{ count: "exact" },
@@ -230,7 +268,7 @@ export async function GET(request: Request) {
 			if (articles && articles.length > 0) {
 				// Simple categorization based on recency and keywords
 				items = await Promise.all(
-					articles.map(async (article: any, index: number) => {
+					articles.map(async (article) => {
 						const hoursOld =
 							(Date.now() -
 								new Date(
@@ -277,7 +315,6 @@ export async function GET(request: Request) {
 							image: await generateThumbnail(
 								article,
 								category,
-								trending,
 								supabase,
 							),
 							isRSS: true,

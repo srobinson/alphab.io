@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
+import type { LucideIcon } from "lucide-react";
 import {
     AlertCircle,
     BarChart3,
@@ -28,7 +30,7 @@ interface NewsItem {
 
 interface IndustryMove {
 	id: string;
-	icon: any;
+	icon: LucideIcon;
 	category: string;
 	title: string;
 	description: string;
@@ -60,6 +62,7 @@ export function IndustryMoves() {
 	const [loading, setLoading] = useState(true);
 	const [loadingMore, setLoadingMore] = useState(false);
 	const [imagesLoaded, setImagesLoaded] = useState<Set<string>>(new Set());
+	const [imageSources, setImageSources] = useState<Record<string, string>>({});
 	const [page, setPage] = useState(1);
 	const [hasMore, setHasMore] = useState(true);
 	const observerTarget = useRef<HTMLDivElement>(null);
@@ -77,7 +80,7 @@ export function IndustryMoves() {
 
 				// Convert API response to industry moves format
 				const curatedMoves: IndustryMove[] = data.items.map(
-					(item: NewsItem, index: number) => ({
+					(item: NewsItem) => ({
 						id: item.id,
 						icon: categoryIcons[item.category] || categoryIcons.default,
 						category: categoryNames[item.category] || item.category,
@@ -239,7 +242,7 @@ export function IndustryMoves() {
 		} finally {
 			setLoadingMore(false);
 		}
-	}, [page, loadingMore, hasMore, displayedMoves.length]);
+	}, [page, loadingMore, hasMore]);
 
 	// Intersection Observer for infinite scroll
 	useEffect(() => {
@@ -358,6 +361,7 @@ export function IndustryMoves() {
 						const isClickable = move.link && move.link !== "#";
 						const imageUrl =
 							move.image || getFallbackImage(move.category, move.title);
+						const resolvedImage = imageSources[move.id] ?? imageUrl;
 						// Use a unique key combining ID and index to ensure uniqueness
 						const uniqueKey = `${move.id}-${index}`;
 
@@ -381,21 +385,22 @@ export function IndustryMoves() {
 
 								{/* Image Section */}
 								<div className="relative w-full h-48 overflow-hidden bg-gray-200 dark:bg-gray-700">
-									<img
-										src={imageUrl}
+									<Image
+										src={resolvedImage}
 										alt={move.title}
-										className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-										loading="lazy"
-										onError={(e) => {
-											const target = e.target as HTMLImageElement;
-											if (target.src !== "/images/ai-head-design.webp") {
-												target.src = "/images/ai-head-design.webp";
-											}
-										}}
-										onLoad={(e) => {
-											const target = e.target as HTMLImageElement;
-											target.style.opacity = "1";
+										fill
+										className="object-cover transition-transform duration-300 hover:scale-110"
+										sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+										onLoadingComplete={() => {
 											setImagesLoaded((prev) => new Set(prev).add(move.id));
+										}}
+										onError={() => {
+											setImageSources((prev) => {
+												if (prev[move.id]) {
+													return prev;
+												}
+												return { ...prev, [move.id]: "/images/ai-head-design.webp" };
+											});
 										}}
 										style={{
 											opacity: imagesLoaded.has(move.id) ? 1 : 0,
@@ -469,7 +474,7 @@ export function IndustryMoves() {
 				{!hasMore && displayedMoves.length > 0 && (
 					<div className="text-center py-8">
 						<p className="text-gray-500 dark:text-gray-400">
-							You've reached the end of the latest updates
+							You&rsquo;ve reached the end of the latest updates
 						</p>
 					</div>
 				)}

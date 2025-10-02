@@ -2,7 +2,6 @@
 
 const fs = require('fs').promises;
 const path = require('path');
-const crypto = require('crypto');
 
 const SERPAPI_ENDPOINT = 'https://serpapi.com/search';
 
@@ -67,8 +66,7 @@ class BlogGenerator {
     const {
       topic,
       type = 'analysis', // analysis, tutorial, prediction, reality-check
-      style = 'analytical',
-      targetLength = 'medium' // short (800-1200), medium (1500-2500), long (3000-4000)
+      style = 'analytical'
     } = options;
 
     if (!topic) {
@@ -268,19 +266,49 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
 
     // Generate introduction with hook
     const intro = await this.generateIntroduction(outline.hook, outline.thesis);
-    sections.push({ type: 'introduction', content: intro });
+    sections.push({ type: 'introduction', content: this.cleanSectionContent(intro) });
 
     // Generate main sections
     for (const section of outline.sections) {
       const content = await this.generateSection(section, research);
-      sections.push({ type: 'section', title: section.title, content });
+      sections.push({ type: 'section', title: section.title, content: this.cleanSectionContent(content) });
     }
 
     // Generate conclusion
     const conclusion = await this.generateConclusion(outline.conclusion);
-    sections.push({ type: 'conclusion', content: conclusion });
+    sections.push({ type: 'conclusion', content: this.cleanSectionContent(conclusion) });
 
     return sections;
+  }
+
+  cleanSectionContent(content) {
+    if (typeof content !== 'string') {
+      return content;
+    }
+
+    const preambleRegexes = [
+      /^based on .*?here'?s the blog section:?$/i,
+      /^based on .*?here is the blog section:?$/i,
+      /^here'?s the blog section.*$/i,
+      /^here is the blog section.*$/i
+    ];
+
+    const isPreamble = (line) => {
+      const simplified = line.replace(/[\u2018\u2019]/g, "'").trim();
+      return preambleRegexes.some(regex => regex.test(simplified));
+    };
+
+    const lines = content.split(/\r?\n/);
+
+    while (lines.length > 0 && isPreamble(lines[0])) {
+      lines.shift();
+    }
+
+    while (lines.length > 0 && lines[0].trim() === '') {
+      lines.shift();
+    }
+
+    return lines.join('\n').replace(/^\s+/, '');
   }
 
   async generateIntroduction(hook, thesis) {

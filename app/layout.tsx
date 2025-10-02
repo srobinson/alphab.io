@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider"; // Make sure this p
 import ScrollToTop from "@/components/utils/scroll-to-top";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import { headers } from "next/headers";
 import type React from "react";
 import "./globals.css";
@@ -186,12 +187,14 @@ export default async function RootLayout({
 
 	return (
 		<html lang="en" suppressHydrationWarning>
-			{/* <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-      </head> */}
+			<head>
+				<Script
+					id="rade-structured-data"
+					type="application/ld+json"
+					strategy="beforeInteractive"
+					dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+				/>
+			</head>
 			<body className={inter.className}>
 				{process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
 					<GoogleAnalytics

@@ -99,7 +99,7 @@ export default function ContactPage() {
               data.error || resp.statusText,
             );
           }
-        } catch (subscriptionError) {
+        } catch (subscriptionError: unknown) {
           console.warn("Newsletter subscription failed:", subscriptionError);
         }
       }
@@ -111,9 +111,10 @@ export default function ContactPage() {
       // Reset form
       event.currentTarget.reset();
       setSubscribeToNewsletter(false);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Contact form error:", err);
-      setError(err.message || "Failed to send message. Please try again.");
+      const message = err instanceof Error ? err.message : "Failed to send message. Please try again.";
+      setError(message);
     } finally {
       setIsSubmitting(false);
     }
@@ -133,14 +134,14 @@ export default function ContactPage() {
         <motion.div className="text-center" variants={itemVariants}>
           <Mail className="mx-auto h-12 w-12 text-blue-500 dark:text-blue-500" />
           <h2 className="mt-6 text-3xl md:text-4xl font-black text-gray-900 dark:text-white">
-            LET'S{" "}
+            LET&rsquo;S{" "}
             <span className="text-blue-600 dark:text-blue-400">CONNECT</span>
           </h2>
           <p className="mt-3 text-lg text-gray-700 dark:text-gray-300">
             Have a project in mind, a question, or just want to explore the
             possibilities of AI?
             <br />
-            I'm here to listen and help you chart the course.
+            I&apos;m here to listen and help you chart the course.
           </p>
         </motion.div>
 
@@ -285,12 +286,12 @@ export default function ContactPage() {
                   Message Sent Successfully!
                 </h3>
                 <p className="text-green-700 dark:text-green-400 mb-4">
-                  Thank you for reaching out. I'll get back to you within 24
+                  Thank you for reaching out. I&rsquo;ll get back to you within 24
                   hours.
                 </p>
                 {subscribeToNewsletter && (
                   <p className="text-green-600 dark:text-green-400 text-sm">
-                    ✓ You've also been subscribed to our newsletter for AI
+                    ✓ You&rsquo;ve also been subscribed to our newsletter for AI
                     insights and updates.
                   </p>
                 )}

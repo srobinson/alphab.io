@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "./blog-background.css";
 
 export const metadata: Metadata = {
     title: "AI Tech Blog | Daily AI Insights & Technology Analysis",
@@ -53,5 +54,5 @@ export default function BlogLayout({
 }: {
     children: React.ReactNode
 }) {
-    return <div>{children}</div>;
+    return <div className="blog-background min-h-screen">{children}</div>;
 }

@@ -15,17 +15,6 @@ import Link from "next/link";
 
 export default function PricingPage() {
   // Animation variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
@@ -241,7 +230,7 @@ export default function PricingPage() {
                   </div>
                   <div className="text-right">
                     <div className="font-mono text-xl font-bold text-gray-900 dark:text-white">
-                      Let's Talk
+                      Let&rsquo;s Talk
                     </div>
                     <div className="text-sm text-gray-500 dark:text-gray-400">
                       Flexible arrangements
@@ -392,8 +381,8 @@ export default function PricingPage() {
             IN YOUR AI FUTURE?
           </h2>
           <p className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
-            Whether you're looking for a strategic consultation, implementation
-            support, or exploring a community collaboration, let's start the
+            Whether you&rsquo;re looking for a strategic consultation, implementation
+            support, or exploring a community collaboration, let&rsquo;s start the
             conversation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

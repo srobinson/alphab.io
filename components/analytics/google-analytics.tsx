@@ -57,7 +57,7 @@ export const trackPageView = (url: string, title?: string) => {
 // Extend the Window interface to include gtag and dataLayer
 declare global {
     interface Window {
-        gtag: (...args: any[]) => void;
-        dataLayer: any[];
+        gtag?: (...args: unknown[]) => void;
+        dataLayer?: unknown[];
     }
 }

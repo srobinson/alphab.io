@@ -8,12 +8,44 @@ export const runtime = "nodejs";
 // This API route can be called to send notifications about new contacts
 // You can integrate this with email services like Resend, SendGrid, or Nodemailer
 
+type NotifyRequestBody = {
+  contactId: string;
+  notificationType?: string;
+};
+
+type ContactRow = {
+  id: string;
+  name: string | null;
+  email: string | null;
+  message: string | null;
+  source: string | null;
+  subscribed_to_newsletter: boolean | null;
+  created_at: string | null;
+};
+
+type ContactNotificationData = {
+  id: string;
+  name: string;
+  email: string;
+  message: string;
+  source: string;
+  subscribed_to_newsletter: boolean;
+  created_at: string;
+};
+
 export async function POST(request: NextRequest) {
   console.log("[notify-contact] API called");
   try {
-    const requestBody = await request.json();
+    const requestBody = (await request.json()) as Partial<NotifyRequestBody>;
 
-    const { contactId, notificationType = "new_contact" } = requestBody;
+    const contactId =
+      typeof requestBody.contactId === "string"
+        ? requestBody.contactId.trim()
+        : "";
+    const notificationType =
+      typeof requestBody.notificationType === "string"
+        ? requestBody.notificationType
+        : "new_contact";
 
     if (!contactId) {
       return NextResponse.json(
@@ -32,7 +64,7 @@ export async function POST(request: NextRequest) {
 
     // Get contact details
     const { data: contact, error: contactError } = await supabase
-      .from("contacts")
+      .from<ContactRow>("contacts")
       .select("*")
       .eq("id", contactId)
       .single();
@@ -45,6 +77,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    const contactDetails: ContactNotificationData = {
+      id: contact.id,
+      name: contact.name ?? "Unknown",
+      email: contact.email ?? "unknown@alphab.io",
+      message: contact.message ?? "",
+      source: contact.source ?? "unknown",
+      subscribed_to_newsletter: Boolean(contact.subscribed_to_newsletter),
+      created_at: contact.created_at ?? new Date().toISOString(),
+    };
+
     // Log the notification activity
     await supabase
       .from("user_activity_log")
@@ -54,8 +96,8 @@ export async function POST(request: NextRequest) {
         activity_data: {
           contact_id: contactId,
           notification_type: notificationType,
-          contact_email: contact.email,
-          contact_name: contact.name,
+          contact_email: contactDetails.email,
+          contact_name: contactDetails.name,
           timestamp: new Date().toISOString(),
         },
       });
@@ -63,20 +105,20 @@ export async function POST(request: NextRequest) {
     const notificationData = {
       type: notificationType,
       contact: {
-        id: contact.id,
-        name: contact.name,
-        email: contact.email,
-        message: contact.message,
-        source: contact.source,
-        subscribed_to_newsletter: contact.subscribed_to_newsletter,
-        created_at: contact.created_at,
+        id: contactDetails.id,
+        name: contactDetails.name,
+        email: contactDetails.email,
+        message: contactDetails.message,
+        source: contactDetails.source,
+        subscribed_to_newsletter: contactDetails.subscribed_to_newsletter,
+        created_at: contactDetails.created_at,
       },
       emailData: {
         from: "noreply@alphab.io", // Your verified domain
         to: process.env.ADMIN_EMAIL || "admin@alphab.io", // Your admin email
-        subject: `New Contact Form Submission from ${contact.name}`,
-        html: generateEmailHTML(contact),
-        text: generateEmailText(contact),
+        subject: `New Contact Form Submission from ${contactDetails.name}`,
+        html: generateEmailHTML(contactDetails),
+        text: generateEmailText(contactDetails),
       },
     };
 
@@ -88,7 +130,7 @@ export async function POST(request: NextRequest) {
       message: "Notification processed",
       data: notificationData,
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("[notify-contact] Notification error:", error);
     return NextResponse.json(
       { error: "Failed to process notification" },
@@ -97,7 +139,11 @@ export async function POST(request: NextRequest) {
   }
 }
 
-function generateEmailHTML(contact: any): string {
+function generateEmailHTML(contact: ContactNotificationData): string {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://alphab.io";
+  const formattedMessage = contact.message
+    ? contact.message.replace(/\n/g, "<br>")
+    : "";
   return `
     <!DOCTYPE html>
     <html>
@@ -151,14 +197,12 @@ function generateEmailHTML(contact: any): string {
                 
                 <div class="field">
                     <div class="label">Message:</div>
-                    <div class="message">${
-    contact.message.replace(/\n/g, "<br>")
-  }</div>
+                    <div class="message">${formattedMessage}</div>
                 </div>
             </div>
             
             <div class="footer">
-                <p>You can manage this contact and reply directly from your <a href="${process.env.NEXT_PUBLIC_SITE_URL}/admin/contacts">admin dashboard</a>.</p>
+                <p>You can manage this contact and reply directly from your <a href="${siteUrl}/admin/contacts">admin dashboard</a>.</p>
                 <p>Contact ID: ${contact.id}</p>
             </div>
         </div>
@@ -167,7 +211,8 @@ function generateEmailHTML(contact: any): string {
   `;
 }
 
-function generateEmailText(contact: any): string {
+function generateEmailText(contact: ContactNotificationData): string {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://alphab.io";
   return `
 New Contact Form Submission
 
@@ -182,7 +227,7 @@ ${contact.message}
 
 ---
 Contact ID: ${contact.id}
-Manage contacts: ${process.env.NEXT_PUBLIC_SITE_URL}/admin/contacts
+Manage contacts: ${siteUrl}/admin/contacts
   `.trim();
 }
 

@@ -5,6 +5,16 @@
 
 const DEFAULT_MODEL = process.env.OPENROUTER_MODEL || 'anthropic/claude-3.5-sonnet'
 
+type OpenRouterChoiceMessage = {
+  content?: string | null
+}
+
+type OpenRouterResponse = {
+  choices?: Array<{
+    message?: OpenRouterChoiceMessage
+  }>
+}
+
 type SummarizeOptions = {
   model?: string
   maxTokens?: number
@@ -52,10 +62,10 @@ export async function summarize(text: string, opts: SummarizeOptions = {}): Prom
       console.warn('[summarize] OpenRouter non-OK:', res.status, txt)
       return null
     }
-    const json: any = await res.json()
-    const content: string | undefined = json?.choices?.[0]?.message?.content
+    const json = (await res.json()) as OpenRouterResponse
+    const content = json.choices?.[0]?.message?.content
     return typeof content === 'string' ? content.trim() : null
-  } catch (e) {
+  } catch (e: unknown) {
     console.warn('[summarize] error:', e)
     return null
   }
@@ -85,9 +95,9 @@ export async function summarizeNew(text: string, opts: SummarizeOptions = {}): P
     }),
   })
   if (!res.ok) throw new Error(`OpenRouter summarize error: ${res.status}`)
-  const data = await res.json()
-  const content = data.choices?.[0]?.message?.content || ''
-  return String(content).trim()
+  const data = (await res.json()) as OpenRouterResponse
+  const content = data.choices?.[0]?.message?.content ?? ''
+  return String(content ?? '').trim()
 }
 
 // Strip HTML tags for model input trimming
@@ -153,16 +163,20 @@ export async function summarizeInfo(input: SummarizeInfoInput): Promise<Summariz
     }),
   })
   if (!res.ok) throw new Error(`OpenRouter summarizeInfo error: ${res.status}`)
-  const data = await res.json()
-  const content = data.choices?.[0]?.message?.content || '{}'
+  const data = (await res.json()) as OpenRouterResponse
+  const content = data.choices?.[0]?.message?.content ?? '{}'
 
   try {
-    const parsed = JSON.parse(content)
+    const parsed = JSON.parse(content) as Partial<SummarizeInfoOutput>
     const summary = typeof parsed.summary === 'string' ? parsed.summary.trim() : ''
-    const tags = Array.isArray(parsed.tags) ? parsed.tags.filter((t: any) => typeof t === 'string' && t.trim()).map((t: string) => t.trim()) : []
+    const tags = Array.isArray(parsed.tags)
+      ? parsed.tags
+          .filter((tag): tag is string => typeof tag === 'string' && tag.trim().length > 0)
+          .map((tag) => tag.trim())
+      : []
     const sourceLabel = typeof parsed.sourceLabel === 'string' ? parsed.sourceLabel.trim() : undefined
     return { summary, tags, sourceLabel }
-  } catch (e) {
+  } catch {
     // Fallback: try to use plain text
     return { summary: String(content).trim(), tags: [], sourceLabel: undefined }
   }

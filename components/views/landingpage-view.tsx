@@ -40,8 +40,9 @@ const Index = () => {
 
 			setIsSubmitted(true);
 			setEmail("");
-		} catch (err: any) {
-			setError(err.message || "Failed to subscribe. Please try again.");
+		} catch (err: unknown) {
+			const message = err instanceof Error ? err.message : "Failed to subscribe. Please try again.";
+			setError(message);
 		} finally {
 			setIsSubmitting(false);
 		}
@@ -71,7 +72,7 @@ const Index = () => {
 		{
 			title: "TECH ACCELERATOR",
 			subtitle:
-				"Rapid prototyping and technology acceleration services. Bringing tomorrow's innovations to today's challenges.",
+				"Rapid prototyping and technology acceleration services. Bringing tomorrow&rsquo;s innovations to today&rsquo;s challenges.",
 			status: "WIP",
 			color: "from-green-400 via-cyan-400 to-blue-500",
 			accent: "green",
@@ -237,20 +238,20 @@ const Index = () => {
                             <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center">
                                 <div className="space-y-4 sm:space-y-6">
                                     <div className="space-y-3 sm:space-y-4 text-gray-300 leading-relaxed">
-                                        <p className="text-sm sm:text-base lg:text-lg">
-                                            <span className="text-white font-semibold">AlphaB</span> is where <span className="text-blue-400">AI becomes our favorite toy</span>.
-                                            I'm a technologist who believes that the coolest tech should be
-                                            <span className="text-purple-400"> fun to play with, not just functional</span>.
-                                        </p>
+						<p className="text-sm sm:text-base lg:text-lg">
+							<span className="text-white font-semibold">AlphaB</span> is where <span className="text-blue-400">AI becomes our favorite toy</span>.
+							I&rsquo;m a technologist who believes that the coolest tech should be
+							<span className="text-purple-400"> fun to play with, not just functional</span>.
+						</p>
                                         <p className="text-sm sm:text-base">
                                             From AI consulting through <span className="text-red-400 font-semibold">RADE</span> to wild
                                             experiments at <span className="text-blue-400 font-semibold">Awake Careful Ant</span>, we bring the toys out to play
                                             and have the time of our lives doing it.
                                         </p>
-                                        <p className="text-sm sm:text-base">
-                                            This isn't about pushing boundaries-it's a <span className="text-yellow-400">digital playground</span>
-                                            where AI tools become the most entertaining toys you've ever seen.
-                                        </p>
+						<p className="text-sm sm:text-base">
+							This isn&rsquo;t about pushing boundaries—it&rsquo;s a <span className="text-yellow-400">digital playground</span>
+							where AI tools become the most entertaining toys you&rsquo;ve ever seen.
+						</p>
                                     </div>
                                 </div>
 
@@ -260,7 +261,7 @@ const Index = () => {
                                             <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400 mt-1 flex-shrink-0" />
                                             <div>
                                                 <h3 className="text-white font-semibold mb-1 text-sm sm:text-base">Play First</h3>
-                                                <p className="text-gray-400 text-xs sm:text-sm">Making AI tools so fun you'll forget you're working</p>
+								<p className="text-gray-400 text-xs sm:text-sm">Making AI tools so fun you&rsquo;ll forget you&rsquo;re working</p>
                                             </div>
                                         </div>
                                         <div className="flex items-start space-x-3 sm:space-x-4 p-3 sm:p-4 border border-white/10 bg-gradient-to-r from-purple-500/5 to-transparent">
@@ -351,7 +352,7 @@ const Index = () => {
 										</span>
 									</div>
 									<p className="text-gray-400 text-sm sm:text-base px-4 sm:px-0">
-										You're now part of the AlphaB innovation network. Expect
+										You&rsquo;re now part of the AlphaB innovation network. Expect
 										amazing things in your inbox soon.
 									</p>
 								</div>

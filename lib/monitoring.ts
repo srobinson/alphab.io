@@ -4,14 +4,14 @@
 export type LogLevel = 'debug' | 'info' | 'warn' | 'error'
 
 export interface LogContext {
-  [key: string]: any
+	[key: string]: unknown
 }
 
 export interface PerformanceMetric {
-  name: string
-  duration: number
-  success: boolean
-  metadata?: Record<string, any>
+	name: string
+	duration: number
+	success: boolean
+	metadata?: Record<string, unknown>
 }
 
 class Monitor {
@@ -89,11 +89,11 @@ class Monitor {
   /**
    * Helper to time async operations
    */
-  async timeAsync<T>(
-    name: string,
-    operation: () => Promise<T>,
-    metadata?: Record<string, any>
-  ): Promise<T> {
+	async timeAsync<T>(
+		name: string,
+		operation: () => Promise<T>,
+		metadata?: Record<string, unknown>
+	): Promise<T> {
     const startTime = Date.now()
     let success = false
     
@@ -216,18 +216,18 @@ export const monitor = new Monitor()
  * Decorator to automatically track function performance
  */
 export function tracked(name?: string) {
-  return function (
-    target: any,
-    propertyKey: string,
-    descriptor: PropertyDescriptor
-  ) {
-    const originalMethod = descriptor.value
-    const metricName = name || `${target.constructor.name}.${propertyKey}`
-    
-    descriptor.value = async function (...args: any[]) {
-      return monitor.timeAsync(metricName, () => originalMethod.apply(this, args))
-    }
-    
-    return descriptor
-  }
+	return function (
+		target: object,
+		propertyKey: string,
+		descriptor: PropertyDescriptor
+	) {
+		const originalMethod = descriptor.value as (...fnArgs: unknown[]) => unknown
+		const metricName = name || `${target.constructor.name}.${propertyKey}`
+		
+		descriptor.value = async function (...args: unknown[]) {
+			return monitor.timeAsync(metricName, async () => originalMethod.apply(this, args))
+		}
+		
+		return descriptor
+	}
 }

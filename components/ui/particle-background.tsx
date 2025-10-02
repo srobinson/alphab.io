@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useMemo, useRef } from "react"
 import { motion } from "framer-motion"
 
 interface Particle {
@@ -27,13 +27,16 @@ export function ParticleBackground({ particleCount = 50, className = "" }: Parti
   const mouseRef = useRef({ x: 0, y: 0 })
 
   // Particle colors - subtle blues and whites
-  const colors = [
-    "rgba(59, 130, 246, 0.3)", // blue-500
-    "rgba(96, 165, 250, 0.2)", // blue-400
-    "rgba(147, 197, 253, 0.15)", // blue-300
-    "rgba(255, 255, 255, 0.1)", // white
-    "rgba(255, 255, 255, 0.05)", // very subtle white
-  ]
+  const colors = useMemo(
+    () => [
+      "rgba(59, 130, 246, 0.3)", // blue-500
+      "rgba(96, 165, 250, 0.2)", // blue-400
+      "rgba(147, 197, 253, 0.15)", // blue-300
+      "rgba(255, 255, 255, 0.1)", // white
+      "rgba(255, 255, 255, 0.05)", // very subtle white
+    ],
+    [],
+  )
 
   // Initialize particles
   useEffect(() => {
@@ -65,7 +68,7 @@ export function ParticleBackground({ particleCount = 50, className = "" }: Parti
 
     container.addEventListener("mousemove", handleMouseMove)
     return () => container.removeEventListener("mousemove", handleMouseMove)
-  }, [particleCount])
+  }, [colors, particleCount])
 
   // Animation loop
   useEffect(() => {

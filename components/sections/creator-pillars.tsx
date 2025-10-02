@@ -106,10 +106,10 @@ export function CreatorPillars() {
                 viewport={{ once: true, amount: 0.2 }}
             >
                 <h2 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-gray-900 dark:text-gray-100 mb-6">
-                    Here's what I know
+                    Here&rsquo;s what I know
                 </h2>
                 <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 max-w-4xl mx-auto leading-relaxed">
-                    I've spent years in the trenches, building systems that
+                    I&rsquo;ve spent years in the trenches, building systems that
                     actually work. Not theory. Not hype. Just proven methods
                     that turn content into results.
                 </p>

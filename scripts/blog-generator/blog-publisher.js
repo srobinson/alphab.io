@@ -10,14 +10,12 @@ const PUBLIC_CONTENT_DIR = path.join(__dirname, '../../public/content/blog');
 class BlogPublisher {
   constructor() {
     this.draftsPath = path.join(__dirname, '../../app/blog_generated/drafts');
-    this.postsPath = path.join(__dirname, '../../app/blog_generated/posts');
     this.contentPath = CONTENT_DIR;
     this.publicContentPath = PUBLIC_CONTENT_DIR;
   }
 
   async initialize() {
     await Promise.all([
-      fs.mkdir(this.postsPath, { recursive: true }),
       fs.mkdir(this.contentPath, { recursive: true }),
       fs.mkdir(this.publicContentPath, { recursive: true })
     ]);
