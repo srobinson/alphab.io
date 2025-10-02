@@ -67,7 +67,7 @@ export async function fetchMetadata(url: string): Promise<PageMeta> {
     if (!res.ok) throw new Error(`status ${res.status}`)
     html = await res.text()
   } catch (e: any) {
-    console.warn('[ingest] fetchMetadata failed:', e?.message)
+    console.warn('[ingest] fetchMetadata failed:', url, e)
     return { title: null, description: null, publishedAt: null, contentHtml: null }
   }
 

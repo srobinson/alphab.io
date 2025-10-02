@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "ingest": "tsx scripts/ingest.ts"
+    "ingest": "tsx scripts/ingest.ts",
+    "test-automation": "tsx scripts/test-automation.ts",
+    "content": "tsx scripts/content.ts",
+    "test-thumbnails": "tsx scripts/test-thumbnails.ts"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
@@ -61,6 +64,7 @@
     "react-resizable-panels": "^2.1.7",
     "recharts": "2.15.0",
     "resend": "^6.0.1",
+    "rss-parser": "^3.13.0",
     "sonner": "^1.7.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
