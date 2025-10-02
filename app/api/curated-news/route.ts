@@ -412,6 +412,12 @@ export async function GET(request: Request) {
 						trending: false,
 					},
 				],
+				pagination: {
+					page: 1,
+					limit: 12,
+					total: 1,
+					hasMore: false,
+				},
 				error: true,
 				message: "Using fallback data due to system initialization",
 				timestamp: new Date().toISOString(),

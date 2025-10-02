@@ -97,6 +97,15 @@ export function IndustryMoves() {
 				setDisplayedMoves(curatedMoves);
 				setHasMore(data.pagination?.hasMore ?? false);
 				setLoading(false);
+				
+				// Debug logging
+				console.log('🎯 Industry Moves loaded:', {
+					itemsLoaded: curatedMoves.length,
+					hasMore: data.pagination?.hasMore,
+					totalAvailable: data.pagination?.total,
+					isError: data.error,
+					currentPage: page
+				});
 			} catch (error) {
 				console.error("Failed to fetch curated news:", error);
 				// Fallback to sample data if API fails
@@ -202,16 +211,29 @@ export function IndustryMoves() {
 
 	// Load more items from API
 	const loadMore = useCallback(async () => {
-		if (loadingMore || !hasMore) return;
+		console.log('🚀 loadMore called', { loadingMore, hasMore, page });
+		
+		if (loadingMore || !hasMore) {
+			console.log('⏸️ loadMore aborted', { loadingMore, hasMore });
+			return;
+		}
 
 		setLoadingMore(true);
 
 		try {
 			const nextPage = page + 1;
+			console.log(`📡 Fetching page ${nextPage}...`);
+			
 			const response = await fetch(
 				`/api/curated-news?page=${nextPage}&limit=${ITEMS_PER_PAGE}`,
 			);
 			const data = await response.json();
+
+			console.log('📦 API response:', {
+				itemsReceived: data.items?.length,
+				hasMore: data.pagination?.hasMore,
+				total: data.pagination?.total
+			});
 
 			// Convert API response to industry moves format
 			const newMoves: IndustryMove[] = data.items.map((item: NewsItem) => ({
@@ -226,18 +248,25 @@ export function IndustryMoves() {
 				image: item.image,
 			}));
 
-			// Filter out duplicates by checking existing IDs
 			setDisplayedMoves((prev) => {
 				const existingIds = new Set(prev.map((move) => move.id));
 				const uniqueNewMoves = newMoves.filter(
 					(move) => !existingIds.has(move.id),
 				);
+				
+				console.log('📥 Loaded more items:', {
+					newItems: uniqueNewMoves.length,
+					totalNow: prev.length + uniqueNewMoves.length,
+					hasMore: data.pagination?.hasMore,
+					page: nextPage
+				});
+				
 				return [...prev, ...uniqueNewMoves];
 			});
 			setPage(nextPage);
 			setHasMore(data.pagination?.hasMore ?? false);
 		} catch (error) {
-			console.error("Failed to load more items:", error);
+			console.error("❌ Failed to load more items:", error);
 			setHasMore(false);
 		} finally {
 			setLoadingMore(false);
@@ -246,9 +275,33 @@ export function IndustryMoves() {
 
 	// Intersection Observer for infinite scroll
 	useEffect(() => {
+		// Don't set up observer until we have items loaded
+		if (loading || !observerTarget.current) {
+			console.log('⏸️ Skipping observer setup - waiting for DOM', { 
+				loading, 
+				hasRef: !!observerTarget.current 
+			});
+			return;
+		}
+		
+		console.log('🔭 Setting up IntersectionObserver', { 
+			hasMore, 
+			loadingMore, 
+			page,
+			observerTargetExists: !!observerTarget.current 
+		});
+		
 		const observer = new IntersectionObserver(
 			(entries) => {
+				console.log('👁️ Observer callback triggered', {
+					isIntersecting: entries[0].isIntersecting,
+					hasMore,
+					loadingMore,
+					willLoadMore: entries[0].isIntersecting && hasMore && !loadingMore
+				});
+				
 				if (entries[0].isIntersecting && hasMore && !loadingMore) {
+					console.log('✅ Calling loadMore()');
 					loadMore();
 				}
 			},
@@ -260,15 +313,17 @@ export function IndustryMoves() {
 
 		const currentTarget = observerTarget.current;
 		if (currentTarget) {
+			console.log('👀 Starting to observe target element');
 			observer.observe(currentTarget);
 		}
 
 		return () => {
 			if (currentTarget) {
+				console.log('🛑 Cleaning up observer');
 				observer.unobserve(currentTarget);
 			}
 		};
-	}, [loadMore, hasMore, loadingMore, page]);
+	}, [loadMore, hasMore, loadingMore, page, loading]);
 
 	// Masonry breakpoint configuration
 	const breakpointColumnsObj = {
@@ -467,8 +522,20 @@ export function IndustryMoves() {
 					</div>
 				)}
 
-				{/* Intersection observer target */}
-				<div ref={observerTarget} className="h-10" />
+				{/* Intersection observer target - with debug visual */}
+				<div 
+					ref={observerTarget} 
+					className="h-20 flex items-center justify-center border-2 border-dashed border-blue-300 dark:border-blue-700 my-8 rounded"
+					style={{ minHeight: '80px' }}
+				>
+					<div className="text-center text-sm text-gray-500 dark:text-gray-400">
+						<div>Scroll Trigger Zone</div>
+						<div className="text-xs">
+							{hasMore ? '✅ More content available' : '🏁 No more content'}
+							{loadingMore && ' | ⏳ Loading...'}
+						</div>
+					</div>
+				</div>
 
 				{/* End of content message */}
 				{!hasMore && displayedMoves.length > 0 && (
