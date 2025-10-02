@@ -419,8 +419,24 @@ Generate:
 4. Internal linking suggestions
 5. Schema markup data
 
-Use these title formats as inspiration:
-${this.voiceFramework.seoStrategy.titleFormats.join(', ')}
+TITLE REQUIREMENTS:
+- The title MUST closely reflect the original topic: "${topic}"
+- Optimize for SEO while staying true to the user's intended focus
+- If the topic is already a good title, use it with minor refinements
+- AVOID overused patterns like "The Hidden Truth About..." or "The Surprising Secret..."
+- AVOID adding "in ${CURRENT_YEAR}" or "in 2025" unless it's essential to the topic
+- Create unique, specific titles that stand out
+- Vary your approach - don't repeat similar structures
+- Keep titles timeless when possible
+
+Consider these diverse title styles (pick ONE that fits best):
+1. Direct value: "${topic}" (if already strong)
+2. Question format: "Should [Audience] [Action] About [Topic]?"
+3. Impact-focused: "What [Topic] Means for [Industry/Audience]"
+4. Practical guide: "How to [Action] in the Age of [Technology]"
+5. Contrarian take: "Why Everyone's Wrong About [Topic]"
+6. Data-driven: "[Number] Key Insights About [Topic]"
+7. News angle: "Why [Recent Development] Changes [Industry]"
 
 Ensure titles, descriptions, and schema references reflect the current year (${CURRENT_YEAR}) unless citing historical events.
 

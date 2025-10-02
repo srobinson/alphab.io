@@ -1,6 +1,24 @@
 {
   "posts": [
     {
+      "slug": "the-hidden-truth-about-ai-adoption-in-2025-leaders-take-note",
+      "title": "What Recent AI Developments Mean for Business Leaders in 2025",
+      "description": "While 78% of businesses use AI, most struggle with strategic deployment. Discover how to bridge the AI adoption-impact gap and drive real business outcomes in 2025.",
+      "date": "2025-10-02",
+      "publishedAt": "2025-10-02T13:42:28.252Z",
+      "category": "AI Analysis",
+      "tags": [
+        "AI business adoption 2025",
+        "strategic AI deployment",
+        "AI business outcomes",
+        "enterprise AI implementation",
+        "AI transformation strategy"
+      ],
+      "readTime": "12 min read",
+      "generated": true,
+      "draftId": "what-recent-ai-developments-mean-for-bus-342819"
+    },
+    {
       "slug": "the-hidden-truth-about-ais-42-project-failure-rate-in-2025",
       "title": "The Hidden Truth About AI's 42% Project Failure Rate in 2025",
       "description": "Explore why 42% of AI projects fail despite $500B market projections. Uncover the critical success factors behind AI implementation and why investments don't guarantee results.",
@@ -19,6 +37,6 @@
       "draftId": "the-other-side-of-the-ai-hype-211355"
     }
   ],
-  "lastUpdated": "2025-10-02T10:52:26.941Z",
-  "totalPosts": 1
+  "lastUpdated": "2025-10-02T13:42:28.254Z",
+  "totalPosts": 2
 }
