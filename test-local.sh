@@ -36,16 +36,11 @@ check_server() {
 echo ""
 echo "🔍 1. Testing RSS Sources (No Database Required)"
 echo "================================================"
-NEXT_PUBLIC_SUPABASE_URL=https://smttbnogqnqmlnfmkgcc.supabase.co \
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtdHRibm9ncW5xbWxuZm1rZ2NjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0ODk4OTkyMiwiZXhwIjoyMDY0NTY1OTIyfQ.v-Wj2W1aZvMYXMq9kJB79Nkq61LIj2wYxRmQicmLVj0 \
 pnpm content test
 
 echo ""
 echo "🗄️  2. Testing Database Connection"
 echo "==================================="
-NEXT_PUBLIC_SUPABASE_URL=https://smttbnogqnqmlnfmkgcc.supabase.co \
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtdHRibm9ncW5xbWxuZm1rZ2NjIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc0ODk4OTkyMiwiZXhwIjoyMDY0NTY1OTIyfQ.v-Wj2W1aZvMYXMq9kJB79Nkq61LIj2wYxRmQicmLVj0 \
-CRON_SECRET=test123 \
 pnpm content status
 
 echo ""

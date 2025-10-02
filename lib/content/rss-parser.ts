@@ -41,7 +41,11 @@ export class RSSParser {
     })
   }
 
-  async fetchFromSource(source: ContentSource): Promise<FetchResult> {
+  async fetchFromSource(
+    source: ContentSource,
+    attemptNumber: number = 1,
+    maxRetries: number = 3
+  ): Promise<FetchResult> {
     const startTime = Date.now()
     
     try {
@@ -49,8 +53,12 @@ export class RSSParser {
         throw new Error('No RSS URL provided')
       }
 
+      console.log(`[${source.name}] Attempt ${attemptNumber}/${maxRetries}`)
+
       const feed = await this.parser.parseURL(source.rssUrl)
       const items = this.processFeedItems(feed, source)
+      
+      console.log(`[${source.name}] ✓ Success: ${items.length} items fetched`)
       
       return {
         source,
@@ -59,13 +67,26 @@ export class RSSParser {
         duration: Date.now() - startTime
       }
     } catch (error) {
-      console.error(`Error fetching RSS feed for ${source.name}:`, error)
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error'
+      console.warn(`[${source.name}] ✗ Attempt ${attemptNumber}/${maxRetries} failed:`, errorMessage)
+      
+      // Retry logic with exponential backoff
+      if (attemptNumber < maxRetries) {
+        const delay = 1000 * Math.pow(2, attemptNumber - 1) // 1s, 2s, 4s
+        console.log(`[${source.name}] Retrying in ${delay}ms...`)
+        
+        await new Promise(resolve => setTimeout(resolve, delay))
+        return this.fetchFromSource(source, attemptNumber + 1, maxRetries)
+      }
+      
+      // All retries exhausted
+      console.error(`[${source.name}] ✗ All ${maxRetries} attempts failed`)
       
       return {
         source,
         items: [],
         success: false,
-        error: error instanceof Error ? error.message : 'Unknown error',
+        error: `Failed after ${maxRetries} attempts: ${errorMessage}`,
         duration: Date.now() - startTime
       }
     }

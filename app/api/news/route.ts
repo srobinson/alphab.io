@@ -8,6 +8,11 @@ import {
   rssFeedSources,
 } from "@/lib/news-feeds";
 import { NextResponse } from "next/server";
+import { checkRateLimit } from '@/lib/rate-limit';
+
+// Required for rate limiting
+export const dynamic = 'force-dynamic'
+export const revalidate = 1800 // Cache for 30 minutes
 
 // Simple RSS parser function
 async function parseRSSFeed(
@@ -129,8 +134,28 @@ async function parseRSSFeed(
   }
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    // Rate limiting - 30 requests per minute per IP (more restrictive due to RSS fetching)
+    const rateLimitCheck = checkRateLimit(request, {
+      limit: 30,
+      windowMs: 60 * 1000
+    })
+    
+    if (!rateLimitCheck.allowed) {
+      console.warn('Rate limit exceeded for news API')
+      return NextResponse.json(
+        { 
+          error: 'Rate limit exceeded. Please try again later.',
+          retryAfter: rateLimitCheck.headers['Retry-After']
+        },
+        { 
+          status: 429,
+          headers: rateLimitCheck.headers
+        }
+      )
+    }
+
     // Fetch from multiple sources in parallel
     const [rssResults, newsApiResults] = await Promise.allSettled([
       // Fetch RSS feeds
@@ -234,6 +259,11 @@ export async function GET() {
       apiItemsCount,
       brandItemsCount,
       totalItems: finalItems.length,
+    }, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=1800, stale-while-revalidate=3600', // 30 min cache
+        ...rateLimitCheck.headers
+      }
     });
   } catch (error) {
     console.error("Error in news API:", error);

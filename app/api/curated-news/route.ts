@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
 import { createClient } from '@supabase/supabase-js'
 import { SimpleThumbnailService } from '@/lib/content/simple-thumbnails'
+import { checkRateLimit } from '@/lib/rate-limit'
 
+// Enable edge caching - cache responses for 5 minutes
 export const revalidate = 300; // 5 minutes
+export const runtime = 'nodejs' // Ensure we can use all Node.js features
+export const dynamic = 'force-dynamic' // Required for rate limiting
 
 // Helper function to format time ago
 function formatTimeAgo(dateString: string | null): string {
@@ -35,8 +39,40 @@ function generateThumbnail(article: any, category: string, trending: boolean): s
   })
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    // Rate limiting - 60 requests per minute per IP
+    const rateLimitCheck = checkRateLimit(request, {
+      limit: 60,
+      windowMs: 60 * 1000
+    })
+    
+    // Add cache headers for CDN/browser caching
+    const headers = {
+      'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600',
+      'CDN-Cache-Control': 'public, s-maxage=300',
+      'Vercel-CDN-Cache-Control': 'public, s-maxage=300',
+      ...rateLimitCheck.headers
+    }
+    
+    // Check if rate limit exceeded
+    if (!rateLimitCheck.allowed) {
+      console.warn('Rate limit exceeded for curated-news API')
+      return NextResponse.json(
+        { 
+          error: 'Rate limit exceeded. Please try again later.',
+          retryAfter: rateLimitCheck.headers['Retry-After']
+        },
+        { 
+          status: 429,
+          headers: {
+            ...headers,
+            'Retry-After': rateLimitCheck.headers['Retry-After']
+          }
+        }
+      )
+    }
+
     // Initialize Supabase client
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
     const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
@@ -67,7 +103,7 @@ export async function GET() {
       .order('display_order', { ascending: true })
       .limit(12)
     
-    let items = []
+    let items: any[] = []
     
     if (cachedData && cachedData.length > 0) {
       // Use cached data
@@ -182,6 +218,8 @@ export async function GET() {
       items,
       cached: cachedData && cachedData.length > 0,
       timestamp: new Date().toISOString()
+    }, {
+      headers
     });
     
   } catch (error) {
@@ -210,6 +248,10 @@ export async function GET() {
       error: true,
       message: "Using fallback data due to system initialization",
       timestamp: new Date().toISOString()
+    }, {
+      headers: {
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=120' // Shorter cache for errors
+      }
     });
   }
 }
