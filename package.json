@@ -10,7 +10,13 @@
     "ingest": "tsx scripts/ingest.ts",
     "test-automation": "tsx scripts/test-automation.ts",
     "content": "tsx scripts/content.ts",
-    "test-thumbnails": "tsx scripts/test-thumbnails.ts"
+    "test-thumbnails": "tsx scripts/test-thumbnails.ts",
+    "blog:analyze": "node scripts/blog-generator/blog-analyzer.js",
+    "blog:generate": "node scripts/blog-generator/blog-generator.js",
+    "blog:publish": "node scripts/blog-generator/blog-publisher.js",
+    "blog:list": "node scripts/blog-generator/blog-publisher.js list",
+    "blog:preview": "node scripts/blog-generator/blog-publisher.js preview",
+    "blog:unpublish": "node scripts/blog-generator/blog-publisher.js unpublish"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
@@ -50,10 +56,13 @@
     "clsx": "^2.1.1",
     "cmdk": "1.0.4",
     "date-fns": "4.1.0",
+    "dotenv": "^17.2.3",
     "embla-carousel-react": "8.5.1",
     "framer-motion": "latest",
+    "gray-matter": "^4.0.3",
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
+    "markdown-it": "^14.1.0",
     "next": "15.2.4",
     "next-themes": "latest",
     "react": "^19",
@@ -73,9 +82,11 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "eslint-config-next": "15.5.4",
     "postcss": "^8",
     "tailwindcss": "^3.4.17",
     "tsx": "^4.20.3",

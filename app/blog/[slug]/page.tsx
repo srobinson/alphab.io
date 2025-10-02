@@ -3,64 +3,117 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, ArrowLeft, Share2, Twitter, Linkedin } from "lucide-react"
+import { promises as fs } from "fs"
+import path from "path"
+import matter from "gray-matter"
+import MarkdownIt from "markdown-it"
 
-// This would typically fetch from your CMS or database
-const getBlogPost = async (slug: string) => {
-    const posts = [
-        {
-            slug: "multimodal-ai-gpt4v-analysis",
-            title: "The Rise of Multimodal AI: Analyzing GPT-4V and Beyond",
-            excerpt: "Deep dive into the latest multimodal AI capabilities and their implications for business applications.",
-            content: `
-        <h2>Introduction to Multimodal AI</h2>
-        <p>Multimodal AI represents a significant leap forward in artificial intelligence capabilities, combining text, image, and other data modalities to create more sophisticated and versatile AI systems.</p>
-        
-        <h2>GPT-4V: A Game Changer</h2>
-        <p>OpenAI's GPT-4V (Vision) has demonstrated remarkable capabilities in understanding and reasoning about visual content alongside text, opening new possibilities for AI applications.</p>
-        
-        <h2>Business Implications</h2>
-        <p>The integration of multimodal AI into business processes can revolutionize customer service, content creation, and data analysis workflows.</p>
-        
-        <h2>Future Outlook</h2>
-        <p>As multimodal AI continues to evolve, we can expect even more sophisticated applications that blur the lines between different types of data and reasoning.</p>
-      `,
-            category: "AI Research",
-            readTime: "8 min read",
-            publishedAt: "2024-01-15T10:00:00Z",
-            author: "RADE AI Solutions",
-            tags: ["Multimodal AI", "GPT-4V", "Computer Vision", "AI Research"],
-        },
-        {
-            slug: "rag-enterprise-ai-future",
-            title: "Retrieval-Augmented Generation: The Future of Enterprise AI",
-            excerpt: "How RAG is transforming enterprise AI applications and why it matters for your business.",
-            content: `
-        <h2>Understanding RAG</h2>
-        <p>Retrieval-Augmented Generation (RAG) combines the power of large language models with external knowledge retrieval, creating more accurate and contextually relevant AI responses.</p>
-        
-        <h2>Enterprise Applications</h2>
-        <p>RAG is particularly valuable for enterprise applications where accuracy and up-to-date information are critical for business operations.</p>
-        
-        <h2>Implementation Strategies</h2>
-        <p>Successful RAG implementation requires careful consideration of data architecture, retrieval mechanisms, and integration with existing systems.</p>
-      `,
-            category: "Enterprise AI",
-            readTime: "6 min read",
-            publishedAt: "2024-01-14T10:00:00Z",
-            author: "RADE AI Solutions",
-            tags: ["RAG", "Enterprise AI", "Knowledge Retrieval", "LLM"],
-        },
-    ]
+const CONTENT_DIR = path.join(process.cwd(), "content/blog")
 
-    return posts.find(post => post.slug === slug)
+const markdown = new MarkdownIt({ html: true, linkify: true, typographer: true })
+
+type BlogPost = {
+    slug: string
+    title: string
+    description: string
+    category: string
+    date: string
+    publishedAt?: string
+    readTime: string
+    author: string
+    tags: string[]
+    seoKeywords: string[]
+    generated: boolean
+    contentHtml: string
+    wordCount: number
 }
 
 type Props = {
     params: { slug: string }
 }
 
+type MetadataShape = {
+    title?: string
+    description?: string
+    category?: string
+    date?: string
+    publishedAt?: string
+    readTime?: string
+    author?: string
+    tags?: unknown
+    seo?: {
+        keywords?: unknown
+    }
+    generated?: boolean
+}
+
+const isObject = (value: unknown): value is Record<string, unknown> =>
+    typeof value === "object" && value !== null
+
+const toStringArray = (value: unknown): string[] =>
+    Array.isArray(value) ? value.filter((entry): entry is string => typeof entry === "string") : []
+
+async function loadPost(slug: string): Promise<BlogPost | null> {
+    const mdxPath = path.join(CONTENT_DIR, `${slug}.mdx`)
+    const metaPath = path.join(CONTENT_DIR, `${slug}.meta.json`)
+
+    let rawMdx: string
+    try {
+        rawMdx = await fs.readFile(mdxPath, "utf8")
+    } catch {
+        return null
+    }
+
+    const parsed = matter(rawMdx)
+    let metadata: MetadataShape = {}
+
+    if (isObject(parsed.data)) {
+        metadata = { ...metadata, ...(parsed.data as MetadataShape) }
+    }
+
+    try {
+        const rawMeta = await fs.readFile(metaPath, "utf8")
+        const parsedMeta = JSON.parse(rawMeta)
+        if (isObject(parsedMeta)) {
+            metadata = { ...metadata, ...(parsedMeta as MetadataShape) }
+        }
+    } catch {
+        // Optional metadata file
+    }
+
+    const contentHtml = markdown.render(parsed.content)
+
+    const wordCount = (parsed.content.match(/\w+/g) || []).length
+    const readTime = metadata.readTime || `${Math.max(1, Math.ceil(wordCount / 200))} min read`
+
+    const tags = toStringArray(metadata.tags)
+    const seoKeywords = toStringArray(metadata.seo?.keywords)
+    const author = typeof metadata.author === "string" ? metadata.author : "RADE AI Solutions"
+    const category = typeof metadata.category === "string" ? metadata.category : "AI Insights"
+    const title = typeof metadata.title === "string" ? metadata.title : slug
+    const description = typeof metadata.description === "string" ? metadata.description : ""
+    const date = typeof metadata.date === "string" ? metadata.date : new Date().toISOString()
+    const publishedAt = typeof metadata.publishedAt === "string" ? metadata.publishedAt : metadata.date
+
+    return {
+        slug,
+        title,
+        description,
+        category,
+        date,
+        publishedAt: publishedAt || date,
+        readTime,
+        author,
+        tags,
+        seoKeywords,
+        generated: Boolean(metadata.generated),
+        contentHtml,
+        wordCount,
+    }
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-    const post = await getBlogPost(params.slug)
+    const post = await loadPost(params.slug)
 
     if (!post) {
         return {
@@ -68,17 +121,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         }
     }
 
+    const published = post.publishedAt || post.date
+
     return {
         title: `${post.title} | RADE AI Blog`,
-        description: post.excerpt,
-        keywords: post.tags,
+        description: post.description,
+        keywords: post.seoKeywords.length > 0 ? post.seoKeywords : post.tags,
         authors: [{ name: post.author }],
         openGraph: {
             title: post.title,
-            description: post.excerpt,
+            description: post.description,
             url: `https://alphab.io/blog/${post.slug}`,
             type: "article",
-            publishedTime: post.publishedAt,
+            publishedTime: published,
             authors: [post.author],
             tags: post.tags,
             images: [
@@ -93,7 +148,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         twitter: {
             card: "summary_large_image",
             title: post.title,
-            description: post.excerpt,
+            description: post.description,
             images: [`/images/blog/${post.slug}-twitter.jpg`],
         },
         alternates: {
@@ -103,45 +158,47 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-    const post = await getBlogPost(params.slug)
+    const post = await loadPost(params.slug)
 
     if (!post) {
         notFound()
     }
 
+    const published = post.publishedAt || post.date
+
     const articleStructuredData = {
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         "headline": post.title,
-        "description": post.excerpt,
+        "description": post.description,
         "image": `https://alphab.io/images/blog/${post.slug}-og.jpg`,
         "author": {
             "@type": "Person",
             "name": post.author,
-            "url": "https://alphab.io"
+            "url": "https://alphab.io",
         },
         "publisher": {
             "@type": "Organization",
             "name": "RADE AI Solutions",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://alphab.io/images/rade-logo.svg"
-            }
+                "url": "https://alphab.io/images/rade-logo.svg",
+            },
         },
-        "datePublished": post.publishedAt,
-        "dateModified": post.publishedAt,
+        "datePublished": published,
+        "dateModified": published,
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": `https://alphab.io/blog/${post.slug}`
+            "@id": `https://alphab.io/blog/${post.slug}`,
         },
-        "keywords": post.tags.join(", "),
+        "keywords": post.seoKeywords.length > 0 ? post.seoKeywords.join(", ") : post.tags.join(", "),
         "articleSection": post.category,
-        "wordCount": post.content.split(' ').length,
+        "wordCount": post.wordCount,
         "timeRequired": post.readTime,
     }
 
     const shareUrl = `https://alphab.io/blog/${post.slug}`
-    const shareText = `${post.title} - ${post.excerpt}`
+    const shareText = `${post.title} - ${post.description}`
 
     return (
         <>
@@ -169,7 +226,7 @@ export default async function BlogPostPage({ params }: Props) {
                         </span>
                         <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
                             <Calendar className="w-4 h-4 mr-1" />
-                            {new Date(post.publishedAt).toLocaleDateString()}
+                            {new Date(published).toLocaleDateString()}
                         </div>
                         <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
                             <Clock className="w-4 h-4 mr-1" />
@@ -182,7 +239,7 @@ export default async function BlogPostPage({ params }: Props) {
                     </h1>
 
                     <p className="text-xl text-gray-700 dark:text-gray-300 leading-relaxed mb-8">
-                        {post.excerpt}
+                        {post.description}
                     </p>
 
                     <div className="flex items-center justify-between border-t border-gray-200 dark:border-gray-700 pt-6">
@@ -194,6 +251,20 @@ export default async function BlogPostPage({ params }: Props) {
 
                         <div className="flex items-center gap-2">
                             <span className="text-sm text-gray-600 dark:text-gray-400 mr-2">Share:</span>
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                asChild
+                            >
+                                <a
+                                    href={shareUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label="Copy link"
+                                >
+                                    <Share2 className="w-4 h-4" />
+                                </a>
+                            </Button>
                             <Button
                                 variant="outline"
                                 size="sm"
@@ -229,24 +300,26 @@ export default async function BlogPostPage({ params }: Props) {
                 {/* Article Content */}
                 <main className="container mx-auto px-6 pb-16 max-w-4xl">
                     <div
-                        className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-blue-600 dark:prose-a:text-blue-400"
-                        dangerouslySetInnerHTML={{ __html: post.content }}
+                        className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-gray-900 dark:prose-headings:text-white prose-h2:mt-10 prose-h3:mt-8 prose-p:leading-relaxed prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-li:marker:text-blue-500 prose-a:text-blue-600 dark:prose-a:text-blue-400"
+                        dangerouslySetInnerHTML={{ __html: post.contentHtml }}
                     />
 
                     {/* Tags */}
-                    <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Tags</h3>
-                        <div className="flex flex-wrap gap-2">
-                            {post.tags.map((tag) => (
-                                <span
-                                    key={tag}
-                                    className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm rounded-full"
-                                >
-                                    {tag}
-                                </span>
-                            ))}
+                    {post.tags.length > 0 && (
+                        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+                            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Tags</h3>
+                            <div className="flex flex-wrap gap-2">
+                                {post.tags.map((tag) => (
+                                    <span
+                                        key={tag}
+                                        className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm rounded-full"
+                                    >
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </main>
 
                 {/* Related Posts CTA */}

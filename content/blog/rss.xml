@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RADE AI Blog</title>
+    <link>https://alphab.io/blog</link>
+    <description>AI insights and analysis from RADE AI Solutions</description>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 02 Oct 2025 10:09:04 GMT</lastBuildDate>
+    <atom:link href="https://alphab.io/blog/rss.xml" rel="self" type="application/rss+xml"/>
+    
+    <item>
+      <title>The Hidden Truth About AI Agents: Hype vs. Reality in 2024</title>
+      <link>https://alphab.io/blog/the-hidden-truth-about-ai-agents-hype-vs-reality-in-2024</link>
+      <description>Uncover the real-world limitations and capabilities of AI agents in business. Get data-driven insights on workplace automation and AI implementation challenges.</description>
+      <pubDate>Thu, 02 Oct 2025 09:48:27 GMT</pubDate>
+      <guid>https://alphab.io/blog/the-hidden-truth-about-ai-agents-hype-vs-reality-in-2024</guid>
+      <category>Reality Check</category>
+    </item>
+  </channel>
+</rss>

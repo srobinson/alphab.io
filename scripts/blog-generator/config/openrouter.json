@@ -1,0 +1,29 @@
+{
+  "defaultModel": "anthropic/claude-3.5-sonnet",
+  "fallbackModel": "openai/gpt-4-turbo",
+  "models": {
+    "analysis": {
+      "model": "anthropic/claude-3.5-sonnet",
+      "temperature": 0.3,
+      "maxTokens": 4000,
+      "description": "Best for analytical content and research synthesis"
+    },
+    "creative": {
+      "model": "openai/gpt-4-turbo",
+      "temperature": 0.7,
+      "maxTokens": 3000,
+      "description": "Good for creative angles and engaging introductions"
+    },
+    "technical": {
+      "model": "anthropic/claude-3.5-sonnet",
+      "temperature": 0.2,
+      "maxTokens": 4000,
+      "description": "Best for technical accuracy and detailed explanations"
+    }
+  },
+  "costTracking": {
+    "enabled": true,
+    "alertThreshold": 10.00,
+    "monthlyBudget": 50.00
+  }
+}

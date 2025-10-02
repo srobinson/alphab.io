@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Calendar, Clock, ArrowRight, Rss } from "lucide-react"
 import { motion } from "framer-motion"
 import { AnimatedUnderlineText, PREDEFINED_UNDERLINE_PATHS } from "@/components/ui/animated_underline_text"
+import { useState, useEffect } from "react"
 
 // Animation variants
 const sectionVariants = {
@@ -38,61 +39,51 @@ const insightsLetters = "INSIGHTS".split("")
 const insightsBaseDelay = 0.2
 const insightsLetterPulseVariants = createLetterPulseVariants(insightsBaseDelay, 1.1)
 
-// Placeholder blog posts - replace with your actual blog data
-const featuredPosts = [
-    {
-        id: "1",
-        title: "The Rise of Multimodal AI: Analyzing GPT-4V and Beyond",
-        excerpt: "Deep dive into the latest multimodal AI capabilities and their implications for business applications.",
-        category: "AI Research",
-        readTime: "8 min read",
-        publishedAt: "2024-01-15",
-        slug: "multimodal-ai-gpt4v-analysis",
-        featured: true,
-    },
-    {
-        id: "2",
-        title: "Retrieval-Augmented Generation: The Future of Enterprise AI",
-        excerpt: "How RAG is transforming enterprise AI applications and why it matters for your business.",
-        category: "Enterprise AI",
-        readTime: "6 min read",
-        publishedAt: "2024-01-14",
-        slug: "rag-enterprise-ai-future",
-        featured: true,
-    },
-]
-
-const recentPosts = [
-    {
-        id: "3",
-        title: "Anthropic's Constitutional AI: A New Paradigm for AI Safety",
-        excerpt: "Exploring Anthropic's approach to AI alignment and what it means for responsible AI development.",
-        category: "AI Safety",
-        readTime: "7 min read",
-        publishedAt: "2024-01-13",
-        slug: "anthropic-constitutional-ai-safety",
-    },
-    {
-        id: "4",
-        title: "Vector Databases: The Infrastructure Behind Modern AI",
-        excerpt: "Understanding the role of vector databases in powering semantic search and AI applications.",
-        category: "AI Infrastructure",
-        readTime: "5 min read",
-        publishedAt: "2024-01-12",
-        slug: "vector-databases-ai-infrastructure",
-    },
-    {
-        id: "5",
-        title: "Fine-tuning vs RAG: Choosing the Right Approach for Your AI Project",
-        excerpt: "A comprehensive comparison of fine-tuning and RAG approaches for customizing AI models.",
-        category: "AI Development",
-        readTime: "9 min read",
-        publishedAt: "2024-01-11",
-        slug: "fine-tuning-vs-rag-comparison",
-    },
-]
+type BlogPost = {
+    slug: string
+    title: string
+    description: string
+    date: string
+    publishedAt?: string
+    category: string
+    tags: string[]
+    readTime?: string
+    generated?: boolean
+}
 
 export default function BlogPage() {
+    // Blog posts will be loaded from generated content
+    const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+
+    useEffect(() => {
+        // Load blog posts from generated content
+        const loadBlogPosts = async () => {
+            try {
+                const response = await fetch('/api/blog/index')
+                if (!response.ok) {
+                    throw new Error(`Request failed with status ${response.status}`)
+                }
+                const data = await response.json()
+                setBlogPosts((data.posts as BlogPost[]) || [])
+                setError(null)
+            } catch (error) {
+                console.error('Failed to load blog posts:', error);
+                // Fallback to placeholder data if needed
+                setBlogPosts([])
+                setError('Unable to load blog posts right now. Please check back soon.')
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        loadBlogPosts()
+    }, [])
+
+    const featuredPosts = blogPosts.filter(post => post.category === 'Reality Check' || post.generated).slice(0, 2);
+    const recentPosts = blogPosts.slice(0, 5);
+    const showStateCard = (loading && blogPosts.length === 0) || Boolean(error) || (!loading && !error && blogPosts.length === 0);
     const blogStructuredData = {
         "@context": "https://schema.org",
         "@type": "Blog",
@@ -109,12 +100,12 @@ export default function BlogPage() {
             "name": "RADE AI Solutions",
             "url": "https://alphab.io"
         },
-        "blogPost": [...featuredPosts, ...recentPosts].map(post => ({
+        "blogPost": blogPosts.map(post => ({
             "@type": "BlogPosting",
             "headline": post.title,
-            "description": post.excerpt,
+            "description": post.description,
             "url": `https://alphab.io/blog/${post.slug}`,
-            "datePublished": post.publishedAt,
+            "datePublished": post.publishedAt || post.date,
             "author": {
                 "@type": "Person",
                 "name": "RADE AI Solutions"
@@ -241,8 +232,25 @@ export default function BlogPage() {
                     </div>
                 </section>
 
+                {showStateCard && (
+                    <section className="container mx-auto px-6 pt-12 pb-4 max-w-6xl">
+                        <div className="rounded-xl border border-dashed border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-gray-900/40 p-8 text-center">
+                            {loading && (
+                                <p className="text-lg text-gray-600 dark:text-gray-300">Loading the latest insights...</p>
+                            )}
+                            {!loading && error && (
+                                <p className="text-lg text-red-600 dark:text-red-400">{error}</p>
+                            )}
+                            {!loading && !error && blogPosts.length === 0 && (
+                                <p className="text-lg text-gray-600 dark:text-gray-300">Fresh content is being generated. Check back shortly.</p>
+                            )}
+                        </div>
+                    </section>
+                )}
+
                 {/* Featured Posts */}
-                <section className="container mx-auto px-6 pb-16 pt-10 ptmax-w-6xl">
+                {featuredPosts.length > 0 && (
+                <section className="container mx-auto px-6 pb-16 pt-10 max-w-6xl">
                     <motion.h2
                         className="text-3xl font-black text-gray-900 dark:text-white mb-8"
                         initial={{ opacity: 0, y: 20 }}
@@ -255,7 +263,7 @@ export default function BlogPage() {
                     <div className="grid md:grid-cols-2 gap-8 mb-16">
                         {featuredPosts.map((post, index) => (
                             <motion.article
-                                key={post.id}
+                                key={post.slug}
                                 className="group bg-gray-50 dark:bg-gray-900/50 p-8 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700/60 transition-all duration-200 hover:shadow-xl dark:hover:shadow-blue-500/20 hover:scale-[1.02]"
                                 initial="hidden"
                                 whileInView="visible"
@@ -269,11 +277,11 @@ export default function BlogPage() {
                                     </span>
                                     <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
                                         <Calendar className="w-4 h-4 mr-1" />
-                                        {new Date(post.publishedAt).toLocaleDateString()}
+                                        {new Date(post.publishedAt || post.date).toLocaleDateString()}
                                     </div>
                                     <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
                                         <Clock className="w-4 h-4 mr-1" />
-                                        {post.readTime}
+                                        {post.readTime || '—'}
                                     </div>
                                 </div>
                                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -282,7 +290,7 @@ export default function BlogPage() {
                                     </Link>
                                 </h3>
                                 <p className="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
-                                    {post.excerpt}
+                                    {post.description}
                                 </p>
                                 <Link
                                     href={`/blog/${post.slug}`}
@@ -295,8 +303,10 @@ export default function BlogPage() {
                         ))}
                     </div>
                 </section>
+                )}
 
                 {/* Recent Posts */}
+                {recentPosts.length > 0 && (
                 <section className="container mx-auto px-6 pb-16 max-w-6xl">
                     <motion.h2
                         className="text-3xl font-black text-gray-900 dark:text-white mb-8"
@@ -310,7 +320,7 @@ export default function BlogPage() {
                     <div className="grid gap-6">
                         {recentPosts.map((post, index) => (
                             <motion.article
-                                key={post.id}
+                                key={post.slug}
                                 className="group bg-gray-50 dark:bg-gray-900/50 p-6 rounded-lg border border-gray-200 dark:border-gray-700/60 transition-all duration-200 hover:shadow-lg dark:hover:shadow-blue-500/10 hover:border-blue-400 dark:hover:border-blue-500"
                                 initial="hidden"
                                 whileInView="visible"
@@ -326,11 +336,11 @@ export default function BlogPage() {
                                             </span>
                                             <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
                                                 <Calendar className="w-3 h-3 mr-1" />
-                                                {new Date(post.publishedAt).toLocaleDateString()}
+                                                {new Date(post.publishedAt || post.date).toLocaleDateString()}
                                             </div>
                                             <div className="flex items-center text-gray-500 dark:text-gray-400 text-sm">
                                                 <Clock className="w-3 h-3 mr-1" />
-                                                {post.readTime}
+                                                {post.readTime || '—'}
                                             </div>
                                         </div>
                                         <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -339,7 +349,7 @@ export default function BlogPage() {
                                             </Link>
                                         </h3>
                                         <p className="text-gray-700 dark:text-gray-300">
-                                            {post.excerpt}
+                                            {post.description}
                                         </p>
                                     </div>
                                     <Link
@@ -354,6 +364,7 @@ export default function BlogPage() {
                         ))}
                     </div>
                 </section>
+                )}
 
                 {/* Newsletter CTA */}
                 <motion.section

@@ -1,0 +1,64 @@
+{
+  "brandVoice": {
+    "persona": "AI Industry Analyst & Technical Strategist",
+    "perspective": "Experienced professional who bridges technical depth with business strategy",
+    "tone": {
+      "primary": "Analytical yet accessible",
+      "secondary": "Data-driven with healthy skepticism",
+      "avoid": "Overly promotional, buzzword-heavy, superficial"
+    }
+  },
+  "writingStyle": {
+    "structure": {
+      "hook": "Start with a provocative question, surprising statistic, or contrarian observation",
+      "thesis": "Clear, defensible position backed by evidence",
+      "body": "Logical progression with data, examples, and expert insights",
+      "conclusion": "Actionable insights and clear next steps"
+    },
+    "language": {
+      "vocabulary": "Technical when necessary, but always explained",
+      "sentenceLength": "Mix of short punchy statements and detailed explanations",
+      "transitions": ["However, the reality is more nuanced", "But here's what the data actually shows", "The key insight here is", "This matters because"]
+    }
+  },
+  "contentPillars": [
+    {
+      "name": "Reality Check",
+      "description": "Separating AI hype from genuine breakthroughs",
+      "keywords": ["reality", "evidence", "actual capabilities", "limitations"]
+    },
+    {
+      "name": "Business Impact",
+      "description": "How AI developments translate to business value",
+      "keywords": ["ROI", "implementation", "practical applications", "market dynamics"]
+    },
+    {
+      "name": "Technical Deep Dive",
+      "description": "In-depth analysis of AI technologies and methodologies",
+      "keywords": ["architecture", "algorithms", "performance", "benchmarks"]
+    },
+    {
+      "name": "Future Forecast",
+      "description": "Data-driven predictions about AI evolution",
+      "keywords": ["trends", "trajectory", "implications", "timeline"]
+    }
+  ],
+  "signaturePhrases": [
+    "The data tells a different story",
+    "Here's what most analyses miss",
+    "The real breakthrough isn't what you think",
+    "Let's look at the actual numbers",
+    "This changes everything for",
+    "The practical implications are clear"
+  ],
+  "seoStrategy": {
+    "titleFormats": [
+      "Why [Technology] Will/Won't [Prediction] in [Timeframe]",
+      "The [Surprising/Hidden] Truth About [AI Trend]",
+      "How [Company/Technology] is Quietly [Changing/Disrupting] [Industry]",
+      "[Number] Insights About [AI Development] That [Industry] Leaders Must Know"
+    ],
+    "metaDescriptionTemplate": "Data-driven analysis of {topic}. Discover {key_insight} and {actionable_outcome} based on {evidence_type}.",
+    "keywordStrategy": "Long-tail, question-based, problem-solving focused"
+  }
+}
