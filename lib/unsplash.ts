@@ -17,6 +17,15 @@ interface UnsplashSearchResponse {
   results: UnsplashImage[]
 }
 
+const UNSPLASH_CACHE_TTL_MS = 1000 * 60 * 60 * 6; // 6 hours
+const unsplashCache = new Map<
+  string,
+  { value: string | null; expiresAt: number }
+>();
+const unsplashInFlight = new Map<string, Promise<string | null>>();
+
+const normalizeQuery = (query: string) => query.trim().toLowerCase();
+
 /**
  * Search for images on Unsplash
  */
@@ -25,6 +34,12 @@ export async function searchUnsplashImages(
   perPage: number = 1
 ): Promise<string | null> {
   const accessKey = process.env.UNSPLASH_ACCESS_KEY
+  const normalizedQuery = normalizeQuery(query)
+  const cacheKey = `${normalizedQuery}:${perPage}`
+
+  if (!normalizedQuery) {
+    return null
+  }
 
   if (!accessKey) {
     console.warn('Unsplash API key not configured')
@@ -32,39 +47,78 @@ export async function searchUnsplashImages(
   }
 
   try {
-    console.log(`🖼️  Unsplash API call: searching for "${query}"`)
-    const url = new URL('https://api.unsplash.com/search/photos')
-    url.searchParams.set('query', query)
-    url.searchParams.set('per_page', perPage.toString())
-    url.searchParams.set('orientation', 'landscape')
+    const now = Date.now()
+    const cached = unsplashCache.get(cacheKey)
+    if (cached && cached.expiresAt > now) {
+      if (cached.value) {
+        console.log(
+          `♻️  Unsplash cache hit for "${normalizedQuery}" (expires ${new Date(
+            cached.expiresAt
+          ).toISOString()})`
+        )
+      }
+      return cached.value
+    }
 
-    const response = await fetch(url.toString(), {
-      headers: {
-        Authorization: `Client-ID ${accessKey}`,
-      },
-      next: { revalidate: 3600 }, // Cache for 1 hour
-    })
+    if (unsplashInFlight.has(cacheKey)) {
+      return unsplashInFlight.get(cacheKey) ?? null
+    }
 
-    if (!response.ok) {
-      console.error(`Unsplash API error: ${response.status}`)
+    const requestPromise = (async () => {
+      console.log(`🖼️  Unsplash API call: searching for "${query}"`)
+      const url = new URL('https://api.unsplash.com/search/photos')
+      url.searchParams.set('query', normalizedQuery)
+      url.searchParams.set('per_page', perPage.toString())
+      url.searchParams.set('orientation', 'landscape')
+
+      const response = await fetch(url.toString(), {
+        headers: {
+          Authorization: `Client-ID ${accessKey}`,
+        },
+        cache: 'no-store',
+      })
+
+      if (!response.ok) {
+        console.error(`Unsplash API error: ${response.status}`)
+        return null
+      }
+
+      const data: UnsplashSearchResponse = await response.json()
+
+      if (data.results && data.results.length > 0) {
+        const resolvedUrl = new URL(data.results[0].urls.small)
+        resolvedUrl.searchParams.set('w', '400')
+        resolvedUrl.searchParams.set('h', '200')
+        resolvedUrl.searchParams.set('fit', 'crop')
+        const imageUrl = resolvedUrl.toString()
+        console.log(`✅ Unsplash API success: found image for "${query}"`)
+        unsplashCache.set(cacheKey, {
+          value: imageUrl,
+          expiresAt: Date.now() + UNSPLASH_CACHE_TTL_MS,
+        })
+        return imageUrl
+      }
+
+      console.log(`❌ Unsplash API: no results for "${query}"`)
+      unsplashCache.set(cacheKey, {
+        value: null,
+        expiresAt: Date.now() + UNSPLASH_CACHE_TTL_MS,
+      })
       return null
+    })()
+
+    unsplashInFlight.set(cacheKey, requestPromise)
+    try {
+      return await requestPromise
+    } finally {
+      unsplashInFlight.delete(cacheKey)
     }
-
-    const data: UnsplashSearchResponse = await response.json()
-
-    if (data.results && data.results.length > 0) {
-      // Return the small image URL (400x300)
-      // Add UTM parameters for Unsplash attribution
-      const imageUrl = data.results[0].urls.small
-      const urlWithAttribution = `${imageUrl}&w=400&h=200&fit=crop`
-      console.log(`✅ Unsplash API success: found image for "${query}"`)
-      return urlWithAttribution
-    }
-
-    console.log(`❌ Unsplash API: no results for "${query}"`)
-    return null
   } catch (error) {
     console.error('Failed to fetch Unsplash image:', error)
+    unsplashCache.set(cacheKey, {
+      value: null,
+      expiresAt: Date.now() + 5 * 60 * 1000,
+    })
     return null
   }
 }

@@ -9,8 +9,8 @@
 
 import { RSSParser } from "../lib/content/rss-parser";
 import {
-  CONTENT_SOURCES,
-  getActiveSourcesByPriority,
+	CONTENT_SOURCES,
+	getActiveSourcesByPriority,
 } from "../lib/content/sources";
 import { ContentSyncService } from "../lib/content/sync-service";
 

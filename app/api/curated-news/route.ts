@@ -89,6 +89,7 @@ async function generateThumbnail(
 		category: category,
 		tags: article.tags || [],
 		url: article.url,
+		imageUrl: article.image_url || undefined,
 	});
 
 	console.log(
@@ -109,7 +110,7 @@ async function generateThumbnail(
 	}
 
 	// 4. Cache the image URL in the database for future requests
-	if (article.id) {
+	if (article.id && (!article.image_url || article.image_url !== finalImageUrl)) {
 		try {
 			await supabase
 				.from("articles")
