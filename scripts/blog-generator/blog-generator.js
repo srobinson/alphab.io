@@ -4,6 +4,34 @@ const fs = require('fs').promises;
 const path = require('path');
 const crypto = require('crypto');
 
+const SERPAPI_ENDPOINT = 'https://serpapi.com/search';
+
+const extractJSON = (text) => {
+  if (typeof text !== 'string') {
+    throw new Error('Expected JSON string response');
+  }
+
+  try {
+    return JSON.parse(text);
+  } catch (error) {
+    const firstBrace = text.indexOf('{');
+    const lastBrace = text.lastIndexOf('}');
+    if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+      const candidate = text.slice(firstBrace, lastBrace + 1);
+      return JSON.parse(candidate);
+    }
+    throw error;
+  }
+};
+
+const { date: CURRENT_DATE, year: CURRENT_YEAR } = (() => {
+  const now = new Date();
+  return {
+    date: now.toISOString().split('T')[0],
+    year: now.getFullYear(),
+  };
+})();
+
 // Load environment variables
 require('dotenv').config({ path: path.join(__dirname, '../../.env.local') });
 
@@ -16,6 +44,7 @@ class BlogGenerator {
     this.voiceFramework = null;
     this.openrouterConfig = null;
     this.costTracker = { totalSpent: 0, requestCount: 0 };
+    this.webSearchApiKey = process.env.SERPAPI_API_KEY;
   }
 
   async initialize() {
@@ -84,10 +113,11 @@ class BlogGenerator {
     console.log('🔍 Conducting research...');
 
     const researchPrompt = this.buildResearchPrompt(topic, type);
-    const research = await this.callOpenRouter(researchPrompt, 'analysis');
+    const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
+    const research = await this.callOpenRouter(researchPrompt, 'analysis', { tools });
 
     try {
-      return JSON.parse(research);
+      return extractJSON(research);
     } catch (error) {
       console.error('❌ Failed to parse research JSON:', error.message);
       console.log('Raw response:', research.substring(0, 200) + '...');
@@ -96,7 +126,7 @@ class BlogGenerator {
   }
 
   buildResearchPrompt(topic, type) {
-    return `You are an expert AI industry analyst. Research the topic "${topic}" for a ${type} blog post.
+    return `You are an expert AI industry analyst. Today's date is ${CURRENT_DATE}. Research the topic "${topic}" for a ${type} blog post using the most recent credible information (prioritize sources from ${CURRENT_YEAR} or the previous 12 months unless historical context is required).
 
 Your analysis should be comprehensive and include:
 
@@ -173,10 +203,11 @@ Return your research as this exact JSON structure:
     console.log('📋 Creating outline...');
 
     const outlinePrompt = this.buildOutlinePrompt(research, type, style);
-    const outline = await this.callOpenRouter(outlinePrompt, 'creative');
+    const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
+    const outline = await this.callOpenRouter(outlinePrompt, 'creative', { tools });
 
     try {
-      return JSON.parse(outline);
+      return extractJSON(outline);
     } catch (error) {
       console.error('❌ Failed to parse outline JSON:', error.message);
       console.log('Raw response:', outline.substring(0, 200) + '...');
@@ -190,7 +221,7 @@ Return your research as this exact JSON structure:
       p.name.toLowerCase().includes(type.toLowerCase())
     ) || this.voiceFramework.contentPillars[0];
 
-    return `Create a compelling blog post outline using this research data and voice framework.
+    return `Create a compelling blog post outline using this research data and voice framework. Assume today's date is ${CURRENT_DATE}; ensure references to "now" or "today" reflect ${CURRENT_YEAR}.
 
 RESEARCH DATA:
 ${JSON.stringify(research, null, 2)}
@@ -268,11 +299,12 @@ Write 200-300 words that:
 2. Provide necessary context
 3. Present the thesis clearly
 4. Preview what's coming
-5. Use data or specific examples to build credibility
+5. Use data or specific examples to build credibility, referencing the correct year (${CURRENT_YEAR}) for current statistics
 
 Make it conversational but authoritative, skeptical but not cynical.`;
 
-    return await this.callOpenRouter(prompt, 'creative');
+    const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
+    return await this.callOpenRouter(prompt, 'creative', { tools });
   }
 
   async generateSection(sectionOutline, research) {
@@ -298,9 +330,12 @@ Write 400-600 words that:
 4. Address potential objections
 5. Connect to broader implications
 
+Use current data points where possible and state the accurate year (${CURRENT_YEAR}) when describing present-day adoption, revenue, or market stats.
+
 Transition naturally to: ${sectionOutline.transition}`;
 
-    return await this.callOpenRouter(prompt, 'analysis');
+    const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
+    return await this.callOpenRouter(prompt, 'analysis', { tools });
   }
 
   async generateConclusion(conclusionOutline) {
@@ -316,9 +351,12 @@ Write 200-250 words that:
 3. End with a memorable final thought
 4. Include a specific call to action
 
+Ensure the takeaways feel timely for leaders planning in ${CURRENT_YEAR}.
+
 Use signature phrases: ${this.voiceFramework.signaturePhrases.slice(-2).join(', ')}`;
 
-    return await this.callOpenRouter(prompt, 'creative');
+    const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
+    return await this.callOpenRouter(prompt, 'creative', { tools });
   }
 
   async generateSEOMetadata(topic, sections, type) {
@@ -341,6 +379,8 @@ Generate:
 Use these title formats as inspiration:
 ${this.voiceFramework.seoStrategy.titleFormats.join(', ')}
 
+Ensure titles, descriptions, and schema references reflect the current year (${CURRENT_YEAR}) unless citing historical events.
+
 IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end with }.
 
 {
@@ -355,10 +395,11 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
   }
 }`;
 
-    const seoData = await this.callOpenRouter(prompt, 'analysis');
+    const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
+    const seoData = await this.callOpenRouter(prompt, 'analysis', { tools });
 
     try {
-      return JSON.parse(seoData);
+      return extractJSON(seoData);
     } catch (error) {
       console.error('❌ Failed to parse SEO JSON:', error.message);
       console.log('Raw response:', seoData.substring(0, 200) + '...');
@@ -448,7 +489,7 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
     return `${sanitized}-${timestamp}`;
   }
 
-  async callOpenRouter(prompt, modelType = 'analysis') {
+  async callOpenRouter(prompt, modelType = 'analysis', options = {}) {
     const apiKey = process.env.OPENROUTER_API_KEY;
 
     if (!apiKey) {
@@ -459,49 +500,202 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
 
     console.log(`🤖 Calling OpenRouter (${modelConfig.model})...`);
 
+    const messages = options.initialMessages ? [...options.initialMessages] : [];
+    if (!options.skipInitialUserMessage) {
+      messages.push({ role: 'user', content: prompt });
+    }
+
+    const tools = options.tools;
+    const maxIterations = 5;
+
     try {
-      const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-          'HTTP-Referer': 'https://alphab.io',
-          'X-Title': 'RADE AI Blog Generator'
-        },
-        body: JSON.stringify({
+      for (let iteration = 0; iteration < maxIterations; iteration++) {
+        const body = {
           model: modelConfig.model,
-          messages: [
-            {
-              role: 'user',
-              content: prompt
-            }
-          ],
+          messages,
           temperature: modelConfig.temperature,
           max_tokens: modelConfig.maxTokens
-        })
-      });
+        };
+
+        if (tools && tools.length > 0) {
+          body.tools = tools;
+        }
+
+        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+            'HTTP-Referer': 'https://alphab.io',
+            'X-Title': 'RADE AI Blog Generator'
+          },
+          body: JSON.stringify(body)
+        });
+
+        if (!response.ok) {
+          const errorData = await response.text();
+          throw new Error(`OpenRouter API error ${response.status}: ${errorData}`);
+        }
+
+        const data = await response.json();
+        const message = data.choices?.[0]?.message;
+
+        this.costTracker.requestCount++;
+        const inputTokens = data.usage?.prompt_tokens || 0;
+        const outputTokens = data.usage?.completion_tokens || 0;
+        const estimatedCost = this.estimateCost(modelConfig.model, inputTokens, outputTokens);
+        this.costTracker.totalSpent += estimatedCost;
+        console.log(`💰 Request cost: $${estimatedCost.toFixed(4)} (Total: $${this.costTracker.totalSpent.toFixed(4)})`);
+
+        if (!message) {
+          throw new Error('OpenRouter returned an empty message');
+        }
+
+        const toolCalls = message.tool_calls || [];
+
+        if (toolCalls.length > 0) {
+          messages.push({
+            role: 'assistant',
+            content: message.content || '',
+            tool_calls: toolCalls
+          });
+
+          for (const toolCall of toolCalls) {
+            const toolName = toolCall.function?.name;
+            const args = toolCall.function?.arguments;
+
+            if (!toolName) {
+              continue;
+            }
+
+            let parsedArgs = {};
+            if (typeof args === 'string') {
+              try {
+                parsedArgs = JSON.parse(args);
+              } catch (error) {
+                console.warn(`⚠️  Failed to parse tool arguments for ${toolName}:`, error.message);
+              }
+            }
+
+            console.log(`🛠️  Tool call → ${toolName}`, parsedArgs);
+            const toolResponse = await this.executeTool(toolName, parsedArgs);
+            if (toolResponse?.error) {
+              console.warn(`⚠️  ${toolName} returned an error: ${toolResponse.error}`);
+            } else if (toolName === 'search_web') {
+              const resultCount = Array.isArray(toolResponse?.results) ? toolResponse.results.length : 0;
+              console.log(`🔎 search_web results: ${resultCount} hits${resultCount ? ` (top: ${toolResponse.results[0].title || 'n/a'})` : ''}`);
+            }
+
+            messages.push({
+              role: 'tool',
+              tool_call_id: toolCall.id,
+              content: JSON.stringify(toolResponse)
+            });
+          }
+
+          continue;
+        }
+
+        if (Array.isArray(message.content)) {
+          const combined = message.content.map(part => part.text).join('\n');
+          return combined.trim();
+        }
+
+        if (message.content) {
+          return message.content;
+        }
+
+        // If message has no content but also no tool calls, break to avoid loop
+        break;
+      }
+
+      throw new Error('OpenRouter conversation ended without a final response');
+    } catch (error) {
+      throw new Error(`OpenRouter API call failed: ${error.message}`);
+    }
+  }
+
+  getToolDefinitions() {
+    return [
+      {
+        type: 'function',
+        function: {
+          name: 'search_web',
+          description: 'Search the web for up-to-date information. Use this to fetch recent news, stats, or announcements.',
+          parameters: {
+            type: 'object',
+            properties: {
+              query: {
+                type: 'string',
+                description: 'Search query describing the information to look up.'
+              },
+              count: {
+                type: 'integer',
+                description: 'Approximate number of search results (1-10).',
+                minimum: 1,
+                maximum: 10,
+                default: 5
+              }
+            },
+            required: ['query']
+          }
+        }
+      }
+    ];
+  }
+
+  async executeTool(name, args) {
+    switch (name) {
+      case 'search_web':
+        return await this.searchWeb(args?.query, args?.count);
+      default:
+        return { error: `Unknown tool: ${name}` };
+    }
+  }
+
+  async searchWeb(query, count = 5) {
+    if (!query || typeof query !== 'string') {
+      return { error: 'Missing search query' };
+    }
+
+    if (!this.webSearchApiKey) {
+      return { error: 'SERPAPI_API_KEY not configured', query };
+    }
+
+    const resultLimit = Math.max(1, Math.min(count || 5, 10));
+    const params = new URLSearchParams({
+      engine: 'google',
+      q: query,
+      num: String(resultLimit),
+      api_key: this.webSearchApiKey
+    });
+
+    try {
+      const response = await fetch(`${SERPAPI_ENDPOINT}?${params.toString()}`);
 
       if (!response.ok) {
-        const errorData = await response.text();
-        throw new Error(`OpenRouter API error ${response.status}: ${errorData}`);
+        const errorText = await response.text();
+        return { error: `SerpAPI error ${response.status}: ${errorText}`, query };
       }
 
       const data = await response.json();
-      const content = data.choices[0].message.content;
+      const organic = Array.isArray(data.organic_results) ? data.organic_results : [];
+      const results = organic.slice(0, resultLimit).map(item => ({
+        title: item.title,
+        url: item.link,
+        snippet: item.snippet || item.title,
+        position: item.position,
+        source: item.source || item.displayed_link
+      }));
 
-      // Track costs
-      this.costTracker.requestCount++;
-      const inputTokens = data.usage?.prompt_tokens || 0;
-      const outputTokens = data.usage?.completion_tokens || 0;
-      const estimatedCost = this.estimateCost(modelConfig.model, inputTokens, outputTokens);
-      this.costTracker.totalSpent += estimatedCost;
-
-      console.log(`💰 Request cost: $${estimatedCost.toFixed(4)} (Total: $${this.costTracker.totalSpent.toFixed(4)})`);
-
-      return content;
-
+      return {
+        query,
+        fetchedAt: new Date().toISOString(),
+        provider: 'serpapi',
+        results
+      };
     } catch (error) {
-      throw new Error(`OpenRouter API call failed: ${error.message}`);
+      return { error: `Search request failed: ${error.message}`, query };
     }
   }
 

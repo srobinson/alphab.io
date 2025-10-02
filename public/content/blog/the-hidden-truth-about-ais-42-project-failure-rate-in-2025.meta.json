@@ -1,0 +1,49 @@
+{
+  "title": "The Hidden Truth About AI's 42% Project Failure Rate in 2025",
+  "description": "Explore why 42% of AI projects fail despite $500B market projections. Uncover the critical success factors behind AI implementation and why investments don't guarantee results.",
+  "date": "2025-10-02",
+  "category": "Reality Check",
+  "tags": [
+    "AI project failure rate",
+    "enterprise AI implementation",
+    "AI market size 2025",
+    "AI investment risks",
+    "successful AI integration"
+  ],
+  "author": "RADE AI Solutions",
+  "readTime": "14 min read",
+  "seo": {
+    "keywords": [
+      "AI project failure rate",
+      "enterprise AI implementation",
+      "AI market size 2025",
+      "AI investment risks",
+      "successful AI integration",
+      "AI project management",
+      "AI ROI challenges"
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "The Hidden Truth About AI's 42% Project Failure Rate in 2025",
+      "description": "An in-depth analysis of the disconnect between AI investment enthusiasm and project success rates, examining why 42% of AI initiatives fail despite record market growth to $500B in 2025.",
+      "datePublished": "2025",
+      "author": {
+        "@type": "Organization",
+        "name": "Reality Check Blog"
+      },
+      "keywords": "AI project failure, enterprise AI, artificial intelligence implementation, AI market analysis, digital transformation challenges",
+      "articleSection": "reality-check",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://example.com/ai-project-failure-rate-2025"
+      }
+    }
+  },
+  "generated": true,
+  "generatedAt": "2025-10-02T10:50:11.354Z",
+  "slug": "the-hidden-truth-about-ais-42-project-failure-rate-in-2025",
+  "published": true,
+  "publishedAt": "2025-10-02T10:52:26.939Z",
+  "draftId": "the-other-side-of-the-ai-hype-211355"
+}

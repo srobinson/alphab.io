@@ -193,6 +193,20 @@ ${JSON.stringify({
     }
   }
 
+  async deleteDraft(draftId) {
+    if (!draftId) return;
+
+    const draftPath = path.join(this.draftsPath, `${draftId}.json`);
+    try {
+      await fs.unlink(draftPath);
+      console.log(`🗃️  Deleted draft: ${draftId}`);
+    } catch (error) {
+      if (error.code !== 'ENOENT') {
+        throw error;
+      }
+    }
+  }
+
   async readIndex() {
     const indexPath = path.join(this.contentPath, 'index.json');
     try {
@@ -244,6 +258,17 @@ ${JSON.stringify({
 
     await this.writeContentFile('index.json', JSON.stringify(index, null, 2));
     await this.createRSSFeed(index);
+  }
+
+  async listPublishedPosts() {
+    try {
+      const index = await this.readIndex();
+      const posts = Array.isArray(index.posts) ? index.posts : [];
+      return posts.sort((a, b) => new Date(b.publishedAt || b.date) - new Date(a.publishedAt || a.date));
+    } catch (error) {
+      console.warn('⚠️  Unable to read blog index:', error.message);
+      return [];
+    }
   }
 
   async createRSSFeed(indexData) {
@@ -312,7 +337,7 @@ ${JSON.stringify({
     }
 
     const metadata = await this.loadMetadataForSlug(slug);
-    const draftId = metadata?.draftId;
+    const draftId = metadata?.draftId || (await this.lookupDraftIdBySlug(slug));
 
     await this.deleteContentFile(`${slug}.mdx`);
     await this.deleteContentFile(`${slug}.meta.json`);
@@ -333,19 +358,42 @@ ${JSON.stringify({
     await this.writeContentFile('index.json', JSON.stringify(index, null, 2));
     await this.createRSSFeed(index);
 
-    const postJsonPath = path.join(this.postsPath, `${slug}.json`);
-    try {
-      await fs.unlink(postJsonPath);
-    } catch (error) {
-      if (error.code !== 'ENOENT') {
-        throw error;
+    console.log(`🗑️  Unpublished post: ${slug}`);
+    if (draftId) {
+      await this.deleteDraft(draftId);
+    }
+  }
+
+  async lookupDraftIdBySlug(slug) {
+    const index = await this.readIndex();
+    const post = Array.isArray(index.posts) ? index.posts.find(p => p.slug === slug) : null;
+    return post?.draftId;
+  }
+
+  async resetAll() {
+    console.log('♻️  Resetting generated blog content...');
+
+    const index = await this.readIndex();
+    const posts = Array.isArray(index.posts) ? index.posts : [];
+
+    for (const post of posts) {
+      if (post.slug) {
+        await this.deleteContentFile(`${post.slug}.mdx`);
+        await this.deleteContentFile(`${post.slug}.meta.json`);
+      }
+      if (post.draftId) {
+        await this.deleteDraft(post.draftId);
       }
     }
 
-    console.log(`🗑️  Unpublished post: ${slug}`);
-    if (draftId) {
-      console.log(`Draft ID retained: ${draftId}`);
-    }
+    index.posts = [];
+    index.totalPosts = 0;
+    index.lastUpdated = new Date().toISOString();
+
+    await this.writeContentFile('index.json', JSON.stringify(index, null, 2));
+    await this.createRSSFeed(index);
+
+    console.log('✅ Blog index reset. No generated posts remain.');
   }
 
   async listDrafts() {
@@ -408,8 +456,16 @@ ${JSON.stringify({
 // CLI interface
 if (require.main === module) {
   const publisher = new BlogPublisher();
-  const command = process.argv[2];
-  const draftId = process.argv[3];
+  let command = process.argv[2];
+  let draftId = process.argv[3];
+
+  const validCommands = new Set(['list', 'preview', 'publish', 'unpublish', 'reset', 'rss']);
+
+  if (command && !validCommands.has(command)) {
+    // Treat the first argument as a draft ID for publish convenience
+    draftId = command;
+    command = 'publish';
+  }
 
   publisher.initialize().then(async () => {
     switch (command) {
@@ -448,10 +504,29 @@ if (require.main === module) {
         break;
       case 'unpublish':
         if (!draftId) {
-          console.log('Usage: node blog-publisher.js unpublish <slug-or-draft-id>');
-          process.exit(1);
+          const published = await publisher.listPublishedPosts();
+          console.log('\n📚 PUBLISHED POSTS:');
+          if (published.length === 0) {
+            console.log('No generated posts are currently published.');
+          } else {
+            published.forEach((post, idx) => {
+              console.log(`${idx + 1}. ${post.slug}`);
+              if (post.title) {
+                console.log(`   Title: ${post.title}`);
+              }
+              if (post.draftId) {
+                console.log(`   Draft ID: ${post.draftId}`);
+              }
+              console.log(`   Published: ${new Date(post.publishedAt || post.date).toLocaleString()}`);
+            });
+            console.log('\nRun: node blog-publisher.js unpublish <slug-or-draft-id>');
+          }
+          break;
         }
         await publisher.unpublish(draftId);
+        break;
+      case 'reset':
+        await publisher.resetAll();
         break;
       case 'rss':
         await publisher.createRSSFeed();
@@ -462,6 +537,7 @@ if (require.main === module) {
         console.log('  preview <draft-id>       - Preview a draft');
         console.log('  publish <draft-id>       - Publish a draft to static files');
         console.log('  unpublish <slug|draft-id>- Remove a generated blog post');
+        console.log('  reset                    - Remove all generated posts & drafts');
         console.log('  rss                      - Update RSS feed');
         console.log('');
         console.log('Example workflow:');

@@ -23,6 +23,9 @@ OPENROUTER_API_KEY=your_openrouter_api_key_here
 # Supabase (already configured)
 NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
 SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+
+# Web search (enables live research during generation)
+SERPAPI_API_KEY=your_serpapi_api_key
 ```
 
 ### 2. Install Dependencies
@@ -84,6 +87,12 @@ npm run blog:publish draft-id-12345
 
 # Unpublish a generated post (by slug or draft ID)
 npm run blog:unpublish my-post-slug
+
+# List published posts with IDs you can unpublish
+npm run blog:unpublish
+
+# Reset all generated posts and drafts
+npm run blog:reset
 ```
 
 ## Content Strategy
