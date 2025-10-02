@@ -11,7 +11,8 @@ import {
     TrendingUp,
     Zap,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
+import Masonry from "react-masonry-css";
 
 interface NewsItem {
     id: string;
@@ -55,17 +56,25 @@ const categoryNames = {
 };
 
 export function IndustryMoves() {
-    const [industryMoves, setIndustryMoves] = useState<IndustryMove[]>([]);
+    const [displayedMoves, setDisplayedMoves] = useState<IndustryMove[]>([]);
     const [loading, setLoading] = useState(true);
+    const [loadingMore, setLoadingMore] = useState(false);
     const [imagesLoaded, setImagesLoaded] = useState<Set<string>>(new Set());
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+    const observerTarget = useRef<HTMLDivElement>(null);
+    const ITEMS_PER_PAGE = 12;
 
     // Fetch curated news from database
     useEffect(() => {
         const fetchCuratedNews = async () => {
             try {
-                // Fetch from curated news API (ready for Supabase backend)
-                const response = await fetch("/api/curated-news");
+                console.log('📥 Fetching initial page...');
+                // Fetch from curated news API with pagination
+                const response = await fetch(`/api/curated-news?page=1&limit=${ITEMS_PER_PAGE}`);
                 const data = await response.json();
+
+                console.log('✅ Loaded page 1:', data.items.length, 'items, Total:', data.pagination?.total, 'Has more:', data.pagination?.hasMore);
 
                 // Convert API response to industry moves format
                 const curatedMoves: IndustryMove[] = data.items.map((
@@ -85,7 +94,8 @@ export function IndustryMoves() {
                     image: item.image,
                 }));
 
-                setIndustryMoves(curatedMoves);
+                setDisplayedMoves(curatedMoves);
+                setHasMore(data.pagination?.hasMore ?? false);
                 setLoading(false);
             } catch (error) {
                 console.error("Failed to fetch curated news:", error);
@@ -181,13 +191,95 @@ export function IndustryMoves() {
                     },
                 ];
 
-                setIndustryMoves(fallbackMoves);
+                setDisplayedMoves(fallbackMoves);
+                setHasMore(false);
                 setLoading(false);
             }
         };
 
         fetchCuratedNews();
     }, []);
+
+    // Load more items from API
+    const loadMore = useCallback(async () => {
+        if (loadingMore || !hasMore) return;
+
+        console.log('🔄 loadMore called - Page:', page + 1, 'HasMore:', hasMore, 'Loading:', loadingMore);
+        setLoadingMore(true);
+        
+        try {
+            const nextPage = page + 1;
+            console.log('📥 Fetching page', nextPage);
+            const response = await fetch(`/api/curated-news?page=${nextPage}&limit=${ITEMS_PER_PAGE}`);
+            const data = await response.json();
+            
+            console.log('✅ Loaded page', nextPage, ':', data.items.length, 'items');
+            
+            // Convert API response to industry moves format
+            const newMoves: IndustryMove[] = data.items.map((
+                item: NewsItem,
+            ) => ({
+                id: item.id,
+                icon: categoryIcons[item.category] || categoryIcons.default,
+                category: categoryNames[item.category] || item.category,
+                title: item.text,
+                description: item.description ||
+                    `Latest from ${item.source}`,
+                time: item.time,
+                trending: item.category === "breaking" ||
+                    item.category === "trending",
+                link: item.link,
+                image: item.image,
+            }));
+            
+            setDisplayedMoves(prev => [...prev, ...newMoves]);
+            setPage(nextPage);
+            setHasMore(data.pagination?.hasMore ?? false);
+            console.log('📊 Now showing', displayedMoves.length + newMoves.length, 'total items. Has more:', data.pagination?.hasMore);
+        } catch (error) {
+            console.error("Failed to load more items:", error);
+            setHasMore(false);
+        } finally {
+            setLoadingMore(false);
+        }
+    }, [page, loadingMore, hasMore, displayedMoves.length]);
+
+    // Intersection Observer for infinite scroll
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && hasMore && !loadingMore) {
+                    console.log('🔄 Loading more content... (Page', page + 1, ')');
+                    loadMore();
+                }
+            },
+            { 
+                threshold: 0.1,
+                rootMargin: '400px' // Trigger 400px before the target is visible
+            }
+        );
+
+        const currentTarget = observerTarget.current;
+        if (currentTarget) {
+            observer.observe(currentTarget);
+        }
+
+        return () => {
+            if (currentTarget) {
+                observer.unobserve(currentTarget);
+            }
+        };
+    }, [loadMore, hasMore, loadingMore, page]);
+
+    // Masonry breakpoint configuration
+    const breakpointColumnsObj = {
+        default: 4,
+        1536: 4, // 2xl
+        1280: 3, // xl
+        1024: 3, // lg
+        768: 2, // md
+        640: 1  // sm
+    };
 
     // Generate fallback image based on category with variety
     const getFallbackImage = (category: string, title: string) => {
@@ -211,7 +303,7 @@ export function IndustryMoves() {
     if (loading) {
         return (
             <section className="py-16 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-800">
-                <div className="container mx-auto px-6 max-w-6xl">
+                <div className="container mx-auto px-6 max-w-7xl">
                     <div className="text-center mb-12">
                         <h2 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-4">
                             Industry Moves
@@ -221,11 +313,15 @@ export function IndustryMoves() {
                             insights...
                         </p>
                     </div>
-                    <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <Masonry
+                        breakpointCols={breakpointColumnsObj}
+                        className="flex -ml-6 w-auto"
+                        columnClassName="pl-6 bg-clip-padding"
+                    >
                         {[...Array(8)].map((_, index) => (
                             <div
                                 key={index}
-                                className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden animate-pulse"
+                                className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden animate-pulse mb-6"
                             >
                                 <div className="w-full h-48 bg-gray-200 dark:bg-gray-700">
                                 </div>
@@ -245,7 +341,7 @@ export function IndustryMoves() {
                                 </div>
                             </div>
                         ))}
-                    </div>
+                    </Masonry>
                 </div>
             </section>
         );
@@ -253,7 +349,7 @@ export function IndustryMoves() {
 
     return (
         <section className="py-16 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-800">
-            <div className="container mx-auto px-6 max-w-6xl">
+            <div className="container mx-auto px-6 max-w-7xl">
                 <div className="text-center mb-12">
                     <h2 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-4">
                         Industry Moves
@@ -264,13 +360,12 @@ export function IndustryMoves() {
                     </p>
                 </div>
 
-                <motion.div
-                    className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.3 }}
+                <Masonry
+                    breakpointCols={breakpointColumnsObj}
+                    className="flex -ml-6 w-auto"
+                    columnClassName="pl-6 bg-clip-padding"
                 >
-                    {industryMoves.map((move, index) => {
+                    {displayedMoves.map((move, index) => {
                         const IconComponent = move.icon;
                         const isClickable = move.link && move.link !== "#";
                         const imageUrl = move.image ||
@@ -282,13 +377,13 @@ export function IndustryMoves() {
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{
                                     duration: 0.4,
-                                    delay: index * 0.05,
+                                    delay: Math.min(index * 0.05, 0.6),
                                 }}
                                 className={`relative rounded-xl border transition-all duration-300 hover:scale-[1.02] hover:shadow-lg overflow-hidden bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 ${
                                     isClickable
                                         ? "cursor-pointer"
                                         : "cursor-default"
-                                } h-full flex flex-col`}
+                                } mb-6 flex flex-col`}
                             >
                                 {move.trending && (
                                     <div className="absolute top-3 right-3 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-semibold z-10">
@@ -346,11 +441,11 @@ export function IndustryMoves() {
                                         </div>
                                     </div>
 
-                                    <h3 className="font-bold text-gray-900 dark:text-white mb-3 leading-tight line-clamp-2 flex-shrink-0">
+                                    <h3 className="font-bold text-gray-900 dark:text-white mb-3 leading-tight">
                                         {move.title}
                                     </h3>
 
-                                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed line-clamp-3 flex-1">
+                                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
                                         {move.description}
                                     </p>
 
@@ -375,18 +470,36 @@ export function IndustryMoves() {
                                     href={move.link}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="h-full"
                                 >
                                     {cardContent}
                                 </a>
                             )
                             : (
-                                <div key={move.id} className="h-full">
+                                <div key={move.id}>
                                     {cardContent}
                                 </div>
                             );
                     })}
-                </motion.div>
+                </Masonry>
+
+                {/* Loading more indicator */}
+                {loadingMore && (
+                    <div className="flex justify-center items-center py-8">
+                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                    </div>
+                )}
+
+                {/* Intersection observer target */}
+                <div ref={observerTarget} className="h-10" />
+
+                {/* End of content message */}
+                {!hasMore && displayedMoves.length > 0 && (
+                    <div className="text-center py-8">
+                        <p className="text-gray-500 dark:text-gray-400">
+                            You've reached the end of the latest updates
+                        </p>
+                    </div>
+                )}
             </div>
         </section>
     );

@@ -41,6 +41,12 @@ function generateThumbnail(article: any, category: string, trending: boolean): s
 
 export async function GET(request: Request) {
   try {
+    // Parse query parameters for pagination
+    const { searchParams } = new URL(request.url);
+    const page = parseInt(searchParams.get('page') || '1', 10);
+    const limit = parseInt(searchParams.get('limit') || '12', 10);
+    const offset = (page - 1) * limit;
+    
     // Rate limiting - 60 requests per minute per IP
     const rateLimitCheck = checkRateLimit(request, {
       limit: 60,
@@ -85,7 +91,7 @@ export async function GET(request: Request) {
     const supabase = createClient(supabaseUrl, supabaseAnonKey)
     
     // Try to get data from industry moves cache first
-    const { data: cachedData, error: cacheError } = await supabase
+    const { data: cachedData, error: cacheError, count: cachedCount } = await supabase
       .from('industry_moves_cache')
       .select(`
         id,
@@ -97,17 +103,19 @@ export async function GET(request: Request) {
         articles (
           id, title, url, source, summary, published_at, tags
         )
-      `)
+      `, { count: 'exact' })
       .not('articles', 'is', null)
       .gte('expires_at', new Date().toISOString())
       .order('display_order', { ascending: true })
-      .limit(12)
+      .range(offset, offset + limit - 1)
     
     let items: any[] = []
+    let totalCount = 0
     
     if (cachedData && cachedData.length > 0) {
       // Use cached data
       console.log(`Using cached industry moves data (${cachedData.length} items)`)
+      totalCount = cachedCount || 0
       
       items = cachedData.map((item: any) => ({
         id: item.articles.id,
@@ -125,20 +133,22 @@ export async function GET(request: Request) {
       // Fallback to direct articles query
       console.log('No cached data found, fetching from articles table')
       
-      const { data: articles, error: articlesError } = await supabase
+      const { data: articles, error: articlesError, count: articlesCount } = await supabase
         .from('articles')
-        .select('id, title, url, source, summary, published_at, tags')
+        .select('id, title, url, source, summary, published_at, tags', { count: 'exact' })
         .eq('status', 'published')
         .order('published_at', { ascending: false })
-        .limit(16)
+        .range(offset, offset + limit - 1)
       
       if (articlesError) {
         throw articlesError
       }
       
+      totalCount = articlesCount || 0
+      
       if (articles && articles.length > 0) {
         // Simple categorization based on recency and keywords
-        items = articles.slice(0, 12).map((article: any, index: number) => {
+        items = articles.map((article: any, index: number) => {
           const hoursOld = (Date.now() - new Date(article.published_at || article.created_at).getTime()) / (1000 * 60 * 60)
           const title = article.title.toLowerCase()
           
@@ -212,10 +222,16 @@ export async function GET(request: Request) {
       ]
     }
     
-    console.log(`Returning ${items.length} industry moves items`)
+    console.log(`Returning ${items.length} industry moves items (page ${page}, total: ${totalCount})`)
     
     return NextResponse.json({ 
       items,
+      pagination: {
+        page,
+        limit,
+        total: totalCount,
+        hasMore: offset + items.length < totalCount
+      },
       cached: cachedData && cachedData.length > 0,
       timestamp: new Date().toISOString()
     }, {
