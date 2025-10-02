@@ -367,10 +367,12 @@ Use current data points where possible and state the accurate year (${CURRENT_YE
 
 Transition naturally to: ${sectionOutline.transition}
 
-Important style rules:
-- Respond with the complete section content only.
-- Do not add labels, prefaces, or phrases such as "Here’s the blog section" or "Based on the research" before the actual content.
-- Begin with the section heading or first sentence immediately.`;
+CRITICAL FORMATTING RULES:
+- Respond with the complete section content only
+- Do NOT add labels, prefaces, or phrases such as "Here's the blog section" or "Based on the research" before the actual content
+- Do NOT repeat the section title in the body text (the title will be added as a heading separately)
+- Begin immediately with the first paragraph of content
+- Start with a topic sentence, not a restatement of the title`;
 
     const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
     return await this.callOpenRouter(prompt, 'analysis', { tools });
