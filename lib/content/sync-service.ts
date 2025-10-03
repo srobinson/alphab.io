@@ -1,7 +1,8 @@
-// Content synchronization service
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { monitor } from "../monitoring";
 import { ingestUrl } from "../server/ingest";
+import { SimpleThumbnailService } from "./simple-thumbnails";
+import { searchUnsplashImages } from "../unsplash";
 import { ContentClassifier } from "./classifier";
 import { type FetchResult, type RSSItem, RSSParser } from "./rss-parser";
 import { type ContentSource, getActiveSourcesByPriority } from "./sources";
@@ -169,10 +170,23 @@ export class ContentSyncService {
 				filtered_out: fetchResult.items.length - itemsToProcess.length,
 			});
 
-			// Ingest items into database with image URLs
+			// Ingest items into database with Unsplash images only
 			let ingestedCount = 0;
 			for (const item of itemsToProcess) {
 				try {
+					// Generate Unsplash image URL only (no fallbacks)
+					let imageUrl: string | undefined = item.imageUrl; // Use RSS image if available
+
+					// Only fetch from Unsplash if no RSS image exists
+					if (!imageUrl) {
+						const searchQuery = SimpleThumbnailService.getUnsplashSearchQuery(
+							item.title,
+							item.classification.tags,
+						);
+						const unsplashImage = await searchUnsplashImages(searchQuery, 1);
+						imageUrl = unsplashImage || undefined; // Don't use fallback
+					}
+
 					const ingestResult = await ingestUrl(
 						{
 							url: item.link,
@@ -180,7 +194,7 @@ export class ContentSyncService {
 							tags: item.classification.tags,
 							doSummarize: options.enableSummarization !== false,
 							doSaveContent: options.saveContent || false,
-							imageUrl: item.imageUrl, // Pass through RSS extracted image
+							imageUrl, // Only Unsplash or RSS images
 						},
 						this.supabase,
 					);

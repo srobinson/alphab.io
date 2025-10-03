@@ -25,6 +25,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "*",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "alphab.io",
         port: "",
         pathname: "/**",
