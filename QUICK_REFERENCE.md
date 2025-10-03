@@ -96,19 +96,37 @@ CRON_SECRET=...                     # ✅ Set
 - **SIMPLIFICATION_SUMMARY.md** - Complete overview
 - **QUICK_REFERENCE.md** - This file
 
+## Performance Optimization
+
+**If pagination is slow (>1 second per page):**
+
+```bash
+# Apply database indexes for 200x faster queries
+source .env.local
+node scripts/apply-indexes.js
+```
+
+This creates optimized indexes on the articles table.
+
+Expected result: Page loads <200ms (was 35+ seconds!)
+
+See `DATABASE_PERFORMANCE.md` for details.
+
 ## Testing Checklist
 
 - [ ] `pnpm run build` succeeds
-- [ ] Visit `/industry-moves` - page loads fast
+- [ ] Visit `/industry-moves` - page loads fast (<200ms)
 - [ ] Scroll down - infinite scroll works
 - [ ] Check pagination - shows 140+ total articles
 - [ ] Images load from Unsplash (not placeholders)
 - [ ] No console errors in browser DevTools
+- [ ] Page 8 loads quickly (test deep pagination)
 
 ## Support
 
 If issues arise:
 1. Check build: `pnpm run build`
 2. Check database: `pnpm content status`
-3. Check logs: View server console output
-4. Review docs: Read detailed markdown files above
+3. Check indexes: `node scripts/apply-indexes.js`
+4. Check logs: View server console output
+5. Review docs: Read detailed markdown files above

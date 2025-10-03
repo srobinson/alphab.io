@@ -1,6 +1,5 @@
 import { checkRateLimit } from "@/lib/rate-limit";
 import { createClient } from "@supabase/supabase-js";
-import type { SupabaseClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
 // Enable edge caching - cache responses for 5 minutes
@@ -76,7 +75,9 @@ export async function GET(request: Request) {
 		const limit = parseInt(searchParams.get("limit") || "12", 10);
 		const offset = (page - 1) * limit;
 
-		console.log(`📊 Request params: page=${page}, limit=${limit}, offset=${offset}`);
+		console.log(
+			`📊 Request params: page=${page}, limit=${limit}, offset=${offset}`,
+		);
 
 		// Rate limiting - 60 requests per minute per IP
 		const rateLimitCheck = checkRateLimit(request, {
@@ -150,55 +151,55 @@ export async function GET(request: Request) {
 
 			// Simple categorization based on recency and keywords
 			items = articles.map((article) => {
-					const publishedDate = article.published_at || article.created_at;
-					const hoursOld = publishedDate
-						? (Date.now() - new Date(publishedDate).getTime()) / (1000 * 60 * 60)
-						: 999;
-					const title = article.title.toLowerCase();
+				const publishedDate = article.published_at || article.created_at;
+				const hoursOld = publishedDate
+					? (Date.now() - new Date(publishedDate).getTime()) / (1000 * 60 * 60)
+					: 999;
+				const title = article.title.toLowerCase();
 
-					let category = "update";
-					let trending = false;
+				let category = "update";
+				let trending = false;
 
-					// Simple keyword-based categorization
-					if (
-						hoursOld < 6 &&
-						(title.includes("announces") ||
-							title.includes("launches") ||
-							title.includes("releases") ||
-							title.includes("breaking"))
-					) {
-						category = "breaking";
-						trending = true;
-					} else if (
-						title.includes("trend") ||
-						title.includes("popular") ||
-						title.includes("surge") ||
-						hoursOld < 12
-					) {
-						category = "trending";
-						trending = hoursOld < 24;
-					} else if (
-						title.includes("analysis") ||
-						title.includes("insight") ||
-						title.includes("opinion") ||
-						title.includes("understanding")
-					) {
-						category = "insight";
-					}
+				// Simple keyword-based categorization
+				if (
+					hoursOld < 6 &&
+					(title.includes("announces") ||
+						title.includes("launches") ||
+						title.includes("releases") ||
+						title.includes("breaking"))
+				) {
+					category = "breaking";
+					trending = true;
+				} else if (
+					title.includes("trend") ||
+					title.includes("popular") ||
+					title.includes("surge") ||
+					hoursOld < 12
+				) {
+					category = "trending";
+					trending = hoursOld < 24;
+				} else if (
+					title.includes("analysis") ||
+					title.includes("insight") ||
+					title.includes("opinion") ||
+					title.includes("understanding")
+				) {
+					category = "insight";
+				}
 
-					return {
-						id: article.id,
-						category,
-						text: article.title,
-						description: article.summary || `Latest from ${article.source}`,
-						time: formatTimeAgo(article.published_at),
-						source: article.source,
-						link: article.url,
-						image: getArticleImage(article),
-						isRSS: true,
-						trending,
-					};
-				});
+				return {
+					id: article.id,
+					category,
+					text: article.title,
+					description: article.summary || `Latest from ${article.source}`,
+					time: formatTimeAgo(article.published_at),
+					source: article.source,
+					link: article.url,
+					image: getArticleImage(article),
+					isRSS: true,
+					trending,
+				};
+			});
 		}
 
 		// If no real data available, use fallback
