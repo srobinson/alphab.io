@@ -1,18 +1,18 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import type { LucideIcon } from "lucide-react";
 import {
-    AlertCircle,
-    BarChart3,
-    Brain,
-    Globe,
-    Lightbulb,
-    Rocket,
-    TrendingUp,
-    Zap,
+	AlertCircle,
+	BarChart3,
+	Brain,
+	Globe,
+	Lightbulb,
+	Rocket,
+	TrendingUp,
+	Zap,
 } from "lucide-react";
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Masonry from "react-masonry-css";
 
@@ -249,7 +249,7 @@ export function IndustryMoves() {
 		if (loading || !observerTarget.current) {
 			return;
 		}
-		
+
 		const observer = new IntersectionObserver(
 			(entries) => {
 				if (entries[0].isIntersecting && hasMore && !loadingMore) {
@@ -303,6 +303,19 @@ export function IndustryMoves() {
 		return `https://picsum.photos/seed/${seed}/400/200`;
 	};
 
+	// Get category accent color for visual consistency
+	const getCategoryAccentColor = (category: string): string => {
+		const colors = {
+			breaking: "#EF4444", // Red
+			trending: "#F59E0B", // Orange
+			update: "#ffffff", // Blue
+			insight: "#8B5CF6", // Purple
+		};
+		return (
+			colors[category.toLowerCase() as keyof typeof colors] || colors.update
+		);
+	};
+
 	if (loading) {
 		return (
 			<section className="py-16 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-800">
@@ -346,15 +359,6 @@ export function IndustryMoves() {
 	return (
 		<section className="py-16 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-800">
 			<div className="container mx-auto px-6 max-w-7xl">
-				<div className="text-center mb-12">
-					<h2 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-4">
-						Industry Moves
-					</h2>
-					<p className="text-lg text-gray-600 dark:text-gray-400">
-						Stay ahead with the latest AI developments and strategic insights
-					</p>
-				</div>
-
 				<Masonry
 					breakpointCols={breakpointColumnsObj}
 					className="flex -ml-6 w-auto"
@@ -387,16 +391,16 @@ export function IndustryMoves() {
 									</div>
 								)}
 
-								{/* Image Section */}
+								{/* Image Section with Brand Styling */}
 								<div className="relative w-full h-48 overflow-hidden bg-gray-200 dark:bg-gray-700">
-										<Image
-											src={resolvedImage}
-											alt={move.title}
-											fill
-											className="object-cover transition-transform duration-300 hover:scale-110"
-											sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
-											priority={index === 0}
-											onLoad={() => {
+									<Image
+										src={resolvedImage}
+										alt={move.title}
+										fill
+										className="object-cover transition-all duration-300 hover:scale-110"
+										sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+										priority={index === 0}
+										onLoad={() => {
 											setImagesLoaded((prev) => new Set(prev).add(move.id));
 										}}
 										onError={() => {
@@ -404,15 +408,32 @@ export function IndustryMoves() {
 												if (prev[move.id]) {
 													return prev;
 												}
-												return { ...prev, [move.id]: "/images/ai-head-design.webp" };
+												return {
+													...prev,
+													[move.id]: "/images/ai-head-design.webp",
+												};
 											});
 										}}
 										style={{
 											opacity: imagesLoaded.has(move.id) ? 1 : 0,
 											transition: "opacity 0.3s ease-in-out",
+											filter: "saturate(0.85) contrast(1.05) brightness(0.92)",
 										}}
 									/>
-									<div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+
+									{/* Brand-colored overlay for consistency */}
+									<div className="absolute inset-0 bg-gradient-to-br from-blue-600/15 via-transparent to-blue-900/20 mix-blend-multiply" />
+
+									{/* Category accent bar at top */}
+									<div
+										className="absolute top-0 left-0 right-0 h-1"
+										style={{
+											background: getCategoryAccentColor(move.category),
+										}}
+									/>
+
+									{/* Bottom gradient for text readability */}
+									<div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
 								</div>
 
 								{/* Content Section */}

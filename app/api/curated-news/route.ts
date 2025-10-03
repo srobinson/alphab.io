@@ -1,4 +1,5 @@
 import { checkRateLimit } from "@/lib/rate-limit";
+import { decodeHtmlEntities } from "@/lib/utils/html-entities";
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
@@ -190,8 +191,10 @@ export async function GET(request: Request) {
 				return {
 					id: article.id,
 					category,
-					text: article.title,
-					description: article.summary || `Latest from ${article.source}`,
+					text: decodeHtmlEntities(article.title),
+					description: decodeHtmlEntities(
+						article.summary || `Latest from ${article.source}`,
+					),
 					time: formatTimeAgo(article.published_at),
 					source: article.source,
 					link: article.url,

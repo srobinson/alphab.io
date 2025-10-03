@@ -2,6 +2,7 @@
 // Depends on fetch (Node 18+), and a Supabase client passed by caller (service role for writes)
 
 import type { SupabaseClient } from '@supabase/supabase-js'
+import { decodeHtmlEntities } from '../utils/html-entities'
 import { summarizeInfo } from './summarize'
 
 // Strip common tracking params and normalize
@@ -77,12 +78,18 @@ export async function fetchMetadata(url: string): Promise<PageMeta> {
   const metaDesc = extractBetween(html, /<meta[^>]*name=["']description["'][^>]*content=["']([^"']+)["'][^>]*>/i)
   const articlePublished = extractBetween(html, /<meta[^>]*property=["']article:published_time["'][^>]*content=["']([^"']+)["'][^>]*>/i)
 
-  const title = ogTitle || metaTitle || null
-  const description = ogDesc || metaDesc || null
+  // Decode HTML entities from extracted metadata
+  const title = decodeHtmlEntities(ogTitle || metaTitle || '')
+  const description = decodeHtmlEntities(ogDesc || metaDesc || '')
   const publishedAt = articlePublished ? new Date(articlePublished) : null
   const contentHtml = extractContentHtml(html)
 
-  return { title, description, publishedAt, contentHtml }
+  return { 
+    title: title || null, 
+    description: description || null, 
+    publishedAt, 
+    contentHtml 
+  }
 }
 
 export type IngestInput = {

@@ -1,5 +1,6 @@
 // RSS parsing and content fetching service
 import Parser from 'rss-parser'
+import { decodeHtmlEntities } from '../utils/html-entities'
 import type { ContentSource } from './sources'
 
 type RawFeedItem = {
@@ -214,20 +215,24 @@ export class RSSParser {
   }
 
   private cleanTitle(title: string): string {
-    return title
-      .replace(/\s+/g, ' ')
-      .replace(/[\r\n\t]/g, ' ')
-      .trim()
-      .substring(0, 200)
+    return decodeHtmlEntities(
+      title
+        .replace(/\s+/g, ' ')
+        .replace(/[\r\n\t]/g, ' ')
+        .trim()
+        .substring(0, 200)
+    )
   }
 
   private cleanDescription(description: string): string {
-    return description
-      .replace(/<[^>]*>/g, '') // Strip HTML tags
-      .replace(/\s+/g, ' ')
-      .replace(/[\r\n\t]/g, ' ')
-      .trim()
-      .substring(0, 500)
+    return decodeHtmlEntities(
+      description
+        .replace(/<[^>]*>/g, '') // Strip HTML tags
+        .replace(/\s+/g, ' ')
+        .replace(/[\r\n\t]/g, ' ')
+        .trim()
+        .substring(0, 500)
+    )
   }
 
   private normalizeUrl(url: string): string {
