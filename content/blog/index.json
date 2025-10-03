@@ -1,6 +1,42 @@
 {
   "posts": [
     {
+      "slug": "a16z-report-reveals-top-ai-tools-startups-actually-pay-for",
+      "title": "a16z Report Reveals Top AI Tools Startups Actually Pay For",
+      "description": "New research from a16z uncovers which AI applications capture startup spending in 2025, with $104B raised in H1 alone. Explore key investment trends and insights.",
+      "date": "2025-10-03",
+      "publishedAt": "2025-10-03T02:30:40.893Z",
+      "category": "AI Analysis",
+      "tags": [
+        "a16z AI report",
+        "startup AI spending",
+        "AI investment trends 2025",
+        "generative AI funding",
+        "AI startup investments"
+      ],
+      "readTime": "10 min read",
+      "generated": true,
+      "draftId": "a-new-a16z-report-looks-at-which-ai-comp-631549"
+    },
+    {
+      "slug": "anthropic-names-ex-stripe-cto-to-lead-ai-infrastructure-push",
+      "title": "Anthropic Names Ex-Stripe CTO to Lead AI Infrastructure Push",
+      "description": "Former Stripe CTO Rahul Patil joins Anthropic as new chief technical officer, signaling strategic expansion of AI capabilities and infrastructure development.",
+      "date": "2025-10-03",
+      "publishedAt": "2025-10-03T02:21:50.148Z",
+      "category": "AI Analysis",
+      "tags": [
+        "Anthropic CTO",
+        "Rahul Patil",
+        "AI infrastructure",
+        "tech leadership",
+        "artificial intelligence development"
+      ],
+      "readTime": "11 min read",
+      "generated": true,
+      "draftId": "anthropic-hires-new-cto-with-focus-on-ai-089092"
+    },
+    {
       "slug": "the-rise-of-energy-efficient-ai-a-game-changing-trend",
       "title": "The Rise of Energy-Efficient AI: A Game-Changing Trend",
       "description": "Discover how localized, energy-efficient AI models are reshaping technology's future. New data reveals why smaller, smarter AI deployment is outperforming traditional approaches.",
@@ -55,6 +91,6 @@
       "draftId": "the-other-side-of-the-ai-hype-211355"
     }
   ],
-  "lastUpdated": "2025-10-02T14:21:00.796Z",
-  "totalPosts": 3
+  "lastUpdated": "2025-10-03T02:30:40.896Z",
+  "totalPosts": 5
 }

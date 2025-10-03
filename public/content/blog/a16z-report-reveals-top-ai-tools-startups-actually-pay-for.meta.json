@@ -1,0 +1,52 @@
+{
+  "title": "a16z Report Reveals Top AI Tools Startups Actually Pay For",
+  "description": "New research from a16z uncovers which AI applications capture startup spending in 2025, with $104B raised in H1 alone. Explore key investment trends and insights.",
+  "date": "2025-10-03",
+  "category": "AI Analysis",
+  "tags": [
+    "a16z AI report",
+    "startup AI spending",
+    "AI investment trends 2025",
+    "generative AI funding",
+    "AI startup investments"
+  ],
+  "author": "RADE AI Solutions",
+  "readTime": "10 min read",
+  "seo": {
+    "keywords": [
+      "a16z AI report",
+      "startup AI spending",
+      "AI investment trends 2025",
+      "generative AI funding",
+      "AI startup investments",
+      "venture capital AI",
+      "enterprise AI adoption"
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "a16z Report Reveals Top AI Tools Startups Actually Pay For",
+      "description": "Analysis of a16z's latest report examining AI spending patterns among startups in 2025, highlighting key investment trends and strategic adoption of AI tools across industries.",
+      "datePublished": "2025-10-03",
+      "author": {
+        "@type": "Organization",
+        "name": "a16z"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "a16z"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://a16z.com/ai-application-spending-report-2025"
+      },
+      "keywords": "AI investments, startup funding, venture capital, generative AI, enterprise AI, a16z report, AI tools"
+    }
+  },
+  "generated": true,
+  "generatedAt": "2025-10-03T02:30:31.548Z",
+  "slug": "a16z-report-reveals-top-ai-tools-startups-actually-pay-for",
+  "published": true,
+  "publishedAt": "2025-10-03T02:30:40.893Z",
+  "draftId": "a-new-a16z-report-looks-at-which-ai-comp-631549"
+}

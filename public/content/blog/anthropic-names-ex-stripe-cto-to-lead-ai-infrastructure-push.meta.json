@@ -1,0 +1,56 @@
+{
+  "title": "Anthropic Names Ex-Stripe CTO to Lead AI Infrastructure Push",
+  "description": "Former Stripe CTO Rahul Patil joins Anthropic as new chief technical officer, signaling strategic expansion of AI capabilities and infrastructure development.",
+  "date": "2025-10-03",
+  "category": "AI Analysis",
+  "tags": [
+    "Anthropic CTO",
+    "Rahul Patil",
+    "AI infrastructure",
+    "tech leadership",
+    "artificial intelligence development"
+  ],
+  "author": "RADE AI Solutions",
+  "readTime": "11 min read",
+  "seo": {
+    "keywords": [
+      "Anthropic CTO",
+      "Rahul Patil",
+      "AI infrastructure",
+      "tech leadership",
+      "artificial intelligence development",
+      "Claude AI",
+      "enterprise AI strategy"
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Anthropic Names Ex-Stripe CTO to Lead AI Infrastructure Push",
+      "description": "Analysis of Anthropic's strategic leadership changes, including the appointment of former Stripe CTO Rahul Patil and ex-Google executive Chris Ciauri, focusing on AI infrastructure development and global expansion.",
+      "datePublished": "2025-10-03",
+      "author": {
+        "@type": "Organization",
+        "name": "Anthropic"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Anthropic",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://anthropic.com/logo.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://anthropic.com/blog/anthropic-names-ex-stripe-cto"
+      },
+      "keywords": "Anthropic, CTO, Rahul Patil, AI infrastructure, artificial intelligence, tech leadership, enterprise AI"
+    }
+  },
+  "generated": true,
+  "generatedAt": "2025-10-03T02:21:29.092Z",
+  "slug": "anthropic-names-ex-stripe-cto-to-lead-ai-infrastructure-push",
+  "published": true,
+  "publishedAt": "2025-10-03T02:21:50.148Z",
+  "draftId": "anthropic-hires-new-cto-with-focus-on-ai-089092"
+}

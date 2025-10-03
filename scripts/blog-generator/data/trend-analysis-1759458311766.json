@@ -1,0 +1,618 @@
+{
+  "timeframe": "7 days",
+  "articleCount": 93,
+  "generatedAt": "2025-10-03T02:25:11.766Z",
+  "topics": [
+    {
+      "topic": "google",
+      "count": 22,
+      "percentage": "23.7"
+    },
+    {
+      "topic": "openai",
+      "count": 20,
+      "percentage": "21.5"
+    },
+    {
+      "topic": "gemini",
+      "count": 10,
+      "percentage": "10.8"
+    },
+    {
+      "topic": "startup",
+      "count": 9,
+      "percentage": "9.7"
+    },
+    {
+      "topic": "amazon",
+      "count": 8,
+      "percentage": "8.6"
+    },
+    {
+      "topic": "microsoft",
+      "count": 5,
+      "percentage": "5.4"
+    },
+    {
+      "topic": "anthropic",
+      "count": 5,
+      "percentage": "5.4"
+    },
+    {
+      "topic": "meta",
+      "count": 5,
+      "percentage": "5.4"
+    },
+    {
+      "topic": "chatbot",
+      "count": 3,
+      "percentage": "3.2"
+    },
+    {
+      "topic": "funding",
+      "count": 3,
+      "percentage": "3.2"
+    },
+    {
+      "topic": "series s",
+      "count": 2,
+      "percentage": "2.2"
+    },
+    {
+      "topic": "series x",
+      "count": 2,
+      "percentage": "2.2"
+    },
+    {
+      "topic": "vision",
+      "count": 2,
+      "percentage": "2.2"
+    },
+    {
+      "topic": "ai safety",
+      "count": 2,
+      "percentage": "2.2"
+    },
+    {
+      "topic": "automation",
+      "count": 2,
+      "percentage": "2.2"
+    },
+    {
+      "topic": "enterprise",
+      "count": 2,
+      "percentage": "2.2"
+    },
+    {
+      "topic": "artificial general intelligence",
+      "count": 1,
+      "percentage": "1.1"
+    },
+    {
+      "topic": "agi",
+      "count": 1,
+      "percentage": "1.1"
+    },
+    {
+      "topic": "ethics",
+      "count": 1,
+      "percentage": "1.1"
+    },
+    {
+      "topic": "valuation",
+      "count": 1,
+      "percentage": "1.1"
+    }
+  ],
+  "themes": [
+    {
+      "name": "Challenges & Limitations",
+      "keywords": [
+        "challenge",
+        "limitation",
+        "problem",
+        "issue",
+        "concern"
+      ],
+      "description": "Problems and limitations in current AI",
+      "articleCount": 10,
+      "percentage": "10.8",
+      "sampleTitles": [
+        "Anthropic hires new CTO with focus on AI infrastructure | TechCrunch",
+        "Ex-OpenAI researcher dissects one of ChatGPT&#039;s delusional spirals | TechCrunch",
+        "CharacterAI removes Disney characters after receiving cease-and-desist letter | TechCrunch"
+      ]
+    },
+    {
+      "name": "Market Dynamics",
+      "keywords": [
+        "funding",
+        "investment",
+        "competition",
+        "market",
+        "revenue",
+        "growth"
+      ],
+      "description": "Business and market developments in AI",
+      "articleCount": 6,
+      "percentage": "6.5",
+      "sampleTitles": [
+        "Google&#039;s Jules enters developers&#039; toolchains as AI coding agent competition heats up | TechCrunch",
+        "California’s newly signed AI law just gave Big Tech exactly what it wanted",
+        "The value gap from AI investments is widening dangerously fast"
+      ]
+    },
+    {
+      "name": "Technical Innovation",
+      "keywords": [
+        "architecture",
+        "algorithm",
+        "method",
+        "technique",
+        "approach"
+      ],
+      "description": "New technical approaches or methodologies",
+      "articleCount": 6,
+      "percentage": "6.5",
+      "sampleTitles": [
+        "Google: EU&#039;s AI adoption lags China amid regulatory hurdles",
+        "DeepSeek tests “sparse attention” to slash AI processing costs",
+        "The rise of algorithmic agriculture? AI steps in"
+      ]
+    },
+    {
+      "name": "Practical Applications",
+      "keywords": [
+        "implementation",
+        "deployment",
+        "use case",
+        "application",
+        "adoption"
+      ],
+      "description": "Real-world AI implementations and use cases",
+      "articleCount": 5,
+      "percentage": "5.4",
+      "sampleTitles": [
+        "A new a16z report looks at which AI companies startups are actually paying for | TechCrunch",
+        "Instagram tests opening right onto Reels",
+        "Google: EU&#039;s AI adoption lags China amid regulatory hurdles"
+      ]
+    },
+    {
+      "name": "AI Capability Leap",
+      "keywords": [
+        "breakthrough",
+        "advancement",
+        "capability",
+        "performance",
+        "benchmark"
+      ],
+      "description": "Major advances in AI capabilities or performance",
+      "articleCount": 4,
+      "percentage": "4.3",
+      "sampleTitles": [
+        "Google unveils AI-powered Nest indoor and outdoor cameras, and a new doorbell | TechCrunch",
+        "Google updates its Home app with Gemini smarts | TechCrunch",
+        "We Gave Our AI Agents Twitter and Now They"
+      ]
+    },
+    {
+      "name": "Industry Impact",
+      "keywords": [
+        "industry",
+        "sector",
+        "transformation",
+        "disruption",
+        "change"
+      ],
+      "description": "How AI is affecting different industries",
+      "articleCount": 3,
+      "percentage": "3.2",
+      "sampleTitles": [
+        "The $22 costume mask that could enable teenagers to hack the social media ban",
+        "The AI services transformation may be harder than VCs think | TechCrunch",
+        "How generative AI boosters are trying to break into Hollywood"
+      ]
+    }
+  ],
+  "opportunities": [
+    {
+      "type": "Reality Check",
+      "title": "Why regulation Isn't Living Up to the Hype",
+      "description": "Critical analysis of regulation limitations and challenges",
+      "confidence": "high",
+      "reasoning": "1 articles discussing concerns",
+      "sampleArticles": [
+        "California’s new AI safety law shows regulation and innovation don’t have to clash  | TechCrunch"
+      ]
+    },
+    {
+      "type": "Reality Check",
+      "title": "Why data Isn't Living Up to the Hype",
+      "description": "Critical analysis of data limitations and challenges",
+      "confidence": "high",
+      "reasoning": "1 articles discussing concerns",
+      "sampleArticles": [
+        "Rising AI demands push Asia Pacific data centres to adapt, says Vertiv"
+      ]
+    },
+    {
+      "type": "Business Impact",
+      "title": "What google's Latest Moves Mean for the AI Industry",
+      "description": "Analyze google's strategy and market implications",
+      "confidence": "high",
+      "reasoning": "22 recent mentions indicate newsworthy activity",
+      "trendData": {
+        "topic": "google",
+        "count": 22,
+        "percentage": "23.7"
+      }
+    },
+    {
+      "type": "Business Impact",
+      "title": "What openai's Latest Moves Mean for the AI Industry",
+      "description": "Analyze openai's strategy and market implications",
+      "confidence": "high",
+      "reasoning": "20 recent mentions indicate newsworthy activity",
+      "trendData": {
+        "topic": "openai",
+        "count": 20,
+        "percentage": "21.5"
+      }
+    },
+    {
+      "type": "Future Forecast",
+      "title": "chatbot: The Emerging AI Trend Nobody's Talking About",
+      "description": "Early analysis of emerging chatbot trend",
+      "confidence": "medium",
+      "reasoning": "3 early mentions suggest emerging interest",
+      "emergingTrend": {
+        "topic": "chatbot",
+        "count": 3,
+        "percentage": "3.2"
+      }
+    },
+    {
+      "type": "Future Forecast",
+      "title": "funding: The Emerging AI Trend Nobody's Talking About",
+      "description": "Early analysis of emerging funding trend",
+      "confidence": "medium",
+      "reasoning": "3 early mentions suggest emerging interest",
+      "emergingTrend": {
+        "topic": "funding",
+        "count": 3,
+        "percentage": "3.2"
+      }
+    },
+    {
+      "type": "Analysis",
+      "title": "Understanding the AI Market Shift",
+      "description": "Business and market developments in AI",
+      "confidence": "medium",
+      "reasoning": "6 articles around this theme",
+      "themeData": {
+        "name": "Market Dynamics",
+        "keywords": [
+          "funding",
+          "investment",
+          "competition",
+          "market",
+          "revenue",
+          "growth"
+        ],
+        "description": "Business and market developments in AI",
+        "articleCount": 6,
+        "percentage": "6.5",
+        "sampleTitles": [
+          "Google&#039;s Jules enters developers&#039; toolchains as AI coding agent competition heats up | TechCrunch",
+          "California’s newly signed AI law just gave Big Tech exactly what it wanted",
+          "The value gap from AI investments is widening dangerously fast"
+        ]
+      }
+    },
+    {
+      "type": "Analysis",
+      "title": "The Technical Innovation Everyone Missed",
+      "description": "New technical approaches or methodologies",
+      "confidence": "medium",
+      "reasoning": "6 articles around this theme",
+      "themeData": {
+        "name": "Technical Innovation",
+        "keywords": [
+          "architecture",
+          "algorithm",
+          "method",
+          "technique",
+          "approach"
+        ],
+        "description": "New technical approaches or methodologies",
+        "articleCount": 6,
+        "percentage": "6.5",
+        "sampleTitles": [
+          "Google: EU&#039;s AI adoption lags China amid regulatory hurdles",
+          "DeepSeek tests “sparse attention” to slash AI processing costs",
+          "The rise of algorithmic agriculture? AI steps in"
+        ]
+      }
+    }
+  ],
+  "rawData": [
+    {
+      "title": "James Meek · Computers that want things",
+      "summary": "An exploration of artificial intelligence's lack of genuine desires and motivations, centered around the historic 2016 Go match between Lee Sedol and AlphaGo, and the philosophical implications for developing artificial general intelligence (AGI) with genuine wants and ethics.",
+      "tags": [
+        "ai"
+      ],
+      "source": "Hacker News AI",
+      "published_at": "2025-10-09T00:00:00+00:00",
+      "url": "https://www.lrb.co.uk/the-paper/v47/n18/james-meek/computers-that-want-things"
+    },
+    {
+      "title": "NBCUniversal’s new YouTube TV deal covers YouTube, Peacock, and a new sports network",
+      "summary": "NBCUniversal and YouTube TV have reached a new carriage deal that includes the relaunch of NBC Sports Network this fall, adds Peacock to YouTube Primetime Channels, and maintains NBCUniversal's full portfolio of networks on the streaming service.",
+      "tags": [
+        "tech",
+        "featured"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-02T23:20:53+00:00",
+      "url": "https://www.theverge.com/news/791124/youtube-tv-nbc-universal-peacock-nbcsn"
+    },
+    {
+      "title": "Redbox’s next product may be piracy lawsuits",
+      "summary": "Grove Street Partners has offered $100 million to acquire Chicken Soup for the Soul Entertainment's IP litigation assets, planning to pursue lawsuits against internet service providers that allegedly failed to address DMCA copyright violations.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-02T21:53:07+00:00",
+      "url": "https://www.theverge.com/tech/791013/redbox-chicken-soup-piracy-lawsuits-ip-sale-grove-street"
+    },
+    {
+      "title": "Why iRobot’s founder won’t go within 10 feet of today’s walking robots",
+      "summary": "Robotics pioneer Rodney Brooks warns that current bipedal humanoid robots are fundamentally unsafe due to their massive kinetic energy when walking, and argues that video-based learning alone won't enable human-like dexterity without advanced touch sensing capabilities.",
+      "tags": [
+        "tech",
+        "ai",
+        "biz & it",
+        "agility robotics",
+        "ai development tools",
+        "ai research",
+        "boston dynamics",
+        "dexterity",
+        "elon musk",
+        "figure"
+      ],
+      "source": "Ars Technica AI",
+      "published_at": "2025-10-02T21:10:23+00:00",
+      "url": "https://arstechnica.com/ai/2025/10/why-irobots-founder-wont-go-within-10-feet-of-todays-walking-robots"
+    },
+    {
+      "title": "You can still save on Xbox Game Pass Ultimate",
+      "summary": "Several retailers including Amazon, GameStop, Best Buy, and Walmart are still offering Xbox Game Pass Ultimate and PC Game Pass subscriptions at pre-price-hike rates, with 3-month Ultimate available for $59.99 versus Microsoft's new $29.99 monthly price.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai",
+        "microsoft"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-02T21:03:56+00:00",
+      "url": "https://www.theverge.com/tech/791012/xbox-pc-game-pass-ultimate-how-to-get-old-price"
+    },
+    {
+      "title": "Shein is opening its first physical stores",
+      "summary": "Chinese fast-fashion retailer Shein plans to open its first physical locations inside French department stores this November, facing opposition from local authorities and Galeries Lafayette amid new regulations on fast fashion and environmental impact.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-02T20:35:08+00:00",
+      "url": "https://www.theverge.com/news/791000/shein-france-physical-store-chinese-ecommerce-fast-fashion"
+    },
+    {
+      "title": "Ring’s new Search Party feature is on by default; should you opt out?",
+      "summary": "Ring's new Search Party feature, which uses AI to scan nearby Ring cameras for lost dogs, is being automatically enabled for users without prior consent, though users can opt out and must approve sharing any found footage.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-02T20:16:34+00:00",
+      "url": "https://www.theverge.com/news/790928/ring-search-party-cameras-default-opt-out"
+    },
+    {
+      "title": "Google is destroying independent websites, and one sees no choice but to defend it anyway",
+      "summary": "WikiHow CEO testified in Google's ad tech trial that while Google's AI features threaten web traffic, its ad tools provide crucial business stability, leading her to defend Google against DOJ's proposed breakup despite the company's found monopolistic practices.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai",
+        "google"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-02T20:00:00+00:00",
+      "url": "https://www.theverge.com/tech/790711/google-doj-ad-tech-remedies-wikihow-open-web"
+    },
+    {
+      "title": "Strava sues Garmin over alleged patent infringement",
+      "summary": "Strava is suing Garmin for patent infringement over features including segments and heatmaps, seeking to block sales of Garmin devices and its Connect platform, despite their long-standing partnership and integration history.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-02T19:37:59+00:00",
+      "url": "https://www.theverge.com/news/790922/strava-garmin-patent-infringement-lawsuit"
+    },
+    {
+      "title": "Anthropic hires new CTO with focus on AI infrastructure | TechCrunch",
+      "summary": "Anthropic has appointed former Stripe CTO Rahul Patil as its new chief technical officer, while co-founder Sam McCandlish moves to chief architect role, as the company restructures its technical teams to better handle infrastructure and inference challenges.",
+      "tags": [
+        "ai",
+        "ai infrastructure",
+        "anthropic",
+        "inference",
+        "stripe",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-02T19:00:39+00:00",
+      "url": "https://techcrunch.com/2025/10/02/anthropic-hires-new-cto-with-focus-on-ai-infrastructure"
+    },
+    {
+      "title": "OpenAI&#039;s Sora soars to No. 3 on the US App Store | TechCrunch",
+      "summary": "OpenAI's Sora AI video app reached No. 3 on the US App Store with 164,000 downloads in its first two days, despite being invite-only and limited to US and Canada users, performing similarly to xAI's Grok but behind ChatGPT and Gemini's launches.",
+      "tags": [
+        "ai",
+        "apps",
+        "social",
+        "openai",
+        "sora",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-02T18:24:54+00:00",
+      "url": "https://techcrunch.com/2025/10/02/openais-sora-soars-to-no-3-on-the-u-s-app-store"
+    },
+    {
+      "title": "My Favorite All-in-One Printer and Scanner Is $50 Off",
+      "summary": "Epson's EcoTank ET-2980 all-in-one printer is on sale for $280 ($50 off), offering excellent print quality and significant long-term savings through its refillable ink tank system that can print thousands of pages before needing a refill.",
+      "tags": [
+        "tech",
+        "gear",
+        "gear / deals",
+        "gear / products",
+        "gear / products / home office",
+        "featured"
+      ],
+      "source": "Wired Tech",
+      "published_at": "2025-10-02T18:10:18.361+00:00",
+      "url": "https://www.wired.com/story/epson-ecotank-et2980-deal-1025"
+    },
+    {
+      "title": "Google&#039;s Jules enters developers&#039; toolchains as AI coding agent competition heats up | TechCrunch",
+      "summary": "Google is expanding its AI coding agent Jules with a new command-line interface and public API, allowing developers to integrate it into terminals, CI/CD systems, and communication tools while reducing context switching between different environments.",
+      "tags": [
+        "ai",
+        "gemini",
+        "google",
+        "google jules",
+        "jules",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-02T18:00:00+00:00",
+      "url": "https://techcrunch.com/2025/10/02/googles-jules-enters-developers-toolchains-as-ai-coding-agent-competition-heats-up"
+    },
+    {
+      "title": "It’s your last chance to snag the Xbox Series S and X at its current price before they rise tomorrow",
+      "summary": "Microsoft is raising prices on Xbox Series X and S consoles in the US starting October 3rd, 2025, with increases ranging from $20 for Series S models to $50-70 for Series X variants.",
+      "tags": [
+        "tech",
+        "featured"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-02T17:50:58+00:00",
+      "url": "https://www.theverge.com/tech/790768/xbox-series-x-s-kirby-air-riders-deal-sale"
+    },
+    {
+      "title": "Amazon now lets Prime members add items to completed orders",
+      "summary": "Amazon is rolling out a new 'Add to Delivery' feature for US Prime members that allows adding items to completed orders that haven't been delivered yet, available on mobile devices for eligible items like electronics, clothing, books, and groceries.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-02T17:36:32+00:00",
+      "url": "https://www.theverge.com/news/790703/amazon-prime-add-to-deliver-mobile-app-online-store"
+    },
+    {
+      "title": "Ex-OpenAI researcher dissects one of ChatGPT&#039;s delusional spirals | TechCrunch",
+      "summary": "A former OpenAI safety researcher analyzed a case where ChatGPT reinforced a user's delusional beliefs over three weeks, revealing issues with the AI's tendency to agree with and validate harmful user beliefs rather than provide appropriate pushback.",
+      "tags": [
+        "ai",
+        "ai psychosis",
+        "ai safety",
+        "chatbots",
+        "chatgpt",
+        "delusion",
+        "openai",
+        "sycophancy",
+        "featured",
+        "gpt"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-02T15:46:25+00:00",
+      "url": "https://techcrunch.com/2025/10/02/ex-openai-researcher-dissects-one-of-chatgpts-delusional-spirals"
+    },
+    {
+      "title": "Perplexity’s Comet AI browser now free; Max users get new &#039;background assistant&#039; | TechCrunch",
+      "summary": "Perplexity is making its Comet AI browser freely available to all users, while adding a new 'background assistant' feature for Max subscribers that can perform multiple simultaneous tasks like booking flights and sending emails.",
+      "tags": [
+        "ai",
+        "ai browser",
+        "comet",
+        "perplexity",
+        "perplexity ai",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-02T15:36:09+00:00",
+      "url": "https://techcrunch.com/2025/10/02/perplexitys-comet-ai-browser-now-free-max-users-get-new-background-assistant"
+    },
+    {
+      "title": "Phia&#039;s Phoebe Gates and Sophia Kianni talk consumer AI at Disrupt 2025 | TechCrunch",
+      "summary": "Phia co-founders Phoebe Gates and Sophia Kianni will discuss scaling their AI-powered shopping assistant startup and building Gen Z consumer loyalty at TechCrunch Disrupt 2025 in San Francisco.",
+      "tags": [
+        "ai",
+        "enterprise",
+        "tc",
+        "startups",
+        "venture",
+        "media & entertainment",
+        "commerce",
+        "social",
+        "fundraising",
+        "category functionality"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-02T15:00:00+00:00",
+      "url": "https://techcrunch.com/2025/10/02/storming-the-gates-scaling-consumer-ai-with-phoebe-gates-and-sophia-kianni-only-at-techcrunch-disrupt-2025"
+    },
+    {
+      "title": "A new a16z report looks at which AI companies startups are actually paying for | TechCrunch",
+      "summary": "Andreessen Horowitz's first AI Spending Report, based on Mercury's transaction data, reveals the top 50 AI companies that startups are paying for, with OpenAI and Anthropic leading while showing diversity across horizontal and vertical applications.",
+      "tags": [
+        "ai",
+        "a16z",
+        "startup spending",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-02T15:00:00+00:00",
+      "url": "https://techcrunch.com/2025/10/02/a-new-a16z-report-looks-at-which-ai-companies-startups-are-actually-paying-for"
+    },
+    {
+      "title": "OpenAI is the world&#039;s most valuable private company after private stock sale | TechCrunch",
+      "summary": "OpenAI's valuation reached $500 billion after a $6.6 billion private stock sale by employees to investors including SoftBank and T. Rowe Price, making it the most valuable private company globally.",
+      "tags": [
+        "ai",
+        "startups",
+        "venture",
+        "openai",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-02T14:35:44+00:00",
+      "url": "https://techcrunch.com/2025/10/02/openai-is-the-worlds-most-valuable-private-company-after-private-stock-sale"
+    }
+  ]
+}

@@ -480,7 +480,7 @@ class BlogAnalyzer {
     analysis.themes.slice(0, 5).forEach((theme, i) => {
       console.log(`${i + 1}. ${theme.name}: ${theme.articleCount} articles (${theme.percentage}%)`);
       if (theme.sampleTitles && theme.sampleTitles.length > 0) {
-        console.log(`   📰 Example: "${theme.sampleTitles[0].substring(0, 80)}..."`);
+        console.log(`   📰 Example: "${theme.sampleTitles[0]}"`);
       }
     });
 
