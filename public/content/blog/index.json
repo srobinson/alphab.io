@@ -1,6 +1,24 @@
 {
   "posts": [
     {
+      "slug": "openai-and-jony-ive-face-setbacks-with-screenless-ai-device",
+      "title": "OpenAI and Jony Ive Face Setbacks with Screenless AI Device",
+      "description": "Explore the challenges facing OpenAI and Jony Ive's ambitious screenless AI device project, as technical hurdles and design complexities impact their revolutionary vision.",
+      "date": "2025-10-06",
+      "publishedAt": "2025-10-06T06:34:58.201Z",
+      "category": "AI Analysis",
+      "tags": [
+        "OpenAI AI device",
+        "Jony Ive collaboration",
+        "screenless AI technology",
+        "OpenAI hardware",
+        "AI personal computing"
+      ],
+      "readTime": "12 min read",
+      "generated": true,
+      "draftId": "openai-and-jony-ive-may-be-struggling-to-192169"
+    },
+    {
       "slug": "ai-startups-now-command-62-of-vc-funding-the-new-reality",
       "title": "AI Startups Now Command 62% of VC Funding - The New Reality",
       "description": "Explore how AI startups are dominating the 2025 VC landscape with $192.7B in funding. Analysis of investment trends, risks, and what this means for non-AI ventures.",
@@ -109,6 +127,6 @@
       "draftId": "the-other-side-of-the-ai-hype-211355"
     }
   ],
-  "lastUpdated": "2025-10-06T06:26:16.696Z",
-  "totalPosts": 6
+  "lastUpdated": "2025-10-06T06:34:58.203Z",
+  "totalPosts": 7
 }
