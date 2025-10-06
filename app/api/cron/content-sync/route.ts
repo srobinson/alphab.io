@@ -60,6 +60,7 @@ export async function GET(request: NextRequest) {
 		const url = new URL(request.url);
 		const enableSummarization = url.searchParams.get("summarize") !== "false";
 		const saveContent = url.searchParams.get("saveContent") === "true";
+		const disableImages = url.searchParams.get("disableImages") === "true";
 		const minRelevanceScore = parseInt(
 			url.searchParams.get("minScore") || "40",
 		);
@@ -70,6 +71,7 @@ export async function GET(request: NextRequest) {
 		const syncOptions = {
 			enableSummarization,
 			saveContent,
+			disableImages,
 			minRelevanceScore,
 			maxItemsPerSource,
 			updateIndustryMoves: true,

@@ -1,0 +1,597 @@
+{
+  "timeframe": "24 days",
+  "articleCount": 153,
+  "generatedAt": "2025-10-06T06:22:15.875Z",
+  "topics": [
+    {
+      "topic": "openai",
+      "count": 32,
+      "percentage": "20.9"
+    },
+    {
+      "topic": "google",
+      "count": 26,
+      "percentage": "17.0"
+    },
+    {
+      "topic": "amazon",
+      "count": 16,
+      "percentage": "10.5"
+    },
+    {
+      "topic": "startup",
+      "count": 13,
+      "percentage": "8.5"
+    },
+    {
+      "topic": "gemini",
+      "count": 12,
+      "percentage": "7.8"
+    },
+    {
+      "topic": "meta",
+      "count": 6,
+      "percentage": "3.9"
+    },
+    {
+      "topic": "vision",
+      "count": 5,
+      "percentage": "3.3"
+    },
+    {
+      "topic": "valuation",
+      "count": 5,
+      "percentage": "3.3"
+    },
+    {
+      "topic": "funding",
+      "count": 5,
+      "percentage": "3.3"
+    },
+    {
+      "topic": "microsoft",
+      "count": 5,
+      "percentage": "3.3"
+    },
+    {
+      "topic": "anthropic",
+      "count": 5,
+      "percentage": "3.3"
+    },
+    {
+      "topic": "ai safety",
+      "count": 4,
+      "percentage": "2.6"
+    },
+    {
+      "topic": "investment",
+      "count": 4,
+      "percentage": "2.6"
+    },
+    {
+      "topic": "chatbot",
+      "count": 4,
+      "percentage": "2.6"
+    },
+    {
+      "topic": "enterprise",
+      "count": 4,
+      "percentage": "2.6"
+    },
+    {
+      "topic": "regulation",
+      "count": 2,
+      "percentage": "1.3"
+    },
+    {
+      "topic": "compliance",
+      "count": 2,
+      "percentage": "1.3"
+    },
+    {
+      "topic": "series s",
+      "count": 2,
+      "percentage": "1.3"
+    },
+    {
+      "topic": "series x",
+      "count": 2,
+      "percentage": "1.3"
+    },
+    {
+      "topic": "artificial general intelligence",
+      "count": 1,
+      "percentage": "0.7"
+    }
+  ],
+  "themes": [
+    {
+      "name": "Challenges & Limitations",
+      "keywords": [
+        "challenge",
+        "limitation",
+        "problem",
+        "issue",
+        "concern"
+      ],
+      "description": "Problems and limitations in current AI",
+      "articleCount": 13,
+      "percentage": "8.5",
+      "sampleTitles": [
+        "OpenAI and Jony Ive may be struggling to figure out their AI device | TechCrunch",
+        "Can tap-to-pay save public transportation?",
+        "Daniel Ek stepping down changes nothing for the artists boycotting Spotify"
+      ]
+    },
+    {
+      "name": "Market Dynamics",
+      "keywords": [
+        "funding",
+        "investment",
+        "competition",
+        "market",
+        "revenue",
+        "growth"
+      ],
+      "description": "Business and market developments in AI",
+      "articleCount": 11,
+      "percentage": "7.2",
+      "sampleTitles": [
+        "If you’re not an AI startup, good luck raising money from VCs | TechCrunch",
+        "Exclusive: Naveen Rao’s new AI hardware startup targets $5B valuation with backing from a16z, sources say",
+        "Supabase nabs $5B valuation, four months after hitting $2B | TechCrunch"
+      ]
+    },
+    {
+      "name": "Technical Innovation",
+      "keywords": [
+        "architecture",
+        "algorithm",
+        "method",
+        "technique",
+        "approach"
+      ],
+      "description": "New technical approaches or methodologies",
+      "articleCount": 8,
+      "percentage": "5.2",
+      "sampleTitles": [
+        "Sam Altman says Sora will add ‘granular,’ opt-in copyright controls | TechCrunch",
+        "Exclusive: Naveen Rao’s new AI hardware startup targets $5B valuation with backing from a16z, sources say",
+        "DeepSeek tests “sparse attention” to slash AI processing costs"
+      ]
+    },
+    {
+      "name": "Practical Applications",
+      "keywords": [
+        "implementation",
+        "deployment",
+        "use case",
+        "application",
+        "adoption"
+      ],
+      "description": "Real-world AI implementations and use cases",
+      "articleCount": 7,
+      "percentage": "4.6",
+      "sampleTitles": [
+        "Can tap-to-pay save public transportation?",
+        "With its latest acqui-hire, OpenAI is doubling down on personalized consumer AI  | TechCrunch",
+        "A new a16z report looks at which AI companies startups are actually paying for | TechCrunch"
+      ]
+    },
+    {
+      "name": "AI Capability Leap",
+      "keywords": [
+        "breakthrough",
+        "advancement",
+        "capability",
+        "performance",
+        "benchmark"
+      ],
+      "description": "Major advances in AI capabilities or performance",
+      "articleCount": 5,
+      "percentage": "3.3",
+      "sampleTitles": [
+        "Google updates its Home app with Gemini smarts | TechCrunch",
+        "Google unveils AI-powered Nest indoor and outdoor cameras, and a new doorbell | TechCrunch",
+        "We Gave Our AI Agents Twitter and Now They"
+      ]
+    },
+    {
+      "name": "Industry Impact",
+      "keywords": [
+        "industry",
+        "sector",
+        "transformation",
+        "disruption",
+        "change"
+      ],
+      "description": "How AI is affecting different industries",
+      "articleCount": 5,
+      "percentage": "3.3",
+      "sampleTitles": [
+        "Daniel Ek stepping down changes nothing for the artists boycotting Spotify",
+        "China Mobile Shanghai launches industry-first 5G-A network monetisation strategy with Huawei",
+        "The $22 costume mask that could enable teenagers to hack the social media ban"
+      ]
+    }
+  ],
+  "opportunities": [
+    {
+      "type": "Reality Check",
+      "title": "Why regulation Isn't Living Up to the Hype",
+      "description": "Critical analysis of regulation limitations and challenges",
+      "confidence": "high",
+      "reasoning": "2 articles discussing concerns",
+      "sampleArticles": [
+        "California’s new AI safety law shows regulation and innovation don’t have to clash  | TechCrunch",
+        "California’s new AI safety law shows regulation and innovation don’t have to clash  | TechCrunch"
+      ]
+    },
+    {
+      "type": "Reality Check",
+      "title": "Why privacy Isn't Living Up to the Hype",
+      "description": "Critical analysis of privacy limitations and challenges",
+      "confidence": "high",
+      "reasoning": "2 articles discussing concerns",
+      "sampleArticles": [
+        "OpenAI and Jony Ive may be struggling to figure out their AI device | TechCrunch",
+        "AI startup Friend spent more than $1M on all those subway ads | TechCrunch"
+      ]
+    },
+    {
+      "type": "Business Impact",
+      "title": "What openai's Latest Moves Mean for the AI Industry",
+      "description": "Analyze openai's strategy and market implications",
+      "confidence": "high",
+      "reasoning": "32 recent mentions indicate newsworthy activity",
+      "trendData": {
+        "topic": "openai",
+        "count": 32,
+        "percentage": "20.9"
+      }
+    },
+    {
+      "type": "Business Impact",
+      "title": "What google's Latest Moves Mean for the AI Industry",
+      "description": "Analyze google's strategy and market implications",
+      "confidence": "high",
+      "reasoning": "26 recent mentions indicate newsworthy activity",
+      "trendData": {
+        "topic": "google",
+        "count": 26,
+        "percentage": "17.0"
+      }
+    },
+    {
+      "type": "Future Forecast",
+      "title": "vision: The Emerging AI Trend Nobody's Talking About",
+      "description": "Early analysis of emerging vision trend",
+      "confidence": "medium",
+      "reasoning": "5 early mentions suggest emerging interest",
+      "emergingTrend": {
+        "topic": "vision",
+        "count": 5,
+        "percentage": "3.3"
+      }
+    },
+    {
+      "type": "Future Forecast",
+      "title": "valuation: The Emerging AI Trend Nobody's Talking About",
+      "description": "Early analysis of emerging valuation trend",
+      "confidence": "medium",
+      "reasoning": "5 early mentions suggest emerging interest",
+      "emergingTrend": {
+        "topic": "valuation",
+        "count": 5,
+        "percentage": "3.3"
+      }
+    },
+    {
+      "type": "Analysis",
+      "title": "Understanding the AI Market Shift",
+      "description": "Business and market developments in AI",
+      "confidence": "medium",
+      "reasoning": "11 articles around this theme",
+      "themeData": {
+        "name": "Market Dynamics",
+        "keywords": [
+          "funding",
+          "investment",
+          "competition",
+          "market",
+          "revenue",
+          "growth"
+        ],
+        "description": "Business and market developments in AI",
+        "articleCount": 11,
+        "percentage": "7.2",
+        "sampleTitles": [
+          "If you’re not an AI startup, good luck raising money from VCs | TechCrunch",
+          "Exclusive: Naveen Rao’s new AI hardware startup targets $5B valuation with backing from a16z, sources say",
+          "Supabase nabs $5B valuation, four months after hitting $2B | TechCrunch"
+        ]
+      }
+    },
+    {
+      "type": "Analysis",
+      "title": "The Technical Innovation Everyone Missed",
+      "description": "New technical approaches or methodologies",
+      "confidence": "medium",
+      "reasoning": "8 articles around this theme",
+      "themeData": {
+        "name": "Technical Innovation",
+        "keywords": [
+          "architecture",
+          "algorithm",
+          "method",
+          "technique",
+          "approach"
+        ],
+        "description": "New technical approaches or methodologies",
+        "articleCount": 8,
+        "percentage": "5.2",
+        "sampleTitles": [
+          "Sam Altman says Sora will add ‘granular,’ opt-in copyright controls | TechCrunch",
+          "Exclusive: Naveen Rao’s new AI hardware startup targets $5B valuation with backing from a16z, sources say",
+          "DeepSeek tests “sparse attention” to slash AI processing costs"
+        ]
+      }
+    }
+  ],
+  "rawData": [
+    {
+      "title": "James Meek · Computers that want things",
+      "summary": "An exploration of artificial intelligence's lack of genuine desires and motivations, centered around the historic 2016 Go match between Lee Sedol and AlphaGo, and the philosophical implications for developing artificial general intelligence (AGI) with genuine wants and ethics.",
+      "tags": [
+        "ai"
+      ],
+      "source": "Hacker News AI",
+      "published_at": "2025-10-09T00:00:00+00:00",
+      "url": "https://www.lrb.co.uk/the-paper/v47/n18/james-meek/computers-that-want-things"
+    },
+    {
+      "title": "Jane Goodall’s death triggered the premiere of Netflix’s new show",
+      "summary": "Netflix has launched 'Famous Last Words', a show featuring pre-recorded interviews with notable figures that only air after their death, with Jane Goodall's candid interview serving as the premiere episode.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-05T20:34:15+00:00",
+      "url": "https://www.theverge.com/news/792477/jane-goodall-netflix-famous-last-words"
+    },
+    {
+      "title": "California’s new AI safety law shows regulation and innovation don’t have to clash  | TechCrunch",
+      "summary": "California's new AI safety law SB 53 requires large AI labs to be transparent about safety protocols and prevent catastrophic risks, while mandating compliance with these protocols under state oversight.",
+      "tags": [
+        "ai",
+        "government & policy",
+        "ai policy",
+        "ai safety",
+        "equity",
+        "sb 1047",
+        "sb 53",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-05T17:51:48+00:00",
+      "url": "https://techcrunch.com/2025/10/05/californias-new-ai-safety-law-shows-regulation-and-innovation-dont-have-to-clash"
+    },
+    {
+      "title": "If you can get past the terrible logo, Audacity 4 looks pretty great",
+      "summary": "Audacity 4, slated for 2026 release, promises major UX improvements including easier track management, simplified audio editing tools, and removal of restrictive 'modes' that limited user interaction.",
+      "tags": [
+        "tech",
+        "featured"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-05T17:37:55+00:00",
+      "url": "https://www.theverge.com/news/792368/if-you-can-get-past-the-terrible-logo-audacity-4-looks-pretty-great"
+    },
+    {
+      "title": "OpenAI and Jony Ive may be struggling to figure out their AI device | TechCrunch",
+      "summary": "OpenAI and Jony Ive are facing technical challenges in developing a screen-less, palm-sized AI device that responds to audio and visual cues, with issues around device personality, privacy, and computing infrastructure potentially delaying its planned 2026 launch.",
+      "tags": [
+        "ai",
+        "startups",
+        "jony ive",
+        "openai",
+        "sam altman",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-05T16:34:26+00:00",
+      "url": "https://techcrunch.com/2025/10/05/openai-and-jony-ive-may-be-struggling-to-figure-out-their-ai-device"
+    },
+    {
+      "title": "Roland is finally honoring its legacy instead of just cashing in on it",
+      "summary": "Roland has announced the TR-1000, its first analog drum machine in over 40 years, marking a return to the company's analog roots after decades of focusing on digital instruments and emulations.",
+      "tags": [
+        "tech",
+        "featured"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-05T16:00:00+00:00",
+      "url": "https://www.theverge.com/entertainment/792209/roland-is-finally-honoring-its-legacy-instead-of-just-cashing-in-tr-1000"
+    },
+    {
+      "title": "The Reinforcement Gap — or why some AI skills improve faster than others   | TechCrunch",
+      "summary": "AI capabilities that can be automatically tested and validated through reinforcement learning (like coding and math) are advancing much faster than skills requiring subjective human evaluation, creating a growing 'reinforcement gap' in AI development progress.",
+      "tags": [
+        "ai",
+        "ai coding",
+        "reinforcement learning",
+        "sora 2",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-05T15:00:00+00:00",
+      "url": "https://techcrunch.com/2025/10/05/the-reinforcement-gap-or-why-some-ai-skills-improve-faster-than-others"
+    },
+    {
+      "title": "I’ve tested the latest Switch 2 controllers, and this one is the best",
+      "summary": "A comprehensive review of third-party Nintendo Switch 2 controllers finds the EasySMX S10 ($50) as the top recommendation, offering features like TMR joysticks, amiibo support, and HD rumble at a lower price than Nintendo's official Pro Controller.",
+      "tags": [
+        "tech",
+        "featured"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-05T14:00:00+00:00",
+      "url": "https://www.theverge.com/tech/791574/best-switch-2-controllers"
+    },
+    {
+      "title": "The developers behind a hit sausage-dueling game hope Steam launch will take it furter",
+      "summary": "Sausage Legend, a physics-based mobile game about dueling sausages with 3.5M players in Japan, is preparing for a Steam release with expanded features including a story mode and deck-building mechanics.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-05T13:00:00+00:00",
+      "url": "https://www.theverge.com/entertainment/791353/sausage-legend-steam-launch-interview"
+    },
+    {
+      "title": "Version History is live — here’s how to find it",
+      "summary": "The Verge launches 'Version History', a new tech rewatch podcast series that examines influential technology products, with its first episode focusing on the rise and impact of hoverboards in the 2010s.",
+      "tags": [
+        "tech",
+        "featured"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-05T12:30:00+00:00",
+      "url": "https://www.theverge.com/podcast/792339/version-history-podcast-hoverboards"
+    },
+    {
+      "title": "Can tap-to-pay save public transportation?",
+      "summary": "Cities across the US are adopting contactless tap-to-pay systems for public transit following New York's OMNY implementation, though challenges remain around accessibility for unbanked populations and system reliability.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-05T12:00:00+00:00",
+      "url": "https://www.theverge.com/column/789127/tap-to-pay-public-transportation"
+    },
+    {
+      "title": "The best lists to keep — and the best ways to keep them",
+      "summary": "A comprehensive guide to list-making tools and productivity apps, featuring reviews of new Amazon devices, OpenAI's social network, and various tech recommendations in The Verge's weekly Installer newsletter.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-05T12:00:00+00:00",
+      "url": "https://www.theverge.com/tech/791905/best-lists-apps-to-do-shopping-installer"
+    },
+    {
+      "title": "The Ninja Slushi Regularly Sells Out—Prime Day Brings Its Cheapest-Ever Price",
+      "summary": "The Ninja Slushi home slushie maker is available at its lowest price ever with a $50 discount during Prime Day, marking a rare sale for this typically hard-to-find appliance that can make frozen drinks from various beverages.",
+      "tags": [
+        "tech",
+        "gear",
+        "gear / deals",
+        "featured"
+      ],
+      "source": "Wired Tech",
+      "published_at": "2025-10-05T11:36:00+00:00",
+      "url": "https://www.wired.com/story/ninja-slushi-prime-day-deal-october-2025"
+    },
+    {
+      "title": "If you’re not an AI startup, good luck raising money from VCs | TechCrunch",
+      "summary": "According to PitchBook data, AI startups are dominating venture capital investment in 2025, accounting for $192.7B out of $366.8B total investment, with AI representing 62.7% of US VC investments in the latest quarter.",
+      "tags": [
+        "ai",
+        "venture",
+        "pitchbook",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-04T20:05:28+00:00",
+      "url": "https://techcrunch.com/2025/10/04/if-youre-not-an-ai-startup-good-luck-raising-money-from-vcs"
+    },
+    {
+      "title": "This week’s best deal is a ‘kids’ Kindle Paperwhite that’s better than the adult version",
+      "summary": "Amazon's Kindle Paperwhite Kids e-reader is on sale for $134.99 ($45 off), offering better value than the adult version with included extras like an ad-free screen, protective cover, extended warranty, and Amazon Kids Plus subscription.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-04T17:00:00+00:00",
+      "url": "https://www.theverge.com/tech/791728/kindle-paperwhite-kids-sonos-era-100-deal-sale"
+    },
+    {
+      "title": "Nintendo Reportedly Lobbying Japanese Government to Push Back Against Generative AI",
+      "summary": null,
+      "tags": [
+        "ai"
+      ],
+      "source": "Hacker News AI",
+      "published_at": "2025-10-04T16:45:16+00:00",
+      "url": "https://twistedvoxel.com/nintendo-reportedly-lobbying-japanese-government-to-push-back-against-generative-ai"
+    },
+    {
+      "title": "Instacrops will demo its water-saving, crop-boosting AI at TechCrunch Disrupt 2025 | TechCrunch",
+      "summary": "Chilean startup Instacrops uses AI to help farms reduce water consumption by up to 30% while increasing crop yields by 20%, processing 15 million data points per hour to provide irrigation recommendations through WhatsApp and other channels.",
+      "tags": [
+        "ai",
+        "climate",
+        "startups",
+        "techcrunch disrupt 2025",
+        "instacrops",
+        "agriculture",
+        "water conservation",
+        "startup battlefield",
+        "water",
+        "techcrunch disrupt"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-04T16:30:00+00:00",
+      "url": "https://techcrunch.com/2025/10/04/instacrops-will-demo-its-water-saving-crop-boosting-ai-at-techcrunch-disrupt-2025"
+    },
+    {
+      "title": "Sam Altman says Sora will add ‘granular,’ opt-in copyright controls | TechCrunch",
+      "summary": "OpenAI CEO Sam Altman announced that Sora will implement opt-in copyright controls, allowing rightsholders to specify how their characters can be used in AI-generated videos, marking a shift from the previous opt-out approach.",
+      "tags": [
+        "ai",
+        "media & entertainment",
+        "apps",
+        "social",
+        "sora",
+        "openai",
+        "sam altman",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-04T16:26:50+00:00",
+      "url": "https://techcrunch.com/2025/10/04/sam-altman-says-sora-will-add-granular-opt-in-copyright-controls"
+    },
+    {
+      "title": "Daniel Ek stepping down changes nothing for the artists boycotting Spotify",
+      "summary": "Despite Daniel Ek stepping down as Spotify CEO while remaining executive chairman, artists boycotting the platform over issues including low payouts and AI concerns say they won't return without substantial changes to artist compensation and treatment.",
+      "tags": [
+        "tech",
+        "featured"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-04T16:00:00+00:00",
+      "url": "https://www.theverge.com/report/791593/daniel-ek-stepping-down-changes-nothing-for-artists-boycotting-spotify"
+    },
+    {
+      "title": "Ecovacs’ Deebot X8 and X9 Pro Omni robovacs have hit a new low price",
+      "summary": null,
+      "tags": [
+        "tech",
+        "featured"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-04T14:41:43+00:00",
+      "url": "https://www.theverge.com/tech/791106/ecovacs-deebot-x8-x9-pro-omni-robot-vacuum-prime-day-deal-sale"
+    }
+  ]
+}

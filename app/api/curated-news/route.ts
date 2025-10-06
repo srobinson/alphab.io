@@ -37,6 +37,7 @@ type ArticleRecord = {
 	summary: string | null;
 	published_at: string | null;
 	created_at?: string | null;
+	updated_at?: string | null;
 	tags: string[] | null;
 	image_url: string | null;
 };
@@ -55,7 +56,15 @@ type CuratedNewsItem = {
 };
 
 // Use cached image_url from database only - no generation at API level
-function getArticleImage(article: ArticleRecord): string {
+function getArticleImage(
+	article: ArticleRecord,
+	hideImages: boolean = true,
+): string {
+	// If images are hidden, return empty string
+	if (hideImages) {
+		return "";
+	}
+
 	// Return cached image if available, otherwise return a placeholder
 	// Thumbnails should only be generated during sync/backfill operations
 	if (article.image_url && article.image_url.trim().length > 0) {
@@ -69,13 +78,15 @@ function getArticleImage(article: ArticleRecord): string {
 
 export async function GET(request: Request) {
 	console.log("🚀 CURATED NEWS API CALLED - " + new Date().toISOString());
-	try {
-		// Parse query parameters for pagination
-		const { searchParams } = new URL(request.url);
-		const page = parseInt(searchParams.get("page") || "1", 10);
-		const limit = parseInt(searchParams.get("limit") || "12", 10);
-		const offset = (page - 1) * limit;
 
+	// Parse query parameters for pagination
+	const { searchParams } = new URL(request.url);
+	const page = parseInt(searchParams.get("page") || "1", 10);
+	const limit = parseInt(searchParams.get("limit") || "12", 10);
+	const hideImages = searchParams.get("hideImages") === "true";
+	const offset = (page - 1) * limit;
+
+	try {
 		console.log(
 			`📊 Request params: page=${page}, limit=${limit}, offset=${offset}`,
 		);
@@ -133,11 +144,11 @@ export async function GET(request: Request) {
 		} = await supabase
 			.from<ArticleRecord>("articles")
 			.select(
-				"id, title, url, source, summary, published_at, tags, image_url, created_at",
+				"id, title, url, source, summary, published_at, tags, image_url, created_at, updated_at",
 				{ count: "exact" },
 			)
 			.eq("status", "published")
-			.order("published_at", { ascending: false })
+			.order("updated_at", { ascending: false })
 			.range(offset, offset + limit - 1);
 
 		if (articlesError) {
@@ -198,7 +209,7 @@ export async function GET(request: Request) {
 					time: formatTimeAgo(article.published_at),
 					source: article.source,
 					link: article.url,
-					image: getArticleImage(article),
+					image: getArticleImage(article, hideImages),
 					isRSS: true,
 					trending,
 				};
@@ -208,6 +219,8 @@ export async function GET(request: Request) {
 		// If no real data available, use fallback
 		if (items.length === 0) {
 			console.log("No articles found, using fallback data");
+
+			const fallbackImage = hideImages ? "" : "/images/ai-head-design.webp";
 
 			items = [
 				{
@@ -219,7 +232,8 @@ export async function GET(request: Request) {
 					time: "Recently",
 					source: "System",
 					link: "#",
-					image: "/images/ai-head-design.webp",
+					image: fallbackImage,
+					isRSS: false,
 					trending: false,
 				},
 				{
@@ -231,7 +245,8 @@ export async function GET(request: Request) {
 					time: "System Status",
 					source: "RADE",
 					link: "#",
-					image: "/images/ai-head-design.webp",
+					image: fallbackImage,
+					isRSS: false,
 					trending: false,
 				},
 			];
@@ -261,6 +276,8 @@ export async function GET(request: Request) {
 		console.error("Error fetching curated news:", error);
 
 		// Return fallback data on error
+		const errorImage = hideImages ? "" : "/images/ai-head-design.webp";
+
 		return NextResponse.json(
 			{
 				items: [
@@ -273,7 +290,8 @@ export async function GET(request: Request) {
 						time: "System Status",
 						source: "RADE",
 						link: "#",
-						image: "/images/ai-head-design.webp",
+						image: errorImage,
+						isRSS: false,
 						trending: false,
 					},
 				],

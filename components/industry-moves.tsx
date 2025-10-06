@@ -12,7 +12,6 @@ import {
 	TrendingUp,
 	Zap,
 } from "lucide-react";
-import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import Masonry from "react-masonry-css";
 
@@ -392,8 +391,8 @@ export function IndustryMoves() {
 								)}
 
 								{/* Image Section with Brand Styling */}
-								<div className="relative w-full h-48 overflow-hidden bg-gray-200 dark:bg-gray-700">
-									<Image
+								<div className="relative w-full h-0 dark:h-4 overflow-hidden bg-orange-50 dark:bg-gray-700">
+									{/* <Image
 										src={resolvedImage}
 										alt={move.title}
 										fill
@@ -419,7 +418,7 @@ export function IndustryMoves() {
 											transition: "opacity 0.3s ease-in-out",
 											filter: "saturate(0.85) contrast(1.05) brightness(0.92)",
 										}}
-									/>
+									/> */}
 
 									{/* Brand-colored overlay for consistency */}
 									<div className="absolute inset-0 bg-gradient-to-br from-blue-600/15 via-transparent to-blue-900/20 mix-blend-multiply" />

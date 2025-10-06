@@ -17,7 +17,7 @@ import { ContentSyncService } from "../lib/content/sync-service";
 type Command = "sync" | "test" | "status" | "cache" | "help";
 
 async function runSync(
-	options: { sources?: string[]; summarize?: boolean } = {},
+	options: { sources?: string[]; summarize?: boolean; disableImages?: boolean } = {},
 ) {
 	console.log("🔄 Starting content sync...");
 
@@ -27,6 +27,7 @@ async function runSync(
 		const syncOptions = {
 			enableSummarization: options.summarize !== false,
 			saveContent: false,
+			disableImages: options.disableImages || false,
 			minRelevanceScore: 40,
 			maxItemsPerSource: 12,
 			updateIndustryMoves: true,
@@ -178,8 +179,13 @@ function showHelp() {
 	console.log("  cache    Update industry moves cache");
 	console.log("  help     Show this help message");
 	console.log("");
+	console.log("Sync Options:");
+	console.log("  --disable-images    Disable image generation (no Unsplash)");
+	console.log("  --no-images         Alias for --disable-images");
+	console.log("");
 	console.log("Examples:");
 	console.log("  pnpm content sync");
+	console.log("  pnpm content sync --disable-images");
 	console.log("  pnpm content test");
 	console.log("  pnpm content status");
 	console.log("");
@@ -197,9 +203,12 @@ async function main() {
 	console.log("");
 
 	switch (command) {
-		case "sync":
-			await runSync();
+		case "sync": {
+			// Parse additional flags for sync command
+			const disableImages = args.includes("--disable-images") || args.includes("--no-images");
+			await runSync({ disableImages });
 			break;
+		}
 
 		case "test":
 			await testSources();

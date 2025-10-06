@@ -1,6 +1,24 @@
 {
   "posts": [
     {
+      "slug": "ai-startups-now-command-62-of-vc-funding-the-new-reality",
+      "title": "AI Startups Now Command 62% of VC Funding - The New Reality",
+      "description": "Explore how AI startups are dominating the 2025 VC landscape with $192.7B in funding. Analysis of investment trends, risks, and what this means for non-AI ventures.",
+      "date": "2025-10-06",
+      "publishedAt": "2025-10-06T06:26:16.694Z",
+      "category": "AI Analysis",
+      "tags": [
+        "AI startup funding",
+        "venture capital 2025",
+        "AI investment trends",
+        "VC funding allocation",
+        "startup investment strategy"
+      ],
+      "readTime": "12 min read",
+      "generated": true,
+      "draftId": "if-youre-not-an-ai-startup-youre-not-rai-952691"
+    },
+    {
       "slug": "a16z-report-reveals-top-ai-tools-startups-actually-pay-for",
       "title": "a16z Report Reveals Top AI Tools Startups Actually Pay For",
       "description": "New research from a16z uncovers which AI applications capture startup spending in 2025, with $104B raised in H1 alone. Explore key investment trends and insights.",
@@ -91,6 +109,6 @@
       "draftId": "the-other-side-of-the-ai-hype-211355"
     }
   ],
-  "lastUpdated": "2025-10-03T02:30:40.896Z",
-  "totalPosts": 5
+  "lastUpdated": "2025-10-06T06:26:16.696Z",
+  "totalPosts": 6
 }

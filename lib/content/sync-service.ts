@@ -24,6 +24,7 @@ export interface SyncOptions {
 	enableSummarization?: boolean;
 	saveContent?: boolean;
 	updateIndustryMoves?: boolean;
+	disableImages?: boolean;
 }
 
 type GenericDatabase = Record<string, Record<string, unknown>>;
@@ -170,21 +171,26 @@ export class ContentSyncService {
 				filtered_out: fetchResult.items.length - itemsToProcess.length,
 			});
 
-			// Ingest items into database with Unsplash images only
+			// Ingest items into database
 			let ingestedCount = 0;
 			for (const item of itemsToProcess) {
 				try {
-					// Generate Unsplash image URL only (no fallbacks)
-					let imageUrl: string | undefined = item.imageUrl; // Use RSS image if available
+					// Handle image URL based on disableImages flag
+					let imageUrl: string | undefined = undefined;
 
-					// Only fetch from Unsplash if no RSS image exists
-					if (!imageUrl) {
-						const searchQuery = SimpleThumbnailService.getUnsplashSearchQuery(
-							item.title,
-							item.classification.tags,
-						);
-						const unsplashImage = await searchUnsplashImages(searchQuery, 1);
-						imageUrl = unsplashImage || undefined; // Don't use fallback
+					if (!options.disableImages) {
+						// Generate Unsplash image URL only (no fallbacks)
+						imageUrl = item.imageUrl; // Use RSS image if available
+
+						// Only fetch from Unsplash if no RSS image exists
+						if (!imageUrl) {
+							const searchQuery = SimpleThumbnailService.getUnsplashSearchQuery(
+								item.title,
+								item.classification.tags,
+							);
+							const unsplashImage = await searchUnsplashImages(searchQuery, 1);
+							imageUrl = unsplashImage || undefined; // Don't use fallback
+						}
 					}
 
 					const ingestResult = await ingestUrl(
