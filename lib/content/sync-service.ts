@@ -1,10 +1,10 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { monitor } from "../monitoring";
 import { ingestUrl } from "../server/ingest";
-import { SimpleThumbnailService } from "./simple-thumbnails";
 import { searchUnsplashImages } from "../unsplash";
 import { ContentClassifier } from "./classifier";
 import { type FetchResult, type RSSItem, RSSParser } from "./rss-parser";
+import { SimpleThumbnailService } from "./simple-thumbnails";
 import { type ContentSource, getActiveSourcesByPriority } from "./sources";
 
 export interface SyncResult {
@@ -138,8 +138,9 @@ export class ContentSyncService {
 			});
 
 			// Fetch RSS feed
-			const fetchResult: FetchResult =
-				await this.rssParser.fetchFromSource(source);
+			const fetchResult: FetchResult = await this.rssParser.fetchFromSource(
+				source,
+			);
 
 			if (!fetchResult.success) {
 				return {

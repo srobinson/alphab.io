@@ -98,15 +98,21 @@ export const NEWS_QUERIES = [
 ];
 
 // RSS feed sources
+// https://github.com/RSS-Renaissance/awesome-AI-feeds
 export const rssFeedSources = [
   {
     url: "https://techcrunch.com/category/artificial-intelligence/feed/",
     name: "TechCrunch AI",
     category: "breaking" as const,
   },
+  // {
+  //   url: "https://venturebeat.com/ai/feed/",
+  //   name: "VentureBeat AI",
+  //   category: "insight" as const,
+  // },
   {
-    url: "https://venturebeat.com/ai/feed/",
-    name: "VentureBeat AI",
+    url: "http://feeds.feedburner.com/AIInTheNews",
+    name: "AI Topics",
     category: "insight" as const,
   },
   {
@@ -216,9 +222,12 @@ export async function fetchNewsAPI(
   try {
     const url = `${NEWS_API_CONFIG.baseUrl}/everything?q=${encodeURIComponent(
       query
-    )}&sortBy=publishedAt&pageSize=${pageSize}&apiKey=${
+  )}&sortBy=publishedAt&pageSize=${pageSize}&apiKey=${
       NEWS_API_CONFIG.apiKey
-    }`;
+      }`;
+    
+    console.log(url);
+    
 
     const response = await fetch(url, {
       headers: {

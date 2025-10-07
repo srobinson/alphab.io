@@ -1,0 +1,617 @@
+{
+  "timeframe": "64 days",
+  "articleCount": 238,
+  "generatedAt": "2025-10-08T14:14:15.223Z",
+  "topics": [
+    {
+      "topic": "openai",
+      "count": 56,
+      "percentage": "23.5"
+    },
+    {
+      "topic": "google",
+      "count": 49,
+      "percentage": "20.6"
+    },
+    {
+      "topic": "amazon",
+      "count": 36,
+      "percentage": "15.1"
+    },
+    {
+      "topic": "gemini",
+      "count": 15,
+      "percentage": "6.3"
+    },
+    {
+      "topic": "startup",
+      "count": 14,
+      "percentage": "5.9"
+    },
+    {
+      "topic": "anthropic",
+      "count": 10,
+      "percentage": "4.2"
+    },
+    {
+      "topic": "microsoft",
+      "count": 9,
+      "percentage": "3.8"
+    },
+    {
+      "topic": "enterprise",
+      "count": 8,
+      "percentage": "3.4"
+    },
+    {
+      "topic": "funding",
+      "count": 6,
+      "percentage": "2.5"
+    },
+    {
+      "topic": "meta",
+      "count": 6,
+      "percentage": "2.5"
+    },
+    {
+      "topic": "chatbot",
+      "count": 5,
+      "percentage": "2.1"
+    },
+    {
+      "topic": "vision",
+      "count": 5,
+      "percentage": "2.1"
+    },
+    {
+      "topic": "valuation",
+      "count": 5,
+      "percentage": "2.1"
+    },
+    {
+      "topic": "investment",
+      "count": 4,
+      "percentage": "1.7"
+    },
+    {
+      "topic": "claude",
+      "count": 4,
+      "percentage": "1.7"
+    },
+    {
+      "topic": "ai safety",
+      "count": 4,
+      "percentage": "1.7"
+    },
+    {
+      "topic": "acquisition",
+      "count": 3,
+      "percentage": "1.3"
+    },
+    {
+      "topic": "regulation",
+      "count": 2,
+      "percentage": "0.8"
+    },
+    {
+      "topic": "compliance",
+      "count": 2,
+      "percentage": "0.8"
+    },
+    {
+      "topic": "series s",
+      "count": 2,
+      "percentage": "0.8"
+    }
+  ],
+  "themes": [
+    {
+      "name": "Challenges & Limitations",
+      "keywords": [
+        "challenge",
+        "limitation",
+        "problem",
+        "issue",
+        "concern"
+      ],
+      "description": "Problems and limitations in current AI",
+      "articleCount": 18,
+      "percentage": "7.6",
+      "sampleTitles": [
+        "Nothing Ear 3 review: work in progress",
+        "You can't libel the dead. But that doesn't mean you should deepfake them. | TechCrunch",
+        "Ars Live: Is the AI bubble about to pop? Ed Zitron is on with Ars at 3:30pm EDT today"
+      ]
+    },
+    {
+      "name": "Market Dynamics",
+      "keywords": [
+        "funding",
+        "investment",
+        "competition",
+        "market",
+        "revenue",
+        "growth"
+      ],
+      "description": "Business and market developments in AI",
+      "articleCount": 16,
+      "percentage": "6.7",
+      "sampleTitles": [
+        "SoftBank makes a $5.4 billion bet on AI robots",
+        "Google's Search Live comes to India, AI Mode gets more languages | TechCrunch",
+        "Ars Live: Is the AI bubble about to pop? Ed Zitron is on with Ars at 3:30pm EDT today"
+      ]
+    },
+    {
+      "name": "AI Capability Leap",
+      "keywords": [
+        "breakthrough",
+        "advancement",
+        "capability",
+        "performance",
+        "benchmark"
+      ],
+      "description": "Major advances in AI capabilities or performance",
+      "articleCount": 10,
+      "percentage": "4.2",
+      "sampleTitles": [
+        "Tristan Thompson on AI, Sports & Startups at Disrupt 2025 | TechCrunch",
+        "Nothing Ear 3 review: work in progress",
+        "Google launches its AI vibe-coding app Opal in 15 more countries | TechCrunch"
+      ]
+    },
+    {
+      "name": "Practical Applications",
+      "keywords": [
+        "implementation",
+        "deployment",
+        "use case",
+        "application",
+        "adoption"
+      ],
+      "description": "Real-world AI implementations and use cases",
+      "articleCount": 10,
+      "percentage": "4.2",
+      "sampleTitles": [
+        "Anthropic and IBM announce strategic partnership | TechCrunch",
+        "OpenAI launches apps inside of ChatGPT | TechCrunch",
+        "A 19-year-old nabs backing from Google execs for his AI memory startup, Supermemory | TechCrunch"
+      ]
+    },
+    {
+      "name": "Technical Innovation",
+      "keywords": [
+        "architecture",
+        "algorithm",
+        "method",
+        "technique",
+        "approach"
+      ],
+      "description": "New technical approaches or methodologies",
+      "articleCount": 9,
+      "percentage": "3.8",
+      "sampleTitles": [
+        "Sam Altman says Sora will add ‘granular,’ opt-in copyright controls | TechCrunch",
+        "Exclusive: Naveen Rao’s new AI hardware startup targets $5B valuation with backing from a16z, sources say",
+        "Google: EU's AI adoption lags China amid regulatory hurdles"
+      ]
+    },
+    {
+      "name": "Industry Impact",
+      "keywords": [
+        "industry",
+        "sector",
+        "transformation",
+        "disruption",
+        "change"
+      ],
+      "description": "How AI is affecting different industries",
+      "articleCount": 9,
+      "percentage": "3.8",
+      "sampleTitles": [
+        "Tuned Global strengthens its leadership in music technology with the acquisition of Figaro.ai",
+        "AI Redaction That Puts Privacy First: CaseGuard Studio Leading The Way",
+        "Ars Live: Is the AI bubble about to pop? Ed Zitron is on with Ars at 3:30pm EDT today"
+      ]
+    }
+  ],
+  "opportunities": [
+    {
+      "type": "Reality Check",
+      "title": "Why regulation Isn't Living Up to the Hype",
+      "description": "Critical analysis of regulation limitations and challenges",
+      "confidence": "high",
+      "reasoning": "2 articles discussing concerns",
+      "sampleArticles": [
+        "California’s new AI safety law shows regulation and innovation don’t have to clash  | TechCrunch",
+        "California’s new AI safety law shows regulation and innovation don’t have to clash  | TechCrunch"
+      ]
+    },
+    {
+      "type": "Reality Check",
+      "title": "Why privacy Isn't Living Up to the Hype",
+      "description": "Critical analysis of privacy limitations and challenges",
+      "confidence": "high",
+      "reasoning": "2 articles discussing concerns",
+      "sampleArticles": [
+        "OpenAI and Jony Ive may be struggling to figure out their AI device | TechCrunch",
+        "AI startup Friend spent more than $1M on all those subway ads | TechCrunch"
+      ]
+    },
+    {
+      "type": "Business Impact",
+      "title": "What openai's Latest Moves Mean for the AI Industry",
+      "description": "Analyze openai's strategy and market implications",
+      "confidence": "high",
+      "reasoning": "56 recent mentions indicate newsworthy activity",
+      "trendData": {
+        "topic": "openai",
+        "count": 56,
+        "percentage": "23.5"
+      }
+    },
+    {
+      "type": "Business Impact",
+      "title": "What google's Latest Moves Mean for the AI Industry",
+      "description": "Analyze google's strategy and market implications",
+      "confidence": "high",
+      "reasoning": "49 recent mentions indicate newsworthy activity",
+      "trendData": {
+        "topic": "google",
+        "count": 49,
+        "percentage": "20.6"
+      }
+    },
+    {
+      "type": "Future Forecast",
+      "title": "chatbot: The Emerging AI Trend Nobody's Talking About",
+      "description": "Early analysis of emerging chatbot trend",
+      "confidence": "medium",
+      "reasoning": "5 early mentions suggest emerging interest",
+      "emergingTrend": {
+        "topic": "chatbot",
+        "count": 5,
+        "percentage": "2.1"
+      }
+    },
+    {
+      "type": "Future Forecast",
+      "title": "vision: The Emerging AI Trend Nobody's Talking About",
+      "description": "Early analysis of emerging vision trend",
+      "confidence": "medium",
+      "reasoning": "5 early mentions suggest emerging interest",
+      "emergingTrend": {
+        "topic": "vision",
+        "count": 5,
+        "percentage": "2.1"
+      }
+    },
+    {
+      "type": "Analysis",
+      "title": "Understanding the AI Market Shift",
+      "description": "Business and market developments in AI",
+      "confidence": "medium",
+      "reasoning": "16 articles around this theme",
+      "themeData": {
+        "name": "Market Dynamics",
+        "keywords": [
+          "funding",
+          "investment",
+          "competition",
+          "market",
+          "revenue",
+          "growth"
+        ],
+        "description": "Business and market developments in AI",
+        "articleCount": 16,
+        "percentage": "6.7",
+        "sampleTitles": [
+          "SoftBank makes a $5.4 billion bet on AI robots",
+          "Google's Search Live comes to India, AI Mode gets more languages | TechCrunch",
+          "Ars Live: Is the AI bubble about to pop? Ed Zitron is on with Ars at 3:30pm EDT today"
+        ]
+      }
+    },
+    {
+      "type": "Analysis",
+      "title": "The Real Breakthrough in Tristan",
+      "description": "Major advances in AI capabilities or performance",
+      "confidence": "medium",
+      "reasoning": "10 articles around this theme",
+      "themeData": {
+        "name": "AI Capability Leap",
+        "keywords": [
+          "breakthrough",
+          "advancement",
+          "capability",
+          "performance",
+          "benchmark"
+        ],
+        "description": "Major advances in AI capabilities or performance",
+        "articleCount": 10,
+        "percentage": "4.2",
+        "sampleTitles": [
+          "Tristan Thompson on AI, Sports & Startups at Disrupt 2025 | TechCrunch",
+          "Nothing Ear 3 review: work in progress",
+          "Google launches its AI vibe-coding app Opal in 15 more countries | TechCrunch"
+        ]
+      }
+    }
+  ],
+  "rawData": [
+    {
+      "title": "James Meek · Computers that want things",
+      "summary": "An exploration of artificial intelligence's lack of genuine desires and motivations, centered around the historic 2016 Go match between Lee Sedol and AlphaGo, and the philosophical implications for developing artificial general intelligence (AGI) with genuine wants and ethics.",
+      "tags": [
+        "ai"
+      ],
+      "source": "Hacker News AI",
+      "published_at": "2025-10-09T00:00:00+00:00",
+      "url": "https://www.lrb.co.uk/the-paper/v47/n18/james-meek/computers-that-want-things"
+    },
+    {
+      "title": "TAG Heuer's New Smartwatch Ditches Google's Wear OS to Be Apple Friendly",
+      "summary": "TAG Heuer's new Connected Calibre E5 smartwatch abandons Google's Wear OS for a proprietary operating system, making it compatible with both iPhones and Android devices, though it lacks access to major app stores.",
+      "tags": [
+        "tech",
+        "gear",
+        "gear / gear news and events",
+        "gear / products / watches",
+        "featured",
+        "google",
+        "apple"
+      ],
+      "source": "Wired Tech",
+      "published_at": "2025-10-08T14:00:00+00:00",
+      "url": "https://www.wired.com/story/tag-heuer-connected-calibre-e5"
+    },
+    {
+      "title": "Tristan Thompson on AI, Sports & Startups at Disrupt 2025 | TechCrunch",
+      "summary": "Former NBA champion Tristan Thompson will speak at TechCrunch Disrupt 2025 about his ventures in AI sports analytics and tech entrepreneurship, including his company TracyAI which uses artificial intelligence for sports performance insights.",
+      "tags": [
+        "ai",
+        "tc",
+        "startups",
+        "fintech",
+        "biotech & health",
+        "venture",
+        "media & entertainment",
+        "commerce",
+        "social",
+        "sports tech"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-08T14:00:00+00:00",
+      "url": "https://techcrunch.com/2025/10/08/tristan-thompson-on-ai-sports-and-startups-at-techcrunch-disrupt-2025"
+    },
+    {
+      "title": "Google launches extensions system for its command-line coding tool | TechCrunch",
+      "summary": "Google launched Gemini CLI Extensions, allowing third-party companies to integrate with its command-line AI system through open-source extensions hosted on Github, with initial partners including Figma and Stripe.",
+      "tags": [
+        "ai",
+        "tc",
+        "google",
+        "extensions",
+        "gemini",
+        "gemini cli",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-08T14:00:00+00:00",
+      "url": "https://techcrunch.com/2025/10/08/google-launches-extensions-system-for-its-command-line-coding-tool"
+    },
+    {
+      "title": "This Moto Phone Has a Headphone Jack, MicroSD Slot, and Wireless Charging—and It's on Sale for $200",
+      "summary": "The Motorola Moto G Power 5G 2025 smartphone offers rare features like a headphone jack, microSD slot, and wireless charging, along with a 5,000-mAh battery that lasts two days, now available for $200 during Amazon's sale.",
+      "tags": [
+        "tech",
+        "gear",
+        "gear / deals",
+        "gear / products / phones",
+        "featured"
+      ],
+      "source": "Wired Tech",
+      "published_at": "2025-10-08T13:44:12.545+00:00",
+      "url": "https://www.wired.com/story/moto-g-power-5g-2025-prime-big-deal-days"
+    },
+    {
+      "title": "SoftBank makes a $5.4 billion bet on AI robots",
+      "summary": "SoftBank is acquiring ABB's robotics division for $5.4 billion as part of its strategic push into 'Physical AI' and robotics, marking one of four key investment areas alongside chips, data centers, and generative AI.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai",
+        "robotics"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-08T13:00:35+00:00",
+      "url": "https://www.theverge.com/news/796068/softbank-bets-on-ai-robots"
+    },
+    {
+      "title": "Our favorite batteries and chargers are on sale for October Prime Day",
+      "summary": "Various charging accessories from major brands like Anker, Belkin, and Ugreen are discounted during Amazon's Prime Big Deal Days, including power banks, multi-port chargers, and wireless charging stations compatible with both iPhone and newer Android devices.",
+      "tags": [
+        "tech",
+        "featured"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-08T13:00:00+00:00",
+      "url": "https://www.theverge.com/tech/788318/amazon-october-prime-day-chargers-power-banks-batteries-deal-sale-2025"
+    },
+    {
+      "title": "The AirPods 4 are just $89, matching their best price to date during October Prime Day",
+      "summary": "Apple's AirPods 4 are on sale for an all-time low of $89 (normally $129) during Amazon's Prime Day, with the ANC version available for $119, offering improved sound quality and features like Voice Isolation compared to previous entry-level models.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai",
+        "apple"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-08T13:00:00+00:00",
+      "url": "https://www.theverge.com/tech/792480/amazon-october-prime-day-airpods-4-anc-deal-sale-2025"
+    },
+    {
+      "title": "Google's Search Live comes to India, AI Mode gets more languages | TechCrunch",
+      "summary": "Google is launching its AI-powered Search Live feature in India with English and Hindi support, while expanding AI Mode to seven additional Indian languages. India becomes the second market after the US to receive Search Live, which allows users to point their phone cameras at objects for real-time AI assistance and conversations.",
+      "tags": [
+        "ai",
+        "ai mode",
+        "google ai mode",
+        "google search",
+        "search live",
+        "featured",
+        "google"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-08T12:50:57+00:00",
+      "url": "https://techcrunch.com/2025/10/08/googles-search-live-comes-to-india-ai-mode-gets-more-languages"
+    },
+    {
+      "title": "OpenAI wasn’t expecting Sora’s copyright drama",
+      "summary": "OpenAI is reversing its copyright policy for Sora after unexpected backlash, with CEO Sam Altman acknowledging they need to give rightsholders more control over how their characters and likenesses are used in AI-generated videos.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai",
+        "openai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-08T12:00:00+00:00",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/795171/openai-devday-sam-altman-sora-launch-copyright"
+    },
+    {
+      "title": "Amazfit’s Active 2, one of our favorite fitness trackers, is a steal at just $81",
+      "summary": "The Amazfit Active 2 fitness tracker is on sale for $81 during Amazon's Prime Day, offering features like offline maps, heart rate monitoring, and AI assistance in a budget-friendly package that typically costs twice as much.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai",
+        "google",
+        "apple"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-08T12:00:00+00:00",
+      "url": "https://www.theverge.com/tech/791143/amazon-october-prime-day-amazfit-active-2-deal-sale-2025"
+    },
+    {
+      "title": "Samsung’s tiny AI model beats giant reasoning LLMs",
+      "summary": "Samsung researchers demonstrated that a small neural network can outperform large language models in complex reasoning tasks, challenging the assumption that bigger models are always better.",
+      "tags": [
+        "ai",
+        "deep dives",
+        "features",
+        "how it works",
+        "artificial intelligence",
+        "benchmarks",
+        "models",
+        "samsung",
+        "tiny recursive model",
+        "llm"
+      ],
+      "source": "AI News",
+      "published_at": "2025-10-08T11:55:19+00:00",
+      "url": "https://www.artificialintelligence-news.com/news/samsung-tiny-ai-model-beats-giant-reasoning-llms"
+    },
+    {
+      "title": "HMD’s Touch 4G is a dumb-smart-phone",
+      "summary": "HMD has launched the Touch 4G, a hybrid device that combines feature phone simplicity with smartphone capabilities like touchscreen and video calling, priced at ₹4,999 ($55) in India and running on a custom RTOS Touch operating system.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-08T11:21:00+00:00",
+      "url": "https://www.theverge.com/news/795993/hmds-touch-4g-is-a-dumb-smart-phone"
+    },
+    {
+      "title": "Firefox is adding profiles to separate your browsing sessions",
+      "summary": "Mozilla Firefox is introducing profile management that allows users to create separate browsing spaces with distinct bookmarks, logins, history, extensions, and themes, rolling out from October 14th.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-08T10:56:31+00:00",
+      "url": "https://www.theverge.com/news/795998/mozilla-firefox-browser-profiles-separate-tabs"
+    },
+    {
+      "title": "The 16 October Prime Day deals that are most popular with Verge readers",
+      "summary": "The Verge reports on the most popular items purchased by their readers during Amazon's October Prime Day, including power banks, AirTags, USB-C cables, and electric screwdrivers, with deals running until Thursday.",
+      "tags": [
+        "tech",
+        "featured"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-08T10:41:54+00:00",
+      "url": "https://www.theverge.com/tech/795055/amazon-october-prime-day-2025-popular-products-verge-readers"
+    },
+    {
+      "title": "Tuned Global strengthens its leadership in music technology with the acquisition of Figaro.ai",
+      "summary": "Music technology platform Tuned Global has acquired Figaro.ai, a London-based AI company, to enhance its music industry technology offerings and continue supporting existing Figaro.ai customers.",
+      "tags": [
+        "ai",
+        "ai business strategy",
+        "sponsored content"
+      ],
+      "source": "AI News",
+      "published_at": "2025-10-08T10:37:29+00:00",
+      "url": "https://www.artificialintelligence-news.com/news/tuned-global-strengthens-its-leadership-in-music-technology-with-the-acquisition-of-figaro-ai"
+    },
+    {
+      "title": "Nothing Ear 3 review: work in progress",
+      "summary": "Nothing's Ear 3 wireless earbuds ($179) feature a novel 'Super Mic' system built into the charging case for improved call quality, though its performance is inconsistent and faces compatibility limitations with some apps.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-08T10:30:00+00:00",
+      "url": "https://www.theverge.com/tech/792839/nothing-ear-3-review-audio-super-mic-price"
+    },
+    {
+      "title": "The 207 best October Prime Day deals you can still get",
+      "summary": "Amazon's October Prime Day sale enters its final day with deals on tech products including headphones, TVs, smartwatches, and other gadgets available until Thursday 3AM ET.",
+      "tags": [
+        "tech",
+        "featured"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-08T09:33:05+00:00",
+      "url": "https://www.theverge.com/tech/795212/best-amazon-prime-day-tech-deals-october-2025-day-2"
+    },
+    {
+      "title": "AI Redaction That Puts Privacy First: CaseGuard Studio Leading The Way",
+      "summary": "CaseGuard Studio has developed an AI-powered redaction platform that achieves 98% accuracy in automated data protection, targeting sectors like law enforcement, healthcare, legal, and financial services.",
+      "tags": [
+        "ai",
+        "computer vision",
+        "education ai",
+        "government & public sector ai",
+        "healthcare & wellness ai",
+        "sponsored content",
+        "world of work",
+        "data sovereignty",
+        "governance",
+        "redaction"
+      ],
+      "source": "AI News",
+      "published_at": "2025-10-08T09:07:44+00:00",
+      "url": "https://www.artificialintelligence-news.com/news/ai-redaction-that-puts-privacy-first-caseguard-studio-leading-the-way"
+    },
+    {
+      "title": "We dug through thousands of Prime Day deals to find 60 standouts for $50 or less",
+      "summary": null,
+      "tags": [
+        "tech",
+        "featured"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-08T02:01:20+00:00",
+      "url": "https://www.theverge.com/tech/793435/amazon-october-prime-day-best-cheap-tech-deals-under-50-2025"
+    }
+  ]
+}

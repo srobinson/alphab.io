@@ -140,7 +140,7 @@
   "terminal.integrated.cursorStyle": "line",
   // Workbench Aesthetics
   "workbench.colorTheme": "Default Dark Modern",
-  "workbench.iconTheme": "material-icon-theme",
+  "workbench.iconTheme": "vs-seti",
   "workbench.productIconTheme": "Default",
   "workbench.tree.indent": 20,
   "workbench.tree.renderIndentGuides": "always",

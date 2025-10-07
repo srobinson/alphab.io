@@ -1,6 +1,24 @@
 {
   "posts": [
     {
+      "slug": "chatbot-evolution-a-critical-analysis-of-ai-limitations",
+      "title": "Chatbot Evolution: A Critical Analysis of AI Limitations",
+      "description": "Explore the nuanced reality of AI chatbots in 2025, examining their promise, limitations, and impact on digital communication. Key insights on emotional intelligence gaps.",
+      "date": "2025-10-07",
+      "publishedAt": "2025-10-07T15:08:13.587Z",
+      "category": "AI Insights",
+      "tags": [
+        "AI chatbot limitations",
+        "emotional intelligence in chatbots",
+        "digital communication trends",
+        "chatbot effectiveness analysis",
+        "AI customer service challenges"
+      ],
+      "readTime": "12 min read",
+      "generated": true,
+      "draftId": "early-analysis-of-emerging-chatbot-trend-413284"
+    },
+    {
       "slug": "openai-and-jony-ive-face-setbacks-with-screenless-ai-device",
       "title": "OpenAI and Jony Ive Face Setbacks with Screenless AI Device",
       "description": "Explore the challenges facing OpenAI and Jony Ive's ambitious screenless AI device project, as technical hurdles and design complexities impact their revolutionary vision.",
@@ -127,6 +145,6 @@
       "draftId": "the-other-side-of-the-ai-hype-211355"
     }
   ],
-  "lastUpdated": "2025-10-06T06:34:58.203Z",
-  "totalPosts": 7
+  "lastUpdated": "2025-10-07T15:08:13.589Z",
+  "totalPosts": 8
 }

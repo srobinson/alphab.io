@@ -17,7 +17,11 @@ import { ContentSyncService } from "../lib/content/sync-service";
 type Command = "sync" | "test" | "status" | "cache" | "help";
 
 async function runSync(
-	options: { sources?: string[]; summarize?: boolean; disableImages?: boolean } = {},
+	options: {
+		sources?: string[];
+		summarize?: boolean;
+		disableImages?: boolean;
+	} = {},
 ) {
 	console.log("🔄 Starting content sync...");
 
@@ -27,7 +31,7 @@ async function runSync(
 		const syncOptions = {
 			enableSummarization: options.summarize !== false,
 			saveContent: false,
-			disableImages: options.disableImages || false,
+			disableImages: options.disableImages || true,
 			minRelevanceScore: 40,
 			maxItemsPerSource: 12,
 			updateIndustryMoves: true,
@@ -137,10 +141,14 @@ async function showStatus() {
 		// Environment check
 		console.log("\nEnvironment:");
 		console.log(
-			`  SUPABASE_SERVICE_ROLE_KEY: ${process.env.SUPABASE_SERVICE_ROLE_KEY ? "✅ Set" : "❌ Missing"}`,
+			`  SUPABASE_SERVICE_ROLE_KEY: ${
+				process.env.SUPABASE_SERVICE_ROLE_KEY ? "✅ Set" : "❌ Missing"
+			}`,
 		);
 		console.log(
-			`  OPENROUTER_API_KEY: ${process.env.OPENROUTER_API_KEY ? "✅ Set" : "⚠️  Optional"}`,
+			`  OPENROUTER_API_KEY: ${
+				process.env.OPENROUTER_API_KEY ? "✅ Set" : "⚠️  Optional"
+			}`,
 		);
 		console.log(
 			`  CRON_SECRET: ${process.env.CRON_SECRET ? "✅ Set" : "❌ Missing"}`,
@@ -205,7 +213,8 @@ async function main() {
 	switch (command) {
 		case "sync": {
 			// Parse additional flags for sync command
-			const disableImages = args.includes("--disable-images") || args.includes("--no-images");
+			const disableImages = args.includes("--disable-images") ||
+				args.includes("--no-images");
 			await runSync({ disableImages });
 			break;
 		}

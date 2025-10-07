@@ -83,12 +83,13 @@ export async function GET(request: Request) {
 	const { searchParams } = new URL(request.url);
 	const page = parseInt(searchParams.get("page") || "1", 10);
 	const limit = parseInt(searchParams.get("limit") || "12", 10);
+	const sortBy = parseInt(searchParams.get("sortBy") || "updated_at");
 	const hideImages = searchParams.get("hideImages") === "true";
 	const offset = (page - 1) * limit;
 
 	try {
 		console.log(
-			`📊 Request params: page=${page}, limit=${limit}, offset=${offset}`,
+			`📊 Request params: page=${page}, limit=${limit}, offset=${offset}, sortBy=${sortBy}`,
 		);
 
 		// Rate limiting - 60 requests per minute per IP
@@ -147,8 +148,7 @@ export async function GET(request: Request) {
 				"id, title, url, source, summary, published_at, tags, image_url, created_at, updated_at",
 				{ count: "exact" },
 			)
-			.eq("status", "published")
-			.order("updated_at", { ascending: false })
+			.order("created_at", { ascending: false })
 			.range(offset, offset + limit - 1);
 
 		if (articlesError) {

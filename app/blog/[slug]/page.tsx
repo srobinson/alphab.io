@@ -89,26 +89,27 @@ async function loadPost(slug: string): Promise<BlogPost | null> {
 	const contentHtml = markdown.render(parsed.content);
 
 	const wordCount = (parsed.content.match(/\w+/g) || []).length;
-	const readTime =
-		metadata.readTime || `${Math.max(1, Math.ceil(wordCount / 200))} min read`;
+	const readTime = metadata.readTime ||
+		`${Math.max(1, Math.ceil(wordCount / 200))} min read`;
 
 	const tags = toStringArray(metadata.tags);
 	const seoKeywords = toStringArray(metadata.seo?.keywords);
-	const author =
-		typeof metadata.author === "string" ? metadata.author : "RADE AI Solutions";
-	const category =
-		typeof metadata.category === "string" ? metadata.category : "AI Insights";
+	const author = typeof metadata.author === "string"
+		? metadata.author
+		: "RADE AI Solutions";
+	const category = typeof metadata.category === "string"
+		? metadata.category
+		: "AI Insights";
 	const title = typeof metadata.title === "string" ? metadata.title : slug;
-	const description =
-		typeof metadata.description === "string" ? metadata.description : "";
-	const date =
-		typeof metadata.date === "string"
-			? metadata.date
-			: new Date().toISOString();
-	const publishedAt =
-		typeof metadata.publishedAt === "string"
-			? metadata.publishedAt
-			: metadata.date;
+	const description = typeof metadata.description === "string"
+		? metadata.description
+		: "";
+	const date = typeof metadata.date === "string"
+		? metadata.date
+		: new Date().toISOString();
+	const publishedAt = typeof metadata.publishedAt === "string"
+		? metadata.publishedAt
+		: metadata.date;
 
 	return {
 		slug,
@@ -216,10 +217,9 @@ export default async function BlogPostPage({
 			"@type": "WebPage",
 			"@id": `https://rade.alphab.io/blog/${post.slug}`,
 		},
-		keywords:
-			post.seoKeywords.length > 0
-				? post.seoKeywords.join(", ")
-				: post.tags.join(", "),
+		keywords: post.seoKeywords.length > 0
+			? post.seoKeywords.join(", ")
+			: post.tags.join(", "),
 		articleSection: post.category,
 		wordCount: post.wordCount,
 		timeRequired: post.readTime,
@@ -313,8 +313,8 @@ export default async function BlogPostPage({
 
 						{/* Article Content - seamlessly connected */}
 						<main className="relative p-8 md:p-12 lg:px-16 lg:py-12">
-						<div
-							className="prose prose-lg dark:prose-invert max-w-none 
+							<div
+								className="prose prose-lg dark:prose-invert max-w-none 
 								prose-headings:font-bold prose-headings:tracking-tight
 								prose-headings:text-gray-900 dark:prose-headings:text-white 
 								prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-3 prose-h2:border-b prose-h2:border-gray-200 dark:prose-h2:border-gray-800
@@ -330,8 +330,8 @@ export default async function BlogPostPage({
 								prose-li:text-gray-700 dark:prose-li:text-gray-300 prose-li:my-2 prose-li:leading-relaxed
 								prose-li:marker:text-blue-500 dark:prose-li:marker:text-blue-400 prose-li:marker:font-bold
 								prose-img:rounded-xl prose-img:shadow-lg prose-img:my-8"
-							dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-						/>
+								dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+							/>
 
 							{/* Tags */}
 							{post.tags.length > 0 && (
