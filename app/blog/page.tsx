@@ -1,19 +1,19 @@
 "use client";
 
+import { motion } from "framer-motion";
+import { ArrowRight, Calendar, Clock, Rss } from "lucide-react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import {
 	AnimatedUnderlineText,
 	PREDEFINED_UNDERLINE_PATHS,
 } from "@/components/ui/animated_underline_text";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Clock, Rss } from "lucide-react";
-import Link from "next/link";
-import { useEffect, useState } from "react";
 
 // Animation variants
 const sectionVariants = {
 	hidden: { opacity: 0, y: 20 },
-	visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+	visible: { opacity: 1, y: 0, transition: { duration: 0.25, ease: "easeOut" } },
 };
 
 const cardVariants = {
@@ -97,7 +97,10 @@ export default function BlogPage() {
 	const featuredPosts = blogPosts
 		.filter((post) => post.category === "Reality Check" || post.generated)
 		.slice(0, 2);
-	const recentPosts = blogPosts.slice(0, 5);
+	const featuredSlugs = featuredPosts.map((post) => post.slug);
+	const recentPosts = blogPosts.filter(
+		(post) => !featuredSlugs.includes(post.slug),
+	);
 	const showStateCard =
 		(loading && blogPosts.length === 0) ||
 		Boolean(error) ||
@@ -157,7 +160,7 @@ export default function BlogPage() {
 								pathDefinition={PREDEFINED_UNDERLINE_PATHS.slightCurveUp}
 								underlineClassName="text-blue-600 dark:text-blue-500"
 								animationDelay={techBaseDelay}
-								animationDuration={0.7}
+								animationDuration={0.2}
 							>
 								<span style={{ display: "inline-block" }}>
 									{techLetters.map((letter, index) => (
@@ -179,7 +182,7 @@ export default function BlogPage() {
 								pathDefinition={PREDEFINED_UNDERLINE_PATHS.gentleArc}
 								underlineClassName="text-blue-600 dark:text-blue-500"
 								animationDelay={insightsBaseDelay}
-								animationDuration={0.7}
+								animationDuration={0.2}
 							>
 								<span style={{ display: "inline-block" }}>
 									{insightsLetters.map((letter, index) => (
@@ -203,7 +206,7 @@ export default function BlogPage() {
 							className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed"
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6, delay: 0.3 }}
+							transition={{ duration: 0.2, delay: 0.3 }}
 						>
 							Daily analysis of cutting-edge AI technologies, research papers,
 							and emerging trends shaping the future of artificial intelligence.
@@ -213,7 +216,7 @@ export default function BlogPage() {
 							className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8"
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6, delay: 0.5 }}
+							transition={{ duration: 0.2, delay: 0.5 }}
 						>
 							<Button
 								size="lg"
@@ -234,7 +237,7 @@ export default function BlogPage() {
 							className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 dark:text-gray-400"
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6, delay: 0.7 }}
+							transition={{ duration: 0.2, delay: 0.2 }}
 						>
 							<div className="flex items-center gap-2">
 								<div className="w-2 h-2 bg-blue-500 rounded-full"></div>
@@ -253,23 +256,236 @@ export default function BlogPage() {
 				</section>
 
 				{showStateCard && (
-					<section className="container mx-auto px-6 pt-12 pb-4 max-w-6xl">
-						<div className="rounded-xl border border-dashed border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-gray-900/40 p-8 text-center">
-							{loading && (
-								<p className="text-lg text-gray-600 dark:text-gray-300">
-									Loading the latest insights...
-								</p>
-							)}
-							{!loading && error && (
-								<p className="text-lg text-red-600 dark:text-red-400">
-									{error}
-								</p>
-							)}
-							{!loading && !error && blogPosts.length === 0 && (
-								<p className="text-lg text-gray-600 dark:text-gray-300">
-									Fresh content is being generated. Check back shortly.
-								</p>
-							)}
+					<section className="container mx-auto px-6 pt-12 pb-4 max-w-6xl relative overflow-hidden">
+						{/* Animated background elements */}
+						<div className="absolute inset-0 opacity-20">
+							<div className="absolute top-4 left-10 w-24 h-24 bg-blue-500/20 rounded-full blur-xl animate-pulse"></div>
+							<div
+								className="absolute top-16 right-16 w-20 h-20 bg-purple-500/20 rounded-full blur-xl animate-pulse"
+								style={{ animationDelay: ".25" }}
+							></div>
+							<div
+								className="absolute bottom-8 left-1/2 w-16 h-16 bg-green-500/20 rounded-full blur-xl animate-pulse"
+								style={{ animationDelay: ".25" }}
+							></div>
+						</div>
+
+						<div className="relative z-10">
+							<div className="rounded-xl border border-dashed border-gray-300 dark:border-gray-700 bg-white/80 dark:bg-gray-900/40 p-12 text-center backdrop-blur-sm">
+								{loading && (
+									<div className="space-y-8">
+										{/* Animated loading text */}
+										<div className="flex items-center justify-center gap-2">
+											<motion.span
+												className="text-xl text-gray-600 dark:text-gray-300 font-medium"
+												initial={{ opacity: 0 }}
+												animate={{ opacity: 1 }}
+												transition={{ duration: 0.2 }}
+											>
+												Loading the latest insights
+											</motion.span>
+											<div className="flex gap-1">
+												<motion.div
+													className="w-2 h-2 bg-blue-500 rounded-full"
+													animate={{ scale: [1, 1.5, 1] }}
+													transition={{
+														duration: 0.25,
+														repeat: Infinity,
+														delay: 0,
+													}}
+												></motion.div>
+												<motion.div
+													className="w-2 h-2 bg-blue-500 rounded-full"
+													animate={{ scale: [1, 1.5, 1] }}
+													transition={{
+														duration: 0.25,
+														repeat: Infinity,
+														delay: 0.2,
+													}}
+												></motion.div>
+												<motion.div
+													className="w-2 h-2 bg-blue-500 rounded-full"
+													animate={{ scale: [1, 1.5, 1] }}
+													transition={{
+														duration: 0.25,
+														repeat: Infinity,
+														delay: 0.26,
+													}}
+												></motion.div>
+											</div>
+										</div>
+
+										{/* Progress bar */}
+										<div className="max-w-md mx-auto">
+											<div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-4 overflow-hidden">
+												<motion.div
+													className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 rounded-full"
+													initial={{ width: "0%" }}
+													animate={{ width: "100%" }}
+													transition={{
+														duration: 0.25,
+														repeat: Infinity,
+														ease: "easeInOut",
+													}}
+												></motion.div>
+											</div>
+											<p className="text-sm text-gray-500 dark:text-gray-400">
+												Fetching AI insights and analysis...
+											</p>
+										</div>
+
+										{/* Animated icons */}
+										<div className="flex justify-center gap-8">
+											<motion.div
+												className="w-12 h-12 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center"
+												animate={{
+													scale: [1, 1.1, 1],
+													rotate: [0, 5, -5, 0],
+												}}
+												transition={{
+													duration: 0.25,
+													repeat: Infinity,
+													ease: "easeInOut",
+												}}
+											>
+												<svg
+													className="w-6 h-6 text-blue-600 dark:text-blue-400"
+													fill="none"
+													stroke="currentColor"
+													viewBox="0 0 24 24"
+												>
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														strokeWidth={2}
+														d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+													/>
+												</svg>
+											</motion.div>
+											<motion.div
+												className="w-12 h-12 rounded-lg bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center"
+												animate={{
+													scale: [1, 1.1, 1],
+													rotate: [0, -5, 5, 0],
+												}}
+												transition={{
+													duration: 0.25,
+													repeat: Infinity,
+													ease: "easeInOut",
+													delay: 0.2,
+												}}
+											>
+												<svg
+													className="w-6 h-6 text-purple-600 dark:text-purple-400"
+													fill="none"
+													stroke="currentColor"
+													viewBox="0 0 24 24"
+												>
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														strokeWidth={2}
+														d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+													/>
+												</svg>
+											</motion.div>
+											<motion.div
+												className="w-12 h-12 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center"
+												animate={{
+													scale: [1, 1.1, 1],
+													rotate: [0, 5, -5, 0],
+												}}
+												transition={{
+													duration: 0.25,
+													repeat: Infinity,
+													ease: "easeInOut",
+													delay: .25,
+												}}
+											>
+												<svg
+													className="w-6 h-6 text-green-600 dark:text-green-400"
+													fill="none"
+													stroke="currentColor"
+													viewBox="0 0 24 24"
+												>
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														strokeWidth={2}
+														d="M13 10V3L4 14h7v7l9-11h-7z"
+													/>
+												</svg>
+											</motion.div>
+										</div>
+
+										{/* Loading steps */}
+										<div className="flex flex-wrap justify-center gap-6 text-xs text-gray-500 dark:text-gray-400">
+											<div className="flex items-center gap-2">
+												<div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+												<span>Analyzing AI trends</span>
+											</div>
+											<div className="flex items-center gap-2">
+												<div
+													className="w-2 h-2 bg-purple-500 rounded-full animate-pulse"
+													style={{ animationDelay: "0.20" }}
+												></div>
+												<span>Processing insights</span>
+											</div>
+											<div className="flex items-center gap-2">
+												<div
+													className="w-2 h-2 bg-green-500 rounded-full animate-pulse"
+													style={{ animationDelay: ".30" }}
+												></div>
+												<span>Preparing content</span>
+											</div>
+										</div>
+									</div>
+								)}
+								{!loading && error && (
+									<div className="space-y-4">
+										<div className="w-16 h-16 mx-auto rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
+											<svg
+												className="w-8 h-8 text-red-600 dark:text-red-400"
+												fill="none"
+												stroke="currentColor"
+												viewBox="0 0 24 24"
+											>
+												<path
+													strokeLinecap="round"
+													strokeLinejoin="round"
+													strokeWidth={2}
+													d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"
+												/>
+											</svg>
+										</div>
+										<p className="text-lg text-red-600 dark:text-red-400 font-medium">
+											{error}
+										</p>
+									</div>
+								)}
+								{!loading && !error && blogPosts.length === 0 && (
+									<div className="space-y-4">
+										<div className="w-16 h-16 mx-auto rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+											<svg
+												className="w-8 h-8 text-blue-600 dark:text-blue-400"
+												fill="none"
+												stroke="currentColor"
+												viewBox="0 0 24 24"
+											>
+												<path
+													strokeLinecap="round"
+													strokeLinejoin="round"
+													strokeWidth={2}
+													d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+												/>
+											</svg>
+										</div>
+										<p className="text-lg text-gray-600 dark:text-gray-300 font-medium">
+											Fresh content is being generated. Check back shortly.
+										</p>
+									</div>
+								)}
+							</div>
 						</div>
 					</section>
 				)}
@@ -281,7 +497,7 @@ export default function BlogPage() {
 							className="text-3xl font-black text-gray-900 dark:text-white mb-8"
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6 }}
+							transition={{ duration: 0.2 }}
 							viewport={{ once: true }}
 						>
 							Featured Articles
@@ -338,7 +554,7 @@ export default function BlogPage() {
 							className="text-3xl font-black text-gray-900 dark:text-white mb-8"
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6 }}
+							transition={{ duration: 0.25 }}
 							viewport={{ once: true }}
 						>
 							Recent Posts
@@ -404,14 +620,14 @@ export default function BlogPage() {
 						className="bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 rounded-2xl p-8 text-white"
 						initial={{ opacity: 0, scale: 0.95 }}
 						whileInView={{ opacity: 1, scale: 1 }}
-						transition={{ duration: 0.6, delay: 0.2 }}
+						transition={{ duration: 0.25,, delay: 0.2 }}
 						viewport={{ once: true }}
 					>
 						<motion.h2
 							className="text-3xl font-black mb-4"
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6, delay: 0.3 }}
+							transition={{ duration: 0.25,, delay: 0.15 }}
 							viewport={{ once: true }}
 						>
 							Stay Ahead of the AI Curve
@@ -420,7 +636,7 @@ export default function BlogPage() {
 							className="text-xl mb-6 opacity-90"
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6, delay: 0.4 }}
+							transition={{ duration: 0.25, delay: 0.2 }}
 							viewport={{ once: true }}
 						>
 							Get daily AI insights delivered to your inbox. Join thousands of
@@ -429,7 +645,7 @@ export default function BlogPage() {
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							transition={{ duration: 0.6, delay: 0.5 }}
+							transition={{ duration: 0.25, delay: 0.2 }}
 							viewport={{ once: true }}
 						>
 							<Button

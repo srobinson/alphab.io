@@ -48,6 +48,7 @@ type CuratedNewsItem = {
 	text: string;
 	description: string;
 	time: string;
+	timestamp: string; // ISO date string for sorting
 	source: string;
 	link: string;
 	image: string;
@@ -98,11 +99,11 @@ export async function GET(request: Request) {
 			windowMs: 60 * 1000,
 		});
 
-		// Add cache headers for CDN/browser caching
+		// Add cache headers for CDN/browser caching - reduced cache time for testing
 		const headers = {
-			"Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
-			"CDN-Cache-Control": "public, s-maxage=300",
-			"Vercel-CDN-Cache-Control": "public, s-maxage=300",
+			"Cache-Control": "public, s-maxage=30, stale-while-revalidate=60",
+			"CDN-Cache-Control": "public, s-maxage=30",
+			"Vercel-CDN-Cache-Control": "public, s-maxage=30",
 			...rateLimitCheck.headers,
 		};
 
@@ -124,16 +125,16 @@ export async function GET(request: Request) {
 			);
 		}
 
-		// Initialize Supabase client
+		// Initialize Supabase client with service role for full access
 		const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-		const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+		const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-		if (!supabaseUrl || !supabaseAnonKey) {
+		if (!supabaseUrl || !supabaseServiceKey) {
 			console.error("Missing Supabase configuration");
 			throw new Error("Database configuration error");
 		}
 
-		const supabase = createClient(supabaseUrl, supabaseAnonKey);
+		const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
 		// Query directly from articles table
 		console.log("Fetching articles from database");
@@ -199,6 +200,24 @@ export async function GET(request: Request) {
 					category = "insight";
 				}
 
+				// Create a proper timestamp for sorting
+				// Priority: created_at > published_at > fallback based on ID
+				let sortTimestamp;
+				if (article.created_at) {
+					sortTimestamp = article.created_at;
+				} else if (article.published_at) {
+					sortTimestamp = article.published_at;
+				} else {
+					// Create a deterministic timestamp based on ID for consistent sorting
+					const baseDate = new Date('2025-01-01T00:00:00Z');
+					const idHash = article.id.split('').reduce((a, b) => {
+						a = ((a << 5) - a) + b.charCodeAt(0);
+						return a & a;
+					}, 0);
+					const offsetHours = Math.abs(idHash) % (365 * 24); // Spread over a year
+					sortTimestamp = new Date(baseDate.getTime() + offsetHours * 60 * 60 * 1000).toISOString();
+				}
+
 				return {
 					id: article.id,
 					category,
@@ -207,6 +226,7 @@ export async function GET(request: Request) {
 						article.summary || `Latest from ${article.source}`,
 					),
 					time: formatTimeAgo(article.published_at),
+					timestamp: sortTimestamp,
 					source: article.source,
 					link: article.url,
 					image: getArticleImage(article, hideImages),
@@ -230,6 +250,7 @@ export async function GET(request: Request) {
 					description:
 						"Real-time industry updates will appear here once content sync is configured",
 					time: "Recently",
+					timestamp: new Date().toISOString(),
 					source: "System",
 					link: "#",
 					image: fallbackImage,
@@ -243,6 +264,7 @@ export async function GET(request: Request) {
 					description:
 						"The automated content pipeline is ready to fetch and display the latest AI industry news",
 					time: "System Status",
+					timestamp: new Date().toISOString(),
 					source: "RADE",
 					link: "#",
 					image: fallbackImage,
@@ -288,6 +310,7 @@ export async function GET(request: Request) {
 						description:
 							"The content automation system is being set up. Real industry updates coming soon.",
 						time: "System Status",
+						timestamp: new Date().toISOString(),
 						source: "RADE",
 						link: "#",
 						image: errorImage,

@@ -6,8 +6,8 @@ import Link from "next/link";
 
 import { IndustryMoves } from "@/components/industry-moves";
 import {
-    AnimatedUnderlineText,
-    PREDEFINED_UNDERLINE_PATHS,
+	AnimatedUnderlineText,
+	PREDEFINED_UNDERLINE_PATHS,
 } from "@/components/ui/animated_underline_text";
 import { Button } from "@/components/ui/button";
 
@@ -17,7 +17,7 @@ const sectionVariants = {
 	visible: {
 		opacity: 1,
 		y: 0,
-		transition: { duration: 0.6, ease: "easeOut" },
+		transition: { duration: 0.25, ease: "easeOut" },
 	},
 };
 
@@ -28,7 +28,7 @@ const createLetterPulseVariants = (baseDelay: number, pulseScale = 1.3) => ({
 		letterSpacing: ["normal", "2px", "normal"],
 		transition: {
 			delay: baseDelay + i * 0.08,
-			duration: 0.4,
+			duration: 0.2,
 			ease: "circOut",
 		},
 	}),
@@ -111,7 +111,7 @@ export default function IndustryMovesPage() {
 						className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed"
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.3 }}
+						transition={{ duration: 0.25, delay: 0.2 }}
 					>
 						Stay ahead of the curve with real-time AI developments, strategic
 						insights, and industry trends from leading tech sources.
@@ -120,7 +120,7 @@ export default function IndustryMovesPage() {
 						className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 dark:text-gray-400"
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						transition={{ duration: 0.6, delay: 0.5 }}
+						transition={{ duration: 0.25, delay: 0.3 }}
 					>
 						<div className="flex items-center gap-2">
 							<div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
@@ -233,7 +233,7 @@ export default function IndustryMovesPage() {
 					visible: {
 						opacity: 1,
 						y: 0,
-						transition: { duration: 0.6, ease: "easeOut" },
+						transition: { duration: 0.25, ease: "easeOut" },
 					},
 				}}
 				viewport={{ once: true, amount: 0.2 }}
@@ -244,7 +244,7 @@ export default function IndustryMovesPage() {
 							<motion.div
 								initial={{ opacity: 0, y: 20 }}
 								whileInView={{ opacity: 1, y: 0 }}
-								transition={{ duration: 0.6, delay: 0 }}
+								transition={{ duration: 0.25, delay: 0 }}
 								viewport={{ once: true }}
 							>
 								<Button

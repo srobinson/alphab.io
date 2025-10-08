@@ -21,6 +21,7 @@ interface NewsItem {
 	link?: string;
 	category: "breaking" | "trending" | "update" | "insight";
 	time: string;
+	timestamp: string;
 	source: string;
 	isRSS?: boolean;
 	image?: string;
@@ -34,6 +35,7 @@ interface IndustryMove {
 	title: string;
 	description: string;
 	time: string;
+	timestamp: string;
 	trending: boolean;
 	link?: string;
 	image?: string;
@@ -86,6 +88,7 @@ export function IndustryMoves() {
 						title: item.text,
 						description: item.description || `Latest from ${item.source}`,
 						time: item.time,
+						timestamp: item.timestamp,
 						trending:
 							item.category === "breaking" || item.category === "trending",
 						link: item.link,
@@ -93,7 +96,14 @@ export function IndustryMoves() {
 					}),
 				);
 
-				setDisplayedMoves(curatedMoves);
+				// Sort by timestamp descending (newest first)
+				const sortedMoves = curatedMoves.sort((a, b) => {
+					const aTime = new Date(a.timestamp).getTime();
+					const bTime = new Date(b.timestamp).getTime();
+					return bTime - aTime;
+				});
+				console.log('Sorted moves by timestamp:', sortedMoves.map(m => ({ title: m.title, timestamp: m.timestamp })));
+				setDisplayedMoves(sortedMoves);
 				setHasMore(data.pagination?.hasMore ?? false);
 				setLoading(false);
 			} catch (error) {
@@ -220,6 +230,7 @@ export function IndustryMoves() {
 				title: item.text,
 				description: item.description || `Latest from ${item.source}`,
 				time: item.time,
+				timestamp: item.timestamp,
 				trending: item.category === "breaking" || item.category === "trending",
 				link: item.link,
 				image: item.image,
@@ -230,7 +241,15 @@ export function IndustryMoves() {
 				const uniqueNewMoves = newMoves.filter(
 					(move) => !existingIds.has(move.id),
 				);
-				return [...prev, ...uniqueNewMoves];
+				const combined = [...prev, ...uniqueNewMoves];
+				// Sort by timestamp descending (newest first)
+				const resorted = combined.sort((a, b) => {
+					const aTime = new Date(a.timestamp).getTime();
+					const bTime = new Date(b.timestamp).getTime();
+					return bTime - aTime;
+				});
+				console.log('Combined and resorted moves:', resorted.slice(0, 3).map(m => ({ title: m.title, timestamp: m.timestamp })));
+				return resorted;
 			});
 			setPage(nextPage);
 			setHasMore(data.pagination?.hasMore ?? false);
@@ -317,40 +336,147 @@ export function IndustryMoves() {
 
 	if (loading) {
 		return (
-			<section className="py-16 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-800">
-				<div className="container mx-auto px-6 max-w-7xl">
-					<div className="text-center mb-12">
-						<h2 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-4">
+			<section className="py-16 bg-gray-50 dark:bg-gray-900/50 border-t border-gray-200 dark:border-gray-800 relative overflow-hidden">
+				{/* Animated background elements */}
+				<div className="absolute inset-0 opacity-30">
+					<div className="absolute top-10 left-10 w-32 h-32 bg-blue-500/20 rounded-full blur-xl animate-pulse"></div>
+					<div className="absolute top-40 right-20 w-24 h-24 bg-purple-500/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '.25' }}></div>
+					<div className="absolute bottom-20 left-1/3 w-20 h-20 bg-green-500/20 rounded-full blur-xl animate-pulse" style={{ animationDelay: '.23' }}></div>
+				</div>
+
+				<div className="container mx-auto px-6 max-w-7xl relative z-10">
+					{/* Enhanced header with animations */}
+					<div className="text-center mb-16">
+						<motion.h2
+							className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white mb-6"
+							initial={{ opacity: 0, y: 20 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ duration: 0.6 }}
+						>
 							Industry Moves
-						</h2>
-						<p className="text-lg text-gray-600 dark:text-gray-400">
-							Loading the latest AI developments and strategic insights...
-						</p>
+						</motion.h2>
+
+						{/* Animated loading text */}
+						<div className="flex items-center justify-center gap-2 mb-4">
+							<motion.span
+								className="text-lg text-gray-600 dark:text-gray-400"
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								transition={{ duration: 0.6, delay: 0.2 }}
+							>
+								Loading the latest AI developments
+							</motion.span>
+							<div className="flex gap-1">
+								<motion.div
+									className="w-2 h-2 bg-blue-500 rounded-full"
+									animate={{ scale: [1, 1.5, 1] }}
+									transition={{ duration: 1.5, repeat: Infinity, delay: 0 }}
+								></motion.div>
+								<motion.div
+									className="w-2 h-2 bg-blue-500 rounded-full"
+									animate={{ scale: [1, 1.5, 1] }}
+									transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
+								></motion.div>
+								<motion.div
+									className="w-2 h-2 bg-blue-500 rounded-full"
+									animate={{ scale: [1, 1.5, 1] }}
+									transition={{ duration: 1.5, repeat: Infinity, delay: .25 }}
+								></motion.div>
+							</div>
+						</div>
+
+						{/* Progress bar */}
+						<div className="max-w-md mx-auto">
+							<div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mb-4 overflow-hidden">
+								<motion.div
+									className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+									initial={{ width: "0%" }}
+									animate={{ width: "100%" }}
+									transition={{
+										duration: 2,
+										repeat: Infinity,
+										ease: "easeInOut"
+									}}
+								></motion.div>
+							</div>
+							<p className="text-sm text-gray-500 dark:text-gray-400">
+								Fetching strategic insights...
+							</p>
+						</div>
 					</div>
+
+					{/* Enhanced skeleton cards with staggered animations */}
 					<Masonry
 						breakpointCols={breakpointColumnsObj}
 						className="flex -ml-6 w-auto"
 						columnClassName="pl-6 bg-clip-padding"
 					>
 						{[...Array(8)].map((_, index) => (
-							<div
+							<motion.div
 								key={index}
-								className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden animate-pulse mb-6"
+								className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden mb-6 relative shimmer-effect"
+								initial={{ opacity: 0, y: 20 }}
+								animate={{ opacity: 1, y: 0 }}
+								transition={{
+									duration: 0.4,
+									delay: index * 0.1,
+									ease: "easeOut"
+								}}
+								style={{
+									animationDelay: `${index * 0.2}s`
+								}}
 							>
-								<div className="w-full h-48 bg-gray-200 dark:bg-gray-700"></div>
+
+								{/* Image skeleton with animated gradient */}
+								<div className="w-full h-48 bg-gradient-to-br from-gray-200 via-gray-300 to-gray-200 dark:from-gray-700 dark:via-gray-600 dark:to-gray-700 animate-pulse relative overflow-hidden shimmer-effect"
+									style={{
+										animationDelay: `${index * 0.3}s`
+									}}
+								></div>
+
 								<div className="p-6">
+									{/* Category and icon skeleton */}
 									<div className="flex items-center mb-4">
-										<div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-lg mr-3"></div>
-										<div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-20"></div>
+										<div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-lg mr-3 animate-pulse"></div>
+										<div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-20 animate-pulse"></div>
 									</div>
-									<div className="h-5 bg-gray-200 dark:bg-gray-700 rounded mb-2"></div>
-									<div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-3"></div>
-									<div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+
+									{/* Title skeleton */}
+									<div className="h-5 bg-gray-200 dark:bg-gray-700 rounded mb-2 animate-pulse"></div>
+									<div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-3 animate-pulse"></div>
+
+									{/* Description skeleton */}
+									<div className="space-y-2 mb-4">
+										<div className="h-4 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
+										<div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-5/6 animate-pulse"></div>
+									</div>
+
+									{/* Time skeleton */}
+									<div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-16 animate-pulse"></div>
 								</div>
-							</div>
+							</motion.div>
 						))}
 					</Masonry>
+
+					{/* Loading stats */}
+					<div className="text-center mt-12">
+						<div className="inline-flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
+							<div className="flex items-center gap-2">
+								<div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+								<span>Scanning news sources</span>
+							</div>
+							<div className="flex items-center gap-2">
+								<div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+								<span>Analyzing trends</span>
+							</div>
+							<div className="flex items-center gap-2">
+								<div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+								<span>Curating insights</span>
+							</div>
+						</div>
+					</div>
 				</div>
+
 			</section>
 		);
 	}

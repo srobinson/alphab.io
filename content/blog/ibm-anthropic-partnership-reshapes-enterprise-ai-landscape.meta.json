@@ -1,0 +1,58 @@
+{
+  "title": "IBM-Anthropic Partnership Reshapes Enterprise AI Landscape",
+  "description": "Explore how IBM and Anthropic's strategic partnership transforms enterprise AI with enhanced security, governance, and scalability. Key insights for business leaders in 2025.",
+  "date": "2025-10-08",
+  "category": "AI Analysis",
+  "tags": [
+    "IBM Anthropic partnership",
+    "enterprise AI solutions",
+    "AI governance",
+    "enterprise software development",
+    "Claude AI integration"
+  ],
+  "author": "RADE AI Solutions",
+  "readTime": "13 min read",
+  "seo": {
+    "keywords": [
+      "IBM Anthropic partnership",
+      "enterprise AI solutions",
+      "AI governance",
+      "enterprise software development",
+      "Claude AI integration",
+      "AI security framework",
+      "business AI transformation"
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "IBM-Anthropic Partnership Reshapes Enterprise AI Landscape",
+      "description": "Analysis of the strategic partnership between IBM and Anthropic, focusing on enterprise AI development, security frameworks, and business implications in 2025.",
+      "datePublished": "2025",
+      "author": {
+        "@type": "Organization",
+        "name": "Organization Name"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Publisher Name"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "URL_OF_THE_PAGE"
+      },
+      "keywords": [
+        "IBM Anthropic partnership",
+        "enterprise AI solutions",
+        "AI governance",
+        "enterprise software development",
+        "Claude AI integration"
+      ]
+    }
+  },
+  "generated": true,
+  "generatedAt": "2025-10-08T14:27:18.777Z",
+  "slug": "ibm-anthropic-partnership-reshapes-enterprise-ai-landscape",
+  "published": true,
+  "publishedAt": "2025-10-08T14:29:02.690Z",
+  "draftId": "anthropic-and-ibm-announce-strategic-par-638777"
+}

@@ -1,211 +1,50 @@
 {
-  // TypeScript & Deno Configuration
-  "[typescript]": {
-    "editor.defaultFormatter": "denoland.vscode-deno",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "explicit",
-      "source.organizeImports": "explicit",
-      "source.removeUnusedImports": "explicit"
-    },
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "denoland.vscode-deno",
-    "editor.codeActionsOnSave": {
-      "source.fixAll": "explicit",
-      "source.organizeImports": "explicit",
-      "source.removeUnusedImports": "explicit"
-    },
-    "editor.formatOnSave": true,
-    "editor.formatOnPaste": true
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
-  },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "denoland.vscode-deno"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  // Deno Configuration
-  "deno.enablePaths": [
-    "supabase/functions"
-  ],
-  "deno.lint": true,
-  "deno.unstable": [
-    "bare-node-builtins",
-    "byonm",
-    "sloppy-imports",
-    "unsafe-proto",
-    "webgpu",
-    "broadcast-channel",
-    "worker-options",
-    "cron",
-    "kv",
-    "ffi",
-    "fs",
-    "http",
-    "net"
-  ],
-  // TypeScript Enhanced Settings
-  "typescript.preferences.includePackageJsonAutoImports": "auto",
-  "typescript.preferences.importModuleSpecifier": "relative",
-  "typescript.suggest.autoImports": true,
-  "typescript.suggest.completeFunctionCalls": true,
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "typescript.inlayHints.parameterNames.enabled": "literals",
-  "typescript.inlayHints.parameterTypes.enabled": true,
-  "typescript.inlayHints.variableTypes.enabled": true,
-  "typescript.inlayHints.propertyDeclarationTypes.enabled": true,
-  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
-  // Editor Enhancements
-  "editor.inlineSuggest.enabled": true,
-  "editor.bracketPairColorization.enabled": true,
-  "editor.guides.bracketPairs": "active",
-  "editor.minimap.enabled": false,
-  "editor.fontFamily": "'JetBrains Mono', 'Cascadia Code', 'Fira Code', Consolas, 'Courier New', monospace",
-  "editor.fontLigatures": true,
-  "editor.fontSize": 14,
-  "editor.lineHeight": 1.6,
-  "editor.cursorBlinking": "smooth",
-  "editor.cursorSmoothCaretAnimation": "on",
-  "editor.smoothScrolling": true,
-  "editor.wordWrap": "on",
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
-  "editor.renderWhitespace": "boundary",
-  "editor.renderLineHighlight": "gutter",
-  "editor.semanticHighlighting.enabled": true,
-  "editor.stickyScroll.enabled": true,
-  "editor.accessibilitySupport": "off",
-  // Advanced Editor Features
-  "editor.linkedEditing": true,
-  "editor.multiCursorModifier": "ctrlCmd",
-  "editor.snippetSuggestions": "top",
-  "editor.suggest.localityBonus": true,
-  "editor.suggest.shareSuggestSelections": true,
-  "editor.suggest.snippetsPreventQuickSuggestions": false,
-  "editor.parameterHints.enabled": true,
-  "editor.quickSuggestions": {
-    "other": true,
-    "comments": false,
-    "strings": true
-  },
-  // Git Integration
-  "git.autofetch": true,
-  "git.confirmSync": false,
-  "git.enableSmartCommit": true,
-  "git.suggestSmartCommit": false,
-  "diffEditor.ignoreTrimWhitespace": false,
-  "merge-conflict.autoNavigateNextConflict.enabled": true,
-  // File Explorer
-  "explorer.compactFolders": false,
-  "explorer.confirmDelete": false,
-  "explorer.confirmDragAndDrop": false,
-  "explorer.sortOrder": "type",
-  "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/CVS": true,
-    "**/.DS_Store": true,
-    "**/Thumbs.db": true,
-    "**/.next": true,
-    "**/node_modules": true,
-    "**/.turbo": true,
-    "**/dist": true,
-    "**/out": true
-  },
-  // Search & Replace
-  "search.exclude": {
-    "**/node_modules": true,
-    "**/bower_components": true,
-    "**/.next": true,
-    "**/dist": true,
-    "**/out": true,
-    "**/.turbo": true
-  },
-  "search.followSymlinks": false,
-  "search.smartCase": true,
-  // Terminal
-  "terminal.integrated.fontSize": 14,
-  "terminal.integrated.fontFamily": "'JetBrains Mono', 'Cascadia Code', monospace",
-  "terminal.integrated.smoothScrolling": true,
-  "terminal.integrated.cursorBlinking": true,
-  "terminal.integrated.cursorStyle": "line",
-  // Workbench Aesthetics
-  "workbench.colorTheme": "Default Dark Modern",
-  "workbench.iconTheme": "vs-seti",
-  "workbench.productIconTheme": "Default",
-  "workbench.tree.indent": 20,
-  "workbench.tree.renderIndentGuides": "always",
-  "workbench.activityBar.location": "top",
-  "workbench.editor.enablePreview": false,
-  "workbench.editor.showTabs": "multiple",
-  "workbench.editor.tabSizing": "shrink",
-  "workbench.startupEditor": "newUntitledFile",
-  // IntelliSense & Autocomplete
-  "emmet.includeLanguages": {
-    "javascript": "javascriptreact",
-    "typescript": "typescriptreact"
-  },
-  "emmet.triggerExpansionOnTab": true,
-  // Extension-Specific Settings
-  "tailwindCSS.includeLanguages": {
-    "typescript": "typescript",
-    "typescriptreact": "typescriptreact"
-  },
-  "tailwindCSS.experimental.classRegex": [
-    [
-      "cva\\(([^)]*)\\)",
-      "[\"'`]([^\"'`]*).*?[\"'`]"
-    ],
-    [
-      "cn\\(([^)]*)\\)",
-      "[\"'`]([^\"'`]*).*?[\"'`]"
-    ],
-    [
-      "clsx\\(([^)]*)\\)",
-      "[\"'`]([^\"'`]*).*?[\"'`]"
-    ]
-  ],
-  // Error Lens
-  "errorLens.enabledDiagnosticLevels": [
-    "error",
-    "warning",
-    "info"
-  ],
-  "errorLens.fontStyleItalic": true,
-  "errorLens.fontSize": "12px",
-  // Prettier (fallback for non-Deno files)
-  "prettier.semi": false,
-  "prettier.singleQuote": true,
-  "prettier.tabWidth": 2,
-  "prettier.trailingComma": "es5",
-  // Auto-save and file watching
-  "files.autoSave": "onFocusChange",
-  "files.watcherExclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
-    "**/node_modules/*/**": true,
-    "**/.next/**": true,
-    "**/dist/**": true
-  },
-  // Performance optimizations
-  "extensions.experimental.affinity": {
-    "vscodevim.vim": 1
-  },
-  "typescript.disableAutomaticTypeAcquisition": false,
-  "typescript.tsserver.maxTsServerMemory": 8192,
-  // Language specific optimizations
-  "json.maxItemsComputed": 10000,
-  "html.format.indentInnerHtml": true,
-  "css.validate": true,
-  "scss.validate": true,
-  "less.validate": true
+	// ---------- editor basics ----------
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.organizeImports.biome": "always",
+		"source.fixAll.biome": "always",
+		"source.fixAll.markdownlint": "always"
+	},
+	"editor.defaultFormatter": "biomejs.biome",
+	"editor.tabSize": 2,
+	"editor.rulers": [120],
+	"files.trimTrailingWhitespace": true,
+	"files.insertFinalNewline": true,
+
+	// ---------- language overrides ----------
+	"[md]": { "editor.defaultFormatter": "DavidAnson.vscode-markdownlint" },
+	"[jsonc]": { "editor.defaultFormatter": "biomejs.biome" },
+	"[json]": { "editor.defaultFormatter": "biomejs.biome" },
+	"[javascript]": { "editor.defaultFormatter": "biomejs.biome" },
+	"[typescript]": { "editor.defaultFormatter": "biomejs.biome" },
+	"[javascriptreact]": { "editor.defaultFormatter": "biomejs.biome" },
+	"[typescriptreact]": { "editor.defaultFormatter": "biomejs.biome" },
+
+	// ---------- TypeScript ergonomics ----------
+	"typescript.tsserver.maxTsServerMemory": 4096,
+	"typescript.preferences.importModuleSpecifier": "non-relative",
+	"typescript.preferences.preferTypeOnlyAutoImports": true,
+	"typescript.updateImportsOnFileMove.enabled": "always",
+
+	// ---------- Tailwind ----------
+	"tailwindCSS.emmetCompletions": true,
+	"tailwindCSS.includeLanguages": {
+		"typescriptreact": "javascript"
+	},
+	"css.lint.unknownAtRules": "ignore",
+	// If using Prettier for tailwind class sorting ONLY:
+	// "[typescriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+
+	// ---------- Biome ----------
+	"biome.enabled": true,
+	"biome.requireConfiguration": false,
+	"biome.experimental": {
+		"formatter": true
+	},
+
+	// ---------- UI polish ----------
+	"errorLens.enabled": true,
+	"errorLens.margin": "90",
+	"git.autofetch": true
 }

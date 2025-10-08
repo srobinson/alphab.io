@@ -1,6 +1,42 @@
 {
   "posts": [
     {
+      "slug": "ibm-anthropic-partnership-reshapes-enterprise-ai-landscape",
+      "title": "IBM-Anthropic Partnership Reshapes Enterprise AI Landscape",
+      "description": "Explore how IBM and Anthropic's strategic partnership transforms enterprise AI with enhanced security, governance, and scalability. Key insights for business leaders in 2025.",
+      "date": "2025-10-08",
+      "publishedAt": "2025-10-08T14:29:02.690Z",
+      "category": "AI Analysis",
+      "tags": [
+        "IBM Anthropic partnership",
+        "enterprise AI solutions",
+        "AI governance",
+        "enterprise software development",
+        "Claude AI integration"
+      ],
+      "readTime": "13 min read",
+      "generated": true,
+      "draftId": "anthropic-and-ibm-announce-strategic-par-638777"
+    },
+    {
+      "slug": "nothing-ear-3-review-premium-promise-vs-reality",
+      "title": "Nothing Ear 3 Review: Premium Promise vs Reality",
+      "description": "Detailed analysis of Nothing Ear 3's $179 price tag, Hi-Res LDAC audio, and 45dB noise cancellation. Is the 2025 flagship truly worth the premium over its predecessor?",
+      "date": "2025-10-08",
+      "publishedAt": "2025-10-08T14:28:50.911Z",
+      "category": "AI Insights",
+      "tags": [
+        "Nothing Ear 3 review",
+        "premium wireless earbuds",
+        "Hi-Res LDAC audio",
+        "noise cancellation earbuds",
+        "Nothing Ear 3 price"
+      ],
+      "readTime": "11 min read",
+      "generated": true,
+      "draftId": "nothing-ear-3-review-work-in-progress-116530"
+    },
+    {
       "slug": "chatbot-evolution-a-critical-analysis-of-ai-limitations",
       "title": "Chatbot Evolution: A Critical Analysis of AI Limitations",
       "description": "Explore the nuanced reality of AI chatbots in 2025, examining their promise, limitations, and impact on digital communication. Key insights on emotional intelligence gaps.",
@@ -145,6 +181,6 @@
       "draftId": "the-other-side-of-the-ai-hype-211355"
     }
   ],
-  "lastUpdated": "2025-10-07T15:08:13.589Z",
-  "totalPosts": 8
+  "lastUpdated": "2025-10-08T14:29:02.692Z",
+  "totalPosts": 10
 }
