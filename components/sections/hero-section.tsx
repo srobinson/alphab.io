@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ArrowRight, BrainCircuit, Settings2, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import { ClockBackground } from "@/components/background/clock-background";
@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { AiDispatch } from "@/components/views/home/ai-dispatch";
 
 // Animation variants
-const newsShowVariants = {
+const newsShowVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,

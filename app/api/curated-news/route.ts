@@ -99,7 +99,7 @@ export async function GET(request: Request) {
       "Cache-Control": "public, s-maxage=30, stale-while-revalidate=60",
       "CDN-Cache-Control": "public, s-maxage=30",
       "Vercel-CDN-Cache-Control": "public, s-maxage=30",
-      ...rateLimitCheck.headers,
+      ...(rateLimitCheck.headers as Record<string, string>),
     };
 
     // Check if rate limit exceeded
@@ -114,7 +114,7 @@ export async function GET(request: Request) {
           status: 429,
           headers: {
             ...headers,
-            "Retry-After": rateLimitCheck.headers["Retry-After"],
+            "Retry-After": rateLimitCheck.headers["Retry-After"] || "60",
           },
         }
       );
@@ -139,7 +139,7 @@ export async function GET(request: Request) {
       error: articlesError,
       count: articlesCount,
     } = await supabase
-      .from<ArticleRecord>("articles")
+      .from("articles")
       .select(
         "id, title, url, source, summary, published_at, tags, image_url, created_at, updated_at",
         { count: "exact" }
@@ -205,7 +205,7 @@ export async function GET(request: Request) {
         } else {
           // Create a deterministic timestamp based on ID for consistent sorting
           const baseDate = new Date("2025-01-01T00:00:00Z");
-          const idHash = article.id.split("").reduce((a, b) => {
+          const idHash = article.id.split("").reduce((a: number, b: string) => {
             a = (a << 5) - a + b.charCodeAt(0);
             return a & a;
           }, 0);

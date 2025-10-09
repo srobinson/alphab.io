@@ -97,7 +97,7 @@ export async function GET(request: NextRequest) {
         itemsProcessed: result.itemsIngested,
         duration: result.duration,
         success: result.success,
-        error: result.error,
+        ...(result.error && { error: result.error }),
       });
     });
 

@@ -175,9 +175,11 @@ export async function summarizeInfo(input: SummarizeInfoInput): Promise<Summariz
           .map((tag) => tag.trim())
       : []
     const sourceLabel = typeof parsed.sourceLabel === 'string' ? parsed.sourceLabel.trim() : undefined
-    return { summary, tags, sourceLabel }
+    return sourceLabel
+      ? { summary, tags, sourceLabel }
+      : { summary, tags }
   } catch {
     // Fallback: try to use plain text
-    return { summary: String(content).trim(), tags: [], sourceLabel: undefined }
+    return { summary: String(content).trim(), tags: [] }
   }
 }

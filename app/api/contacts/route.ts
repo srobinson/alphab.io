@@ -129,7 +129,7 @@ export async function POST(request: NextRequest) {
       await resend.emails.send({
         from: process.env.WELCOME_FROM_EMAIL || "notifications@alphab.io",
         to: email,
-        bcc: adminBcc.length ? adminBcc : undefined,
+        ...(adminBcc.length ? { bcc: adminBcc } : {}),
         replyTo: replyTo,
         subject,
         text: plain,

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { AlertCircle, Bell, CheckCircle, Mail, MessageSquare, Send, User } from "lucide-react";
 import type React from "react";
 import { useState } from "react";
@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 
 // Animation variants remain the same
-const formVariants = {
+const formVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -19,7 +19,7 @@ const formVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 15 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
@@ -113,8 +113,8 @@ export default function ContactPage() {
     // Root container for the page, ensuring it takes full height and applies base theme colors
     <div className="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300 bg-[rgb(17_24_39/_var(--tw-bg-opacity,1))]">
       <motion.div
-        className="max-w-2xl w-full space-y-10 p-8 md:p-12 
-                   rounded-xl shadow-2xl 
+        className="max-w-2xl w-full space-y-10 p-8 md:p-12
+                   rounded-xl shadow-2xl
                    border border-white/10 bg-white/5 backdrop-blur-md"
         initial="hidden"
         animate="visible"

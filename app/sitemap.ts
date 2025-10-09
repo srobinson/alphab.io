@@ -66,7 +66,7 @@ async function loadBlogSitemapEntries(): Promise<SitemapEntry[]> {
 
     const posts = (data as { posts: unknown[] }).posts;
 
-    return posts
+    const mappedPosts = posts
       .map((post) => {
         if (!isObject(post) || typeof post.slug !== "string") {
           return null;
@@ -88,7 +88,9 @@ async function loadBlogSitemapEntries(): Promise<SitemapEntry[]> {
           priority: 0.6,
         } satisfies SitemapEntry;
       })
-      .filter((entry): entry is SitemapEntry => entry !== null);
+      .filter((entry) => entry !== null);
+
+    return mappedPosts;
   } catch (error) {
     const err = error as NodeJS.ErrnoException;
     if (err?.code === "ENOENT") {

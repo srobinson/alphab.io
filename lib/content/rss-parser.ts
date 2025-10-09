@@ -39,10 +39,10 @@ export interface RSSItem {
   sourceId: string
   category: string
   priority: string
-  content?: string
-  author?: string
+  content?: string | undefined
+  author?: string | undefined
   tags?: string[]
-  imageUrl?: string // Add image URL field
+  imageUrl?: string | undefined // Add image URL field
 }
 
 export interface FetchResult {
@@ -74,7 +74,7 @@ export class RSSParser {
     maxRetries: number = 3
   ): Promise<FetchResult> {
     const startTime = Date.now()
-    
+
     try {
       if (!source.rssUrl) {
         throw new Error('No RSS URL provided')
@@ -84,9 +84,9 @@ export class RSSParser {
 
       const feed = await this.parser.parseURL(source.rssUrl)
       const items = this.processFeedItems(feed, source)
-      
+
       console.log(`[${source.name}] ✓ Success: ${items.length} items fetched`)
-      
+
       return {
         source,
         items,
@@ -96,19 +96,19 @@ export class RSSParser {
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error'
       console.warn(`[${source.name}] ✗ Attempt ${attemptNumber}/${maxRetries} failed:`, errorMessage)
-      
+
       // Retry logic with exponential backoff
       if (attemptNumber < maxRetries) {
         const delay = 1000 * Math.pow(2, attemptNumber - 1) // 1s, 2s, 4s
         console.log(`[${source.name}] Retrying in ${delay}ms...`)
-        
+
         await new Promise(resolve => setTimeout(resolve, delay))
         return this.fetchFromSource(source, attemptNumber + 1, maxRetries)
       }
-      
+
       // All retries exhausted
       console.error(`[${source.name}] ✗ All ${maxRetries} attempts failed`)
-      
+
       return {
         source,
         items: [],
@@ -121,7 +121,7 @@ export class RSSParser {
 
 	private processFeedItems(feed: RawFeed, source: ContentSource): RSSItem[] {
 		if (!feed.items) return []
-		
+
 		return feed.items
 			.slice(0, source.maxItems || 10)
 			.map((item) => this.createRSSItem(item, source))
@@ -131,9 +131,9 @@ export class RSSParser {
 	private createRSSItem(item: RawFeedItem, source: ContentSource): RSSItem {
     // Clean and normalize the description
 	const description = this.cleanDescription(
-		item.contentSnippet || 
-		item.description || 
-		item.summary || 
+		item.contentSnippet ||
+		item.description ||
+		item.summary ||
 		''
 	)
 
@@ -165,7 +165,7 @@ export class RSSParser {
 
 	private extractImageUrl(item: RawFeedItem): string | undefined {
 		// Try multiple fields for image extraction
-		
+
 		// 1. Media thumbnail (common in RSS feeds)
 		const mediaThumbnail = item['media:thumbnail']
 		if (mediaThumbnail && typeof mediaThumbnail === 'object' && ' $' in mediaThumbnail) {
@@ -174,12 +174,12 @@ export class RSSParser {
 				return attributes.url
 			}
 		}
-		
+
 		// 2. Enclosure (podcast/media feeds)
 		if (item.enclosure?.url && this.isImageUrl(item.enclosure.url)) {
 			return item.enclosure.url
 		}
-		
+
 		// 3. Content encoded - extract first image
 		if (typeof item['content:encoded'] === 'string') {
 			const imageMatch = item['content:encoded'].match(/<img[^>]+src="([^">]+)"/i)
@@ -187,7 +187,7 @@ export class RSSParser {
 				return imageMatch[1]
 			}
 		}
-		
+
 		// 4. Description - extract first image
 		if (typeof item.description === 'string') {
 			const imageMatch = item.description.match(/<img[^>]+src="([^">]+)"/i)
@@ -195,7 +195,7 @@ export class RSSParser {
 				return imageMatch[1]
 			}
 		}
-		
+
 		// 5. iTunes image (for podcast feeds)
 		const itunesImage = item['itunes:image']
 		if (itunesImage && typeof itunesImage === 'object' && ' $' in itunesImage) {
@@ -204,7 +204,7 @@ export class RSSParser {
 				return attributes.href
 			}
 		}
-		
+
 		return undefined
 	}
 
@@ -243,11 +243,11 @@ export class RSSParser {
         'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term',
         'fbclid', 'gclid', 'mc_cid', 'mc_eid', '_ga', '_gl'
       ]
-      
+
       trackingParams.forEach(param => {
         urlObj.searchParams.delete(param)
       })
-      
+
       return urlObj.toString()
     } catch {
       return url
@@ -256,7 +256,7 @@ export class RSSParser {
 
   private parseDate(dateString: string | undefined): Date | null {
     if (!dateString) return null
-    
+
     try {
       return new Date(dateString)
     } catch {
@@ -266,10 +266,10 @@ export class RSSParser {
 
 	private extractTags(item: RawFeedItem, source: ContentSource): string[] {
     const tags: string[] = []
-    
+
     // Add source-based tags
     tags.push(source.category)
-    
+
     // Extract from categories
     if (item.categories && Array.isArray(item.categories)) {
       item.categories.forEach((category: string) => {
@@ -278,12 +278,12 @@ export class RSSParser {
         }
       })
     }
-    
+
     // Add priority-based tags
     if (source.priority === 'high') {
       tags.push('featured')
     }
-    
+
     return [...new Set(tags)].slice(0, 10) // Remove duplicates and limit
   }
 
@@ -292,7 +292,7 @@ export class RSSParser {
     if (!item.title || item.title.length < 10) return false
     if (!item.link || !this.isValidUrl(item.link)) return false
     if (!item.description || item.description.length < 20) return false
-    
+
     // Filter out common spam/irrelevant patterns
     const spamPatterns = [
       /^\[AD\]/i,
@@ -300,7 +300,7 @@ export class RSSParser {
       /job\s*(opening|vacancy|position)/i,
       /hiring\s*now/i
     ]
-    
+
     return !spamPatterns.some(pattern => pattern.test(item.title))
   }
 
@@ -316,11 +316,11 @@ export class RSSParser {
   async fetchMultipleSources(sources: ContentSource[]): Promise<FetchResult[]> {
     const promises = sources.map(source => this.fetchFromSource(source))
     return Promise.allSettled(promises).then(results =>
-      results.map(result =>
+      results.map((result, index) =>
         result.status === 'fulfilled'
           ? result.value
           : {
-              source: sources[results.indexOf(result)],
+              source: sources[index]!,
               items: [],
               success: false,
               error: 'Promise rejected',

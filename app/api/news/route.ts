@@ -25,7 +25,7 @@ async function parseRSSFeed(
       headers: {
         "User-Agent": "RADE-AI-News-Aggregator/1.0",
       },
-      next: { revalidate: 1800 }, // Cache for 30 minutes
+      cache: "force-cache",
     });
 
     if (!response.ok) {
@@ -104,10 +104,9 @@ async function parseRSSFeed(
               .trim()
               .substring(0, 150) + (description.length > 150 ? "..." : "");
 
-          items.push({
+          const newsItem: NewsItem = {
             id: `rss-${sourceName}-${Date.now()}-${Math.random()}`,
             text: formattedTitle,
-            link: link || undefined,
             category,
             time: parsedDate.toLocaleTimeString([], {
               hour: "2-digit",
@@ -116,9 +115,18 @@ async function parseRSSFeed(
             source: sourceName,
             isRSS: true,
             pubDate: parsedDate,
-            image: cleanImageUrl || undefined,
             description: cleanDescription || `Latest from ${sourceName}`,
-          });
+          };
+
+          if (link) {
+            newsItem.link = link;
+          }
+
+          if (cleanImageUrl) {
+            newsItem.image = cleanImageUrl;
+          }
+
+          items.push(newsItem);
         }
       } catch (itemError) {
         console.warn(`Error parsing RSS item from ${sourceName}:`, itemError);
@@ -168,11 +176,11 @@ export async function GET(request: Request) {
 
     // Collect RSS results
     if (rssResults.status === "fulfilled") {
-      rssResults.value.forEach((result, index) => {
+      rssResults.value.forEach((result: PromiseSettledResult<NewsItem[]>, index: number) => {
         if (result.status === "fulfilled") {
           allItems.push(...result.value);
         } else {
-          console.warn(`RSS feed ${rssFeedSources[index].name} failed:`, result.reason);
+          console.warn(`RSS feed ${rssFeedSources[index]?.name} failed:`, result.reason);
         }
       });
     }
@@ -267,11 +275,11 @@ export async function GET(request: Request) {
       const rssResults = await Promise.allSettled(rssPromises);
       const fallbackItems: NewsItem[] = [];
 
-      rssResults.forEach((result, index) => {
+      rssResults.forEach((result, index: number) => {
         if (result.status === "fulfilled") {
           fallbackItems.push(...result.value);
         } else {
-          console.warn(`Fallback RSS feed ${rssFeedSources[index].name} failed:`, result.reason);
+          console.warn(`Fallback RSS feed ${rssFeedSources[index]?.name} failed:`, result.reason);
         }
       });
 

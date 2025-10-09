@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import {
   Bot,
   BrainCircuit,
@@ -98,12 +98,12 @@ const services = [
   },
 ];
 
-const sectionVariants = {
+const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-const cardVariants = {
+const cardVariants: Variants = {
   hidden: { opacity: 0, y: 20, scale: 0.98 },
   visible: {
     opacity: 1,
@@ -113,7 +113,7 @@ const cardVariants = {
   },
 };
 
-const createLetterPulseVariants = (baseDelay: number, pulseScale = 1.3) => ({
+const createLetterPulseVariants = (baseDelay: number, pulseScale = 1.3): Variants => ({
   initial: { scale: 1, letterSpacing: "normal" },
   pulse: (i: number) => ({
     scale: [1, pulseScale, 1],

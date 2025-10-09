@@ -56,7 +56,7 @@ export function AnimatedUnderlineText({
             duration: animationDuration,
             ease: "easeInOut",
           }}
-          onAnimationComplete={onUnderlineComplete} // Add this line
+          onAnimationComplete={() => onUnderlineComplete?.()} // Add this line
         />
       </motion.svg>
     </span>

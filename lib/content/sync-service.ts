@@ -15,7 +15,7 @@ export interface SyncResult {
 	itemsProcessed: number;
 	itemsIngested: number;
 	duration: number;
-	error?: string;
+	error?: string | undefined;
 }
 
 export interface SyncOptions {
@@ -86,8 +86,8 @@ export class ContentSyncService {
 					results.push(result.value);
 				} else {
 					results.push({
-						sourceId: batch[index].id,
-						sourceName: batch[index].name,
+						sourceId: batch[index]?.id || "unknown",
+						sourceName: batch[index]?.name || "unknown",
 						success: false,
 						itemsFetched: 0,
 						itemsProcessed: 0,
@@ -201,7 +201,7 @@ export class ContentSyncService {
 							tags: item.classification.tags,
 							doSummarize: options.enableSummarization !== false,
 							doSaveContent: options.saveContent || false,
-							imageUrl, // Only Unsplash or RSS images
+							...(imageUrl && { imageUrl }), // Only include imageUrl if it has a value
 						},
 						this.supabase,
 					);
@@ -251,7 +251,7 @@ export class ContentSyncService {
 
 			// Get latest articles from database
 			const { data: articles, error } = await this.supabase
-				.from<ArticleRow>("articles")
+				.from("articles")
 				.select("*")
 				.eq("status", "published")
 				.order("published_at", { ascending: false })
@@ -267,7 +267,7 @@ export class ContentSyncService {
 			}
 
 			// Convert to RSSItem format for classification
-			const rssItems: RSSItem[] = articles.map((article) => ({
+			const rssItems: RSSItem[] = (articles as ArticleRow[]).map((article) => ({
 				guid: article.id,
 				title: article.title,
 				link: article.url,
@@ -345,7 +345,7 @@ export class ContentSyncService {
 			if (cacheEntries.length > 0) {
 				const { error: insertError } = await this.supabase
 					.from("industry_moves_cache")
-					.insert(cacheEntries);
+					.insert(cacheEntries as any);
 
 				if (insertError) {
 					throw insertError;
@@ -384,7 +384,7 @@ export class ContentSyncService {
 
 			if (error || !data) return null;
 
-			return new Date(data.created_at);
+			return new Date((data as { created_at: string }).created_at);
 		} catch {
 			return null;
 		}

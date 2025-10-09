@@ -62,7 +62,7 @@ export default function ContactsAdminPage() {
       setLoading(true);
 
       const { data: contactsData, error: contactsError } = await supabase
-        .from<Contact>("contacts")
+        .from("contacts")
         .select("*")
         .order("created_at", { ascending: false });
 

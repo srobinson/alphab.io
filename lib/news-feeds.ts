@@ -225,9 +225,9 @@ export async function fetchNewsAPI(
   )}&sortBy=publishedAt&pageSize=${pageSize}&apiKey=${
       NEWS_API_CONFIG.apiKey
       }`;
-    
+
     console.log(url);
-    
+
 
     const response = await fetch(url, {
       headers: {
@@ -264,7 +264,7 @@ export async function fetchNewsAPI(
         const description = article.description ?? "";
         const sourceName = article.source?.name ?? "NewsAPI";
 
-        return {
+        const newsItem: NewsItem = {
           id: `newsapi-${Date.now()}-${index}`,
           text: formatRSSTitle(article.title),
           link: article.url,
@@ -276,12 +276,14 @@ export async function fetchNewsAPI(
           source: sourceName,
           isRSS: false,
           pubDate: publishedAt,
-          image: article.urlToImage ?? undefined,
           description:
             description.substring(0, 150) +
               (description.length > 150 ? "..." : "") ||
             `Latest from ${sourceName}`,
+          ...(article.urlToImage ? { image: article.urlToImage } : {}),
         };
+
+        return newsItem;
       });
   } catch (error) {
     console.warn("Error fetching from NewsAPI:", error);
@@ -352,7 +354,7 @@ export async function fetchGNewsAPI(
           source: sourceName,
           isRSS: false,
           pubDate: publishedAt,
-          image: article.image ?? undefined,
+          ...(article.image ? { image: article.image } : {}),
           description:
             description.substring(0, 150) +
               (description.length > 150 ? "..." : "") ||

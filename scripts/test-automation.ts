@@ -30,16 +30,20 @@ async function testRSSParsing() {
         if (result.items.length > 0) {
           // Test classification on first item
           const firstItem = result.items[0];
-          const classified = await classifier.classifyContent(firstItem);
+          if (firstItem) {
+            const classified = await classifier.classifyContent(firstItem);
 
-          console.log(`   📊 Classification of first item:`);
-          console.log(`      Title: ${firstItem.title.substring(0, 60)}...`);
-          console.log(`      Category: ${classified.classification.category}`);
-          console.log(`      Relevance Score: ${classified.classification.relevanceScore}`);
-          console.log(`      Is Breaking: ${classified.classification.isBreaking}`);
-          console.log(`      Is Trending: ${classified.classification.isTrending}`);
-          console.log(`      Priority: ${classified.classification.priority}`);
-          console.log(`      Tags: ${classified.classification.tags.slice(0, 5).join(", ")}`);
+            console.log(`   📊 Classification of first item:`);
+            console.log(`      Title: ${firstItem.title.substring(0, 60)}...`);
+            console.log(`      Category: ${classified.classification.category}`);
+            console.log(`      Relevance Score: ${classified.classification.relevanceScore}`);
+            console.log(`      Is Breaking: ${classified.classification.isBreaking}`);
+            console.log(`      Is Trending: ${classified.classification.isTrending}`);
+            console.log(`      Priority: ${classified.classification.priority}`);
+            console.log(`      Tags: ${classified.classification.tags.slice(0, 5).join(", ")}`);
+          } else {
+            console.log(`   ⚠️  First item is undefined`);
+          }
         }
       } else {
         console.log(`   ❌ Failed: ${result.error}`);

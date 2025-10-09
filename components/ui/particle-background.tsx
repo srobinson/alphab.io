@@ -26,7 +26,7 @@ export function ParticleBackground({
 }: ParticleBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const particlesRef = useRef<Particle[]>([]);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | null>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
 
   // Particle colors - subtle blues and whites
@@ -60,7 +60,7 @@ export function ParticleBackground({
         | "circle"
         | "square"
         | "triangle",
-      color: colors[Math.floor(Math.random() * colors.length)],
+      color: colors[Math.floor(Math.random() * colors.length)] ?? colors[0]!,
     }));
 
     // Mouse move handler for subtle interaction

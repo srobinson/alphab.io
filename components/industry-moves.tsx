@@ -35,7 +35,7 @@ interface IndustryMove {
   title: string;
   description: string;
   time: string;
-  timestamp: string;
+  timestamp?: string;
   trending: boolean;
   link?: string;
   image?: string;
@@ -63,7 +63,7 @@ export function IndustryMoves() {
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [_imagesLoaded, _setImagesLoaded] = useState<Set<string>>(new Set());
-  const [imageSources, _setImageSources] = useState<Record<string, string>>({});
+  // const [imageSources, _setImageSources] = useState<Record<string, string>>({});
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const observerTarget = useRef<HTMLDivElement>(null);
@@ -93,8 +93,8 @@ export function IndustryMoves() {
 
         // Sort by timestamp descending (newest first)
         const sortedMoves = curatedMoves.sort((a, b) => {
-          const aTime = new Date(a.timestamp).getTime();
-          const bTime = new Date(b.timestamp).getTime();
+          const aTime = new Date(a.timestamp || 0).getTime();
+          const bTime = new Date(b.timestamp || 0).getTime();
           return bTime - aTime;
         });
         console.log(
@@ -237,8 +237,8 @@ export function IndustryMoves() {
         const combined = [...prev, ...uniqueNewMoves];
         // Sort by timestamp descending (newest first)
         const resorted = combined.sort((a, b) => {
-          const aTime = new Date(a.timestamp).getTime();
-          const bTime = new Date(b.timestamp).getTime();
+          const aTime = new Date(a.timestamp || 0).getTime();
+          const bTime = new Date(b.timestamp || 0).getTime();
           return bTime - aTime;
         });
         console.log(
@@ -266,7 +266,7 @@ export function IndustryMoves() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && hasMore && !loadingMore) {
+        if (entries[0]?.isIntersecting && hasMore && !loadingMore) {
           loadMore();
         }
       },
@@ -299,23 +299,23 @@ export function IndustryMoves() {
   };
 
   // Generate fallback image based on category with variety
-  const getFallbackImage = (_category: string, title: string) => {
-    // Create deterministic fallback based on title hash
-    const hashString = (str: string): number => {
-      let hash = 0;
-      for (let i = 0; i < str.length; i++) {
-        const char = str.charCodeAt(i);
-        hash = (hash << 5) - hash + char;
-        hash = hash & hash;
-      }
-      return Math.abs(hash);
-    };
+  // const getFallbackImage = (_category: string, title: string) => {
+  //   // Create deterministic fallback based on title hash
+  //   const hashString = (str: string): number => {
+  //     let hash = 0;
+  //     for (let i = 0; i < str.length; i++) {
+  //       const char = str.charCodeAt(i);
+  //       hash = (hash << 5) - hash + char;
+  //       hash = hash & hash;
+  //     }
+  //     return Math.abs(hash);
+  //   };
 
-    const seed = hashString(title);
+  //   const seed = hashString(title);
 
-    // Use Picsum with deterministic seed for variety
-    return `https://picsum.photos/seed/${seed}/400/200`;
-  };
+  //   // Use Picsum with deterministic seed for variety
+  //   return `https://picsum.photos/seed/${seed}/400/200`;
+  // };
 
   // Get category accent color for visual consistency
   const getCategoryAccentColor = (category: string): string => {
@@ -497,8 +497,8 @@ export function IndustryMoves() {
           {displayedMoves.map((move, index) => {
             const IconComponent = move.icon;
             const isClickable = move.link && move.link !== "#";
-            const imageUrl = move.image || getFallbackImage(move.category, move.title);
-            const _resolvedImage = imageSources[move.id] ?? imageUrl;
+            // const imageUrl = move.image || getFallbackImage(move.category, move.title);
+            // const _resolvedImage = imageSources[move.id] ?? imageUrl;
             // Use a unique key combining ID and index to ensure uniqueness
             const uniqueKey = `${move.id}-${index}`;
 

@@ -14,7 +14,8 @@ const store: RateLimitStore = {}
 setInterval(() => {
   const now = Date.now()
   Object.keys(store).forEach(key => {
-    if (store[key].resetTime < now) {
+    const record = store[key]
+    if (record && record.resetTime < now) {
       delete store[key]
     }
   })
@@ -93,8 +94,8 @@ export function checkRateLimit(
   } = {}
 ): { allowed: boolean; headers: Record<string, string> } {
   // Get identifier from options or extract from request
-  const identifier = options.identifier || 
-    request.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+  const identifier = options.identifier ||
+    request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
     request.headers.get('x-real-ip') ||
     'anonymous'
   

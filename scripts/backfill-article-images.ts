@@ -51,7 +51,7 @@ function loadEnvExports(file = ".env.local") {
     if (!match) continue;
 
     const [, key, rawValue] = match;
-    if (!key) continue;
+    if (!key || !rawValue) continue;
 
     let value = rawValue.trim();
     if (
@@ -115,7 +115,7 @@ async function resolveImageUrl(article: ArticleRow): Promise<string> {
     category,
     tags: article.tags || [],
     url: article.url,
-    imageUrl: article.image_url || undefined,
+    ...(article.image_url ? { imageUrl: article.image_url } : {}),
   });
 
   if (!baseThumbnail) {
@@ -138,7 +138,7 @@ async function resolveImageUrl(article: ArticleRow): Promise<string> {
 
 async function fetchNextBatch(): Promise<ArticleRow[]> {
   const { data, error } = await supabase
-    .from<ArticleRow>("articles")
+    .from("articles")
     .select("id,title,url,source,tags,image_url,status,published_at,created_at")
     .is("image_url", null)
     .order("published_at", { ascending: false, nullsFirst: false })

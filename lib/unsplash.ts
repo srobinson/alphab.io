@@ -88,17 +88,20 @@ export async function searchUnsplashImages(
       const data: UnsplashSearchResponse = await response.json();
 
       if (data.results && data.results.length > 0) {
-        const resolvedUrl = new URL(data.results[0].urls.small);
-        resolvedUrl.searchParams.set("w", "400");
-        resolvedUrl.searchParams.set("h", "200");
-        resolvedUrl.searchParams.set("fit", "crop");
-        const imageUrl = resolvedUrl.toString();
-        console.log(`✅ Unsplash API success: found image for "${query}"`);
-        unsplashCache.set(cacheKey, {
-          value: imageUrl,
-          expiresAt: Date.now() + UNSPLASH_CACHE_TTL_MS,
-        });
-        return imageUrl;
+        const firstResult = data.results[0];
+        if (firstResult) {
+          const resolvedUrl = new URL(firstResult.urls.small);
+          resolvedUrl.searchParams.set("w", "400");
+          resolvedUrl.searchParams.set("h", "200");
+          resolvedUrl.searchParams.set("fit", "crop");
+          const imageUrl = resolvedUrl.toString();
+          console.log(`✅ Unsplash API success: found image for "${query}"`);
+          unsplashCache.set(cacheKey, {
+            value: imageUrl,
+            expiresAt: Date.now() + UNSPLASH_CACHE_TTL_MS,
+          });
+          return imageUrl;
+        }
       }
 
       console.log(`❌ Unsplash API: no results for "${query}"`);

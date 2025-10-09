@@ -290,9 +290,9 @@ export default async function BlogPostPage({ params }: { params: ParamsPromise }
             {/* Article Content - seamlessly connected */}
             <main className="relative p-8 md:p-12 lg:px-16 lg:py-12">
               <div
-                className="prose prose-lg dark:prose-invert max-w-none 
+                className="prose prose-lg dark:prose-invert max-w-none
 								prose-headings:font-bold prose-headings:tracking-tight
-								prose-headings:text-gray-900 dark:prose-headings:text-white 
+								prose-headings:text-gray-900 dark:prose-headings:text-white
 								prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-6 prose-h2:pb-3 prose-h2:border-b prose-h2:border-gray-200 dark:prose-h2:border-gray-800
 								prose-h3:text-2xl prose-h3:mt-10 prose-h3:mb-4
 								prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-p:leading-relaxed prose-p:text-lg prose-p:mb-6

@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
       const sent = await resend.emails.send({
         from: process.env.WELCOME_FROM_EMAIL || "welcome@alphab.io",
         to: email,
-        bcc: adminBcc.length ? adminBcc : undefined,
+        ...(adminBcc.length ? { bcc: adminBcc } : {}),
         subject: "Welcome to AlphaB",
         html: generateWelcomeHTML({ first_name, source }),
         text: generateWelcomeText({ first_name, source }),

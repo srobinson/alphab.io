@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, type Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
@@ -8,7 +8,7 @@ interface PageTransitionProps {
   children: ReactNode;
 }
 
-const pageVariants = {
+const pageVariants: Variants = {
   initial: {
     opacity: 0,
     scale: 0.95,
@@ -38,7 +38,7 @@ const pageVariants = {
   },
 };
 
-const unpackVariants = {
+const unpackVariants: Variants = {
   initial: {
     clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
     opacity: 0,
@@ -65,7 +65,7 @@ const unpackVariants = {
   },
 };
 
-const overlayVariants = {
+const overlayVariants: Variants = {
   initial: {
     scaleY: 0,
     originY: 0,

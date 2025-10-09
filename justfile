@@ -16,7 +16,7 @@ test-watch:
 
 # ------------- Quality Gates -------------
 typecheck:
-    pnpm run type-check
+    pnpm run typecheck
 
 lint:
     biome check .

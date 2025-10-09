@@ -8,15 +8,15 @@ export interface LogContext {
 }
 
 export interface PerformanceMetric {
-	name: string
-	duration: number
-	success: boolean
-	metadata?: Record<string, unknown>
+  name: string
+  duration: number
+  success: boolean
+  metadata?: Record<string, unknown> | undefined
 }
 
 class Monitor {
   private isDevelopment = process.env.NODE_ENV === 'development'
-  
+
   /**
    * Log a message with context
    */
@@ -28,7 +28,7 @@ class Monitor {
       message,
       ...context
     }
-    
+
     // In development, use console for pretty printing
     if (this.isDevelopment) {
       const emoji = {
@@ -37,36 +37,36 @@ class Monitor {
         warn: '⚠️',
         error: '🚨'
       }[level]
-      
+
       console.log(`${emoji} [${level.toUpperCase()}] ${message}`, context || '')
     } else {
       // In production, output structured JSON for log aggregation
       console.log(JSON.stringify(logData))
     }
   }
-  
+
   debug(message: string, context?: LogContext) {
     this.log('debug', message, context)
   }
-  
+
   info(message: string, context?: LogContext) {
     this.log('info', message, context)
   }
-  
+
   warn(message: string, context?: LogContext) {
     this.log('warn', message, context)
   }
-  
+
   error(message: string, error?: Error | unknown, context?: LogContext) {
     const errorData = error instanceof Error ? {
       message: error.message,
       stack: error.stack,
       name: error.name
     } : { error: String(error) }
-    
+
     this.log('error', message, { ...errorData, ...context })
   }
-  
+
   /**
    * Track performance metrics
    */
@@ -77,7 +77,7 @@ class Monitor {
       success: metric.success,
       ...metric.metadata
     })
-    
+
     // Warn on slow operations
     if (metric.duration > 5000) {
       this.warn(`Slow operation detected: ${metric.name}`, {
@@ -85,7 +85,7 @@ class Monitor {
       })
     }
   }
-  
+
   /**
    * Helper to time async operations
    */
@@ -96,7 +96,7 @@ class Monitor {
 	): Promise<T> {
     const startTime = Date.now()
     let success = false
-    
+
     try {
       const result = await operation()
       success = true
@@ -109,7 +109,7 @@ class Monitor {
       this.trackPerformance({ name, duration, success, metadata })
     }
   }
-  
+
   /**
    * Track API request metrics
    */
@@ -121,7 +121,7 @@ class Monitor {
       success: statusCode >= 200 && statusCode < 300
     })
   }
-  
+
   /**
    * Track content sync metrics
    */
@@ -147,7 +147,7 @@ class Monitor {
       })
     }
   }
-  
+
   /**
    * Track cache performance
    */
@@ -157,7 +157,7 @@ class Monitor {
       cache_hit: hit
     })
   }
-  
+
   /**
    * Track rate limit events
    */
@@ -169,19 +169,19 @@ class Monitor {
       })
     }
   }
-  
+
   /**
    * Critical error that needs immediate attention
    */
   critical(message: string, error?: Error | unknown, context?: LogContext) {
     this.error(`[CRITICAL] ${message}`, error, { ...context, critical: true })
-    
+
     // In production, this could trigger alerts via webhooks
     if (!this.isDevelopment && process.env.ALERT_WEBHOOK_URL) {
       this.sendAlert(message, error, context).catch(console.error)
     }
   }
-  
+
   /**
    * Send alert to external service (webhook, Slack, etc.)
    */
@@ -189,7 +189,7 @@ class Monitor {
     try {
       const webhookUrl = process.env.ALERT_WEBHOOK_URL
       if (!webhookUrl) return
-      
+
       const payload = {
         text: `🚨 Critical Error: ${message}`,
         error: error instanceof Error ? error.message : String(error),
@@ -197,7 +197,7 @@ class Monitor {
         timestamp: new Date().toISOString(),
         environment: process.env.NODE_ENV
       }
-      
+
       await fetch(webhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -223,11 +223,11 @@ export function tracked(name?: string) {
 	) {
 		const originalMethod = descriptor.value as (...fnArgs: unknown[]) => unknown
 		const metricName = name || `${target.constructor.name}.${propertyKey}`
-		
+
 		descriptor.value = async function (...args: unknown[]) {
 			return monitor.timeAsync(metricName, async () => originalMethod.apply(this, args))
 		}
-		
+
 		return descriptor
 	}
 }

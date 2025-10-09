@@ -84,11 +84,11 @@ export async function fetchMetadata(url: string): Promise<PageMeta> {
   const publishedAt = articlePublished ? new Date(articlePublished) : null
   const contentHtml = extractContentHtml(html)
 
-  return { 
-    title: title || null, 
-    description: description || null, 
-    publishedAt, 
-    contentHtml 
+  return {
+    title: title || null,
+    description: description || null,
+    publishedAt,
+    contentHtml
   }
 }
 
@@ -111,15 +111,6 @@ export type IngestResult = {
  * Ingest a single URL into Supabase `articles` table.
  */
 export async function ingestUrl(input: IngestInput, sb: SupabaseClient): Promise<IngestResult> {
-  type ExistingArticleRow = {
-    id: string
-    tags: string[] | null
-    summary: string | null
-    source: string | null
-    content_html: string | null
-    published_at: string | null
-  }
-
   const rawUrl = input.url
   if (!rawUrl) return { id: null, upserted: false, reason: 'missing url' }
 
@@ -128,7 +119,7 @@ export async function ingestUrl(input: IngestInput, sb: SupabaseClient): Promise
 
   // Check if already exists by URL
   const { data: existing, error: findErr } = await sb
-    .from<ExistingArticleRow>('articles')
+    .from('articles')
     .select('id, tags, summary, source, content_html, published_at')
     .eq('url', url)
     .maybeSingle()
@@ -152,7 +143,7 @@ export async function ingestUrl(input: IngestInput, sb: SupabaseClient): Promise
         url,
         title: meta.title!,
         description: meta.description,
-        contentHtml: meta.contentHtml,
+        contentHtml: meta.contentHtml ?? null,
       })
       summary = info.summary || null
       inferredTags = Array.isArray(info.tags) ? info.tags : []
@@ -195,14 +186,14 @@ export async function ingestUrl(input: IngestInput, sb: SupabaseClient): Promise
     status: 'published' as const,
   }
   if (finalContentHtml) payload.content_html = finalContentHtml
-  
+
   // Add image URL if provided (from RSS feed)
   if (input.imageUrl) {
     payload.image_url = input.imageUrl
   }
 
   const { data, error } = await sb
-    .from<{ id: string }>('articles')
+    .from('articles')
     .upsert(payload, { onConflict: 'url' })
     .select('id')
     .single()

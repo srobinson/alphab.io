@@ -9,12 +9,12 @@ export interface ThumbnailOptions {
 
 export class ThumbnailService {
 	// OpenGraph/RSS image extraction patterns
-	private static readonly OG_IMAGE_PATTERNS = [
-		"og:image",
-		"twitter:image",
-		"article:image",
-		"image",
-	];
+	// private static readonly OG_IMAGE_PATTERNS = [
+	// 	"og:image",
+	// 	"twitter:image",
+	// 	"article:image",
+	// 	"image",
+	// ];
 
 	// Category-based color schemes
 	private static readonly CATEGORY_COLORS = {
@@ -145,7 +145,7 @@ export class ThumbnailService {
 	 * Generate SVG thumbnail
 	 */
 	private static generateSVG(
-		gradient: string,
+		_gradient: string,
 		options: ThumbnailOptions,
 	): string {
 		const colors = ThumbnailService.getCategoryColors(options.category);
@@ -170,31 +170,31 @@ export class ThumbnailService {
             <stop offset="100%" style="stop-color:${accentColor};stop-opacity:1" />
           </linearGradient>
         </defs>
-        
+
         <!-- Background -->
         <rect width="400" height="200" fill="url(#bg)" />
-        
+
         <!-- Pattern overlay -->
         <rect width="400" height="200" fill="url(#bg)" opacity="0.1" />
-        
+
         <!-- Icon -->
         <g transform="translate(320, 30)">
           ${icon}
         </g>
-        
+
         <!-- Category badge -->
         <rect x="20" y="20" width="80" height="24" fill="rgba(255,255,255,0.2)" rx="12"/>
         <text x="60" y="36" fill="white" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="600">
           ${options.category.toUpperCase()}
         </text>
-        
+
         <!-- Title -->
         <foreignObject x="20" y="60" width="280" height="80">
           <div xmlns="http://www.w3.org/1999/xhtml" style="color: white; font-family: Inter, sans-serif; font-size: 16px; font-weight: 700; line-height: 1.2; word-wrap: break-word;">
             ${displayTitle}
           </div>
         </foreignObject>
-        
+
         <!-- Source -->
         <text x="20" y="170" fill="rgba(255,255,255,0.8)" font-family="Inter, sans-serif" font-size="14" font-weight="500">
           ${options.source}

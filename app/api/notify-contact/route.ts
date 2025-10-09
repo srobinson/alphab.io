@@ -13,16 +13,6 @@ type NotifyRequestBody = {
   notificationType?: string;
 };
 
-type ContactRow = {
-  id: string;
-  name: string | null;
-  email: string | null;
-  message: string | null;
-  source: string | null;
-  subscribed_to_newsletter: boolean | null;
-  created_at: string | null;
-};
-
 type ContactNotificationData = {
   id: string;
   name: string;
@@ -55,7 +45,7 @@ export async function POST(request: NextRequest) {
 
     // Get contact details
     const { data: contact, error: contactError } = await supabase
-      .from<ContactRow>("contacts")
+      .from("contacts")
       .select("*")
       .eq("id", contactId)
       .single();
@@ -152,13 +142,13 @@ function generateEmailHTML(contact: ContactNotificationData): string {
                   contact.created_at
                 ).toLocaleString()}</p>
             </div>
-            
+
             <div class="content">
                 <div class="field">
                     <div class="label">Name:</div>
                     <div class="value">${contact.name}</div>
                 </div>
-                
+
                 <div class="field">
                     <div class="label">Email:</div>
                     <div class="value">
@@ -170,18 +160,18 @@ function generateEmailHTML(contact: ContactNotificationData): string {
                         }
                     </div>
                 </div>
-                
+
                 <div class="field">
                     <div class="label">Source:</div>
                     <div class="value">${contact.source}</div>
                 </div>
-                
+
                 <div class="field">
                     <div class="label">Message:</div>
                     <div class="message">${formattedMessage}</div>
                 </div>
             </div>
-            
+
             <div class="footer">
                 <p>You can manage this contact and reply directly from your <a href="${siteUrl}/admin/contacts">admin dashboard</a>.</p>
                 <p>Contact ID: ${contact.id}</p>

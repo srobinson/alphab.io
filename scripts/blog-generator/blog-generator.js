@@ -522,6 +522,8 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
           return `## ${sanitize(section.title)}\n\n${sanitize(section.content)}`;
         } else if (section.type === "conclusion") {
           return `## Key Takeaways\n\n${sanitize(section.content)}`;
+        } else {
+          throw new Error(`Unknown section type: ${section.type}`);
         }
       })
       .join("\n\n");

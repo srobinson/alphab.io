@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Mail } from "lucide-react";
 import Link from "next/link";
 
@@ -12,7 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 // Animation variants
-const sectionVariants = {
+const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -21,7 +21,7 @@ const sectionVariants = {
   },
 };
 
-const createLetterPulseVariants = (baseDelay: number, pulseScale = 1.3) => ({
+const createLetterPulseVariants = (baseDelay: number, pulseScale = 1.3): Variants => ({
   initial: { scale: 1, letterSpacing: "normal" },
   pulse: (i: number) => ({
     scale: [1, pulseScale, 1],

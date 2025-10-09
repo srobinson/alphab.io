@@ -31,8 +31,8 @@ export function Header() {
 
   return (
     <header
-      className="sticky top-0 z-50 w-full border-b 
-                       bg-white/80 backdrop-blur-lg 
+      className="sticky top-0 z-50 w-full border-b
+                       bg-white/80 backdrop-blur-lg
                        border-gray-200/80
                        dark:bg-black/80 dark:border-gray-700/80"
     >
@@ -201,7 +201,7 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="absolute right-0 top-0 h-full w-80 max-w-[85vw] 
+              className="absolute right-0 top-0 h-full w-80 max-w-[85vw]
                          bg-white/95 dark:bg-black/95 backdrop-blur-lg
                          border-l border-gray-200/80 dark:border-gray-700/80
                          shadow-2xl"

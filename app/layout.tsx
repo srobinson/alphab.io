@@ -72,6 +72,35 @@ export const metadata: Metadata = {
     images: ["/images/twitter-image.jpg"],
     creator: "@alphab_io",
   },
+  icons: {
+    icon: "/icon.svg",
+    apple: "/apple-icon.png",
+    other: [
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        url: "/favicon-16x16.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        url: "/favicon-32x32.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "96x96",
+        url: "/favicon-96x96.png",
+      },
+      {
+        rel: "apple-touch-icon",
+        sizes: "180x180",
+        url: "/apple-icon-180x180.png",
+      },
+    ],
+  },
   alternates: {
     canonical: "https://alphab.io",
   },
@@ -92,7 +121,10 @@ export default async function RootLayout({
         url: "https://alphab.io",
         logo: {
           "@type": "ImageObject",
-          url: new URL("/images/alphab-logo.svg", metadata.metadataBase).toString(),
+          url: new URL(
+            "/images/alphab-logo.svg",
+            metadata.metadataBase || "https://alphab.io"
+          ).toString(),
           width: 200,
           height: 200,
         },
@@ -100,14 +132,7 @@ export default async function RootLayout({
           "AlphaB delivers expert AI solutions and consulting services specializing in ethical AI solutions and strategic implementation through our RADE practice.",
         foundingDate: "2024",
         areaServed: "Worldwide",
-        serviceType: [
-          "AI Consulting",
-          "Custom AI Development",
-          "AI Strategy",
-          "AI Implementation",
-          "Machine Learning Solutions",
-        ],
-        sameAs: ["https://linkedin.com/company/alphab", "https://twitter.com/alphab_io"],
+        sameAs: ["https://github.com/alphabio", "https://twitter.com/alphab_io"],
       },
       {
         "@type": "WebSite",
@@ -133,7 +158,10 @@ export default async function RootLayout({
         "@type": "ProfessionalService",
         "@id": "https://alphab.io/#service",
         name: "AlphaB AI Solutions",
-        image: new URL("/images/alphab-logo.svg", metadata.metadataBase).toString(),
+        image: new URL(
+          "/images/alphab-logo.svg",
+          metadata.metadataBase || "https://alphab.io"
+        ).toString(),
         description: "Professional AI consulting and development services by AlphaB",
         provider: {
           "@id": "https://alphab.io/#organization",

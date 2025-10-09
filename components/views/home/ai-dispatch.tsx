@@ -77,7 +77,7 @@ export function AiDispatch({
       (entries) => {
         const entry = entries[0];
         // When headline comes into view, start the typewriter effect
-        if (entry.isIntersecting) {
+        if (entry?.isIntersecting) {
           setShowHeader(true);
         }
       },
