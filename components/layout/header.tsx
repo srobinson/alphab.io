@@ -1,13 +1,13 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { ThemeToggleButton } from "@/components/ui/theme-toggle-button";
-import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ThemeToggleButton } from "@/components/ui/theme-toggle-button";
+import { cn } from "@/lib/utils";
 
 export function Header() {
   const pathname = usePathname();
@@ -30,10 +30,12 @@ export function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b 
+    <header
+      className="sticky top-0 z-50 w-full border-b 
                        bg-white/80 backdrop-blur-lg 
                        border-gray-200/80
-                       dark:bg-black/80 dark:border-gray-700/80">
+                       dark:bg-black/80 dark:border-gray-700/80"
+    >
       <div className="container mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link href="/" className="mr-6 flex items-center space-x-2 group">
           <svg
@@ -47,7 +49,8 @@ export function Header() {
               fill="currentColor"
               stroke="none"
             >
-              <path d="M3043 3046 c-79 -141 -143 -259 -143 -262 0 -2 9 -4 20 -4 65 0 110
+              <path
+                d="M3043 3046 c-79 -141 -143 -259 -143 -262 0 -2 9 -4 20 -4 65 0 110
 -69 118 -183 l5 -70 -27 7 c-31 8 -33 -2 -5 -38 l21 -27 -46 -457 c-26 -251
 -49 -467 -52 -479 -3 -15 -12 -23 -25 -23 -49 0 -119 -65 -119 -110 0 -12 -76
 -33 -326 -93 -179 -43 -331 -80 -337 -83 -9 -3 -12 38 -13 153 0 142 -3 167
@@ -82,15 +85,16 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
 -5 18 7 36 11 39 7 4 -3 -15 -50 -42 -104 -40 -81 -61 -111 -134 -182 -139
 -138 -287 -200 -481 -200 -119 0 -202 20 -308 72 -132 65 -264 201 -320 332
 -13 29 -12 29 30 -10 197 -181 478 -171 660 24 58 62 67 68 108 71 25 1 47 5
-49 7 7 7 27 5 103 -12z" />
+49 7 7 7 27 5 103 -12z"
+              />
             </g>
           </svg>
           <span
             className={cn(
-              "font-bold text-2xl text-gray-900 dark:text-white transition-colors duration-300 group-hover:text-blue-500 dark:group-hover:text-blue-400",
+              "font-bold text-2xl text-gray-900 dark:text-white transition-colors duration-300 group-hover:text-blue-500 dark:group-hover:text-blue-400"
             )}
           >
-            RADE
+            AlphaB
           </span>
         </Link>
 
@@ -105,16 +109,14 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
                     "relative px-3 py-2 text-sm font-medium transition-colors duration-200 ease-out cursor-pointer group",
                     isActive
                       ? "text-gray-900 dark:text-white"
-                      : "text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white",
+                      : "text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
                   )}
                 >
                   {link.label}
                   <span
                     className={cn(
                       "absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 dark:bg-blue-400 transition-transform duration-300 ease-out origin-center",
-                      isActive
-                        ? "scale-x-100"
-                        : "scale-x-0 group-hover:scale-x-100",
+                      isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
                     )}
                   />
                 </a>
@@ -130,7 +132,7 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
                 "transition-all duration-200 ease-out ml-2",
                 pathname === "/contact"
                   ? "bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white dark:text-white border-transparent dark:border-transparent"
-                  : "text-gray-800 border-gray-800 hover:bg-gray-800 hover:text-white dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-gray-900",
+                  : "text-gray-800 border-gray-800 hover:bg-gray-800 hover:text-white dark:text-white dark:border-white dark:hover:bg-white dark:hover:text-gray-900"
               )}
             >
               Contact
@@ -150,29 +152,27 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
             aria-label="Toggle mobile menu"
           >
             <AnimatePresence mode="wait" initial={false}>
-              {isMobileMenuOpen
-                ? (
-                  <motion.div
-                    key="close-icon"
-                    initial={{ rotate: -90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: 90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <X className="h-6 w-6" />
-                  </motion.div>
-                )
-                : (
-                  <motion.div
-                    key="menu-icon"
-                    initial={{ rotate: 90, opacity: 0 }}
-                    animate={{ rotate: 0, opacity: 1 }}
-                    exit={{ rotate: -90, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Menu className="h-6 w-6" />
-                  </motion.div>
-                )}
+              {isMobileMenuOpen ? (
+                <motion.div
+                  key="close-icon"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X className="h-6 w-6" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu-icon"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu className="h-6 w-6" />
+                </motion.div>
+              )}
             </AnimatePresence>
           </Button>
         </div>
@@ -224,7 +224,7 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
                               "flex items-center px-4 py-3 text-lg font-medium rounded-lg transition-all duration-200 ease-out group",
                               isActive
                                 ? "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-l-4 border-blue-500"
-                                : "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800/50 hover:text-blue-600 dark:hover:text-blue-400",
+                                : "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800/50 hover:text-blue-600 dark:hover:text-blue-400"
                             )}
                             onClick={toggleMobileMenu}
                           >
@@ -252,15 +252,13 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
                   >
                     <Link href="/contact" legacyBehavior passHref>
                       <Button
-                        variant={pathname === "/contact"
-                          ? "default"
-                          : "outline"}
+                        variant={pathname === "/contact" ? "default" : "outline"}
                         size="lg"
                         className={cn(
                           "w-full justify-center text-lg font-medium py-3",
                           pathname === "/contact"
                             ? "bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white"
-                            : "border-2 border-blue-500 text-blue-600 hover:bg-blue-500 hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-gray-900",
+                            : "border-2 border-blue-500 text-blue-600 hover:bg-blue-500 hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-gray-900"
                         )}
                         onClick={toggleMobileMenu}
                       >
@@ -278,7 +276,7 @@ c105 113 235 190 370 219 72 16 293 5 355 -18z m112 -858 c95 -21 252 -24 296
                   className="mt-auto pb-6 text-center"
                 >
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    AI Leadership Solutions
+                    AI Solutions & Innovation
                   </p>
                 </motion.div>
               </div>

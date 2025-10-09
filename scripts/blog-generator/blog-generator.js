@@ -1,20 +1,20 @@
 #!/usr/bin/env node
 
-const fs = require('fs').promises;
-const path = require('path');
+const fs = require("node:fs").promises;
+const path = require("node:path");
 
-const SERPAPI_ENDPOINT = 'https://serpapi.com/search';
+const SERPAPI_ENDPOINT = "https://serpapi.com/search";
 
 const extractJSON = (text) => {
-  if (typeof text !== 'string') {
-    throw new Error('Expected JSON string response');
+  if (typeof text !== "string") {
+    throw new Error("Expected JSON string response");
   }
 
   try {
     return JSON.parse(text);
   } catch (error) {
-    const firstBrace = text.indexOf('{');
-    const lastBrace = text.lastIndexOf('}');
+    const firstBrace = text.indexOf("{");
+    const lastBrace = text.lastIndexOf("}");
     if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
       const candidate = text.slice(firstBrace, lastBrace + 1);
       return JSON.parse(candidate);
@@ -26,19 +26,19 @@ const extractJSON = (text) => {
 const { date: CURRENT_DATE, year: CURRENT_YEAR } = (() => {
   const now = new Date();
   return {
-    date: now.toISOString().split('T')[0],
+    date: now.toISOString().split("T")[0],
     year: now.getFullYear(),
   };
 })();
 
 // Load environment variables
-require('dotenv').config({ path: path.join(__dirname, '../../.env.local') });
+require("dotenv").config({ path: path.join(__dirname, "../../.env.local") });
 
 class BlogGenerator {
   constructor() {
-    this.configPath = path.join(__dirname, 'config');
-    this.dataPath = path.join(__dirname, 'data');
-    this.outputPath = path.join(__dirname, '../../app/blog_generated');
+    this.configPath = path.join(__dirname, "config");
+    this.dataPath = path.join(__dirname, "data");
+    this.outputPath = path.join(__dirname, "../../app/blog_generated");
 
     this.voiceFramework = null;
     this.openrouterConfig = null;
@@ -49,28 +49,28 @@ class BlogGenerator {
   async initialize() {
     // Load configurations
     this.voiceFramework = JSON.parse(
-      await fs.readFile(path.join(this.configPath, 'voice-framework.json'), 'utf8')
+      await fs.readFile(path.join(this.configPath, "voice-framework.json"), "utf8")
     );
     this.openrouterConfig = JSON.parse(
-      await fs.readFile(path.join(this.configPath, 'openrouter.json'), 'utf8')
+      await fs.readFile(path.join(this.configPath, "openrouter.json"), "utf8")
     );
 
     // Ensure output directory exists
     await fs.mkdir(this.outputPath, { recursive: true });
-    await fs.mkdir(path.join(this.outputPath, 'drafts'), { recursive: true });
+    await fs.mkdir(path.join(this.outputPath, "drafts"), { recursive: true });
 
-    console.log('🤖 Blog Generator initialized');
+    console.log("🤖 Blog Generator initialized");
   }
 
   async generateBlogPost(options = {}) {
     const {
       topic,
-      type = 'analysis', // analysis, tutorial, prediction, reality-check
-      style = 'analytical'
+      type = "analysis", // analysis, tutorial, prediction, reality-check
+      style = "analytical",
     } = options;
 
     if (!topic) {
-      throw new Error('Topic is required for blog generation');
+      throw new Error("Topic is required for blog generation");
     }
 
     console.log(`📝 Generating ${type} blog post about: ${topic}`);
@@ -93,7 +93,7 @@ class BlogGenerator {
       outline,
       sections,
       seoData,
-      research
+      research,
     });
 
     // Step 5: Save draft
@@ -108,18 +108,18 @@ class BlogGenerator {
   }
 
   async conductResearch(topic, type) {
-    console.log('🔍 Conducting research...');
+    console.log("🔍 Conducting research...");
 
     const researchPrompt = this.buildResearchPrompt(topic, type);
     const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
-    const research = await this.callOpenRouter(researchPrompt, 'analysis', { tools });
+    const research = await this.callOpenRouter(researchPrompt, "analysis", { tools });
 
     try {
       return extractJSON(research);
     } catch (error) {
-      console.error('❌ Failed to parse research JSON:', error.message);
-      console.log('Raw response:', research.substring(0, 200) + '...');
-      throw new Error('AI returned invalid JSON format. Please try again.');
+      console.error("❌ Failed to parse research JSON:", error.message);
+      console.log("Raw response:", `${research.substring(0, 200)}...`);
+      throw new Error("AI returned invalid JSON format. Please try again.");
     }
   }
 
@@ -198,26 +198,27 @@ Return your research as this exact JSON structure:
   }
 
   async createOutline(research, type, style) {
-    console.log('📋 Creating outline...');
+    console.log("📋 Creating outline...");
 
     const outlinePrompt = this.buildOutlinePrompt(research, type, style);
     const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
-    const outline = await this.callOpenRouter(outlinePrompt, 'creative', { tools });
+    const outline = await this.callOpenRouter(outlinePrompt, "creative", { tools });
 
     try {
       return extractJSON(outline);
     } catch (error) {
-      console.error('❌ Failed to parse outline JSON:', error.message);
-      console.log('Raw response:', outline.substring(0, 200) + '...');
-      throw new Error('AI returned invalid JSON format for outline. Please try again.');
+      console.error("❌ Failed to parse outline JSON:", error.message);
+      console.log("Raw response:", `${outline.substring(0, 200)}...`);
+      throw new Error("AI returned invalid JSON format for outline. Please try again.");
     }
   }
 
-  buildOutlinePrompt(research, type, style) {
+  buildOutlinePrompt(research, type, _style) {
     const voiceGuide = this.voiceFramework.brandVoice;
-    const pillar = this.voiceFramework.contentPillars.find(p =>
-      p.name.toLowerCase().includes(type.toLowerCase())
-    ) || this.voiceFramework.contentPillars[0];
+    const pillar =
+      this.voiceFramework.contentPillars.find((p) =>
+        p.name.toLowerCase().includes(type.toLowerCase())
+      ) || this.voiceFramework.contentPillars[0];
 
     return `Create a compelling blog post outline using this research data and voice framework. Assume today's date is ${CURRENT_DATE}; ensure references to "now" or "today" reflect ${CURRENT_YEAR}.
 
@@ -260,29 +261,33 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
   }
 
   async generateSections(outline, research) {
-    console.log('✍️ Generating content sections...');
+    console.log("✍️ Generating content sections...");
 
     const sections = [];
 
     // Generate introduction with hook
     const intro = await this.generateIntroduction(outline.hook, outline.thesis);
-    sections.push({ type: 'introduction', content: this.cleanSectionContent(intro) });
+    sections.push({ type: "introduction", content: this.cleanSectionContent(intro) });
 
     // Generate main sections
     for (const section of outline.sections) {
       const content = await this.generateSection(section, research);
-      sections.push({ type: 'section', title: section.title, content: this.cleanSectionContent(content) });
+      sections.push({
+        type: "section",
+        title: section.title,
+        content: this.cleanSectionContent(content),
+      });
     }
 
     // Generate conclusion
     const conclusion = await this.generateConclusion(outline.conclusion);
-    sections.push({ type: 'conclusion', content: this.cleanSectionContent(conclusion) });
+    sections.push({ type: "conclusion", content: this.cleanSectionContent(conclusion) });
 
     return sections;
   }
 
   cleanSectionContent(content) {
-    if (typeof content !== 'string') {
+    if (typeof content !== "string") {
       return content;
     }
 
@@ -290,12 +295,12 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
       /^based on .*?here'?s the blog section:?$/i,
       /^based on .*?here is the blog section:?$/i,
       /^here'?s the blog section.*$/i,
-      /^here is the blog section.*$/i
+      /^here is the blog section.*$/i,
     ];
 
     const isPreamble = (line) => {
       const simplified = line.replace(/[\u2018\u2019]/g, "'").trim();
-      return preambleRegexes.some(regex => regex.test(simplified));
+      return preambleRegexes.some((regex) => regex.test(simplified));
     };
 
     const lines = content.split(/\r?\n/);
@@ -304,11 +309,11 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
       lines.shift();
     }
 
-    while (lines.length > 0 && lines[0].trim() === '') {
+    while (lines.length > 0 && lines[0].trim() === "") {
       lines.shift();
     }
 
-    return lines.join('\n').replace(/^\s+/, '');
+    return lines.join("\n").replace(/^\s+/, "");
   }
 
   async generateIntroduction(hook, thesis) {
@@ -320,7 +325,7 @@ THESIS: ${thesis}
 VOICE GUIDELINES:
 - ${this.voiceFramework.brandVoice.persona}
 - Tone: ${this.voiceFramework.brandVoice.tone.primary}
-- Use signature phrases like: ${this.voiceFramework.signaturePhrases.slice(0, 2).join(', ')}
+- Use signature phrases like: ${this.voiceFramework.signaturePhrases.slice(0, 2).join(", ")}
 
 Write 200-300 words that:
 1. Open with the hook in an engaging way
@@ -337,15 +342,15 @@ Important style rules:
 - Start directly with the opening sentence of the introduction.`;
 
     const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
-    return await this.callOpenRouter(prompt, 'creative', { tools });
+    return await this.callOpenRouter(prompt, "creative", { tools });
   }
 
   async generateSection(sectionOutline, research) {
     const prompt = `Write a blog section with this outline:
 
 TITLE: ${sectionOutline.title}
-KEY POINTS: ${sectionOutline.key_points.join(', ')}
-SUPPORTING EVIDENCE: ${sectionOutline.evidence.join(', ')}
+KEY POINTS: ${sectionOutline.key_points.join(", ")}
+SUPPORTING EVIDENCE: ${sectionOutline.evidence.join(", ")}
 
 RESEARCH CONTEXT:
 ${JSON.stringify(research, null, 2)}
@@ -375,14 +380,14 @@ CRITICAL FORMATTING RULES:
 - Start with a topic sentence, not a restatement of the title`;
 
     const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
-    return await this.callOpenRouter(prompt, 'analysis', { tools });
+    return await this.callOpenRouter(prompt, "analysis", { tools });
   }
 
   async generateConclusion(conclusionOutline) {
     const prompt = `Write a powerful blog conclusion:
 
 SUMMARY: ${conclusionOutline.summary}
-ACTION ITEMS: ${conclusionOutline.action_items.join(', ')}
+ACTION ITEMS: ${conclusionOutline.action_items.join(", ")}
 CALL TO ACTION: ${conclusionOutline.call_to_action}
 
 Write 200-250 words that:
@@ -393,7 +398,7 @@ Write 200-250 words that:
 
 Ensure the takeaways feel timely for leaders planning in ${CURRENT_YEAR}.
 
-Use signature phrases: ${this.voiceFramework.signaturePhrases.slice(-2).join(', ')}
+Use signature phrases: ${this.voiceFramework.signaturePhrases.slice(-2).join(", ")}
 
 Important style rules:
 - Provide only the conclusion content.
@@ -401,13 +406,13 @@ Important style rules:
 - Start immediately with the concluding sentence or heading.`;
 
     const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
-    return await this.callOpenRouter(prompt, 'creative', { tools });
+    return await this.callOpenRouter(prompt, "creative", { tools });
   }
 
   async generateSEOMetadata(topic, sections, type) {
-    console.log('🔍 Generating SEO metadata...');
+    console.log("🔍 Generating SEO metadata...");
 
-    const content = sections.map(s => s.content).join('\n\n');
+    const content = sections.map((s) => s.content).join("\n\n");
     const prompt = `Create SEO metadata for this blog post:
 
 TOPIC: ${topic}
@@ -457,14 +462,14 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
 }`;
 
     const tools = this.webSearchApiKey ? this.getToolDefinitions() : undefined;
-    const seoData = await this.callOpenRouter(prompt, 'analysis', { tools });
+    const seoData = await this.callOpenRouter(prompt, "analysis", { tools });
 
     try {
       return extractJSON(seoData);
     } catch (error) {
-      console.error('❌ Failed to parse SEO JSON:', error.message);
-      console.log('Raw response:', seoData.substring(0, 200) + '...');
-      throw new Error('AI returned invalid JSON format for SEO data. Please try again.');
+      console.error("❌ Failed to parse SEO JSON:", error.message);
+      console.log("Raw response:", `${seoData.substring(0, 200)}...`);
+      throw new Error("AI returned invalid JSON format for SEO data. Please try again.");
     }
   }
 
@@ -472,9 +477,9 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
     const { topic, type, style, outline, sections, seoData } = data;
 
     const sanitize = (value) => {
-      const replaceDash = (str) => str.replace(/\u2014/g, '-');
+      const replaceDash = (str) => str.replace(/\u2014/g, "-");
 
-      if (typeof value === 'string') {
+      if (typeof value === "string") {
         return replaceDash(value);
       }
 
@@ -482,10 +487,8 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
         return value.map((item) => sanitize(item));
       }
 
-      if (value && typeof value === 'object') {
-        return Object.fromEntries(
-          Object.entries(value).map(([key, val]) => [key, sanitize(val)])
-        );
+      if (value && typeof value === "object") {
+        return Object.fromEntries(Object.entries(value).map(([key, val]) => [key, sanitize(val)]));
       }
 
       return value;
@@ -497,29 +500,31 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
     const frontmatter = {
       title: sanitizedSeoData.title,
       description: sanitizedSeoData.metaDescription,
-      date: new Date().toISOString().split('T')[0],
+      date: new Date().toISOString().split("T")[0],
       category: this.mapTypeToCategory(type),
       tags: sanitizedSeoData.keywords.slice(0, 5),
       author: "RADE AI Solutions",
       readTime: this.estimateReadTime(sections),
       seo: {
         keywords: sanitizedSeoData.keywords,
-        schema: sanitizedSeoData.schema
+        schema: sanitizedSeoData.schema,
       },
       generated: true,
-      generatedAt: new Date().toISOString()
+      generatedAt: new Date().toISOString(),
     };
 
     // Assemble content
-    const content = sections.map(section => {
-      if (section.type === 'introduction') {
-        return sanitize(section.content);
-      } else if (section.type === 'section') {
-        return `## ${sanitize(section.title)}\n\n${sanitize(section.content)}`;
-      } else if (section.type === 'conclusion') {
-        return `## Key Takeaways\n\n${sanitize(section.content)}`;
-      }
-    }).join('\n\n');
+    const content = sections
+      .map((section) => {
+        if (section.type === "introduction") {
+          return sanitize(section.content);
+        } else if (section.type === "section") {
+          return `## ${sanitize(section.title)}\n\n${sanitize(section.content)}`;
+        } else if (section.type === "conclusion") {
+          return `## Key Takeaways\n\n${sanitize(section.content)}`;
+        }
+      })
+      .join("\n\n");
 
     return {
       frontmatter: sanitize(frontmatter),
@@ -530,19 +535,19 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
         style,
         outline,
         generatedAt: new Date().toISOString(),
-        cost: this.costTracker.totalSpent
-      })
+        cost: this.costTracker.totalSpent,
+      }),
     };
   }
 
   mapTypeToCategory(type) {
     const mapping = {
-      'analysis': 'AI Analysis',
-      'tutorial': 'Technical Guide',
-      'prediction': 'Future Forecast',
-      'reality-check': 'Reality Check'
+      analysis: "AI Analysis",
+      tutorial: "Technical Guide",
+      prediction: "Future Forecast",
+      "reality-check": "Reality Check",
     };
-    return mapping[type] || 'AI Insights';
+    return mapping[type] || "AI Insights";
   }
 
   estimateReadTime(sections) {
@@ -550,12 +555,12 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
       return count + (section.content.match(/\w+/g) || []).length;
     }, 0);
 
-    return Math.ceil(totalWords / 200) + ' min read';
+    return `${Math.ceil(totalWords / 200)} min read`;
   }
 
   async saveDraft(blogPost, draftId) {
     const filename = `${draftId}.json`;
-    const filepath = path.join(this.outputPath, 'drafts', filename);
+    const filepath = path.join(this.outputPath, "drafts", filename);
 
     await fs.writeFile(filepath, JSON.stringify(blogPost, null, 2));
 
@@ -563,29 +568,31 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
   }
 
   generateDraftId(topic) {
-    const sanitized = topic.toLowerCase()
-      .replace(/[^a-z0-9\s]/g, '')
-      .replace(/\s+/g, '-')
+    const sanitized = topic
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, "")
+      .replace(/\s+/g, "-")
       .substring(0, 40);
 
     const timestamp = Date.now().toString().slice(-6);
     return `${sanitized}-${timestamp}`;
   }
 
-  async callOpenRouter(prompt, modelType = 'analysis', options = {}) {
+  async callOpenRouter(prompt, modelType = "analysis", options = {}) {
     const apiKey = process.env.OPENROUTER_API_KEY;
 
     if (!apiKey) {
-      throw new Error('OPENROUTER_API_KEY not found in environment variables');
+      throw new Error("OPENROUTER_API_KEY not found in environment variables");
     }
 
-    const modelConfig = this.openrouterConfig.models[modelType] || this.openrouterConfig.models.analysis;
+    const modelConfig =
+      this.openrouterConfig.models[modelType] || this.openrouterConfig.models.analysis;
 
     console.log(`🤖 Calling OpenRouter (${modelConfig.model})...`);
 
     const messages = options.initialMessages ? [...options.initialMessages] : [];
     if (!options.skipInitialUserMessage) {
-      messages.push({ role: 'user', content: prompt });
+      messages.push({ role: "user", content: prompt });
     }
 
     const tools = options.tools;
@@ -597,22 +604,22 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
           model: modelConfig.model,
           messages,
           temperature: modelConfig.temperature,
-          max_tokens: modelConfig.maxTokens
+          max_tokens: modelConfig.maxTokens,
         };
 
         if (tools && tools.length > 0) {
           body.tools = tools;
         }
 
-        const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-          method: 'POST',
+        const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+          method: "POST",
           headers: {
-            'Authorization': `Bearer ${apiKey}`,
-            'Content-Type': 'application/json',
-            'HTTP-Referer': 'https://alphab.io',
-            'X-Title': 'RADE AI Blog Generator'
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+            "HTTP-Referer": "https://alphab.io",
+            "X-Title": "RADE AI Blog Generator",
           },
-          body: JSON.stringify(body)
+          body: JSON.stringify(body),
         });
 
         if (!response.ok) {
@@ -628,19 +635,21 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
         const outputTokens = data.usage?.completion_tokens || 0;
         const estimatedCost = this.estimateCost(modelConfig.model, inputTokens, outputTokens);
         this.costTracker.totalSpent += estimatedCost;
-        console.log(`💰 Request cost: $${estimatedCost.toFixed(4)} (Total: $${this.costTracker.totalSpent.toFixed(4)})`);
+        console.log(
+          `💰 Request cost: $${estimatedCost.toFixed(4)} (Total: $${this.costTracker.totalSpent.toFixed(4)})`
+        );
 
         if (!message) {
-          throw new Error('OpenRouter returned an empty message');
+          throw new Error("OpenRouter returned an empty message");
         }
 
         const toolCalls = message.tool_calls || [];
 
         if (toolCalls.length > 0) {
           messages.push({
-            role: 'assistant',
-            content: message.content || '',
-            tool_calls: toolCalls
+            role: "assistant",
+            content: message.content || "",
+            tool_calls: toolCalls,
           });
 
           for (const toolCall of toolCalls) {
@@ -652,7 +661,7 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
             }
 
             let parsedArgs = {};
-            if (typeof args === 'string') {
+            if (typeof args === "string") {
               try {
                 parsedArgs = JSON.parse(args);
               } catch (error) {
@@ -664,15 +673,19 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
             const toolResponse = await this.executeTool(toolName, parsedArgs);
             if (toolResponse?.error) {
               console.warn(`⚠️  ${toolName} returned an error: ${toolResponse.error}`);
-            } else if (toolName === 'search_web') {
-              const resultCount = Array.isArray(toolResponse?.results) ? toolResponse.results.length : 0;
-              console.log(`🔎 search_web results: ${resultCount} hits${resultCount ? ` (top: ${toolResponse.results[0].title || 'n/a'})` : ''}`);
+            } else if (toolName === "search_web") {
+              const resultCount = Array.isArray(toolResponse?.results)
+                ? toolResponse.results.length
+                : 0;
+              console.log(
+                `🔎 search_web results: ${resultCount} hits${resultCount ? ` (top: ${toolResponse.results[0].title || "n/a"})` : ""}`
+              );
             }
 
             messages.push({
-              role: 'tool',
+              role: "tool",
               tool_call_id: toolCall.id,
-              content: JSON.stringify(toolResponse)
+              content: JSON.stringify(toolResponse),
             });
           }
 
@@ -680,7 +693,7 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
         }
 
         if (Array.isArray(message.content)) {
-          const combined = message.content.map(part => part.text).join('\n');
+          const combined = message.content.map((part) => part.text).join("\n");
           return combined.trim();
         }
 
@@ -692,7 +705,7 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
         break;
       }
 
-      throw new Error('OpenRouter conversation ended without a final response');
+      throw new Error("OpenRouter conversation ended without a final response");
     } catch (error) {
       throw new Error(`OpenRouter API call failed: ${error.message}`);
     }
@@ -701,35 +714,36 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
   getToolDefinitions() {
     return [
       {
-        type: 'function',
+        type: "function",
         function: {
-          name: 'search_web',
-          description: 'Search the web for up-to-date information. Use this to fetch recent news, stats, or announcements.',
+          name: "search_web",
+          description:
+            "Search the web for up-to-date information. Use this to fetch recent news, stats, or announcements.",
           parameters: {
-            type: 'object',
+            type: "object",
             properties: {
               query: {
-                type: 'string',
-                description: 'Search query describing the information to look up.'
+                type: "string",
+                description: "Search query describing the information to look up.",
               },
               count: {
-                type: 'integer',
-                description: 'Approximate number of search results (1-10).',
+                type: "integer",
+                description: "Approximate number of search results (1-10).",
                 minimum: 1,
                 maximum: 10,
-                default: 5
-              }
+                default: 5,
+              },
             },
-            required: ['query']
-          }
-        }
-      }
+            required: ["query"],
+          },
+        },
+      },
     ];
   }
 
   async executeTool(name, args) {
     switch (name) {
-      case 'search_web':
+      case "search_web":
         return await this.searchWeb(args?.query, args?.count);
       default:
         return { error: `Unknown tool: ${name}` };
@@ -737,20 +751,20 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
   }
 
   async searchWeb(query, count = 5) {
-    if (!query || typeof query !== 'string') {
-      return { error: 'Missing search query' };
+    if (!query || typeof query !== "string") {
+      return { error: "Missing search query" };
     }
 
     if (!this.webSearchApiKey) {
-      return { error: 'SERPAPI_API_KEY not configured', query };
+      return { error: "SERPAPI_API_KEY not configured", query };
     }
 
     const resultLimit = Math.max(1, Math.min(count || 5, 10));
     const params = new URLSearchParams({
-      engine: 'google',
+      engine: "google",
       q: query,
       num: String(resultLimit),
-      api_key: this.webSearchApiKey
+      api_key: this.webSearchApiKey,
     });
 
     try {
@@ -763,19 +777,19 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
 
       const data = await response.json();
       const organic = Array.isArray(data.organic_results) ? data.organic_results : [];
-      const results = organic.slice(0, resultLimit).map(item => ({
+      const results = organic.slice(0, resultLimit).map((item) => ({
         title: item.title,
         url: item.link,
         snippet: item.snippet || item.title,
         position: item.position,
-        source: item.source || item.displayed_link
+        source: item.source || item.displayed_link,
       }));
 
       return {
         query,
         fetchedAt: new Date().toISOString(),
-        provider: 'serpapi',
-        results
+        provider: "serpapi",
+        results,
       };
     } catch (error) {
       return { error: `Search request failed: ${error.message}`, query };
@@ -785,15 +799,15 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
   estimateCost(model, inputTokens, outputTokens) {
     // OpenRouter pricing per 1K tokens (as of 2024)
     const pricing = {
-      'anthropic/claude-3.5-sonnet': { input: 0.003, output: 0.015 },
-      'openai/gpt-4-turbo': { input: 0.01, output: 0.03 },
-      'openai/gpt-4o': { input: 0.005, output: 0.015 },
-      'meta-llama/llama-3.1-70b-instruct': { input: 0.0009, output: 0.0009 },
-      'default': { input: 0.002, output: 0.01 }
+      "anthropic/claude-3.5-sonnet": { input: 0.003, output: 0.015 },
+      "openai/gpt-4-turbo": { input: 0.01, output: 0.03 },
+      "openai/gpt-4o": { input: 0.005, output: 0.015 },
+      "meta-llama/llama-3.1-70b-instruct": { input: 0.0009, output: 0.0009 },
+      default: { input: 0.002, output: 0.01 },
     };
 
     const rates = pricing[model] || pricing.default;
-    return (inputTokens / 1000 * rates.input) + (outputTokens / 1000 * rates.output);
+    return (inputTokens / 1000) * rates.input + (outputTokens / 1000) * rates.output;
   }
 }
 
@@ -802,22 +816,23 @@ if (require.main === module) {
   const generator = new BlogGenerator();
 
   const topic = process.argv[2];
-  const type = process.argv[3] || 'analysis';
+  const type = process.argv[3] || "analysis";
 
   if (!topic) {
     console.log('Usage: node blog-generator.js "Topic" [type]');
-    console.log('Types: analysis, tutorial, prediction, reality-check');
+    console.log("Types: analysis, tutorial, prediction, reality-check");
     process.exit(1);
   }
 
-  generator.initialize()
+  generator
+    .initialize()
     .then(() => generator.generateBlogPost({ topic, type }))
-    .then(result => {
+    .then((result) => {
       console.log(`\n🎉 Success! Draft ID: ${result.draftId}`);
       console.log(`Next step: node blog-publisher.js ${result.draftId}`);
     })
-    .catch(error => {
-      console.error('❌ Generation failed:', error.message);
+    .catch((error) => {
+      console.error("❌ Generation failed:", error.message);
       process.exit(1);
     });
 }

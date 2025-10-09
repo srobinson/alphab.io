@@ -5,38 +5,38 @@ import { ArrowRight, Calendar, Clock, Rss } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
-	AnimatedUnderlineText,
-	PREDEFINED_UNDERLINE_PATHS,
+  AnimatedUnderlineText,
+  PREDEFINED_UNDERLINE_PATHS,
 } from "@/components/ui/animated_underline_text";
 import { Button } from "@/components/ui/button";
 
 // Animation variants
 const sectionVariants = {
-	hidden: { opacity: 0, y: 20 },
-	visible: { opacity: 1, y: 0, transition: { duration: 0.25, ease: "easeOut" } },
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.25, ease: "easeOut" } },
 };
 
 const cardVariants = {
-	hidden: { opacity: 0, y: 20, scale: 0.98 },
-	visible: {
-		opacity: 1,
-		y: 0,
-		scale: 1,
-		transition: { duration: 0.5, ease: "easeOut" },
-	},
+  hidden: { opacity: 0, y: 20, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
 };
 
 const createLetterPulseVariants = (baseDelay: number, pulseScale = 1.3) => ({
-	initial: { scale: 1, letterSpacing: "normal" },
-	pulse: (i: number) => ({
-		scale: [1, pulseScale, 1],
-		letterSpacing: ["normal", "2px", "normal"],
-		transition: {
-			delay: baseDelay + i * 0.08,
-			duration: 0.4,
-			ease: "circOut",
-		},
-	}),
+  initial: { scale: 1, letterSpacing: "normal" },
+  pulse: (i: number) => ({
+    scale: [1, pulseScale, 1],
+    letterSpacing: ["normal", "2px", "normal"],
+    transition: {
+      delay: baseDelay + i * 0.08,
+      duration: 0.4,
+      ease: "circOut",
+    },
+  }),
 });
 
 const techLetters = "TECH".split("");
@@ -45,101 +45,94 @@ const techLetterPulseVariants = createLetterPulseVariants(techBaseDelay, 1.15);
 
 const insightsLetters = "INSIGHTS".split("");
 const insightsBaseDelay = 0.2;
-const insightsLetterPulseVariants = createLetterPulseVariants(
-	insightsBaseDelay,
-	1.1,
-);
+const insightsLetterPulseVariants = createLetterPulseVariants(insightsBaseDelay, 1.1);
 
 type BlogPost = {
-	slug: string;
-	title: string;
-	description: string;
-	date: string;
-	publishedAt?: string;
-	category: string;
-	tags: string[];
-	readTime?: string;
-	generated?: boolean;
+  slug: string;
+  title: string;
+  description: string;
+  date: string;
+  publishedAt?: string;
+  category: string;
+  tags: string[];
+  readTime?: string;
+  generated?: boolean;
 };
 
 export default function BlogPage() {
-	// Blog posts will be loaded from generated content
-	const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
-	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState<string | null>(null);
+  // Blog posts will be loaded from generated content
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-	useEffect(() => {
-		// Load blog posts from generated content
-		const loadBlogPosts = async () => {
-			try {
-				const response = await fetch("/api/blog/index");
-				if (!response.ok) {
-					throw new Error(`Request failed with status ${response.status}`);
-				}
-				const data = await response.json();
-				setBlogPosts((data.posts as BlogPost[]) || []);
-				setError(null);
-			} catch (error) {
-				console.error("Failed to load blog posts:", error);
-				// Fallback to placeholder data if needed
-				setBlogPosts([]);
-				setError(
-					"Unable to load blog posts right now. Please check back soon.",
-				);
-			} finally {
-				setLoading(false);
-			}
-		};
+  useEffect(() => {
+    // Load blog posts from generated content
+    const loadBlogPosts = async () => {
+      try {
+        const response = await fetch("/api/blog/index");
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+        const data = await response.json();
+        setBlogPosts((data.posts as BlogPost[]) || []);
+        setError(null);
+      } catch (error) {
+        console.error("Failed to load blog posts:", error);
+        // Fallback to placeholder data if needed
+        setBlogPosts([]);
+        setError("Unable to load blog posts right now. Please check back soon.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-		loadBlogPosts();
-	}, []);
+    loadBlogPosts();
+  }, []);
 
-	const featuredPosts = blogPosts
-		.filter((post) => post.category === "Reality Check" || post.generated)
-		.slice(0, 2);
-	const featuredSlugs = featuredPosts.map((post) => post.slug);
-	const recentPosts = blogPosts.filter(
-		(post) => !featuredSlugs.includes(post.slug),
-	);
-	const showStateCard =
-		(loading && blogPosts.length === 0) ||
-		Boolean(error) ||
-		(!loading && !error && blogPosts.length === 0);
-	const blogStructuredData = {
-		"@context": "https://schema.org",
-		"@type": "Blog",
-		name: "RADE AI Tech Blog",
-		description:
-			"Daily insights into cutting-edge AI technologies, research papers, and emerging tech trends",
-		url: "https://rade.alphab.io/blog",
-		author: {
-			"@type": "Person",
-			name: "RADE AI Solutions",
-			url: "https://alphab.io",
-		},
-		publisher: {
-			"@type": "Organization",
-			name: "RADE AI Solutions",
-			url: "https://alphab.io",
-		},
-		blogPost: blogPosts.map((post) => ({
-			"@type": "BlogPosting",
-			headline: post.title,
-			description: post.description,
-			url: `https://rade.alphab.io/blog/${post.slug}`,
-			datePublished: post.publishedAt || post.date,
-			author: {
-				"@type": "Person",
-				name: "RADE AI Solutions",
-			},
-			publisher: {
-				"@type": "Organization",
-				name: "RADE AI Solutions",
-			},
-		})),
-	};
+  const featuredPosts = blogPosts
+    .filter((post) => post.category === "Reality Check" || post.generated)
+    .slice(0, 2);
+  const featuredSlugs = featuredPosts.map((post) => post.slug);
+  const recentPosts = blogPosts.filter((post) => !featuredSlugs.includes(post.slug));
+  const showStateCard =
+    (loading && blogPosts.length === 0) ||
+    Boolean(error) ||
+    (!loading && !error && blogPosts.length === 0);
+  const blogStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "RADE AI Tech Blog",
+    description:
+      "Daily insights into cutting-edge AI technologies, research papers, and emerging tech trends",
+    url: "https://rade.alphab.io/blog",
+    author: {
+      "@type": "Person",
+      name: "RADE AI Solutions",
+      url: "https://alphab.io",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "RADE AI Solutions",
+      url: "https://alphab.io",
+    },
+    blogPost: blogPosts.map((post) => ({
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.description,
+      url: `https://rade.alphab.io/blog/${post.slug}`,
+      datePublished: post.publishedAt || post.date,
+      author: {
+        "@type": "Person",
+        name: "RADE AI Solutions",
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "RADE AI Solutions",
+      },
+    })),
+  };
 
-	return (
+  return (
 		<>
 			<script
 				type="application/ld+json"

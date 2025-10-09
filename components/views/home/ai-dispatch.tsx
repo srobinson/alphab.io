@@ -28,9 +28,11 @@ const formatDate = (date: Date): string => {
   });
 };
 
-export function AiDispatch(
-  { mainHeadline, briefings, dispatchSource = "RADE AI CORE" }: AiDispatchProps,
-) {
+export function AiDispatch({
+  mainHeadline,
+  briefings,
+  dispatchSource = "RADE AI CORE",
+}: AiDispatchProps) {
   const currentDate = formatDate(new Date());
   const [showHeader, setShowHeader] = useState(false);
   const [creatorIntelText, setCreatorIntelText] = useState("");
@@ -67,36 +69,36 @@ export function AiDispatch(
     }, 50);
 
     return () => clearInterval(interval);
-  }, [showHeader, fullCreatorIntelText, fullDateText]);
+  }, [showHeader, fullDateText]);
 
   // Trigger header reveal when headline comes into view
-	useEffect(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				const entry = entries[0];
-				// When headline comes into view, start the typewriter effect
-				if (entry.isIntersecting) {
-					setShowHeader(true);
-				}
-			},
-			{
-				threshold: 0.1, // Trigger when 10% of headline is visible
-				rootMargin: "0px",
-			},
-		);
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+        // When headline comes into view, start the typewriter effect
+        if (entry.isIntersecting) {
+          setShowHeader(true);
+        }
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of headline is visible
+        rootMargin: "0px",
+      }
+    );
 
-		const currentHeadline = headlineRef.current;
+    const currentHeadline = headlineRef.current;
 
-		if (currentHeadline) {
-			observer.observe(currentHeadline);
-		}
+    if (currentHeadline) {
+      observer.observe(currentHeadline);
+    }
 
-		return () => {
-			if (currentHeadline) {
-				observer.unobserve(currentHeadline);
-			}
-		};
-	}, []);
+    return () => {
+      if (currentHeadline) {
+        observer.unobserve(currentHeadline);
+      }
+    };
+  }, []);
 
   return (
     <motion.div

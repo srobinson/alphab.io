@@ -1,17 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import {
-  Banknote,
-  Calendar,
-  CheckCircle,
-  Clock,
-  Heart,
-  Receipt,
-  User,
-} from "lucide-react";
+import { Banknote, Calendar, CheckCircle, Clock, Heart, Receipt, User } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function PricingPage() {
   // Animation variants
@@ -29,12 +21,7 @@ export default function PricingPage() {
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-b border-gray-200 dark:border-gray-800">
         <div className="container mx-auto px-6 max-w-6xl text-center">
-          <motion.div
-            variants={itemVariants}
-            initial="hidden"
-            animate="visible"
-            className="mb-2"
-          >
+          <motion.div variants={itemVariants} initial="hidden" animate="visible" className="mb-2">
             <span className="bg-blue-600 dark:bg-blue-500 text-white px-4 py-1 text-sm font-bold tracking-wider">
               INVESTMENT
             </span>
@@ -56,8 +43,8 @@ export default function PricingPage() {
             animate="visible"
             className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed"
           >
-            No agency overhead. No marketing team markups. Just pure AI
-            expertise and implementation power.
+            No agency overhead. No marketing team markups. Just pure AI expertise and implementation
+            power.
           </motion.p>
           <motion.div
             className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 dark:text-gray-400"
@@ -90,8 +77,7 @@ export default function PricingPage() {
       >
         <div className="relative">
           {/* Background texture */}
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black rounded-xl opacity-80">
-          </div>
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-black rounded-xl opacity-80"></div>
 
           {/* Statement header */}
           <div className="relative bg-white dark:bg-gray-900 border-2 border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden shadow-2xl">
@@ -99,19 +85,13 @@ export default function PricingPage() {
               <div className="flex items-center">
                 <Receipt className="h-8 w-8 mr-4" />
                 <div>
-                  <h2 className="text-2xl font-bold tracking-tight">
-                    INVESTMENT STATEMENT
-                  </h2>
-                  <p className="text-blue-100 text-sm">
-                    Direct value transfer. No middlemen.
-                  </p>
+                  <h2 className="text-2xl font-bold tracking-tight">INVESTMENT STATEMENT</h2>
+                  <p className="text-blue-100 text-sm">Direct value transfer. No middlemen.</p>
                 </div>
               </div>
               <div className="text-right">
                 <p className="text-sm text-blue-100">Statement Date</p>
-                <p className="font-mono font-bold">
-                  {new Date().toLocaleDateString()}
-                </p>
+                <p className="font-mono font-bold">{new Date().toLocaleDateString()}</p>
               </div>
             </div>
 
@@ -119,18 +99,14 @@ export default function PricingPage() {
             <div className="p-8 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
               <div className="flex justify-between items-start mb-8">
                 <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Account Holder
-                  </p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Account Holder</p>
                   <p className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
                     <User className="h-5 w-5 mr-2 text-blue-600 dark:text-blue-400" />
                     Your Business
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Service Provider
-                  </p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Service Provider</p>
                   <p className="text-xl font-bold text-gray-900 dark:text-white">
                     RADE AI Consulting
                   </p>
@@ -167,9 +143,7 @@ export default function PricingPage() {
                     <div className="font-mono text-2xl font-bold text-gray-900 dark:text-white">
                       $1,000
                     </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
-                      $200/hour value
-                    </div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">$200/hour value</div>
                   </div>
                 </div>
 
@@ -202,9 +176,7 @@ export default function PricingPage() {
                     <div className="font-mono text-2xl font-bold text-gray-900 dark:text-white">
                       $1,500
                     </div>
-                    <div className="text-sm text-gray-500 dark:text-gray-400">
-                      $125/hour value
-                    </div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400">$125/hour value</div>
                   </div>
                 </div>
 
@@ -218,8 +190,7 @@ export default function PricingPage() {
                         Community Projects
                       </h3>
                       <p className="text-gray-600 dark:text-gray-300 mt-1">
-                        I regularly contribute to worthy causes and community
-                        initiatives
+                        I regularly contribute to worthy causes and community initiatives
                       </p>
                       <div className="mt-2">
                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
@@ -252,9 +223,7 @@ export default function PricingPage() {
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
-                    <span className="text-gray-700 dark:text-gray-300">
-                      No agency overhead
-                    </span>
+                    <span className="text-gray-700 dark:text-gray-300">No agency overhead</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-2" />
@@ -286,8 +255,7 @@ export default function PricingPage() {
       </motion.section>
 
       {/* Value Proposition Section */}
-      {
-        /* <motion.section
+      {/* <motion.section
         className="container mx-auto px-6 py-16 max-w-4xl"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -362,8 +330,7 @@ export default function PricingPage() {
             </div>
           </div>
         </div>
-      </motion.section> */
-      }
+      </motion.section> */}
 
       {/* Call to Action */}
       <motion.section
@@ -375,15 +342,12 @@ export default function PricingPage() {
       >
         <div className="space-y-8">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white">
-            READY TO{" "}
-            <span className="text-blue-600 dark:text-blue-500">INVEST</span>
-            {" "}
-            IN YOUR AI FUTURE?
+            READY TO <span className="text-blue-600 dark:text-blue-500">INVEST</span> IN YOUR AI
+            FUTURE?
           </h2>
           <p className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
-            Whether you&rsquo;re looking for a strategic consultation, implementation
-            support, or exploring a community collaboration, let&rsquo;s start the
-            conversation.
+            Whether you&rsquo;re looking for a strategic consultation, implementation support, or
+            exploring a community collaboration, let&rsquo;s start the conversation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact" passHref legacyBehavior>

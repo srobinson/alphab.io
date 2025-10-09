@@ -107,13 +107,7 @@
   "themes": [
     {
       "name": "Challenges & Limitations",
-      "keywords": [
-        "challenge",
-        "limitation",
-        "problem",
-        "issue",
-        "concern"
-      ],
+      "keywords": ["challenge", "limitation", "problem", "issue", "concern"],
       "description": "Problems and limitations in current AI",
       "articleCount": 18,
       "percentage": "7.6",
@@ -125,14 +119,7 @@
     },
     {
       "name": "Market Dynamics",
-      "keywords": [
-        "funding",
-        "investment",
-        "competition",
-        "market",
-        "revenue",
-        "growth"
-      ],
+      "keywords": ["funding", "investment", "competition", "market", "revenue", "growth"],
       "description": "Business and market developments in AI",
       "articleCount": 16,
       "percentage": "6.7",
@@ -144,13 +131,7 @@
     },
     {
       "name": "AI Capability Leap",
-      "keywords": [
-        "breakthrough",
-        "advancement",
-        "capability",
-        "performance",
-        "benchmark"
-      ],
+      "keywords": ["breakthrough", "advancement", "capability", "performance", "benchmark"],
       "description": "Major advances in AI capabilities or performance",
       "articleCount": 10,
       "percentage": "4.2",
@@ -162,13 +143,7 @@
     },
     {
       "name": "Practical Applications",
-      "keywords": [
-        "implementation",
-        "deployment",
-        "use case",
-        "application",
-        "adoption"
-      ],
+      "keywords": ["implementation", "deployment", "use case", "application", "adoption"],
       "description": "Real-world AI implementations and use cases",
       "articleCount": 10,
       "percentage": "4.2",
@@ -180,13 +155,7 @@
     },
     {
       "name": "Technical Innovation",
-      "keywords": [
-        "architecture",
-        "algorithm",
-        "method",
-        "technique",
-        "approach"
-      ],
+      "keywords": ["architecture", "algorithm", "method", "technique", "approach"],
       "description": "New technical approaches or methodologies",
       "articleCount": 9,
       "percentage": "3.8",
@@ -198,13 +167,7 @@
     },
     {
       "name": "Industry Impact",
-      "keywords": [
-        "industry",
-        "sector",
-        "transformation",
-        "disruption",
-        "change"
-      ],
+      "keywords": ["industry", "sector", "transformation", "disruption", "change"],
       "description": "How AI is affecting different industries",
       "articleCount": 9,
       "percentage": "3.8",
@@ -294,14 +257,7 @@
       "reasoning": "16 articles around this theme",
       "themeData": {
         "name": "Market Dynamics",
-        "keywords": [
-          "funding",
-          "investment",
-          "competition",
-          "market",
-          "revenue",
-          "growth"
-        ],
+        "keywords": ["funding", "investment", "competition", "market", "revenue", "growth"],
         "description": "Business and market developments in AI",
         "articleCount": 16,
         "percentage": "6.7",
@@ -320,13 +276,7 @@
       "reasoning": "10 articles around this theme",
       "themeData": {
         "name": "AI Capability Leap",
-        "keywords": [
-          "breakthrough",
-          "advancement",
-          "capability",
-          "performance",
-          "benchmark"
-        ],
+        "keywords": ["breakthrough", "advancement", "capability", "performance", "benchmark"],
         "description": "Major advances in AI capabilities or performance",
         "articleCount": 10,
         "percentage": "4.2",
@@ -342,9 +292,7 @@
     {
       "title": "James Meek · Computers that want things",
       "summary": "An exploration of artificial intelligence's lack of genuine desires and motivations, centered around the historic 2016 Go match between Lee Sedol and AlphaGo, and the philosophical implications for developing artificial general intelligence (AGI) with genuine wants and ethics.",
-      "tags": [
-        "ai"
-      ],
+      "tags": ["ai"],
       "source": "Hacker News AI",
       "published_at": "2025-10-09T00:00:00+00:00",
       "url": "https://www.lrb.co.uk/the-paper/v47/n18/james-meek/computers-that-want-things"
@@ -387,15 +335,7 @@
     {
       "title": "Google launches extensions system for its command-line coding tool | TechCrunch",
       "summary": "Google launched Gemini CLI Extensions, allowing third-party companies to integrate with its command-line AI system through open-source extensions hosted on Github, with initial partners including Figma and Stripe.",
-      "tags": [
-        "ai",
-        "tc",
-        "google",
-        "extensions",
-        "gemini",
-        "gemini cli",
-        "featured"
-      ],
+      "tags": ["ai", "tc", "google", "extensions", "gemini", "gemini cli", "featured"],
       "source": "TechCrunch AI",
       "published_at": "2025-10-08T14:00:00+00:00",
       "url": "https://techcrunch.com/2025/10/08/google-launches-extensions-system-for-its-command-line-coding-tool"
@@ -403,13 +343,7 @@
     {
       "title": "This Moto Phone Has a Headphone Jack, MicroSD Slot, and Wireless Charging—and It's on Sale for $200",
       "summary": "The Motorola Moto G Power 5G 2025 smartphone offers rare features like a headphone jack, microSD slot, and wireless charging, along with a 5,000-mAh battery that lasts two days, now available for $200 during Amazon's sale.",
-      "tags": [
-        "tech",
-        "gear",
-        "gear / deals",
-        "gear / products / phones",
-        "featured"
-      ],
+      "tags": ["tech", "gear", "gear / deals", "gear / products / phones", "featured"],
       "source": "Wired Tech",
       "published_at": "2025-10-08T13:44:12.545+00:00",
       "url": "https://www.wired.com/story/moto-g-power-5g-2025-prime-big-deal-days"
@@ -417,12 +351,7 @@
     {
       "title": "SoftBank makes a $5.4 billion bet on AI robots",
       "summary": "SoftBank is acquiring ABB's robotics division for $5.4 billion as part of its strategic push into 'Physical AI' and robotics, marking one of four key investment areas alongside chips, data centers, and generative AI.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai",
-        "robotics"
-      ],
+      "tags": ["tech", "featured", "ai", "robotics"],
       "source": "The Verge",
       "published_at": "2025-10-08T13:00:35+00:00",
       "url": "https://www.theverge.com/news/796068/softbank-bets-on-ai-robots"
@@ -430,10 +359,7 @@
     {
       "title": "Our favorite batteries and chargers are on sale for October Prime Day",
       "summary": "Various charging accessories from major brands like Anker, Belkin, and Ugreen are discounted during Amazon's Prime Big Deal Days, including power banks, multi-port chargers, and wireless charging stations compatible with both iPhone and newer Android devices.",
-      "tags": [
-        "tech",
-        "featured"
-      ],
+      "tags": ["tech", "featured"],
       "source": "The Verge",
       "published_at": "2025-10-08T13:00:00+00:00",
       "url": "https://www.theverge.com/tech/788318/amazon-october-prime-day-chargers-power-banks-batteries-deal-sale-2025"
@@ -441,12 +367,7 @@
     {
       "title": "The AirPods 4 are just $89, matching their best price to date during October Prime Day",
       "summary": "Apple's AirPods 4 are on sale for an all-time low of $89 (normally $129) during Amazon's Prime Day, with the ANC version available for $119, offering improved sound quality and features like Voice Isolation compared to previous entry-level models.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai",
-        "apple"
-      ],
+      "tags": ["tech", "featured", "ai", "apple"],
       "source": "The Verge",
       "published_at": "2025-10-08T13:00:00+00:00",
       "url": "https://www.theverge.com/tech/792480/amazon-october-prime-day-airpods-4-anc-deal-sale-2025"
@@ -470,12 +391,7 @@
     {
       "title": "OpenAI wasn’t expecting Sora’s copyright drama",
       "summary": "OpenAI is reversing its copyright policy for Sora after unexpected backlash, with CEO Sam Altman acknowledging they need to give rightsholders more control over how their characters and likenesses are used in AI-generated videos.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai",
-        "openai"
-      ],
+      "tags": ["tech", "featured", "ai", "openai"],
       "source": "The Verge",
       "published_at": "2025-10-08T12:00:00+00:00",
       "url": "https://www.theverge.com/ai-artificial-intelligence/795171/openai-devday-sam-altman-sora-launch-copyright"
@@ -483,13 +399,7 @@
     {
       "title": "Amazfit’s Active 2, one of our favorite fitness trackers, is a steal at just $81",
       "summary": "The Amazfit Active 2 fitness tracker is on sale for $81 during Amazon's Prime Day, offering features like offline maps, heart rate monitoring, and AI assistance in a budget-friendly package that typically costs twice as much.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai",
-        "google",
-        "apple"
-      ],
+      "tags": ["tech", "featured", "ai", "google", "apple"],
       "source": "The Verge",
       "published_at": "2025-10-08T12:00:00+00:00",
       "url": "https://www.theverge.com/tech/791143/amazon-october-prime-day-amazfit-active-2-deal-sale-2025"
@@ -516,11 +426,7 @@
     {
       "title": "HMD’s Touch 4G is a dumb-smart-phone",
       "summary": "HMD has launched the Touch 4G, a hybrid device that combines feature phone simplicity with smartphone capabilities like touchscreen and video calling, priced at ₹4,999 ($55) in India and running on a custom RTOS Touch operating system.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai"
-      ],
+      "tags": ["tech", "featured", "ai"],
       "source": "The Verge",
       "published_at": "2025-10-08T11:21:00+00:00",
       "url": "https://www.theverge.com/news/795993/hmds-touch-4g-is-a-dumb-smart-phone"
@@ -528,11 +434,7 @@
     {
       "title": "Firefox is adding profiles to separate your browsing sessions",
       "summary": "Mozilla Firefox is introducing profile management that allows users to create separate browsing spaces with distinct bookmarks, logins, history, extensions, and themes, rolling out from October 14th.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai"
-      ],
+      "tags": ["tech", "featured", "ai"],
       "source": "The Verge",
       "published_at": "2025-10-08T10:56:31+00:00",
       "url": "https://www.theverge.com/news/795998/mozilla-firefox-browser-profiles-separate-tabs"
@@ -540,10 +442,7 @@
     {
       "title": "The 16 October Prime Day deals that are most popular with Verge readers",
       "summary": "The Verge reports on the most popular items purchased by their readers during Amazon's October Prime Day, including power banks, AirTags, USB-C cables, and electric screwdrivers, with deals running until Thursday.",
-      "tags": [
-        "tech",
-        "featured"
-      ],
+      "tags": ["tech", "featured"],
       "source": "The Verge",
       "published_at": "2025-10-08T10:41:54+00:00",
       "url": "https://www.theverge.com/tech/795055/amazon-october-prime-day-2025-popular-products-verge-readers"
@@ -551,11 +450,7 @@
     {
       "title": "Tuned Global strengthens its leadership in music technology with the acquisition of Figaro.ai",
       "summary": "Music technology platform Tuned Global has acquired Figaro.ai, a London-based AI company, to enhance its music industry technology offerings and continue supporting existing Figaro.ai customers.",
-      "tags": [
-        "ai",
-        "ai business strategy",
-        "sponsored content"
-      ],
+      "tags": ["ai", "ai business strategy", "sponsored content"],
       "source": "AI News",
       "published_at": "2025-10-08T10:37:29+00:00",
       "url": "https://www.artificialintelligence-news.com/news/tuned-global-strengthens-its-leadership-in-music-technology-with-the-acquisition-of-figaro-ai"
@@ -563,11 +458,7 @@
     {
       "title": "Nothing Ear 3 review: work in progress",
       "summary": "Nothing's Ear 3 wireless earbuds ($179) feature a novel 'Super Mic' system built into the charging case for improved call quality, though its performance is inconsistent and faces compatibility limitations with some apps.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai"
-      ],
+      "tags": ["tech", "featured", "ai"],
       "source": "The Verge",
       "published_at": "2025-10-08T10:30:00+00:00",
       "url": "https://www.theverge.com/tech/792839/nothing-ear-3-review-audio-super-mic-price"
@@ -575,10 +466,7 @@
     {
       "title": "The 207 best October Prime Day deals you can still get",
       "summary": "Amazon's October Prime Day sale enters its final day with deals on tech products including headphones, TVs, smartwatches, and other gadgets available until Thursday 3AM ET.",
-      "tags": [
-        "tech",
-        "featured"
-      ],
+      "tags": ["tech", "featured"],
       "source": "The Verge",
       "published_at": "2025-10-08T09:33:05+00:00",
       "url": "https://www.theverge.com/tech/795212/best-amazon-prime-day-tech-deals-october-2025-day-2"
@@ -605,10 +493,7 @@
     {
       "title": "We dug through thousands of Prime Day deals to find 60 standouts for $50 or less",
       "summary": null,
-      "tags": [
-        "tech",
-        "featured"
-      ],
+      "tags": ["tech", "featured"],
       "source": "The Verge",
       "published_at": "2025-10-08T02:01:20+00:00",
       "url": "https://www.theverge.com/tech/793435/amazon-october-prime-day-best-cheap-tech-deals-under-50-2025"

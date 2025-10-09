@@ -1,6 +1,6 @@
-import { MetadataRoute } from "next";
-import { promises as fs } from "fs";
-import path from "path";
+import { promises as fs } from "node:fs";
+import path from "node:path";
+import type { MetadataRoute } from "next";
 
 const baseUrl = "https://alphab.io";
 const BLOG_INDEX_PATH = path.join(process.cwd(), "content/blog/index.json");
@@ -76,8 +76,8 @@ async function loadBlogSitemapEntries(): Promise<SitemapEntry[]> {
           typeof post.publishedAt === "string"
             ? post.publishedAt
             : typeof post.date === "string"
-            ? post.date
-            : undefined;
+              ? post.date
+              : undefined;
 
         const lastModified = publishedValue ? new Date(publishedValue) : new Date();
 

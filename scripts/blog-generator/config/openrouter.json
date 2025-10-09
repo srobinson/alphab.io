@@ -23,7 +23,7 @@
   },
   "costTracking": {
     "enabled": true,
-    "alertThreshold": 10.00,
-    "monthlyBudget": 50.00
+    "alertThreshold": 10.0,
+    "monthlyBudget": 50.0
   }
 }

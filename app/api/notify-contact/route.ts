@@ -1,6 +1,6 @@
-import { createAdminClient } from "@/lib/supabaseAdmin";
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+import { createAdminClient } from "@/lib/supabaseAdmin";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -38,28 +38,19 @@ export async function POST(request: NextRequest) {
   try {
     const requestBody = (await request.json()) as Partial<NotifyRequestBody>;
 
-    const contactId =
-      typeof requestBody.contactId === "string"
-        ? requestBody.contactId.trim()
-        : "";
+    const contactId = typeof requestBody.contactId === "string" ? requestBody.contactId.trim() : "";
     const notificationType =
       typeof requestBody.notificationType === "string"
         ? requestBody.notificationType
         : "new_contact";
 
     if (!contactId) {
-      return NextResponse.json(
-        { error: "Contact ID is required" },
-        { status: 400 },
-      );
+      return NextResponse.json({ error: "Contact ID is required" }, { status: 400 });
     }
 
     const supabase = createAdminClient();
     if (!supabase) {
-      return NextResponse.json(
-        { error: "Database connection not available" },
-        { status: 500 },
-      );
+      return NextResponse.json({ error: "Database connection not available" }, { status: 500 });
     }
 
     // Get contact details
@@ -71,10 +62,7 @@ export async function POST(request: NextRequest) {
 
     if (contactError || !contact) {
       console.warn("[notify-contact] contact fetch failed:", contactError);
-      return NextResponse.json(
-        { error: "Contact not found" },
-        { status: 404 },
-      );
+      return NextResponse.json({ error: "Contact not found" }, { status: 404 });
     }
 
     const contactDetails: ContactNotificationData = {
@@ -88,19 +76,17 @@ export async function POST(request: NextRequest) {
     };
 
     // Log the notification activity
-    await supabase
-      .from("user_activity_log")
-      .insert({
-        user_id: null,
-        activity_type: "notification_sent",
-        activity_data: {
-          contact_id: contactId,
-          notification_type: notificationType,
-          contact_email: contactDetails.email,
-          contact_name: contactDetails.name,
-          timestamp: new Date().toISOString(),
-        },
-      });
+    await supabase.from("user_activity_log").insert({
+      user_id: null,
+      activity_type: "notification_sent",
+      activity_data: {
+        contact_id: contactId,
+        notification_type: notificationType,
+        contact_email: contactDetails.email,
+        contact_name: contactDetails.name,
+        timestamp: new Date().toISOString(),
+      },
+    });
 
     const notificationData = {
       type: notificationType,
@@ -132,18 +118,13 @@ export async function POST(request: NextRequest) {
     });
   } catch (error: unknown) {
     console.error("[notify-contact] Notification error:", error);
-    return NextResponse.json(
-      { error: "Failed to process notification" },
-      { status: 500 },
-    );
+    return NextResponse.json({ error: "Failed to process notification" }, { status: 500 });
   }
 }
 
 function generateEmailHTML(contact: ContactNotificationData): string {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://alphab.io";
-  const formattedMessage = contact.message
-    ? contact.message.replace(/\n/g, "<br>")
-    : "";
+  const formattedMessage = contact.message ? contact.message.replace(/\n/g, "<br>") : "";
   return `
     <!DOCTYPE html>
     <html>
@@ -167,9 +148,9 @@ function generateEmailHTML(contact: ContactNotificationData): string {
         <div class="container">
             <div class="header">
                 <h2 style="margin: 0; color: #007bff;">New Contact Form Submission</h2>
-                <p style="margin: 10px 0 0 0; color: #6c757d;">Received on ${
-    new Date(contact.created_at).toLocaleString()
-  }</p>
+                <p style="margin: 10px 0 0 0; color: #6c757d;">Received on ${new Date(
+                  contact.created_at
+                ).toLocaleString()}</p>
             </div>
             
             <div class="content">
@@ -183,10 +164,10 @@ function generateEmailHTML(contact: ContactNotificationData): string {
                     <div class="value">
                         <a href="mailto:${contact.email}">${contact.email}</a>
                         ${
-    contact.subscribed_to_newsletter
-      ? '<span class="badge">Newsletter Subscriber</span>'
-      : ""
-  }
+                          contact.subscribed_to_newsletter
+                            ? '<span class="badge">Newsletter Subscriber</span>'
+                            : ""
+                        }
                     </div>
                 </div>
                 

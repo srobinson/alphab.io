@@ -1,9 +1,8 @@
 "use client";
 
-import type React from "react";
-
-import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import type React from "react";
+import { cn } from "@/lib/utils";
 
 interface AnimatedUnderlineTextProps {
   children: React.ReactNode;
@@ -38,10 +37,7 @@ export function AnimatedUnderlineText({
     <span className={cn("relative inline-block", className)}>
       {children}
       <motion.svg
-        className={cn(
-          "absolute bottom-[-4px] left-0 w-full h-[10px]",
-          underlineClassName,
-        )} // Adjust height & bottom as needed
+        className={cn("absolute bottom-[-4px] left-0 w-full h-[10px]", underlineClassName)} // Adjust height & bottom as needed
         viewBox={viewBox}
         preserveAspectRatio="none" // Allows stretching
         aria-hidden="true"

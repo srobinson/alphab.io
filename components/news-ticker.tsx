@@ -1,11 +1,10 @@
 "use client";
 
-import type React from "react";
-
-import type { NewsItem } from "@/lib/news-feeds";
 import { AlertCircle, Clock, Radio, TrendingUp, Zap } from "lucide-react";
+import type React from "react";
 import { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
+import type { NewsItem } from "@/lib/news-feeds";
 
 const TickerItem = ({ item }: { item: NewsItem }) => {
   const handleClick = () => {
@@ -62,34 +61,26 @@ const TickerItem = ({ item }: { item: NewsItem }) => {
   return (
     <span
       className={`flex items-center shrink-0 mx-4 text-sm md:text-base px-2 py-1 rounded-sm transition-all duration-200 ${
-        item.link
-          ? "cursor-pointer hover:text-blue-600 dark:hover:text-blue-400"
-          : ""
+        item.link ? "cursor-pointer hover:text-blue-600 dark:hover:text-blue-400" : ""
       }`}
       onClick={handleClick}
     >
       <span
-        className={`flex items-center ${
-          getCategoryClass(
-            item.category,
-          )
-        } text-xs font-bold px-1.5 py-0.5 rounded mr-2 whitespace-nowrap`}
+        className={`flex items-center ${getCategoryClass(
+          item.category
+        )} text-xs font-bold px-1.5 py-0.5 rounded mr-2 whitespace-nowrap`}
       >
         {getCategoryIcon(item.category)}
         <span className="ml-1">{getCategoryLabel(item.category)}</span>
       </span>
-      <span
-        className={`text-gray-700 dark:text-gray-200 transition-all duration-150`}
-      >
+      <span className={`text-gray-700 dark:text-gray-200 transition-all duration-150`}>
         {item.text}
       </span>
       <span className="ml-2 text-xs text-gray-500 dark:text-gray-400 font-mono whitespace-nowrap">
         {item.time}
       </span>
       {item.isRSS && (
-        <span className="ml-1 text-xs text-green-600 dark:text-green-400 font-bold">
-          ●
-        </span>
+        <span className="ml-1 text-xs text-green-600 dark:text-green-400 font-bold">●</span>
       )}
     </span>
   );
@@ -101,10 +92,7 @@ const MarqueeWrapper = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const handleError = (event: ErrorEvent) => {
-      if (
-        event.message.includes("querySelector") ||
-        event.message.includes("__hrp")
-      ) {
+      if (event.message.includes("querySelector") || event.message.includes("__hrp")) {
         console.warn("Marquee selector error caught:", event.message);
         setHasError(true);
         event.preventDefault();
@@ -182,7 +170,7 @@ export function NewsTicker() {
     fetchNews();
     const interval = setInterval(fetchNews, 30 * 60 * 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [fetchNews]);
 
   return (
     <div className="w-full">
@@ -201,21 +189,19 @@ export function NewsTicker() {
           </div>
         </div>
         <div className="flex-grow bg-gray-200/95 dark:bg-gray-800/95 backdrop-blur-sm overflow-hidden py-2 w-full">
-          {isLoading
-            ? (
-              <div className="flex items-center justify-center py-2">
-                <span className="text-sm text-gray-600 dark:text-gray-400">
-                  Loading latest news...
-                </span>
-              </div>
-            )
-            : (
-              <MarqueeWrapper>
-                {newsItems.map((item) => (
-                  <TickerItem key={item.id} item={item} />
-                ))}
-              </MarqueeWrapper>
-            )}
+          {isLoading ? (
+            <div className="flex items-center justify-center py-2">
+              <span className="text-sm text-gray-600 dark:text-gray-400">
+                Loading latest news...
+              </span>
+            </div>
+          ) : (
+            <MarqueeWrapper>
+              {newsItems.map((item) => (
+                <TickerItem key={item.id} item={item} />
+              ))}
+            </MarqueeWrapper>
+          )}
         </div>
       </div>
     </div>

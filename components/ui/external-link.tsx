@@ -1,19 +1,14 @@
 "use client";
 
 import { ExternalLink as ExternalLinkIcon } from "lucide-react";
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
 interface ExternalLinkProps extends HTMLAttributes<HTMLAnchorElement> {
   href: string;
   children: React.ReactNode;
 }
 
-export function ExternalLink({
-  href,
-  children,
-  className = "",
-  ...props
-}: ExternalLinkProps) {
+export function ExternalLink({ href, children, className = "", ...props }: ExternalLinkProps) {
   return (
     <a
       href={href}

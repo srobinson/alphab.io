@@ -1,21 +1,13 @@
 "use client";
 
+import { motion } from "framer-motion";
+import { AlertCircle, Bell, CheckCircle, Mail, MessageSquare, Send, User } from "lucide-react";
+import type React from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { motion } from "framer-motion";
-import {
-  AlertCircle,
-  Bell,
-  CheckCircle,
-  Mail,
-  MessageSquare,
-  Send,
-  User,
-} from "lucide-react";
-import type React from "react";
-import { useState } from "react";
 
 // Animation variants remain the same
 const formVariants = {
@@ -71,8 +63,7 @@ export default function ContactPage() {
       if (!contactResp.ok) {
         const data = await contactResp.json().catch(() => ({}));
         throw new Error(
-          data.error ||
-            "Failed to store contact submission. Please try again later.",
+          data.error || "Failed to store contact submission. Please try again later."
         );
       }
       const { id: contactId } = await contactResp.json();
@@ -94,10 +85,7 @@ export default function ContactPage() {
           });
           if (!resp.ok) {
             const data = await resp.json().catch(() => ({}));
-            console.warn(
-              "Newsletter subscription failed:",
-              data.error || resp.statusText,
-            );
+            console.warn("Newsletter subscription failed:", data.error || resp.statusText);
           }
         } catch (subscriptionError: unknown) {
           console.warn("Newsletter subscription failed:", subscriptionError);
@@ -113,7 +101,8 @@ export default function ContactPage() {
       setSubscribeToNewsletter(false);
     } catch (err: unknown) {
       console.error("Contact form error:", err);
-      const message = err instanceof Error ? err.message : "Failed to send message. Please try again.";
+      const message =
+        err instanceof Error ? err.message : "Failed to send message. Please try again.";
       setError(message);
     } finally {
       setIsSubmitting(false);
@@ -134,179 +123,164 @@ export default function ContactPage() {
         <motion.div className="text-center" variants={itemVariants}>
           <Mail className="mx-auto h-12 w-12 text-blue-500 dark:text-blue-500" />
           <h2 className="mt-6 text-3xl md:text-4xl font-black text-gray-900 dark:text-white">
-            LET&rsquo;S{" "}
-            <span className="text-blue-600 dark:text-blue-400">CONNECT</span>
+            LET&rsquo;S <span className="text-blue-600 dark:text-blue-400">CONNECT</span>
           </h2>
           <p className="mt-3 text-lg text-gray-700 dark:text-gray-300">
-            Have a project in mind, a question, or just want to explore the
-            possibilities of AI?
+            Have a project in mind, a question, or just want to explore the possibilities of AI?
             <br />
             I&apos;m here to listen and help you chart the course.
           </p>
         </motion.div>
 
-        {!isSubmitted
-          ? (
-            <motion.form
-              className="space-y-8"
-              onSubmit={handleSubmit}
+        {!isSubmitted ? (
+          <motion.form className="space-y-8" onSubmit={handleSubmit} variants={itemVariants}>
+            {/* Honeypot field */}
+            <input
+              type="text"
+              name="company"
+              autoComplete="off"
+              tabIndex={-1}
+              className="hidden"
+              aria-hidden="true"
+            />
+            <motion.div className="relative" variants={itemVariants}>
+              <Label
+                htmlFor="name"
+                className="absolute -top-3 left-2.5 bg-transparent px-1 text-sm text-gray-400"
+              >
+                <User className="inline-block h-4 w-4 mr-1" /> Full Name
+              </Label>
+              <Input
+                id="name"
+                name="name"
+                type="text"
+                required
+                disabled={isSubmitting}
+                className="bg-transparent text-white placeholder:text-gray-400 border-white/20 focus:border-blue-400 focus:ring-blue-400/30 disabled:opacity-50"
+                placeholder="Your Name"
+              />
+            </motion.div>
+
+            <motion.div className="relative" variants={itemVariants}>
+              <Label
+                htmlFor="email"
+                className="absolute -top-3 left-2.5 bg-transparent px-1 text-sm text-gray-400"
+              >
+                <Mail className="inline-block h-4 w-4 mr-1" /> Email Address
+              </Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                required
+                disabled={isSubmitting}
+                className="bg-transparent text-white placeholder:text-gray-400 border-white/20 focus:border-blue-400 focus:ring-blue-400/30 disabled:opacity-50"
+                placeholder="you@example.com"
+              />
+            </motion.div>
+
+            <motion.div className="relative" variants={itemVariants}>
+              <Label
+                htmlFor="message"
+                className="absolute -top-3 left-2.5 bg-transparent px-1 text-sm text-gray-400"
+              >
+                <MessageSquare className="inline-block h-4 w-4 mr-1" /> Your Message
+              </Label>
+              <Textarea
+                id="message"
+                name="message"
+                rows={6}
+                required
+                disabled={isSubmitting}
+                className="bg-transparent text-white placeholder:text-gray-400 border-white/20 focus:border-blue-400 focus:ring-blue-400/30 disabled:opacity-50"
+                placeholder="Tell me about your vision or inquiry..."
+              />
+            </motion.div>
+
+            {/* Newsletter subscription option */}
+            <motion.div
+              className="flex items-center space-x-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800"
               variants={itemVariants}
             >
-              {/* Honeypot field */}
               <input
-                type="text"
-                name="company"
-                autoComplete="off"
-                tabIndex={-1}
-                className="hidden"
-                aria-hidden="true"
+                type="checkbox"
+                id="newsletter"
+                checked={subscribeToNewsletter}
+                onChange={(e) => setSubscribeToNewsletter(e.target.checked)}
+                disabled={isSubmitting}
+                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded disabled:opacity-50"
               />
-              <motion.div className="relative" variants={itemVariants}>
-                <Label
-                  htmlFor="name"
-                  className="absolute -top-3 left-2.5 bg-transparent px-1 text-sm text-gray-400"
-                >
-                  <User className="inline-block h-4 w-4 mr-1" /> Full Name
-                </Label>
-                <Input
-                  id="name"
-                  name="name"
-                  type="text"
-                  required
-                  disabled={isSubmitting}
-                  className="bg-transparent text-white placeholder:text-gray-400 border-white/20 focus:border-blue-400 focus:ring-blue-400/30 disabled:opacity-50"
-                  placeholder="Your Name"
-                />
-              </motion.div>
+              <Label
+                htmlFor="newsletter"
+                className="flex items-center text-sm text-gray-700 dark:text-gray-300 cursor-pointer"
+              >
+                <Bell className="inline-block h-4 w-4 mr-2 text-blue-500" />
+                Subscribe to newsletter for AI insights and updates
+              </Label>
+            </motion.div>
 
-              <motion.div className="relative" variants={itemVariants}>
-                <Label
-                  htmlFor="email"
-                  className="absolute -top-3 left-2.5 bg-transparent px-1 text-sm text-gray-400"
-                >
-                  <Mail className="inline-block h-4 w-4 mr-1" /> Email Address
-                </Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  disabled={isSubmitting}
-                  className="bg-transparent text-white placeholder:text-gray-400 border-white/20 focus:border-blue-400 focus:ring-blue-400/30 disabled:opacity-50"
-                  placeholder="you@example.com"
-                />
-              </motion.div>
-
-              <motion.div className="relative" variants={itemVariants}>
-                <Label
-                  htmlFor="message"
-                  className="absolute -top-3 left-2.5 bg-transparent px-1 text-sm text-gray-400"
-                >
-                  <MessageSquare className="inline-block h-4 w-4 mr-1" />{" "}
-                  Your Message
-                </Label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  rows={6}
-                  required
-                  disabled={isSubmitting}
-                  className="bg-transparent text-white placeholder:text-gray-400 border-white/20 focus:border-blue-400 focus:ring-blue-400/30 disabled:opacity-50"
-                  placeholder="Tell me about your vision or inquiry..."
-                />
-              </motion.div>
-
-              {/* Newsletter subscription option */}
+            {error && (
               <motion.div
-                className="flex items-center space-x-3 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800"
+                className="flex items-center space-x-2 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg"
                 variants={itemVariants}
               >
-                <input
-                  type="checkbox"
-                  id="newsletter"
-                  checked={subscribeToNewsletter}
-                  onChange={(e) => setSubscribeToNewsletter(e.target.checked)}
-                  disabled={isSubmitting}
-                  className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded disabled:opacity-50"
-                />
-                <Label
-                  htmlFor="newsletter"
-                  className="flex items-center text-sm text-gray-700 dark:text-gray-300 cursor-pointer"
-                >
-                  <Bell className="inline-block h-4 w-4 mr-2 text-blue-500" />
-                  Subscribe to newsletter for AI insights and updates
-                </Label>
+                <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
+                <p className="text-red-700 dark:text-red-300 text-sm">{error}</p>
               </motion.div>
+            )}
 
-              {error && (
-                <motion.div
-                  className="flex items-center space-x-2 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg"
-                  variants={itemVariants}
-                >
-                  <AlertCircle className="h-5 w-5 text-red-500 flex-shrink-0" />
-                  <p className="text-red-700 dark:text-red-300 text-sm">
-                    {error}
-                  </p>
-                </motion.div>
-              )}
-
-              <motion.div variants={itemVariants}>
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full group relative flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-md
+            <motion.div variants={itemVariants}>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full group relative flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-md
                            text-white bg-blue-600 hover:bg-blue-700
                            dark:bg-blue-500 dark:hover:bg-blue-700
                            focus:outline-none focus:ring-2 focus:ring-offset-2
                            focus:ring-offset-gray-50 dark:focus:ring-offset-gray-900
                            focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                    {isSubmitting
-                      ? (
-                        <div className="h-5 w-5 border-2 border-blue-300 border-t-transparent rounded-full animate-spin" />
-                      )
-                      : (
-                        <Send className="h-5 w-5 text-blue-300 group-hover:text-blue-100" />
-                      )}
-                  </span>
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                </Button>
-              </motion.div>
-            </motion.form>
-          )
-          : (
-            <motion.div
-              className="text-center space-y-6 p-8 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800"
-              variants={itemVariants}
-            >
-              <CheckCircle className="mx-auto h-16 w-16 text-green-500" />
-              <div>
-                <h3 className="text-2xl font-bold text-green-800 dark:text-green-300 mb-2">
-                  Message Sent Successfully!
-                </h3>
-                <p className="text-green-700 dark:text-green-400 mb-4">
-                  Thank you for reaching out. I&rsquo;ll get back to you within 24
-                  hours.
-                </p>
-                {subscribeToNewsletter && (
-                  <p className="text-green-600 dark:text-green-400 text-sm">
-                    ✓ You&rsquo;ve also been subscribed to our newsletter for AI
-                    insights and updates.
-                  </p>
-                )}
-              </div>
-              <Button
-                onClick={() => {
-                  setIsSubmitted(false);
-                  setError("");
-                }}
-                className="bg-green-600 hover:bg-green-700 text-white"
               >
-                Send Another Message
+                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                  {isSubmitting ? (
+                    <div className="h-5 w-5 border-2 border-blue-300 border-t-transparent rounded-full animate-spin" />
+                  ) : (
+                    <Send className="h-5 w-5 text-blue-300 group-hover:text-blue-100" />
+                  )}
+                </span>
+                {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
             </motion.div>
-          )}
+          </motion.form>
+        ) : (
+          <motion.div
+            className="text-center space-y-6 p-8 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800"
+            variants={itemVariants}
+          >
+            <CheckCircle className="mx-auto h-16 w-16 text-green-500" />
+            <div>
+              <h3 className="text-2xl font-bold text-green-800 dark:text-green-300 mb-2">
+                Message Sent Successfully!
+              </h3>
+              <p className="text-green-700 dark:text-green-400 mb-4">
+                Thank you for reaching out. I&rsquo;ll get back to you within 24 hours.
+              </p>
+              {subscribeToNewsletter && (
+                <p className="text-green-600 dark:text-green-400 text-sm">
+                  ✓ You&rsquo;ve also been subscribed to our newsletter for AI insights and updates.
+                </p>
+              )}
+            </div>
+            <Button
+              onClick={() => {
+                setIsSubmitted(false);
+                setError("");
+              }}
+              className="bg-green-600 hover:bg-green-700 text-white"
+            >
+              Send Another Message
+            </Button>
+          </motion.div>
+        )}
       </motion.div>
     </div>
   );

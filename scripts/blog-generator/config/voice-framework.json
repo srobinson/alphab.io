@@ -18,7 +18,12 @@
     "language": {
       "vocabulary": "Technical when necessary, but always explained",
       "sentenceLength": "Mix of short punchy statements and detailed explanations",
-      "transitions": ["However, the reality is more nuanced", "But here's what the data actually shows", "The key insight here is", "This matters because"]
+      "transitions": [
+        "However, the reality is more nuanced",
+        "But here's what the data actually shows",
+        "The key insight here is",
+        "This matters because"
+      ]
     }
   },
   "contentPillars": [

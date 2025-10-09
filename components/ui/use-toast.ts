@@ -22,29 +22,25 @@ function genId() {
   return count.toString();
 }
 
-type ActionType =
-  | "ADD_TOAST"
-  | "UPDATE_TOAST"
-  | "DISMISS_TOAST"
-  | "REMOVE_TOAST";
+type ActionType = "ADD_TOAST" | "UPDATE_TOAST" | "DISMISS_TOAST" | "REMOVE_TOAST";
 
 type Action =
   | {
-    type: Extract<ActionType, "ADD_TOAST">;
-    toast: ToasterToast;
-  }
+      type: Extract<ActionType, "ADD_TOAST">;
+      toast: ToasterToast;
+    }
   | {
-    type: Extract<ActionType, "UPDATE_TOAST">;
-    toast: Partial<ToasterToast>;
-  }
+      type: Extract<ActionType, "UPDATE_TOAST">;
+      toast: Partial<ToasterToast>;
+    }
   | {
-    type: Extract<ActionType, "DISMISS_TOAST">;
-    toastId?: ToasterToast["id"];
-  }
+      type: Extract<ActionType, "DISMISS_TOAST">;
+      toastId?: ToasterToast["id"];
+    }
   | {
-    type: Extract<ActionType, "REMOVE_TOAST">;
-    toastId?: ToasterToast["id"];
-  };
+      type: Extract<ActionType, "REMOVE_TOAST">;
+      toastId?: ToasterToast["id"];
+    };
 
 interface State {
   toasts: ToasterToast[];
@@ -79,9 +75,7 @@ export const reducer = (state: State, action: Action): State => {
     case "UPDATE_TOAST":
       return {
         ...state,
-        toasts: state.toasts.map((t) =>
-          t.id === action.toast.id ? { ...t, ...action.toast } : t
-        ),
+        toasts: state.toasts.map((t) => (t.id === action.toast.id ? { ...t, ...action.toast } : t)),
       };
 
     case "DISMISS_TOAST": {
@@ -102,9 +96,9 @@ export const reducer = (state: State, action: Action): State => {
         toasts: state.toasts.map((t) =>
           t.id === toastId || toastId === undefined
             ? {
-              ...t,
-              open: false,
-            }
+                ...t,
+                open: false,
+              }
             : t
         ),
       };
@@ -176,7 +170,7 @@ function useToast() {
         listeners.splice(index, 1);
       }
     };
-  }, [state]);
+  }, []);
 
   return {
     ...state,

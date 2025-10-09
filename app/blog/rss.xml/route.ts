@@ -1,6 +1,6 @@
+import { promises as fs } from "node:fs";
+import path from "node:path";
 import { NextResponse } from "next/server";
-import { promises as fs } from "fs";
-import path from "path";
 
 const BLOG_INDEX_PATH = path.join(process.cwd(), "content/blog/index.json");
 

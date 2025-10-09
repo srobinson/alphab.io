@@ -107,13 +107,7 @@
   "themes": [
     {
       "name": "Challenges & Limitations",
-      "keywords": [
-        "challenge",
-        "limitation",
-        "problem",
-        "issue",
-        "concern"
-      ],
+      "keywords": ["challenge", "limitation", "problem", "issue", "concern"],
       "description": "Problems and limitations in current AI",
       "articleCount": 14,
       "percentage": "9.1",
@@ -125,14 +119,7 @@
     },
     {
       "name": "Market Dynamics",
-      "keywords": [
-        "funding",
-        "investment",
-        "competition",
-        "market",
-        "revenue",
-        "growth"
-      ],
+      "keywords": ["funding", "investment", "competition", "market", "revenue", "growth"],
       "description": "Business and market developments in AI",
       "articleCount": 11,
       "percentage": "7.1",
@@ -144,13 +131,7 @@
     },
     {
       "name": "Technical Innovation",
-      "keywords": [
-        "architecture",
-        "algorithm",
-        "method",
-        "technique",
-        "approach"
-      ],
+      "keywords": ["architecture", "algorithm", "method", "technique", "approach"],
       "description": "New technical approaches or methodologies",
       "articleCount": 8,
       "percentage": "5.2",
@@ -162,13 +143,7 @@
     },
     {
       "name": "Practical Applications",
-      "keywords": [
-        "implementation",
-        "deployment",
-        "use case",
-        "application",
-        "adoption"
-      ],
+      "keywords": ["implementation", "deployment", "use case", "application", "adoption"],
       "description": "Real-world AI implementations and use cases",
       "articleCount": 7,
       "percentage": "4.5",
@@ -180,13 +155,7 @@
     },
     {
       "name": "AI Capability Leap",
-      "keywords": [
-        "breakthrough",
-        "advancement",
-        "capability",
-        "performance",
-        "benchmark"
-      ],
+      "keywords": ["breakthrough", "advancement", "capability", "performance", "benchmark"],
       "description": "Major advances in AI capabilities or performance",
       "articleCount": 5,
       "percentage": "3.2",
@@ -198,13 +167,7 @@
     },
     {
       "name": "Industry Impact",
-      "keywords": [
-        "industry",
-        "sector",
-        "transformation",
-        "disruption",
-        "change"
-      ],
+      "keywords": ["industry", "sector", "transformation", "disruption", "change"],
       "description": "How AI is affecting different industries",
       "articleCount": 5,
       "percentage": "3.2",
@@ -294,14 +257,7 @@
       "reasoning": "11 articles around this theme",
       "themeData": {
         "name": "Market Dynamics",
-        "keywords": [
-          "funding",
-          "investment",
-          "competition",
-          "market",
-          "revenue",
-          "growth"
-        ],
+        "keywords": ["funding", "investment", "competition", "market", "revenue", "growth"],
         "description": "Business and market developments in AI",
         "articleCount": 11,
         "percentage": "7.1",
@@ -320,13 +276,7 @@
       "reasoning": "8 articles around this theme",
       "themeData": {
         "name": "Technical Innovation",
-        "keywords": [
-          "architecture",
-          "algorithm",
-          "method",
-          "technique",
-          "approach"
-        ],
+        "keywords": ["architecture", "algorithm", "method", "technique", "approach"],
         "description": "New technical approaches or methodologies",
         "articleCount": 8,
         "percentage": "5.2",
@@ -342,9 +292,7 @@
     {
       "title": "James Meek · Computers that want things",
       "summary": "An exploration of artificial intelligence's lack of genuine desires and motivations, centered around the historic 2016 Go match between Lee Sedol and AlphaGo, and the philosophical implications for developing artificial general intelligence (AGI) with genuine wants and ethics.",
-      "tags": [
-        "ai"
-      ],
+      "tags": ["ai"],
       "source": "Hacker News AI",
       "published_at": "2025-10-09T00:00:00+00:00",
       "url": "https://www.lrb.co.uk/the-paper/v47/n18/james-meek/computers-that-want-things"
@@ -352,11 +300,7 @@
     {
       "title": "Jane Goodall’s death triggered the premiere of Netflix’s new show",
       "summary": "Netflix has launched 'Famous Last Words', a show featuring pre-recorded interviews with notable figures that only air after their death, with Jane Goodall's candid interview serving as the premiere episode.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai"
-      ],
+      "tags": ["tech", "featured", "ai"],
       "source": "The Verge",
       "published_at": "2025-10-05T20:34:15+00:00",
       "url": "https://www.theverge.com/news/792477/jane-goodall-netflix-famous-last-words"
@@ -381,10 +325,7 @@
     {
       "title": "If you can get past the terrible logo, Audacity 4 looks pretty great",
       "summary": "Audacity 4, slated for 2026 release, promises major UX improvements including easier track management, simplified audio editing tools, and removal of restrictive 'modes' that limited user interaction.",
-      "tags": [
-        "tech",
-        "featured"
-      ],
+      "tags": ["tech", "featured"],
       "source": "The Verge",
       "published_at": "2025-10-05T17:37:55+00:00",
       "url": "https://www.theverge.com/news/792368/if-you-can-get-past-the-terrible-logo-audacity-4-looks-pretty-great"
@@ -392,14 +333,7 @@
     {
       "title": "OpenAI and Jony Ive may be struggling to figure out their AI device | TechCrunch",
       "summary": "OpenAI and Jony Ive are facing technical challenges in developing a screen-less, palm-sized AI device that responds to audio and visual cues, with issues around device personality, privacy, and computing infrastructure potentially delaying its planned 2026 launch.",
-      "tags": [
-        "ai",
-        "startups",
-        "jony ive",
-        "openai",
-        "sam altman",
-        "featured"
-      ],
+      "tags": ["ai", "startups", "jony ive", "openai", "sam altman", "featured"],
       "source": "TechCrunch AI",
       "published_at": "2025-10-05T16:34:26+00:00",
       "url": "https://techcrunch.com/2025/10/05/openai-and-jony-ive-may-be-struggling-to-figure-out-their-ai-device"
@@ -407,10 +341,7 @@
     {
       "title": "Roland is finally honoring its legacy instead of just cashing in on it",
       "summary": "Roland has announced the TR-1000, its first analog drum machine in over 40 years, marking a return to the company's analog roots after decades of focusing on digital instruments and emulations.",
-      "tags": [
-        "tech",
-        "featured"
-      ],
+      "tags": ["tech", "featured"],
       "source": "The Verge",
       "published_at": "2025-10-05T16:00:00+00:00",
       "url": "https://www.theverge.com/entertainment/792209/roland-is-finally-honoring-its-legacy-instead-of-just-cashing-in-tr-1000"
@@ -418,13 +349,7 @@
     {
       "title": "The Reinforcement Gap — or why some AI skills improve faster than others   | TechCrunch",
       "summary": "AI capabilities that can be automatically tested and validated through reinforcement learning (like coding and math) are advancing much faster than skills requiring subjective human evaluation, creating a growing 'reinforcement gap' in AI development progress.",
-      "tags": [
-        "ai",
-        "ai coding",
-        "reinforcement learning",
-        "sora 2",
-        "featured"
-      ],
+      "tags": ["ai", "ai coding", "reinforcement learning", "sora 2", "featured"],
       "source": "TechCrunch AI",
       "published_at": "2025-10-05T15:00:00+00:00",
       "url": "https://techcrunch.com/2025/10/05/the-reinforcement-gap-or-why-some-ai-skills-improve-faster-than-others"
@@ -432,10 +357,7 @@
     {
       "title": "I’ve tested the latest Switch 2 controllers, and this one is the best",
       "summary": "A comprehensive review of third-party Nintendo Switch 2 controllers finds the EasySMX S10 ($50) as the top recommendation, offering features like TMR joysticks, amiibo support, and HD rumble at a lower price than Nintendo's official Pro Controller.",
-      "tags": [
-        "tech",
-        "featured"
-      ],
+      "tags": ["tech", "featured"],
       "source": "The Verge",
       "published_at": "2025-10-05T14:00:00+00:00",
       "url": "https://www.theverge.com/tech/791574/best-switch-2-controllers"
@@ -443,11 +365,7 @@
     {
       "title": "The developers behind a hit sausage-dueling game hope Steam launch will take it furter",
       "summary": "Sausage Legend, a physics-based mobile game about dueling sausages with 3.5M players in Japan, is preparing for a Steam release with expanded features including a story mode and deck-building mechanics.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai"
-      ],
+      "tags": ["tech", "featured", "ai"],
       "source": "The Verge",
       "published_at": "2025-10-05T13:00:00+00:00",
       "url": "https://www.theverge.com/entertainment/791353/sausage-legend-steam-launch-interview"
@@ -455,10 +373,7 @@
     {
       "title": "Version History is live — here’s how to find it",
       "summary": "The Verge launches 'Version History', a new tech rewatch podcast series that examines influential technology products, with its first episode focusing on the rise and impact of hoverboards in the 2010s.",
-      "tags": [
-        "tech",
-        "featured"
-      ],
+      "tags": ["tech", "featured"],
       "source": "The Verge",
       "published_at": "2025-10-05T12:30:00+00:00",
       "url": "https://www.theverge.com/podcast/792339/version-history-podcast-hoverboards"
@@ -466,11 +381,7 @@
     {
       "title": "Can tap-to-pay save public transportation?",
       "summary": "Cities across the US are adopting contactless tap-to-pay systems for public transit following New York's OMNY implementation, though challenges remain around accessibility for unbanked populations and system reliability.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai"
-      ],
+      "tags": ["tech", "featured", "ai"],
       "source": "The Verge",
       "published_at": "2025-10-05T12:00:00+00:00",
       "url": "https://www.theverge.com/column/789127/tap-to-pay-public-transportation"
@@ -478,11 +389,7 @@
     {
       "title": "The best lists to keep — and the best ways to keep them",
       "summary": "A comprehensive guide to list-making tools and productivity apps, featuring reviews of new Amazon devices, OpenAI's social network, and various tech recommendations in The Verge's weekly Installer newsletter.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai"
-      ],
+      "tags": ["tech", "featured", "ai"],
       "source": "The Verge",
       "published_at": "2025-10-05T12:00:00+00:00",
       "url": "https://www.theverge.com/tech/791905/best-lists-apps-to-do-shopping-installer"
@@ -490,12 +397,7 @@
     {
       "title": "The Ninja Slushi Regularly Sells Out—Prime Day Brings Its Cheapest-Ever Price",
       "summary": "The Ninja Slushi home slushie maker is available at its lowest price ever with a $50 discount during Prime Day, marking a rare sale for this typically hard-to-find appliance that can make frozen drinks from various beverages.",
-      "tags": [
-        "tech",
-        "gear",
-        "gear / deals",
-        "featured"
-      ],
+      "tags": ["tech", "gear", "gear / deals", "featured"],
       "source": "Wired Tech",
       "published_at": "2025-10-05T11:36:00+00:00",
       "url": "https://www.wired.com/story/ninja-slushi-prime-day-deal-october-2025"
@@ -503,12 +405,7 @@
     {
       "title": "If you’re not an AI startup, good luck raising money from VCs | TechCrunch",
       "summary": "According to PitchBook data, AI startups are dominating venture capital investment in 2025, accounting for $192.7B out of $366.8B total investment, with AI representing 62.7% of US VC investments in the latest quarter.",
-      "tags": [
-        "ai",
-        "venture",
-        "pitchbook",
-        "featured"
-      ],
+      "tags": ["ai", "venture", "pitchbook", "featured"],
       "source": "TechCrunch AI",
       "published_at": "2025-10-04T20:05:28+00:00",
       "url": "https://techcrunch.com/2025/10/04/if-youre-not-an-ai-startup-good-luck-raising-money-from-vcs"
@@ -516,11 +413,7 @@
     {
       "title": "This week’s best deal is a ‘kids’ Kindle Paperwhite that’s better than the adult version",
       "summary": "Amazon's Kindle Paperwhite Kids e-reader is on sale for $134.99 ($45 off), offering better value than the adult version with included extras like an ad-free screen, protective cover, extended warranty, and Amazon Kids Plus subscription.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai"
-      ],
+      "tags": ["tech", "featured", "ai"],
       "source": "The Verge",
       "published_at": "2025-10-04T17:00:00+00:00",
       "url": "https://www.theverge.com/tech/791728/kindle-paperwhite-kids-sonos-era-100-deal-sale"
@@ -528,9 +421,7 @@
     {
       "title": "Nintendo Reportedly Lobbying Japanese Government to Push Back Against Generative AI",
       "summary": null,
-      "tags": [
-        "ai"
-      ],
+      "tags": ["ai"],
       "source": "Hacker News AI",
       "published_at": "2025-10-04T16:45:16+00:00",
       "url": "https://twistedvoxel.com/nintendo-reportedly-lobbying-japanese-government-to-push-back-against-generative-ai"
@@ -574,10 +465,7 @@
     {
       "title": "Daniel Ek stepping down changes nothing for the artists boycotting Spotify",
       "summary": "Despite Daniel Ek stepping down as Spotify CEO while remaining executive chairman, artists boycotting the platform over issues including low payouts and AI concerns say they won't return without substantial changes to artist compensation and treatment.",
-      "tags": [
-        "tech",
-        "featured"
-      ],
+      "tags": ["tech", "featured"],
       "source": "The Verge",
       "published_at": "2025-10-04T16:00:00+00:00",
       "url": "https://www.theverge.com/report/791593/daniel-ek-stepping-down-changes-nothing-for-artists-boycotting-spotify"
@@ -585,10 +473,7 @@
     {
       "title": "Ecovacs’ Deebot X8 and X9 Pro Omni robovacs have hit a new low price",
       "summary": null,
-      "tags": [
-        "tech",
-        "featured"
-      ],
+      "tags": ["tech", "featured"],
       "source": "The Verge",
       "published_at": "2025-10-04T14:41:43+00:00",
       "url": "https://www.theverge.com/tech/791106/ecovacs-deebot-x8-x9-pro-omni-robot-vacuum-prime-day-deal-sale"

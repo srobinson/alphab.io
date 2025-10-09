@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import {
   brandMessages,
   categorizeRSSContent,
@@ -7,18 +8,17 @@ import {
   type NewsItem,
   rssFeedSources,
 } from "@/lib/news-feeds";
-import { NextResponse } from "next/server";
-import { checkRateLimit } from '@/lib/rate-limit';
+import { checkRateLimit } from "@/lib/rate-limit";
 
 // Required for rate limiting
-export const dynamic = 'force-dynamic'
-export const revalidate = 1800 // Cache for 30 minutes
+export const dynamic = "force-dynamic";
+export const revalidate = 1800; // Cache for 30 minutes
 
 // Simple RSS parser function
 async function parseRSSFeed(
   url: string,
   sourceName: string,
-  defaultCategory: NewsItem["category"],
+  defaultCategory: NewsItem["category"]
 ) {
   try {
     const response = await fetch(url, {
@@ -29,9 +29,7 @@ async function parseRSSFeed(
     });
 
     if (!response.ok) {
-      console.warn(
-        `Failed to fetch RSS from ${sourceName}: ${response.status}`,
-      );
+      console.warn(`Failed to fetch RSS from ${sourceName}: ${response.status}`);
       return [];
     }
 
@@ -45,11 +43,11 @@ async function parseRSSFeed(
       // Limit to 8 items per feed
       try {
         const titleMatch = itemXml.match(
-          /<title[^>]*><!\[CDATA\[(.*?)\]\]><\/title>|<title[^>]*>(.*?)<\/title>/i,
+          /<title[^>]*><!\[CDATA\[(.*?)\]\]><\/title>|<title[^>]*>(.*?)<\/title>/i
         );
         const linkMatch = itemXml.match(/<link[^>]*>(.*?)<\/link>/i);
         const descMatch = itemXml.match(
-          /<description[^>]*><!\[CDATA\[(.*?)\]\]><\/description>|<description[^>]*>(.*?)<\/description>/i,
+          /<description[^>]*><!\[CDATA\[(.*?)\]\]><\/description>|<description[^>]*>(.*?)<\/description>/i
         );
         const pubDateMatch = itemXml.match(/<pubDate[^>]*>(.*?)<\/pubDate>/i);
 
@@ -76,7 +74,7 @@ async function parseRSSFeed(
 
         for (const pattern of imagePatterns) {
           const match = itemXml.match(pattern);
-          if (match && match[1]) {
+          if (match?.[1]) {
             imageUrl = match[1];
             break;
           }
@@ -95,16 +93,16 @@ async function parseRSSFeed(
 
         if (title && isRelevantContent(title, description)) {
           const formattedTitle = formatRSSTitle(title);
-          const category = categorizeRSSContent(title, description) ||
-            defaultCategory;
+          const category = categorizeRSSContent(title, description) || defaultCategory;
           const parsedDate = pubDate ? new Date(pubDate) : new Date();
 
           // Clean description for display
-          const cleanDescription = description
-            .replace(/<[^>]*>/g, "") // Remove HTML tags
-            .replace(/&[^;]+;/g, " ") // Remove HTML entities
-            .trim()
-            .substring(0, 150) + (description.length > 150 ? "..." : "");
+          const cleanDescription =
+            description
+              .replace(/<[^>]*>/g, "") // Remove HTML tags
+              .replace(/&[^;]+;/g, " ") // Remove HTML entities
+              .trim()
+              .substring(0, 150) + (description.length > 150 ? "..." : "");
 
           items.push({
             id: `rss-${sourceName}-${Date.now()}-${Math.random()}`,
@@ -139,30 +137,28 @@ export async function GET(request: Request) {
     // Rate limiting - 30 requests per minute per IP (more restrictive due to RSS fetching)
     const rateLimitCheck = checkRateLimit(request, {
       limit: 30,
-      windowMs: 60 * 1000
-    })
-    
+      windowMs: 60 * 1000,
+    });
+
     if (!rateLimitCheck.allowed) {
-      console.warn('Rate limit exceeded for news API')
+      console.warn("Rate limit exceeded for news API");
       return NextResponse.json(
-        { 
-          error: 'Rate limit exceeded. Please try again later.',
-          retryAfter: rateLimitCheck.headers['Retry-After']
+        {
+          error: "Rate limit exceeded. Please try again later.",
+          retryAfter: rateLimitCheck.headers["Retry-After"],
         },
-        { 
+        {
           status: 429,
-          headers: rateLimitCheck.headers
+          headers: rateLimitCheck.headers,
         }
-      )
+      );
     }
 
     // Fetch from multiple sources in parallel
     const [rssResults, newsApiResults] = await Promise.allSettled([
       // Fetch RSS feeds
       Promise.allSettled(
-        rssFeedSources.map((source) =>
-          parseRSSFeed(source.url, source.name, source.category)
-        ),
+        rssFeedSources.map((source) => parseRSSFeed(source.url, source.name, source.category))
       ),
       // Fetch from news APIs
       fetchAllNewsAPIs(),
@@ -176,10 +172,7 @@ export async function GET(request: Request) {
         if (result.status === "fulfilled") {
           allItems.push(...result.value);
         } else {
-          console.warn(
-            `RSS feed ${rssFeedSources[index].name} failed:`,
-            result.reason,
-          );
+          console.warn(`RSS feed ${rssFeedSources[index].name} failed:`, result.reason);
         }
       });
     }
@@ -195,16 +188,12 @@ export async function GET(request: Request) {
     const uniqueItems = allItems.filter((item, index, self) => {
       return (
         index ===
-          self.findIndex(
-            (t) =>
-              t.link === item.link ||
-              (t.text
-                .toLowerCase()
-                .includes(item.text.toLowerCase().substring(0, 30)) &&
-                item.text
-                  .toLowerCase()
-                  .includes(t.text.toLowerCase().substring(0, 30))),
-          )
+        self.findIndex(
+          (t) =>
+            t.link === item.link ||
+            (t.text.toLowerCase().includes(item.text.toLowerCase().substring(0, 30)) &&
+              item.text.toLowerCase().includes(t.text.toLowerCase().substring(0, 30)))
+        )
       );
     });
 
@@ -246,25 +235,26 @@ export async function GET(request: Request) {
     // Count items by source type
     const rssItemsCount = finalItems.filter((item) => item.isRSS).length;
     const apiItemsCount = finalItems.filter(
-      (item) => !item.isRSS && !item.source.includes("RADE"),
+      (item) => !item.isRSS && !item.source.includes("RADE")
     ).length;
-    const brandItemsCount = finalItems.filter((item) =>
-      item.source.includes("RADE")
-    ).length;
+    const brandItemsCount = finalItems.filter((item) => item.source.includes("RADE")).length;
 
-    return NextResponse.json({
-      items: finalItems,
-      lastUpdated: new Date().toISOString(),
-      rssItemsCount,
-      apiItemsCount,
-      brandItemsCount,
-      totalItems: finalItems.length,
-    }, {
-      headers: {
-        'Cache-Control': 'public, s-maxage=1800, stale-while-revalidate=3600', // 30 min cache
-        ...rateLimitCheck.headers
+    return NextResponse.json(
+      {
+        items: finalItems,
+        lastUpdated: new Date().toISOString(),
+        rssItemsCount,
+        apiItemsCount,
+        brandItemsCount,
+        totalItems: finalItems.length,
+      },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=1800, stale-while-revalidate=3600", // 30 min cache
+          ...rateLimitCheck.headers,
+        },
       }
-    });
+    );
   } catch (error) {
     console.error("Error in news API:", error);
 
@@ -281,10 +271,7 @@ export async function GET(request: Request) {
         if (result.status === "fulfilled") {
           fallbackItems.push(...result.value);
         } else {
-          console.warn(
-            `Fallback RSS feed ${rssFeedSources[index].name} failed:`,
-            result.reason,
-          );
+          console.warn(`Fallback RSS feed ${rssFeedSources[index].name} failed:`, result.reason);
         }
       });
 

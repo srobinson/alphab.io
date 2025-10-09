@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 // Define routing by hostnames only; no per-path exceptions
 
@@ -33,7 +33,9 @@ export function middleware(request: NextRequest) {
         console.log("Local custom domain: rewriting root to landing page");
         return NextResponse.rewrite(new URL("/landing", request.url));
       }
-      console.log("Local custom domain: non-root path on main host -> continue to app (allows 404)");
+      console.log(
+        "Local custom domain: non-root path on main host -> continue to app (allows 404)"
+      );
       return NextResponse.next();
     }
     console.log("Local custom domain: continuing to RADE app");
