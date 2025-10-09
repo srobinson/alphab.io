@@ -1,3 +1,30 @@
+/**
+ * Next.js Configuration - Hybrid Static/Dynamic Architecture
+ *
+ * This site uses a hybrid approach:
+ * - Blog pages (/blog, /blog/[slug]) are fully static (pre-rendered at build time)
+ * - API routes (/api/*) remain dynamic for server-side functionality
+ * - Admin pages (/admin/*) remain dynamic for authentication and data access
+ *
+ * Blog Static Generation:
+ * - All blog posts are pre-rendered during build via generateStaticParams()
+ * - No ISR or revalidation - content is static until next deployment
+ * - Pre-build script generates blog index from MDX files
+ * - Post-build script validates all pages were generated
+ *
+ * Dynamic Features Preserved:
+ * - Contact form API (/api/contacts)
+ * - Newsletter subscription (/api/subscribe)
+ * - Admin dashboard (/admin/contacts)
+ * - Cron jobs for content sync (/api/cron/content-sync)
+ *
+ * Benefits:
+ * - Faster blog page loads (served as static HTML)
+ * - Better SEO (fully pre-rendered content)
+ * - Lower server costs (less dynamic rendering)
+ * - Preserved server functionality for forms and admin
+ */
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
@@ -17,7 +44,7 @@ const nextConfig = {
     "rade.alphab.io",
   ],
   images: {
-    // Enable image optimization for better SEO and performance
+    // Image optimization works for both static blog pages and dynamic routes
     unoptimized: false,
     formats: ["image/webp", "image/avif"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -56,9 +83,9 @@ const nextConfig = {
     ],
     loader: "default",
   },
-  // Enable compression for better performance
+  // Compression applies to both static HTML and dynamic API responses
   compress: true,
-  // Generate static exports for better SEO
+  // No trailing slashes - keeps URLs clean for static blog pages
   trailingSlash: false,
   // Security headers
   async headers() {

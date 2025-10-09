@@ -38,7 +38,7 @@ class BlogGenerator {
   constructor() {
     this.configPath = path.join(__dirname, "config");
     this.dataPath = path.join(__dirname, "data");
-    this.outputPath = path.join(__dirname, "../../app/blog_generated");
+    this.outputPath = path.join(__dirname, "../../src/app/blog_generated");
 
     this.voiceFramework = null;
     this.openrouterConfig = null;
@@ -207,7 +207,7 @@ Return your research as this exact JSON structure:
     try {
       return extractJSON(outline);
     } catch (error) {
-      console.error("❌ Failed to parse outline JSON:", error.message);
+      console.error("❌ Failed to parse outline-solid JSON:", error.message);
       console.log("Raw response:", `${outline.substring(0, 200)}...`);
       throw new Error("AI returned invalid JSON format for outline. Please try again.");
     }
@@ -220,7 +220,7 @@ Return your research as this exact JSON structure:
         p.name.toLowerCase().includes(type.toLowerCase())
       ) || this.voiceFramework.contentPillars[0];
 
-    return `Create a compelling blog post outline using this research data and voice framework. Assume today's date is ${CURRENT_DATE}; ensure references to "now" or "today" reflect ${CURRENT_YEAR}.
+    return `Create a compelling blog post outline-solid using this research data and voice framework. Assume today's date is ${CURRENT_DATE}; ensure references to "now" or "today" reflect ${CURRENT_YEAR}.
 
 RESEARCH DATA:
 ${JSON.stringify(research, null, 2)}

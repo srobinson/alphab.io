@@ -32,6 +32,7 @@
   "tailwindCSS.includeLanguages": {
     "typescriptreact": "javascript"
   },
+
   "css.lint.unknownAtRules": "ignore",
   // If using Prettier for tailwind class sorting ONLY:
   // "[typescriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
@@ -46,5 +47,8 @@
   // ---------- UI polish ----------
   "errorLens.enabled": true,
   "errorLens.margin": "90",
-  "git.autofetch": true
+  "git.autofetch": true,
+  "[svg]": {
+    "editor.defaultFormatter": "jock.svg"
+  }
 }

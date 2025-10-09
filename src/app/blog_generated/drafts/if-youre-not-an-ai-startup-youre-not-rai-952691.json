@@ -53,7 +53,7 @@
     "topic": "If you’re not an AI startup, you're not raising money from VCs",
     "type": "analysis",
     "style": "analytical",
-    "outline": {
+    "outline-solid": {
       "hook": "As AI startups dominate 2025's venture capital landscape, is it time to brace for a bubble or buckle up for a breakthrough?",
       "thesis": "While AI startups are currently basking in unprecedented venture capital attention, the real challenge lies in transitioning from high valuations to sustainable value creation.",
       "sections": [

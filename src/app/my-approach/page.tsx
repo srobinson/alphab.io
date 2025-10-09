@@ -1,9 +1,11 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, Brain, Cog, Shield, Target, TrendingUp, Zap } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Brain, Cog, Shield, Target, TrendingUp, Zap } from "lucide-react";
+import { Suspense } from "react";
+import { ConversationCTA } from "@/components/cta/conversation";
+import { Intro } from "@/components/intro";
+import { HeroSection } from "./_components";
 
 const pillarDetails = [
   {
@@ -91,13 +93,8 @@ const pillarDetails = [
   },
 ];
 
-const sectionVariants: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
-
 const pillarCardVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.95, y: 20 },
+  hidden: { opacity: 0, scale: 0.95, y: 80 },
   visible: {
     opacity: 1,
     scale: 1,
@@ -108,156 +105,86 @@ const pillarCardVariants: Variants = {
 
 export default function MyApproachPage() {
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section className="relative py-16 bg-background border-b border-cyber-border overflow-hidden">
-        <div className="absolute inset-0 bg-cyber-radial opacity-30"></div>
-        <div className="container mx-auto px-6 max-w-6xl text-center relative z-10">
-          <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground mb-6 leading-tight md:leading-tight lg:leading-tight"
-            initial="hidden"
-            animate="visible"
-            variants={sectionVariants}
-          >
-            MY{" "}
-            <span className="bg-gradient-to-r from-neon-blue via-neon-cyan to-neon-purple bg-clip-text text-transparent">
-              APPROACH
-            </span>{" "}
-            TO AI
-            <span style={{ display: "block", marginTop: "0.1em" }}>LEADERSHIP</span>
-          </motion.h1>
-          <motion.p
-            className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Transforming visions into reality requires a meticulous, adaptive, and deeply
-            collaborative methodology. My approach is built upon six foundational pillars, ensuring
-            every AI solution is powerful, purposeful, and precisely aligned with your strategic
-            objectives.
-          </motion.p>
-          <motion.div
-            className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.23 }}
-          >
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-              <span>Six Core Pillars</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-              <span>Collaborative Methodology</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-              <span>Strategic Alignment</span>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="container mx-auto px-6 pb-0 pt-10 lg:pb-24 max-w-6xl">
-        <div className="space-y-16">
-          {pillarDetails.map((pillar) => {
-            const IconComponent = pillar.icon;
-            return (
-              <motion.div
-                key={pillar.title}
-                className="group flex flex-col lg:flex-row lg:items-start gap-x-8 gap-y-6 p-6 rounded-lg bg-white dark:bg-gray-900/20 shadow-lg dark:shadow-gray-800/30 border border-gray-200 dark:border-gray-700/40 transition-all duration-200 ease-out hover:shadow-xl dark:hover:shadow-blue-500/30 hover:scale-[1.02] hover:border-blue-400 dark:hover:border-blue-500"
-                initial="hidden"
-                whileInView="visible"
-                variants={pillarCardVariants}
-                viewport={{ once: true, amount: 0.2 }}
-              >
-                <div className="flex-shrink-0 w-20 h-20 bg-blue-500 dark:bg-blue-600 rounded-xl flex items-center justify-center shadow-lg lg:w-24 lg:h-24 transition-transform duration-200 ease-out group-hover:scale-110">
-                  <IconComponent className="w-10 h-10 text-white lg:w-12 lg:h-12 transition-transform duration-200 ease-out group-hover:rotate-[-5deg]" />
-                </div>
-                <div className="flex-grow">
-                  <h2 className="text-2xl md:text-3xl font-black text-blue-600 dark:text-blue-400 mb-2">
-                    {pillar.title}
-                  </h2>
-                  <h3 className="text-xl md:text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">
-                    {pillar.subtitle}
-                  </h3>
-                  <p className="text-lg text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
-                    {pillar.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {pillar.keywords.map((keyword) => (
-                      <span
-                        key={keyword}
-                        className="text-xs bg-gray-200 text-blue-700 dark:bg-gray-700 dark:text-blue-300 px-3 py-1 rounded-full transition-colors duration-150 ease-out hover:bg-blue-500 hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 cursor-default"
-                      >
-                        {keyword}
-                      </span>
-                    ))}
+    <>
+      <Intro />
+      <div className="max-w-9xl">
+        <div className="bg-black text-white">
+          {/* Hero Section */}
+          <Suspense
+            fallback={
+              <div className="py-16 bg-background border-b border-cyber-border">
+                <div className="container mx-auto px-6 max-w-6xl text-center">
+                  <div className="animate-pulse space-y-6">
+                    <div className="h-16 bg-muted rounded w-3/4 mx-auto"></div>
+                    <div className="h-6 bg-muted rounded w-1/2 mx-auto"></div>
                   </div>
                 </div>
-              </motion.div>
-            );
-          })}
+              </div>
+            }
+          >
+            <HeroSection />
+          </Suspense>
         </div>
-      </section>
 
-      {/* Call to Action Section */}
-      <motion.section
-        className="container mx-auto px-6 pb-20 text-center max-w-6xl"
-        initial="hidden"
-        whileInView="visible"
-        variants={{
-          hidden: { opacity: 0, y: 20 },
-          visible: {
-            opacity: 1,
-            y: 0,
-            transition: { duration: 0.6, ease: "easeOut" },
-          },
-        }}
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        <div className="max-w-4xl mx-auto space-y-8">
-          <motion.h3
-            className="p-0 text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0 }}
-            viewport={{ once: true }}
+        <div className="blog-background">
+          <section className="container mx-auto px-6 pb-0 pt-10 lg:pb-24">
+            <div className="space-y-16">
+              {pillarDetails.map((pillar) => {
+                const IconComponent = pillar.icon;
+                return (
+                  <motion.div
+                    key={pillar.title}
+                    className="group flex flex-col lg:flex-row lg:items-start gap-x-8 gap-y-6 p-6 rounded-lg bg-card/50 backdrop-blur-xs shadow-lg border border-cyber-border transition-all duration-200 ease-out hover:shadow-xl hover:shadow-neon-blue/30 hover:scale-[1.02] hover:border-neon-blue/50"
+                    initial="hidden"
+                    whileInView="visible"
+                    variants={pillarCardVariants}
+                    viewport={{ once: true, amount: 0.2 }}
+                  >
+                    <div className="shrink-0 w-20 h-20 bg-neon-blue/20 border-2 border-neon-blue/40 rounded-xl flex items-center justify-center shadow-lg lg:w-24 lg:h-24 transition-transform duration-200 ease-out group-hover:scale-110">
+                      <IconComponent className="w-10 h-10 text-foreground lg:w-12 lg:h-12 transition-transform duration-200 ease-out group-hover:rotate-[-5deg]" />
+                    </div>
+                    <div className="grow">
+                      <h2 className="text-2xl md:text-3xl font-extrabold text-neon-white">
+                        {pillar.title}
+                      </h2>
+                      <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-4">
+                        {pillar.subtitle}
+                      </h3>
+                      <p className="text-2xl text-muted-foreground mb-4 leading-relaxed">
+                        {pillar.description}
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {pillar.keywords.map((keyword) => (
+                          <span
+                            key={keyword}
+                            className="uppercase px-3 py-1 bg-neon-blue/10 text-neon-yellow border border-neon-blue/20 text-sm font-semibold"
+                          >
+                            {keyword}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </section>
+          {/* CTA Section */}
+          <Suspense
+            fallback={
+              <div className="container mx-auto px-6 pb-20 text-center max-w-6xl">
+                <div className="animate-pulse space-y-6">
+                  <div className="h-12 bg-muted rounded w-1/2 mx-auto"></div>
+                  <div className="h-6 bg-muted rounded w-2/3 mx-auto"></div>
+                  <div className="h-16 bg-muted rounded w-64 mx-auto"></div>
+                </div>
+              </div>
+            }
           >
-            READY TO EXPLORE OUR
-            <span className="text-blue-600 dark:text-blue-500">AI SERVICES</span>?
-          </motion.h3>
-          <motion.p
-            className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto pb-10"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0 }}
-            viewport={{ once: true }}
-          >
-            Discover the comprehensive suite of AI services designed to transform your business and
-            amplify your competitive advantage.
-          </motion.p>
-          <Link href="/services" passHref legacyBehavior>
-            <a>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0 }}
-                viewport={{ once: true }}
-              >
-                <Button
-                  size="lg"
-                  className="bg-blue-600 hover:bg-blue-700 text-white dark:bg-blue-500 dark:hover:bg-blue-600 font-bold px-12 py-6 text-xl"
-                >
-                  EXPLORE SERVICES
-                  <ArrowRight className="ml-3 h-6 w-6" />
-                </Button>
-              </motion.div>
-            </a>
-          </Link>
+            <ConversationCTA />
+          </Suspense>
         </div>
-      </motion.section>
-    </div>
+      </div>
+    </>
   );
 }

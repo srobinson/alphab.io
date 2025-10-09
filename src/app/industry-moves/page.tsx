@@ -2,14 +2,13 @@
 
 import { motion, type Variants } from "framer-motion";
 import { Mail } from "lucide-react";
-import Link from "next/link";
-
 import { IndustryMoves } from "@/components/industry-moves";
 import {
   AnimatedUnderlineText,
   PREDEFINED_UNDERLINE_PATHS,
 } from "@/components/ui/animated_underline_text";
-import { Button } from "@/components/ui/button";
+import { GradientButton } from "@/components/ui/gradient-button";
+import { useContactDrawer } from "@/contexts/contact-drawer-context";
 
 // Animation variants
 const sectionVariants: Variants = {
@@ -43,6 +42,8 @@ const movesBaseDelay = 0.2;
 const movesLetterPulseVariants = createLetterPulseVariants(movesBaseDelay, 1.1);
 
 export default function IndustryMovesPage() {
+  const { openContactDrawer } = useContactDrawer();
+
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -97,7 +98,7 @@ export default function IndustryMovesPage() {
                       display: "inline-block",
                       originY: 0.7,
                     }}
-                    className="bg-gradient-to-r from-neon-blue via-neon-cyan to-neon-purple bg-clip-text text-transparent"
+                    className="bg-linear-to-r from-neon-blue via-neon-cyan to-neon-purple bg-clip-text text-transparent"
                   >
                     {letter}
                   </motion.span>
@@ -121,15 +122,15 @@ export default function IndustryMovesPage() {
             transition={{ duration: 0.25, delay: 0.3 }}
           >
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 bg-neon-green rounded-full animate-pulse"></div>
               <span>Live Updates</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-neon-blue rounded-full"></div>
               <span>Curated Sources</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-neon-purple rounded-full"></div>
               <span>Expert Analysis</span>
             </div>
           </motion.div>
@@ -162,9 +163,7 @@ export default function IndustryMovesPage() {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                Real-Time Intelligence
-              </h3>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Real-Time Intelligence</h3>
               <p className="text-muted-foreground">
                 Get instant access to breaking AI developments and industry shifts as they happen.
               </p>
@@ -185,9 +184,7 @@ export default function IndustryMovesPage() {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                Strategic Insights
-              </h3>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Strategic Insights</h3>
               <p className="text-muted-foreground">
                 Understand the implications of industry moves for your AI strategy and competitive
                 positioning.
@@ -209,9 +206,7 @@ export default function IndustryMovesPage() {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">
-                Curated Sources
-              </h3>
+              <h3 className="text-lg font-semibold text-foreground mb-2">Curated Sources</h3>
               <p className="text-muted-foreground">
                 Handpicked content from TechCrunch, VentureBeat, The Verge, and other trusted
                 industry sources.
@@ -236,24 +231,21 @@ export default function IndustryMovesPage() {
         viewport={{ once: true, amount: 0.2 }}
       >
         <div className="max-w-4xl mx-auto space-y-8">
-          <Link href="/contact" passHref legacyBehavior>
-            <a>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.25, delay: 0 }}
-                viewport={{ once: true }}
-              >
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink hover:opacity-90 text-white font-bold px-12 py-6 text-xl shadow-2xl shadow-neon-blue/30"
-                >
-                  START THE CONVERSATION
-                  <Mail className="ml-3 h-6 w-6" />
-                </Button>
-              </motion.div>
-            </a>
-          </Link>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25, delay: 0 }}
+            viewport={{ once: true }}
+          >
+            <GradientButton
+              variant="blue"
+              size="lg"
+              onClick={() => openContactDrawer({ mode: "contact", source: "industry_moves_cta" })}
+            >
+              START THE CONVERSATION
+              <Mail className="ml-3 h-6 w-6" />
+            </GradientButton>
+          </motion.div>
         </div>
       </motion.section>
     </div>

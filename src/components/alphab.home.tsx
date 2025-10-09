@@ -47,7 +47,7 @@ const Index = () => {
       {/* Animated background pattern */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,0,150,0.1),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_48%,rgba(255,255,255,0.03)_49%,rgba(255,255,255,0.03)_51%,transparent_52%)] bg-[length:20px_20px] animate-pulse"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_48%,rgba(255,255,255,0.03)_49%,rgba(255,255,255,0.03)_51%,transparent_52%)] bg-size-[20px_20px] animate-pulse"></div>
       </div>
 
       {/* Top bar with time */}
@@ -66,19 +66,19 @@ const Index = () => {
         <div className="text-center mb-16">
           <div className="relative">
             <h1 className="text-[12rem] md:text-[20rem] font-black leading-none tracking-tighter">
-              <span className="block bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
+              <span className="block bg-linear-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
                 ALPHAB
               </span>
             </h1>
             <div className="absolute inset-0 text-[12rem] md:text-[20rem] font-black leading-none tracking-tighter">
-              <span className="block text-transparent bg-gradient-to-r from-red-500 via-pink-500 to-yellow-500 bg-clip-text opacity-30 blur-sm">
+              <span className="block text-transparent bg-linear-to-r from-red-500 via-pink-500 to-yellow-500 bg-clip-text opacity-30 blur-xs">
                 ALPHAB
               </span>
             </div>
           </div>
 
           <div className="mt-8 mb-4">
-            <div className="inline-block border border-white/20 rounded-full px-6 py-2 backdrop-blur-sm">
+            <div className="inline-block border border-white/20 rounded-full px-6 py-2 backdrop-blur-xs">
               <span className="text-sm tracking-[0.3em] text-gray-300 font-light">
                 INNOVATION AT THE SPEED OF THOUGHT
               </span>
@@ -87,11 +87,11 @@ const Index = () => {
 
           <h2 className="text-2xl md:text-4xl font-bold tracking-wider mb-8">
             <span className="text-white">INTERESTING</span>{" "}
-            <span className="bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-red-400 to-pink-400 bg-clip-text text-transparent">
               LINKS
             </span>{" "}
             <span className="text-white">&</span>{" "}
-            <span className="bg-gradient-to-r from-yellow-400 to-red-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-yellow-400 to-red-400 bg-clip-text text-transparent">
               EXPERIMENTS
             </span>
           </h2>
@@ -124,15 +124,15 @@ const Index = () => {
               </div>
 
               {/* Main card */}
-              <div className="relative h-80 border border-white/10 bg-black/50 backdrop-blur-sm group-hover:border-white/30 transition-all duration-500 overflow-hidden">
+              <div className="relative h-80 border border-white/10 bg-black/50 backdrop-blur-xs group-hover:border-white/30 transition-all duration-500 overflow-hidden">
                 {/* Background gradient */}
-                {/* <div className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div> */}
+                {/* <div className={`absolute inset-0 bg-linear-to-br ${link.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div> */}
 
                 {/* Content */}
                 <div className="relative p-8 h-full flex flex-col justify-between">
                   <div>
                     <div className="text-4xl mb-4">{link.emoji}</div>
-                    <h3 className="text-2xl font-black tracking-tighter mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-white group-hover:to-gray-400 transition-all duration-300">
+                    <h3 className="text-2xl font-black tracking-tighter mb-4 group-hover:text-transparent group-hover:bg-linear-to-r group-hover:bg-clip-text group-hover:from-white group-hover:to-gray-400 transition-all duration-300">
                       {link.title}
                     </h3>
                     <p className="text-gray-400 text-sm tracking-wide leading-relaxed">
@@ -160,7 +160,7 @@ const Index = () => {
                 </div>
 
                 {/* Scan line effect */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent h-20 w-full opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-linear-to-b from-transparent via-white/5 to-transparent h-20 w-full opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-500"></div>
               </div>
             </a>
           ))}
@@ -172,9 +172,9 @@ const Index = () => {
             href="https://rade.alphab.io"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative overflow-hidden border border-white/20 px-12 py-4 bg-black/50 backdrop-blur-sm hover:border-white/40 transition-all duration-300 inline-block"
+            className="group relative overflow-hidden border border-white/20 px-12 py-4 bg-black/50 backdrop-blur-xs hover:border-white/40 transition-all duration-300 inline-block"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-yellow-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            <div className="absolute inset-0 bg-linear-to-r from-red-500/20 via-pink-500/20 to-yellow-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             <div className="relative flex items-center space-x-3">
               <Zap className="w-5 h-5 text-yellow-400" />
               <span className="text-lg tracking-wider font-medium">
@@ -185,12 +185,6 @@ const Index = () => {
           </a>
         </div>
       </div>
-
-      {/* Corner decorations */}
-      <div className="absolute top-0 left-0 w-32 h-32 border-l-2 border-t-2 border-white/10"></div>
-      <div className="absolute top-0 right-0 w-32 h-32 border-r-2 border-t-2 border-white/10"></div>
-      <div className="absolute bottom-0 left-0 w-32 h-32 border-l-2 border-b-2 border-white/10"></div>
-      <div className="absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 border-white/10"></div>
     </div>
   );
 };

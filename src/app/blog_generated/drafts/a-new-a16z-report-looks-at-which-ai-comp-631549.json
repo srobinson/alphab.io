@@ -52,7 +52,7 @@
     "topic": "A new a16z report looks at which AI companies startups are actually paying for",
     "type": "analysis",
     "style": "analytical",
-    "outline": {
+    "outline-solid": {
       "hook": "Are AI investments in startups a game of buzz or a blueprint for success?",
       "thesis": "Despite the economic turbulence, AI spending in early-stage startups is not just about trend-following but is a strategic pivot towards sustainable growth.",
       "sections": [

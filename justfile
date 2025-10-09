@@ -30,7 +30,11 @@ fix:
 check: format fix typecheck
 
 # ------------- Development -------------
-dev: build test
+dev:
+    pnpm dev
+
+start:
+    pnpm start
 
 clean:
     rm -rf lib node_modules pnpm-lock.yaml

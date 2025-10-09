@@ -49,7 +49,7 @@
     "topic": "The Other Side of the AI Hype",
     "type": "reality-check",
     "style": "analytical",
-    "outline": {
+    "outline-solid": {
       "hook": "While AI investments soar to record highs, why are more than 40% of AI projects failing?",
       "thesis": "Despite the rapid advancements and substantial investments in AI, the reality is that successful AI integration requires more than just financial capital; it demands a strategic alignment of technology, talent, and business objectives.",
       "sections": [

@@ -47,22 +47,24 @@ export function ServiceCard({ service, index }: ServiceCardProps) {
   return (
     <motion.div
       key={index}
-      className="group bg-card/50 backdrop-blur-sm p-8 rounded-xl shadow-2xl border border-cyber-border flex flex-col transition-all duration-200 ease-out hover:shadow-xl dark:hover:shadow-neon-blue/30 hover:scale-[1.03] hover:border-neon-blue/50"
+      className="group bg-card/50 backdrop-blur-xs p-8 my-8 rounded-sm shadow-2xl border border-cyber-border flex flex-col transition-all duration-200 ease-out hover:shadow-xl dark:hover:shadow-neon-blue/30 hover:scale-[1.03] hover:border-neon-blue/50"
       initial="hidden"
       whileInView="visible"
       variants={cardVariants}
       viewport={{ once: true, amount: 0.1 }}
     >
       <div className="flex items-start mb-6">
-        <div className="w-12 h-12 bg-gradient-to-br from-neon-blue to-neon-purple rounded-lg flex items-center justify-center mr-4 transition-transform duration-200 ease-out group-hover:scale-110 flex-shrink-0 shadow-lg shadow-neon-blue/30">
-          <IconComponent className="w-6 h-6 text-white transition-transform duration-200 ease-out group-hover:rotate-[-3deg]" />
+        <div className="w-12 h-12 bg-linear-to-br from-neon-red to-neon-yellow rounded-lg flex items-center justify-center mr-4 transition-transform duration-200 ease-out group-hover:scale-110 shrink-0 shadow-lg shadow-neon-pink/30">
+          <IconComponent className="w-6 h-6 text-white transition-transform duration-200 ease-out group-hover:-rotate-3" />
         </div>
-        <h2 className="text-2xl font-black text-neon-blue">{service.title}</h2>
+        <h2 className="text-2xl  md:text-3xl font-extrabold font-white uppercase">
+          {service.title}
+        </h2>
       </div>
-      <p className="text-muted-foreground mb-6 leading-relaxed flex-grow">
+      <p className="text-muted-foreground text-2xl mb-6 leading-relaxed grow">
         {service.description}
       </p>
-      <ul className="space-y-2 text-sm text-muted-foreground">
+      <ul className="space-y-2 text-2xl text-muted-foreground">
         {service.details.map((detail) => (
           <li
             key={detail}

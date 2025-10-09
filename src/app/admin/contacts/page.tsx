@@ -149,7 +149,7 @@ export default function ContactsAdminPage() {
       case "replied":
         return "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300";
       case "archived":
-        return "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300";
+        return "bg-gray-100 text-gray-800dark:bg-black dark:text-gray-300";
       default:
         return "bg-gray-100 text-gray-800";
     }
@@ -157,7 +157,7 @@ export default function ContactsAdminPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50dark:bg-black flex items-center justify-center">
         <div className="text-center">
           <div className="h-8 w-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600 dark:text-gray-400">Loading contacts...</p>
@@ -167,7 +167,7 @@ export default function ContactsAdminPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-gray-50dark:bg-black p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -327,7 +327,7 @@ export default function ContactsAdminPage() {
 
                   <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-3">
                     <div className="flex items-start gap-2">
-                      <MessageSquare className="h-4 w-4 text-gray-500 mt-0.5 flex-shrink-0" />
+                      <MessageSquare className="h-4 w-4 text-gray-500 mt-0.5 shrink-0" />
                       <p className="text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">
                         {contact.message}
                       </p>
@@ -338,7 +338,7 @@ export default function ContactsAdminPage() {
                 <div className="flex flex-row lg:flex-col gap-2">
                   <Button
                     size="sm"
-                    variant={contact.status === "read" ? "default" : "outline"}
+                    variant={contact.status === "read" ? "default" : "outline-solid"}
                     onClick={() => updateContactStatus(contact.id, "read")}
                     disabled={contact.status === "read"}
                   >
@@ -346,7 +346,7 @@ export default function ContactsAdminPage() {
                   </Button>
                   <Button
                     size="sm"
-                    variant={contact.status === "replied" ? "default" : "outline"}
+                    variant={contact.status === "replied" ? "default" : "outline-solid"}
                     onClick={() => updateContactStatus(contact.id, "replied")}
                     disabled={contact.status === "replied"}
                   >

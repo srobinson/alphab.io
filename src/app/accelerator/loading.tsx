@@ -26,7 +26,7 @@ export default function AcceleratorLoading() {
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}
-              className="border border-white/10 bg-black/50 backdrop-blur-sm p-4 sm:p-6 lg:p-8"
+              className="border border-white/10 bg-black/50 backdrop-blur-xs p-4 sm:p-6 lg:p-8"
             >
               <Skeleton className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 mb-4 sm:mb-6" />
               <Skeleton className="h-6 sm:h-7 lg:h-8 w-3/4 mb-3 sm:mb-4" />

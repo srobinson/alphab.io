@@ -35,7 +35,7 @@ export default function ContactError({ error, reset }: ContactErrorProps) {
           <div className="space-y-3">
             <Button
               onClick={reset}
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white"
+              className="w-full bg-linear-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white"
             >
               <RefreshCw className="mr-2 h-4 w-4" />
               Try Again

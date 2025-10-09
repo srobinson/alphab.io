@@ -1,9 +1,11 @@
 "use client";
 
+"use client";
+
 import { motion } from "framer-motion";
 import { Check, X } from "lucide-react";
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useContactDrawer } from "@/contexts/contact-drawer-context";
 
 const oldWayItems = [
   "Expensive agency retainers",
@@ -23,15 +25,17 @@ const radeWayItems = [
 ];
 
 export function ParadigmInfographic() {
+  const { openContactDrawer } = useContactDrawer();
+
   return (
     <motion.div
-      className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 border border-blue-400/30 shadow-2xl shadow-blue-500/25 relative overflow-hidden"
+      className="bg-linear-to-br from-slate-900 via-blue-900 to-slate-900 rounded-2xl md:rounded-3xl p-8 md:p-12 lg:p-16 border border-blue-400/30 shadow-2xl shadow-blue-500/25 relative overflow-hidden"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.33 }}
     >
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-cyan-500/5 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-br from-blue-500/5 via-transparent to-cyan-500/5 pointer-events-none" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -43,7 +47,7 @@ export function ParadigmInfographic() {
         transition={{ duration: 0.33, delay: 0.2 }}
       >
         <span className="text-white">THE</span>
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+        <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-400">
           ALPHAB RADE
         </span>
         <span className="text-white">DIFFERENCE</span>
@@ -59,7 +63,7 @@ export function ParadigmInfographic() {
           transition={{ duration: 0.33, delay: 0.4 }}
         >
           <div className="flex items-center gap-4 mb-8">
-            <div className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full shadow-xl">
+            <div className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-linear-to-br from-red-500 to-red-600 rounded-full shadow-xl">
               <span className="text-white font-black text-xl md:text-2xl">1</span>
             </div>
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white">The Old Way</h3>
@@ -69,7 +73,7 @@ export function ParadigmInfographic() {
             {oldWayItems.map((item, index) => (
               <motion.div
                 key={index}
-                className="flex items-start gap-4 p-4 bg-red-500/10 border border-red-500/20 rounded-xl backdrop-blur-sm"
+                className="flex items-start gap-4 p-4 bg-red-500/10 border border-red-500/20 rounded-xl backdrop-blur-xs"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{
@@ -77,7 +81,7 @@ export function ParadigmInfographic() {
                   delay: 0.33 + index * 0.1,
                 }}
               >
-                <X className="w-6 h-6 text-red-400 flex-shrink-0 mt-0.5" />
+                <X className="w-6 h-6 text-red-400 shrink-0 mt-0.5" />
                 <span className="text-red-100 text-lg font-medium leading-relaxed">{item}</span>
               </motion.div>
             ))}
@@ -92,10 +96,10 @@ export function ParadigmInfographic() {
           transition={{ duration: 0.33, delay: 0.4 }}
         >
           <div className="flex items-center gap-4 mb-8">
-            <div className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full shadow-xl">
+            <div className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-linear-to-br from-blue-500 to-cyan-500 rounded-full shadow-xl">
               <span className="text-white font-black text-xl md:text-2xl">2</span>
             </div>
-            <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-400">
               The AlphaB Way
             </h3>
           </div>
@@ -104,7 +108,7 @@ export function ParadigmInfographic() {
             {radeWayItems.map((item, index) => (
               <motion.div
                 key={index}
-                className="flex items-start gap-4 p-4 bg-green-500/10 border border-green-500/20 rounded-xl backdrop-blur-sm hover:bg-green-500/15 transition-all duration-300"
+                className="flex items-start gap-4 p-4 bg-green-500/10 border border-green-500/20 rounded-xl backdrop-blur-xs hover:bg-green-500/15 transition-all duration-300"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{
@@ -112,7 +116,7 @@ export function ParadigmInfographic() {
                   delay: 0.33 + index * 0.1,
                 }}
               >
-                <Check className="w-6 h-6 text-green-400 flex-shrink-0 mt-0.5" />
+                <Check className="w-6 h-6 text-green-400 shrink-0 mt-0.5" />
                 <span className="text-green-100 text-lg font-medium leading-relaxed">{item}</span>
               </motion.div>
             ))}
@@ -127,14 +131,13 @@ export function ParadigmInfographic() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.33, delay: 0.2 }}
       >
-        <Link href="/contact" passHref legacyBehavior>
-          <Button
-            size="lg"
-            className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold px-8 py-4 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
-          >
-            Ready to work directly with an expert?
-          </Button>
-        </Link>
+        <Button
+          size="lg"
+          className="bg-linear-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-bold px-8 py-4 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+          onClick={() => openContactDrawer({ mode: "contact", source: "paradigm_infographic" })}
+        >
+          Ready to work directly with an expert?
+        </Button>
       </motion.div>
     </motion.div>
   );

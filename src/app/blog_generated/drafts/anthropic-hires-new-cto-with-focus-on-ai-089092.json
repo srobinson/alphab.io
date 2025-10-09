@@ -56,7 +56,7 @@
     "topic": "Anthropic hires new CTO with focus on AI infrastructure",
     "type": "analysis",
     "style": "analytical",
-    "outline": {
+    "outline-solid": {
       "hook": "Is the recent leadership shakeup at Anthropic a red flag for AI enterprises, or a strategic pivot for a brighter future?",
       "thesis": "The strategic executive changes at Anthropic signify a progressive shift towards optimizing global AI infrastructure, not a sign of underlying issues.",
       "sections": [

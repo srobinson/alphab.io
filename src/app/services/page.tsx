@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { LeadershipCTA } from "@/components/cta";
 import { ServiceCard } from "./_components/service-card";
-import { ServicesCTA } from "./_components/services-cta";
 import { ServicesHero } from "./_components/services-hero";
 
 const services = [
@@ -151,7 +151,7 @@ export default function ServicesPage() {
               <Suspense
                 key={index}
                 fallback={
-                  <div className="bg-card/50 backdrop-blur-sm p-8 rounded-xl border border-cyber-border animate-pulse">
+                  <div className="bg-card/50 backdrop-blur-xs p-8 rounded-xl border border-cyber-border animate-pulse">
                     <div className="space-y-4">
                       <div className="flex items-start space-x-4">
                         <div className="w-12 h-12 bg-muted rounded-lg"></div>
@@ -188,7 +188,7 @@ export default function ServicesPage() {
             </div>
           }
         >
-          <ServicesCTA />
+          <LeadershipCTA />
         </Suspense>
       </div>
     </>

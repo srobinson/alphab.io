@@ -2,9 +2,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function ServicesLoading() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50dark:bg-black">
       {/* Hero Section Skeleton */}
-      <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-b border-gray-200 dark:border-gray-800">
+      <section className="py-16 bg-linear-to-br from-blue-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-b border-gray-200 dark:border-gray-800">
         <div className="container mx-auto px-6 max-w-6xl text-center">
           <Skeleton className="h-16 md:h-20 lg:h-24 w-full max-w-4xl mx-auto mb-6" />
           <Skeleton className="h-6 md:h-8 w-full max-w-3xl mx-auto mb-8" />
@@ -22,7 +22,7 @@ export default function ServicesLoading() {
           {Array.from({ length: 6 }).map((_, index) => (
             <div
               key={index}
-              className="bg-gray-50 dark:bg-gray-900/50 p-8 rounded-xl border border-gray-200 dark:border-gray-700/60"
+              className="bg-gray-50dark:bg-black/50 p-8 rounded-xl border border-gray-200 dark:border-gray-700/60"
             >
               <div className="flex items-start mb-6">
                 <Skeleton className="w-12 h-12 rounded-lg mr-4" />

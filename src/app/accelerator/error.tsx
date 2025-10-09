@@ -3,6 +3,7 @@
 import { AlertCircle, Home, Mail, RefreshCw } from "lucide-react";
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { useContactDrawer } from "@/contexts/contact-drawer-context";
 
 interface AcceleratorErrorProps {
   error: Error & { digest?: string };
@@ -10,6 +11,8 @@ interface AcceleratorErrorProps {
 }
 
 export default function AcceleratorError({ error, reset }: AcceleratorErrorProps) {
+  const { openContactDrawer } = useContactDrawer();
+
   useEffect(() => {
     // Log the error to an error reporting service
     console.error("Accelerator page error:", error);
@@ -24,7 +27,7 @@ export default function AcceleratorError({ error, reset }: AcceleratorErrorProps
       </div>
 
       <div className="relative z-10 px-4 sm:px-6 text-center max-w-md">
-        <div className="border border-white/10 bg-black/50 backdrop-blur-sm p-8 rounded-lg">
+        <div className="border border-white/10 bg-black/50 backdrop-blur-xs p-8 rounded-lg">
           <div className="w-16 h-16 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-6">
             <AlertCircle className="w-8 h-8 text-red-600 dark:text-red-500" />
           </div>
@@ -38,7 +41,7 @@ export default function AcceleratorError({ error, reset }: AcceleratorErrorProps
           <div className="space-y-3">
             <Button
               onClick={reset}
-              className="w-full bg-gradient-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white"
+              className="w-full bg-linear-to-r from-green-600 to-green-500 hover:from-green-700 hover:to-green-600 text-white"
             >
               <RefreshCw className="mr-2 h-4 w-4" />
               RETRY CONNECTION
@@ -57,9 +60,9 @@ export default function AcceleratorError({ error, reset }: AcceleratorErrorProps
 
             <Button
               variant="outline"
-              onClick={() => {
-                window.location.href = "/contact";
-              }}
+              onClick={() =>
+                openContactDrawer({ mode: "contact", source: "accelerator_error_page" })
+              }
               className="w-full border-white/20 text-white hover:bg-white/10"
             >
               <Mail className="mr-2 h-4 w-4" />

@@ -16,9 +16,9 @@ export default function BlogPostError({ error, reset }: BlogPostErrorProps) {
   }, [error]);
 
   return (
-    <article className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-black dark:to-gray-950">
+    <article className="min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-black dark:to-gray-950">
       <div className="relative container mx-auto px-6 py-16 max-w-4xl">
-        <div className="relative bg-white dark:bg-gray-900/50 rounded-3xl shadow-2xl shadow-gray-200/50 dark:shadow-gray-950/50 border border-gray-200/50 dark:border-gray-800/50 backdrop-blur-sm overflow-hidden p-12 text-center">
+        <div className="relative bg-whitedark:bg-black/50 rounded-3xl shadow-2xl shadow-gray-200/50 dark:shadow-gray-950/50 border border-gray-200/50 dark:border-gray-800/50 backdrop-blur-xs overflow-hidden p-12 text-center">
           {/* Decorative corner accents */}
           <div className="absolute top-0 left-0 w-24 h-24 border-t-2 border-l-2 border-red-500/20 dark:border-red-400/20 rounded-tl-3xl" />
           <div className="absolute bottom-0 right-0 w-24 h-24 border-b-2 border-r-2 border-red-500/20 dark:border-red-400/20 rounded-br-3xl" />
@@ -39,7 +39,7 @@ export default function BlogPostError({ error, reset }: BlogPostErrorProps) {
           <div className="space-y-3 max-w-md mx-auto">
             <Button
               onClick={reset}
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white"
+              className="w-full bg-linear-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white"
             >
               <RefreshCw className="mr-2 h-4 w-4" />
               Try Again

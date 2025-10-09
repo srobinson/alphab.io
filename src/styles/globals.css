@@ -1,6 +1,107 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
+  @media (width >= --theme(--breakpoint-sm)) {
+    max-width: none;
+  }
+  @media (width >= 1400px) {
+    max-width: 1400px;
+  }
+}
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-cyber-border: hsl(var(--cyber-border) / var(--cyber-border-opacity));
+  --color-cyber-glow: hsl(var(--cyber-glow));
+
+  --color-neon-red: hsl(var(--neon-red));
+  --color-neon-pink: hsl(var(--neon-pink));
+  --color-neon-yellow: hsl(var(--neon-yellow));
+  --color-neon-blue: hsl(var(--neon-blue));
+  --color-neon-purple: hsl(var(--neon-purple));
+  --color-neon-cyan: hsl(var(--neon-cyan));
+  --color-neon-green: hsl(var(--neon-green));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  --backdrop-blur-cyber: 12px;
+  --backdrop-blur-xs: 4px;
+  --backdrop-blur-sm: 8px;
+  --backdrop-blur-md: 12px;
+  --backdrop-blur-lg: 16px;
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
 
 @layer base {
   :root {
@@ -35,7 +136,7 @@
     /* Cyberpunk theme variables - Light mode */
 
     --neon-red: 0 84% 60%;
-    --neon-pink: 330 81% 60%;
+    --neon-pink: 330 81% 58%;
     --neon-yellow: 45 93% 58%;
     --neon-blue: 217 91% 60%;
     --neon-purple: 271 81% 56%;
@@ -255,7 +356,7 @@
 
 .news-ticker-item:hover {
   transform: translateY(-2px);
-  background-color: rgba(59, 130, 246, 0.1);
+  /* background-color: rgba(59, 130, 246, 0.1); */
 }
 
 /* Professional text glow effect */
@@ -347,26 +448,6 @@
   grid-auto-rows: 1fr;
 }
 
-.blog-background {
-  background:
-    linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
-    linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0,
-    linear-gradient(27deg, #222 5px, transparent 5px) 0 10px,
-    linear-gradient(207deg, #222 5px, transparent 5px) 10px 5px,
-    linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
-    linear-gradient(
-      #1d1d1d 25%,
-      #1a1a1a 25%,
-      #1a1a1a 50%,
-      transparent 50%,
-      transparent 75%,
-      #242424 75%,
-      #242424
-    );
-  background-color: #131313;
-  background-size: 20px 20px;
-}
-
 /* Shimmer loading animation */
 @keyframes shimmer {
   0% {
@@ -432,4 +513,611 @@
     hsl(var(--neon-cyan)),
     hsl(var(--neon-blue))
   );
+}
+
+/* ========================================
+   CYBERPUNK/LANDING PAGE DESIGN SYSTEM
+   ========================================
+   Extracted from landingpage-view.tsx
+   These utilities provide the neon, high-tech aesthetic used across the site
+   Uses neon color variables defined in @theme section
+   ======================================== */
+
+/* Gradient Text Effect Utilities */
+.gradient-text-red-pink-yellow {
+  background: linear-gradient(
+    to right,
+    hsl(var(--neon-red)),
+    hsl(var(--neon-pink)),
+    hsl(var(--neon-yellow))
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.gradient-text-blue-purple-pink {
+  background: linear-gradient(
+    to right,
+    hsl(var(--neon-blue)),
+    hsl(var(--neon-purple)),
+    hsl(var(--neon-pink))
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.gradient-text-green-cyan-blue {
+  background: linear-gradient(
+    to right,
+    hsl(var(--neon-green)),
+    hsl(var(--neon-cyan)),
+    hsl(var(--neon-blue))
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.gradient-text-white-gray {
+  background: linear-gradient(to right, hsl(0 0% 100%), hsl(220 13% 65%), hsl(0 0% 100%));
+  /* background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; */
+}
+
+.gradient-text-red-pink {
+  background: linear-gradient(to right, hsl(var(--neon-red) / 0.85), hsl(var(--neon-pink) / 0.9));
+  /* background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; */
+}
+
+.gradient-text-pink-red {
+  background: linear-gradient(to right, hsl(var(--neon-pink) / 0.85), hsl(var(--neon-red) / 0.9));
+  /* background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; */
+}
+
+.gradient-text-yellow-red {
+  background: linear-gradient(
+    to right,
+    hsl(var(--neon-yellow) / 0.85),
+    hsl(var(--neon-red) / 0.85)
+  );
+  /* background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; */
+}
+
+.gradient-text-yellow-red-pink {
+  background: linear-gradient(
+    to right,
+    hsl(var(--neon-yellow)),
+    hsl(var(--neon-red)),
+    hsl(var(--neon-pink))
+  );
+  /* background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; */
+}
+
+.gradient-text-blue-purple {
+  background: linear-gradient(to right, hsl(var(--neon-blue) / 0.8), hsl(var(--neon-purple) / 0.9));
+  /* background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; */
+}
+
+.gradient-text-white-gray-400 {
+  background: linear-gradient(to right, hsl(0 0% 100%), hsl(220 13% 65%));
+  /* background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; */
+}
+
+/* Cyber Card Utilities */
+.cyber-card {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+
+.cyber-card-hover {
+  transition: border-color 0.5s ease;
+}
+
+.cyber-card-hover:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Cyber card gradient overlays - applied to child elements */
+.cyber-card-gradient-red {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background: linear-gradient(to bottom right, rgb(239 68 68), rgb(236 72 153), rgb(234 179 8));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.cyber-card-gradient-blue {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background: linear-gradient(to bottom right, rgb(59 130 246), rgb(168 85 247), rgb(236 72 153));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.cyber-card-gradient-green {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background: linear-gradient(to bottom right, rgb(74 222 128), rgb(34 211 238), rgb(59 130 246));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.cyber-card-gradient-yellow {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background: linear-gradient(to bottom right, rgb(234 179 8), rgb(239 68 68), rgb(236 72 153));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.cyber-card-gradient-purple {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background: linear-gradient(to bottom right, rgb(168 85 247), rgb(236 72 153), rgb(59 130 246));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.cyber-card-gradient-cyan {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background: linear-gradient(to bottom right, rgb(34 211 238), rgb(59 130 246), rgb(168 85 247));
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Group hover states for gradient overlays */
+.group:hover .cyber-card-gradient-red {
+  opacity: 0.1;
+}
+
+.group:hover .cyber-card-gradient-blue {
+  opacity: 0.1;
+}
+
+.group:hover .cyber-card-gradient-green {
+  opacity: 0.1;
+}
+
+.group:hover .cyber-card-gradient-yellow {
+  opacity: 0.1;
+}
+
+.group:hover .cyber-card-gradient-purple {
+  opacity: 0.1;
+}
+
+.group:hover .cyber-card-gradient-cyan {
+  opacity: 0.1;
+}
+
+.group:hover .group-hover-gradient-text-white-gray-400 {
+  background: linear-gradient(to right, rgb(255 255 255), rgb(156 163 175));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Backdrop Blur Utilities */
+.backdrop-blur-xs {
+  backdrop-filter: blur(4px);
+}
+
+.backdrop-blur-sm {
+  backdrop-filter: blur(8px);
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+}
+
+.backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+}
+
+/* Border Opacity Utilities */
+.border-white-10 {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.border-white-20 {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.border-white-30 {
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.border-white-40 {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.border-white-50 {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Enhanced Scan Line Effect */
+.scan-line-hover {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.05), transparent);
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.group:hover .scan-line-hover {
+  opacity: 1;
+  animation: scan-line-move 0.25s ease-in-out;
+}
+
+/* Background Pattern Utilities */
+.bg-radial-gradient-pink {
+  background: radial-gradient(circle at 50% 50%, rgba(255, 0, 150, 0.1), transparent 50%);
+}
+
+.bg-grid-pattern {
+  background: linear-gradient(
+    45deg,
+    transparent 48%,
+    rgba(255, 255, 255, 0.03) 49%,
+    rgba(255, 255, 255, 0.03) 51%,
+    transparent 52%
+  );
+  background-size: 20px 20px;
+}
+
+.bg-cyber-black {
+  background-color: #000000;
+}
+
+/* Status Pill Utilities */
+.status-pill {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-width: 1px;
+}
+
+.status-pill-red {
+  border-color: rgba(239, 68, 68, 0.5);
+  color: rgb(248 113 113);
+}
+
+.status-pill-blue {
+  border-color: rgba(59, 130, 246, 0.5);
+  color: rgb(96 165 250);
+}
+
+.status-pill-green {
+  border-color: rgba(34, 197, 94, 0.5);
+  color: rgb(74 222 128);
+}
+
+.status-pill-yellow {
+  border-color: rgba(234, 179, 8, 0.5);
+  color: rgb(250 204 21);
+}
+
+.status-pill-purple {
+  border-color: rgba(168, 85, 247, 0.5);
+  color: rgb(192 132 252);
+}
+
+.status-pill-cyan {
+  border-color: rgba(34, 211, 238, 0.5);
+  color: rgb(103 232 249);
+}
+
+/* Gradient Button Utilities */
+.btn-gradient-red {
+  background: linear-gradient(to right, hsl(var(--neon-red)), hsl(var(--neon-pink)));
+  color: #000;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient-red:hover {
+  filter: brightness(1.1);
+}
+
+.btn-gradient-yellow-red {
+  background: linear-gradient(to right, hsl(var(--neon-yellow)), hsl(var(--neon-red)));
+  color: #000;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient-yellow-red:hover {
+  filter: brightness(1.1);
+}
+
+.btn-gradient-blue {
+  background: linear-gradient(to right, hsl(var(--neon-blue)), hsl(var(--neon-purple)));
+  color: #000;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient-blue:hover {
+  filter: brightness(1.1);
+}
+
+.btn-gradient-green {
+  background: linear-gradient(to right, hsl(var(--neon-green)), hsl(var(--neon-cyan)));
+  color: #000;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+}
+
+.btn-gradient-green:hover {
+  filter: brightness(1.1);
+}
+
+/* Glow Effect Utilities */
+.glow-red {
+  box-shadow:
+    0 0 20px rgba(239, 68, 68, 0.3),
+    0 0 40px rgba(239, 68, 68, 0.2);
+}
+
+.glow-blue {
+  box-shadow:
+    0 0 20px rgba(59, 130, 246, 0.3),
+    0 0 40px rgba(59, 130, 246, 0.2);
+}
+
+.glow-yellow {
+  box-shadow:
+    0 0 20px rgba(234, 179, 8, 0.3),
+    0 0 40px rgba(234, 179, 8, 0.2);
+}
+
+.glow-pink {
+  box-shadow:
+    0 0 20px rgba(236, 72, 153, 0.3),
+    0 0 40px rgba(236, 72, 153, 0.2);
+}
+
+.glow-purple {
+  box-shadow:
+    0 0 20px rgba(168, 85, 247, 0.3),
+    0 0 40px rgba(168, 85, 247, 0.2);
+}
+
+.glow-cyan {
+  box-shadow:
+    0 0 20px rgba(34, 211, 238, 0.3),
+    0 0 40px rgba(34, 211, 238, 0.2);
+}
+
+.glow-green {
+  box-shadow:
+    0 0 20px rgba(34, 197, 94, 0.3),
+    0 0 40px rgba(34, 197, 94, 0.2);
+}
+
+/* Hover Transform Utilities */
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-translate-x {
+  transition: transform 0.3s ease;
+}
+
+.hover-translate-x:hover {
+  transform: translateX(8px);
+}
+
+/* Typography Utilities */
+.text-cyber-title {
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.text-cyber-subtitle {
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.text-tracking-wide {
+  letter-spacing: 0.3em;
+}
+
+/* Animation Keyframes */
+@keyframes scan-line-move {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Enhanced ProgressBar animations that work during SSR */
+@keyframes progress-fill {
+  0% {
+    width: 0%;
+    transform: translateX(-100%);
+  }
+  50% {
+    width: 70%;
+    transform: translateX(0%);
+  }
+  100% {
+    width: 100%;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes spin-slow {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    transform: rotate(90deg) scale(1.05);
+  }
+  50% {
+    transform: rotate(180deg) scale(1);
+  }
+  75% {
+    transform: rotate(270deg) scale(1.05);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes bounce-gentle {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-4px) scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.7;
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-progress-fill {
+  animation: progress-fill 2s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s ease-in-out infinite;
+}
+
+.animate-bounce-gentle {
+  animation: bounce-gentle 2s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out;
+}
+
+.animate-scan-line {
+  animation: scan-line-move 2s linear infinite;
+}
+
+.blog-content h2 {
+  margin: 1em 0;
+  font-size: 2.5em;
+  font-weight: bold;
+  border-bottom: 1px solid #fff;
+}
+
+.blog-content p {
+  margin: 1em;
+  font-size: 1.5em;
+}
+
+/* -------------------------------- */
+
+.alphab-background {
+  background: url('data:image/svg+xml,%3Csvg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M8 16c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zm33.414-6l5.95-5.95L45.95.636 40 6.586 34.05.636 32.636 2.05 38.586 8l-5.95 5.95 1.414 1.414L40 9.414l5.95 5.95 1.414-1.414L41.414 8zM40 48c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zM9.414 40l5.95-5.95-1.414-1.414L8 38.586l-5.95-5.95L.636 34.05 6.586 40l-5.95 5.95 1.414 1.414L8 41.414l5.95 5.95 1.414-1.414L9.414 40z" fill="%239C92AC" fill-opacity="0.1" fill-rule="evenodd"/%3E%3C/svg%3E')
+    #000;
+  background-size: 80px;
+  overflow: hidden;
+  animation: movingBackground linear 60s infinite 1.5s;
+}
+
+.alphab-stroke {
+  text-shadow:
+    -4px -4px 0 #000,
+    4px -4px 0 #000,
+    -4px 4px 0 #000,
+    4px 4px 0 #000;
+}
+
+@keyframes movingBackground {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 32rem 32rem;
+  }
 }

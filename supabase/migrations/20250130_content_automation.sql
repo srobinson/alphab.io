@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS industry_moves_cache (
   metadata JSONB DEFAULT '{}',
   cached_at TIMESTAMPTZ DEFAULT NOW(),
   expires_at TIMESTAMPTZ DEFAULT NOW() + INTERVAL '1 hour',
-  
+
   UNIQUE(article_id)
 );
 
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS content_classifications (
   ai_generated BOOLEAN DEFAULT FALSE,
   classification_data JSONB DEFAULT '{}',
   created_at TIMESTAMPTZ DEFAULT NOW(),
-  
+
   UNIQUE(article_id, classification_type)
 );
 
@@ -123,11 +123,11 @@ BEGIN
   SELECT cs.id, cs.name, cs.rss_url, cs.category, cs.priority, cs.max_items, cs.last_checked
   FROM content_sources cs
   WHERE cs.is_active = TRUE
-  ORDER BY 
-    CASE cs.priority 
-      WHEN 'high' THEN 1 
-      WHEN 'medium' THEN 2 
-      WHEN 'low' THEN 3 
+  ORDER BY
+    CASE cs.priority
+      WHEN 'high' THEN 1
+      WHEN 'medium' THEN 2
+      WHEN 'low' THEN 3
     END,
     cs.name;
 END;
@@ -157,15 +157,15 @@ BEGIN
     p_source_id, p_sync_type, p_items_found, p_items_processed, p_items_published,
     p_items_skipped, p_items_failed, p_duration_ms, p_success, p_errors, p_metadata
   ) RETURNING id INTO v_log_id;
-  
+
   -- Update source last_checked timestamp
-  UPDATE content_sources 
-  SET 
+  UPDATE content_sources
+  SET
     last_checked = NOW(),
     last_successful_sync = CASE WHEN p_success THEN NOW() ELSE last_successful_sync END,
     consecutive_failures = CASE WHEN p_success THEN 0 ELSE consecutive_failures + 1 END
   WHERE id = p_source_id;
-  
+
   RETURN v_log_id;
 END;
 $$ LANGUAGE plpgsql;
@@ -173,7 +173,7 @@ $$ LANGUAGE plpgsql;
 -- Insert default content sources
 INSERT INTO content_sources (id, name, rss_url, category, priority, max_items, is_active) VALUES
 ('techcrunch-ai', 'TechCrunch AI', 'https://techcrunch.com/category/artificial-intelligence/feed/', 'ai', 'high', 15, TRUE),
-('venturebeat-ai', 'VentureBeat AI', 'https://venturebeat.com/ai/feed/', 'ai', 'high', 15, TRUE),
+('venturebeat-ai', 'VentureBeat AI', 'https://venturebeat.com/category/ai/feed/', 'ai', 'high', 15, TRUE),
 ('the-verge-ai', 'The Verge AI', 'https://www.theverge.com/ai-artificial-intelligence/rss/index.xml', 'ai', 'high', 10, TRUE),
 ('wired-ai', 'Wired AI', 'https://www.wired.com/feed/tag/ai/latest/rss', 'ai', 'high', 10, TRUE),
 ('ars-technica', 'Ars Technica Tech', 'https://feeds.arstechnica.com/arstechnica/technology-lab', 'tech', 'medium', 8, TRUE),

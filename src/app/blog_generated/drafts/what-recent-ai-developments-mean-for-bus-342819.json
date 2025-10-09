@@ -51,7 +51,7 @@
     "topic": "What Recent AI Developments Mean for Business Leaders",
     "type": "analysis",
     "style": "analytical",
-    "outline": {
+    "outline-solid": {
       "hook": "While 78% of organizations embraced AI by last year, the real question is: Are they truly reaping the benefits or merely following a high-tech trend?",
       "thesis": "Despite widespread adoption, the true impact of AI in business hinges not just on integration, but on strategic deployment and overcoming inherent limitations.",
       "sections": [

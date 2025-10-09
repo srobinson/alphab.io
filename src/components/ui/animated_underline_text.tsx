@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import type React from "react";
 import { cn } from "@/lib/utils";
 
@@ -21,6 +21,19 @@ export const PREDEFINED_UNDERLINE_PATHS = {
   subtleWave: "M2 3 C 20 1, 40 5, 60 3 S 80 1, 98 3", // More dynamic, good for longer words
   slightCurveUp: "M2 2 Q50 4, 98 2", // Gentle curve upwards
 };
+
+export const createLetterPulseVariants = (baseDelay: number, pulseScale = 1.3): Variants => ({
+  initial: { scale: 1, letterSpacing: "normal" },
+  pulse: (i: number) => ({
+    scale: [1, pulseScale, 1],
+    letterSpacing: ["normal", "2px", "normal"],
+    transition: {
+      delay: baseDelay + i * 0.08,
+      duration: 0.4,
+      ease: "circOut",
+    },
+  }),
+});
 
 export function AnimatedUnderlineText({
   children,

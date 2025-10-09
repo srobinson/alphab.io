@@ -53,7 +53,7 @@
     "topic": "The Emerging AI Trend Nobody's Talking About",
     "type": "analysis",
     "style": "analytical",
-    "outline": {
+    "outline-solid": {
       "hook": "Is the future of AI smaller, smarter, and more sovereign than we thought?",
       "thesis": "The shift towards localized, energy-efficient AI models isn't just a trend; it's the blueprint for sustainable and competitive AI development in the next decade.",
       "sections": [

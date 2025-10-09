@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button";
 import { getAllBlogSlugs, getBlogPost } from "@/lib/blog";
 import { ShareButtons } from "./share-buttons";
 
-export const revalidate = 3600; // 1 hour
-
 export async function generateStaticParams() {
   const slugs = await getAllBlogSlugs();
   return slugs.map((slug) => ({ slug }));
 }
+
+export const dynamicParams = false;
 
 export async function generateMetadata({
   params,
@@ -112,36 +112,30 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           __html: JSON.stringify(articleStructuredData),
         }}
       />
-      <article className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-black dark:to-gray-950 text-gray-900 dark:text-white transition-colors duration-300">
-        {/* Decorative gradient overlay */}
-        <div className="fixed inset-0 pointer-events-none opacity-30 dark:opacity-20">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 dark:bg-purple-500/5 rounded-full blur-3xl" />
-        </div>
+      {/* Fix this to top nav before it disappears under the main nav */}
 
-        {/* Navigation */}
-        <nav className="relative container mx-auto px-6 py-8 max-w-5xl">
+      <div className="fixed top-[64px] z-10 bg-black/99 shadow-2xl left-0 right-0 border-b border-gray-200 dark:border-gray-800">
+        <nav className="px-6 py-4 mx-auto max-w-7xl">
           <Link
             href="/blog"
-            className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-all hover:gap-3 gap-2 group"
+            className="flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-all hover:gap-3 gap-2 group"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             <span className="font-medium">Back to Blog</span>
           </Link>
         </nav>
+      </div>
+      <article className="relative blog-background top-[55px] min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-black dark:to-gray-950 text-gray-900 dark:text-white transition-colors duration-300">
+        {/* Decorative gradient overlay */}
 
         {/* Article Container - Header + Content as one block */}
-        <div className="relative container mx-auto px-6 pb-12 max-w-5xl">
-          <div className="relative bg-white dark:bg-gray-900/50 rounded-3xl shadow-2xl shadow-gray-200/50 dark:shadow-gray-950/50 border border-gray-200/50 dark:border-gray-800/50 backdrop-blur-sm overflow-hidden">
-            {/* Decorative corner accents */}
-            <div className="absolute top-0 left-0 w-24 h-24 border-t-2 border-l-2 border-blue-500/20 dark:border-blue-400/20 rounded-tl-3xl" />
-            <div className="absolute bottom-0 right-0 w-24 h-24 border-b-2 border-r-2 border-purple-500/20 dark:border-purple-400/20 rounded-br-3xl" />
-
+        <div className="relative mx-1 sm:container sm:mx-auto sm:px-6 sm:pb-12 sm:max-w-7xl">
+          <div className="relative bg-whitedark:bg-black/50 shadow-2xl shadow-gray-200/50 dark:shadow-gray-950/50 border border-gray-200/50 dark:border-gray-800/50 backdrop-blur-xs overflow-hidden">
             {/* Header Section with gradient background */}
-            <header className="relative bg-gradient-to-br from-blue-50/50 via-purple-50/30 to-transparent dark:from-blue-950/20 dark:via-purple-950/10 dark:to-transparent p-8 md:p-12">
+            <header className="relative bg-linear-to-br from-blue-50/50 via-purple-50/30 to-transparent dark:from-blue-950/20 dark:via-purple-950/10 dark:to-transparent p-8 md:p-12">
               <div className="relative z-10">
                 <div className="flex flex-wrap items-center gap-3 mb-6">
-                  <span className="px-4 py-1.5 bg-gradient-to-r from-blue-600 to-blue-500 dark:from-blue-500 dark:to-blue-400 text-white text-sm font-bold rounded-full shadow-lg shadow-blue-500/25">
+                  <span className="px-4 py-1.5 bg-linear-to-r from-blue-600 to-blue-500 dark:from-blue-500 dark:to-blue-400 text-white text-sm font-bold shadow-lg shadow-blue-500/25">
                     {post.category}
                   </span>
                   <div className="flex items-center text-gray-600 dark:text-gray-400 text-sm font-medium">
@@ -158,7 +152,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   </div>
                 </div>
 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white leading-tight mb-6 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-100 dark:to-white bg-clip-text text-transparent">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 dark:text-white leading-tight mb-6 bg-linear-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-100 dark:to-white bg-clip-text">
                   {post.title}
                 </h1>
 
@@ -168,7 +162,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t border-gray-300/50 dark:border-gray-700/50">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                    <div className="w-10 h-10 rounded-full bg-linear-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-lg">
                       {post.author.charAt(0)}
                     </div>
                     <div>
@@ -189,7 +183,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </header>
 
             {/* Article Content - seamlessly connected */}
-            <main className="relative p-8 md:p-12 lg:px-16 lg:py-12">
+            <main className="blog-content relative sm:p-2 ">
               <div
                 className="prose prose-lg dark:prose-invert max-w-none
 								prose-headings:font-bold prose-headings:tracking-tight
@@ -214,14 +208,14 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               {post.tags.length > 0 && (
                 <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800">
                   <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                    <span className="w-1 h-5 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full" />
+                    <span className="w-1 h-5 bg-linear-to-b from-blue-500 to-purple-500 rounded-full" />
                     Related Topics
                   </h3>
                   <div className="flex flex-wrap gap-2.5">
                     {post.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-4 py-2 bg-gradient-to-br from-gray-100 to-gray-50 dark:from-gray-800 dark:to-gray-850 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-full border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 transition-colors shadow-sm"
+                        className="px-4 py-2 bg-linear-to-br from-gray-100 to-gray-50 dark:from-gray-800 dark:to-gray-850 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-full border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 transition-colors shadow-xs"
                       >
                         #{tag}
                       </span>
@@ -235,7 +229,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         {/* Related Posts CTA */}
         <section className="relative container mx-auto px-6 py-16 max-w-4xl">
-          <div className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-purple-600 dark:from-blue-700 dark:via-blue-600 dark:to-purple-700 rounded-3xl p-8 md:p-12 shadow-2xl shadow-blue-500/25 dark:shadow-blue-950/50 overflow-hidden">
+          <div className="relative bg-linear-to-br from-blue-600 via-blue-500 to-purple-600 dark:from-blue-700 dark:via-blue-600 dark:to-purple-700 rounded-3xl p-8 md:p-12 shadow-2xl shadow-blue-500/25 dark:shadow-blue-950/50 overflow-hidden">
             {/* Decorative elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl" />

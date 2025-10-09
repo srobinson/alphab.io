@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function BlogPostLoading() {
   return (
-    <article className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-black dark:to-gray-950">
+    <article className="min-h-screen bg-linear-to-br from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-black dark:to-gray-950">
       {/* Navigation */}
       <nav className="relative container mx-auto px-6 py-8 max-w-5xl">
         <div className="flex items-center gap-2">
@@ -13,9 +13,9 @@ export default function BlogPostLoading() {
 
       {/* Article Container */}
       <div className="relative container mx-auto px-6 pb-12 max-w-5xl">
-        <div className="relative bg-white dark:bg-gray-900/50 rounded-3xl shadow-2xl shadow-gray-200/50 dark:shadow-gray-950/50 border border-gray-200/50 dark:border-gray-800/50 backdrop-blur-sm overflow-hidden">
+        <div className="relative bg-whitedark:bg-black/50 rounded-3xl shadow-2xl shadow-gray-200/50 dark:shadow-gray-950/50 border border-gray-200/50 dark:border-gray-800/50 backdrop-blur-xs overflow-hidden">
           {/* Header Section */}
-          <header className="relative bg-gradient-to-br from-blue-50/50 via-purple-50/30 to-transparent dark:from-blue-950/20 dark:via-purple-950/10 dark:to-transparent p-8 md:p-12">
+          <header className="relative bg-linear-to-br from-blue-50/50 via-purple-50/30 to-transparent dark:from-blue-950/20 dark:via-purple-950/10 dark:to-transparent p-8 md:p-12">
             <div className="relative z-10">
               <div className="flex flex-wrap items-center gap-3 mb-6">
                 <Skeleton className="h-7 w-20" />
@@ -88,7 +88,7 @@ export default function BlogPostLoading() {
 
       {/* Related Posts CTA */}
       <section className="relative container mx-auto px-6 py-16 max-w-4xl">
-        <div className="relative bg-gradient-to-br from-blue-600 via-blue-500 to-purple-600 dark:from-blue-700 dark:via-blue-600 dark:to-purple-700 rounded-3xl p-8 md:p-12 shadow-2xl shadow-blue-500/25 dark:shadow-blue-950/50 overflow-hidden">
+        <div className="relative bg-linear-to-br from-blue-600 via-blue-500 to-purple-600 dark:from-blue-700 dark:via-blue-600 dark:to-purple-700 rounded-3xl p-8 md:p-12 shadow-2xl shadow-blue-500/25 dark:shadow-blue-950/50 overflow-hidden">
           <Skeleton className="h-10 w-80 mx-auto mb-4" />
           <Skeleton className="h-6 w-full max-w-2xl mx-auto mb-8" />
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

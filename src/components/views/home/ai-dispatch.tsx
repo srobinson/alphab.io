@@ -108,13 +108,13 @@ export function AiDispatch({
 
   return (
     <motion.div
-      className="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 backdrop-blur-md mt-8 md:mt-20 border border-blue-400/30 rounded-2xl md:rounded-3xl p-6 md:p-12 lg:p-16 xl:p-20 shadow-2xl shadow-blue-500/25 w-full max-w-7xl mx-auto overflow-hidden relative"
+      className="bg-linear-to-br from-slate-900 via-blue-900 to-slate-900 backdrop-blur-md mt-8 md:mt-20 border border-blue-400/30 rounded-2xl md:rounded-3xl p-6 md:p-12 lg:p-16 xl:p-20 shadow-2xl shadow-blue-500/25 w-full max-w-7xl mx-auto overflow-hidden relative"
       initial={{ opacity: 0, y: 30, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-cyan-500/5 pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-br from-blue-500/5 via-transparent to-cyan-500/5 pointer-events-none" />
       <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -158,7 +158,7 @@ export function AiDispatch({
       {/* Main Headline */}
       <motion.h1
         ref={headlineRef}
-        className="relative z-10 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-cyan-200 mb-8 md:mb-16 leading-tight tracking-tight drop-shadow-2xl"
+        className="relative z-10 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-linear-to-r from-white via-blue-200 to-cyan-200 mb-8 md:mb-16 leading-tight tracking-tight drop-shadow-2xl"
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -181,15 +181,15 @@ export function AiDispatch({
               transition={{ duration: 0.6, delay: index * 0.2 }}
               viewport={{ once: true, amount: 0.3 }}
             >
-              <div className="relative p-6 md:p-8 lg:p-10 bg-gradient-to-r from-slate-800/90 via-blue-900/30 to-slate-800/90 backdrop-blur-sm rounded-xl md:rounded-2xl border border-blue-400/20 shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:border-blue-400/40 overflow-hidden">
+              <div className="relative p-6 md:p-8 lg:p-10 bg-linear-to-r from-slate-800/90 via-blue-900/30 to-slate-800/90 backdrop-blur-xs rounded-xl md:rounded-2xl border border-blue-400/20 shadow-xl hover:shadow-blue-500/30 transition-all duration-300 hover:border-blue-400/40 overflow-hidden">
                 {/* Card Background Effects */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-cyan-500/5 pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-r from-blue-500/5 via-transparent to-cyan-500/5 pointer-events-none" />
                 <div className="absolute top-0 right-0 w-32 h-32 bg-blue-400/10 rounded-full blur-2xl pointer-events-none" />
 
                 <div className="relative z-10 flex items-start gap-4 md:gap-6">
                   {IconComponent && (
                     <motion.div
-                      className="flex-shrink-0 p-3 md:p-4 bg-gradient-to-br from-blue-500 via-blue-600 to-cyan-600 rounded-xl shadow-xl"
+                      className="shrink-0 p-3 md:p-4 bg-linear-to-br from-blue-500 via-blue-600 to-cyan-600 rounded-xl shadow-xl"
                       initial={{ opacity: 0, x: -10 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.5, delay: index * 0.2 + 0.1 }}
@@ -199,10 +199,10 @@ export function AiDispatch({
                     </motion.div>
                   )}
 
-                  <div className="flex-grow space-y-3 md:space-y-4">
+                  <div className="grow space-y-3 md:space-y-4">
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                       <motion.h2
-                        className="text-xl md:text-2xl lg:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-cyan-200 leading-tight"
+                        className="text-xl md:text-2xl lg:text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-white via-blue-200 to-cyan-200 leading-tight"
                         initial={{ opacity: 0, x: -10 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.5, delay: index * 0.2 + 0.1 }}
@@ -212,7 +212,7 @@ export function AiDispatch({
                       </motion.h2>
                       {briefing.category && (
                         <motion.span
-                          className="inline-block px-3 py-1 text-xs md:text-sm font-bold text-blue-900 bg-gradient-to-r from-blue-200 to-cyan-200 rounded-full uppercase tracking-wider shadow-lg flex-shrink-0"
+                          className="inline-block px-3 py-1 text-xs md:text-sm font-bold text-blue-900 bg-linear-to-r from-blue-200 to-cyan-200 rounded-full uppercase tracking-wider shadow-lg shrink-0"
                           initial={{ opacity: 0 }}
                           whileInView={{ opacity: 1 }}
                           transition={{

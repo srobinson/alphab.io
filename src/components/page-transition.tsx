@@ -88,7 +88,7 @@ export default function PageTransition({ children }: PageTransitionProps) {
       <motion.div key={pathname} style={{ perspective: 1000 }} className="relative">
         {/* Transition overlay */}
         <motion.div
-          className="fixed inset-0 z-50 bg-gradient-to-br from-black via-gray-900 to-black"
+          className="fixed inset-0 z-50 bg-linear-to-br from-black via-gray-900 to-black"
           variants={overlayVariants}
           initial="initial"
           animate="animate"

@@ -4,11 +4,13 @@ import Script from "next/script";
 import type React from "react";
 import { SkipNav } from "@/components/accessibility/skip-nav";
 import { GoogleAnalytics } from "@/components/analytics/google-analytics";
-import { Header } from "@/components/layout/header";
+import { ContactDrawer } from "@/components/contact/contact-drawer";
+import { ConditionalHeader } from "@/components/layout/conditional-header";
 import { ThemeProvider } from "@/components/theme-provider"; // Make sure this path is correct
 import ScrollToTop from "@/components/utils/scroll-to-top";
+import { ContactDrawerProvider } from "@/contexts/contact-drawer-context";
 import "@/styles/globals.css";
-import { Gradient1 } from "@/components";
+import "@/styles/blog-background.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,11 +21,11 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: {
-    default: "AlphaB - AI Solutions & Innovation | Custom AI Development",
+    default: "AlphaB - AI Services & Innovation",
     template: "%s | AlphaB",
   },
   description:
-    "AlphaB delivers expert AI solutions and consulting services through RADE, our flagship AI consulting practice. Transform your business with ethical AI solutions, strategic implementation, and cutting-edge technologies.",
+    "Transform your business with cutting-edge AI services and innovation. Access comprehensive AI consulting, custom model development, implementation services, and our Tech Accelerator for rapid prototyping and development.",
   keywords: [
     "AlphaB",
     "AI consulting",
@@ -56,9 +58,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://alphab.io",
     siteName: "AlphaB",
-    title: "AlphaB - AI Solutions & Innovation | Custom AI Development",
+    title: "AlphaB - AI Services & Innovation",
     description:
-      "AlphaB delivers expert AI solutions and consulting services. Transform your business with ethical AI solutions and strategic implementation through our RADE practice.",
+      "Transform your business with cutting-edge AI services and innovation. Access comprehensive AI consulting, custom model development, implementation services, and our Tech Accelerator.",
     images: [
       {
         url: "/images/og-image.jpg",
@@ -70,9 +72,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AlphaB - AI Solutions & Innovation",
+    title: "AlphaB - AI Services & Innovation",
     description:
-      "AlphaB delivers expert AI solutions and consulting services. Transform your business with ethical AI solutions.",
+      "Transform your business with cutting-edge AI services and innovation. Access comprehensive AI consulting, custom model development, implementation services, and our Tech Accelerator.",
     images: ["/images/twitter-image.jpg"],
     creator: "@alphab_io",
   },
@@ -220,12 +222,15 @@ export default async function RootLayout({
           <GoogleAnalytics measurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID} />
         )}
         {/* Animated background pattern */}
-        <Gradient1 />
+        {/* <Gradient1 /> */}
         <SkipNav />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <ScrollToTop />
-          <Header />
-          <main id="main-content">{children}</main>
+          <ContactDrawerProvider>
+            <ScrollToTop />
+            <ConditionalHeader />
+            <main id="main-content">{children}</main>
+            <ContactDrawer />
+          </ContactDrawerProvider>
         </ThemeProvider>
       </body>
     </html>

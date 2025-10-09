@@ -43,7 +43,7 @@
     "topic": "Early analysis of emerging chatbot trend",
     "type": "future-forecasts",
     "style": "analytical",
-    "outline": {
+    "outline-solid": {
       "hook": "While many hail chatbots as the future of interaction, are we ignoring the critical gaps that could undermine their potential?",
       "thesis": "Despite the rapid advancements in AI chatbots, significant challenges in context handling and emotional engagement continue to limit their practical application across industries.",
       "sections": [

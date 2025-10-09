@@ -18,7 +18,7 @@ export function ExternalLink({ href, children, className = "", ...props }: Exter
       {...props}
     >
       {children}
-      <ExternalLinkIcon className="h-3 w-3 ml-0.5 flex-shrink-0" />
+      <ExternalLinkIcon className="h-3 w-3 ml-0.5 shrink-0" />
     </a>
   );
 }

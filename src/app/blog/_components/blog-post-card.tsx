@@ -34,7 +34,8 @@ export function BlogPostCard({ post, index = 0, variant = "featured" }: BlogPost
     return (
       <motion.article
         key={post.slug}
-        className="group bg-card/50 backdrop-blur-sm p-8 rounded-xl shadow-lg border border-cyber-border transition-all duration-200 hover:shadow-xl dark:hover:shadow-neon-blue/20 hover:scale-[1.02]"
+        // relative h-72 sm:h-80 border border-white/10 bg-black/50 backdrop-blur-xs group-hover:border-white/30 transition-all duration-500 overflow-hidden
+        className="group backdrop-blur-xs p-8 rounded-s shadow-lg border border-cyber-border"
         initial="hidden"
         whileInView="visible"
         variants={cardVariants}
@@ -42,7 +43,7 @@ export function BlogPostCard({ post, index = 0, variant = "featured" }: BlogPost
         transition={{ delay: index * 0.1 }}
       >
         <div className="flex items-center gap-4 mb-4">
-          <span className="px-3 py-1 bg-neon-blue/10 text-neon-blue border border-neon-blue/20 text-sm font-semibold rounded-full">
+          <span className="uppercase px-3 py-1 bg-neon-blue/10 text-neon-yellow border border-neon-blue/20 text-sm font-semibold">
             {post.category}
           </span>
           <div className="flex items-center text-muted-foreground text-sm">
@@ -54,13 +55,13 @@ export function BlogPostCard({ post, index = 0, variant = "featured" }: BlogPost
             {post.readTime || "-"}
           </div>
         </div>
-        <h3 className="text-2xl font-bold text-foreground mb-3 group-hover:text-neon-blue transition-colors">
+        <h3 className="uppercase text-2xl sm:text-3xl font-extrabold text-foreground mb-3 group-hover:text-neon-yellow transition-colors">
           <Link href={`/blog/${post.slug}`}>{post.title}</Link>
         </h3>
-        <p className="text-muted-foreground mb-4 leading-relaxed">{post.description}</p>
+        <p className="text-2xl text-muted-foreground mb-4 leading-relaxed">{post.description}</p>
         <Link
           href={`/blog/${post.slug}`}
-          className="inline-flex items-center text-neon-blue font-semibold hover:text-neon-cyan transition-colors"
+          className="inline-flex items-center text-neon-pink font-semibold hover:text-neon-cyan transition-colors"
         >
           Read More
           <ArrowRight className="ml-2 w-4 h-4" />
@@ -72,7 +73,7 @@ export function BlogPostCard({ post, index = 0, variant = "featured" }: BlogPost
   return (
     <motion.article
       key={post.slug}
-      className="group bg-card/50 backdrop-blur-sm p-6 rounded-lg border border-cyber-border transition-all duration-200 hover:shadow-lg dark:hover:shadow-neon-blue/10 hover:border-neon-blue/50"
+      className="group backdrop-blur-xs p-6 rounded-s border border-cyber-border transition-all duration-200 hover:shadow-lg dark:hover:shadow-neon-blue/10 hover:border-neon-blue/50"
       initial="hidden"
       whileInView="visible"
       variants={cardVariants}
@@ -82,7 +83,7 @@ export function BlogPostCard({ post, index = 0, variant = "featured" }: BlogPost
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex-1">
           <div className="flex items-center gap-4 mb-2">
-            <span className="px-2 py-1 bg-neon-blue/10 text-neon-blue border border-neon-blue/20 text-xs font-semibold rounded">
+            <span className="uppercase px-2 py-1 bg-neon-blue/10 text-neon-blue border border-neon-blue/20 text-xs font-semibold">
               {post.category}
             </span>
             <div className="flex items-center text-muted-foreground text-sm">
@@ -94,18 +95,13 @@ export function BlogPostCard({ post, index = 0, variant = "featured" }: BlogPost
               {post.readTime || "-"}
             </div>
           </div>
-          <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-neon-blue transition-colors">
-            <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+          <h3 className="uppercase text-2xl sm:text-3xl font-extrabold text-foreground mb-2 transition-colors">
+            <Link className="hover:text-neon-yellow" href={`/blog/${post.slug}`}>
+              {post.title}
+            </Link>
           </h3>
-          <p className="text-muted-foreground">{post.description}</p>
+          <p className="text-2xl text-muted-foreground">{post.description}</p>
         </div>
-        <Link
-          href={`/blog/${post.slug}`}
-          className="inline-flex items-center text-neon-blue font-semibold hover:text-neon-cyan transition-colors whitespace-nowrap"
-        >
-          Read More
-          <ArrowRight className="ml-2 w-4 h-4" />
-        </Link>
       </div>
     </motion.article>
   );

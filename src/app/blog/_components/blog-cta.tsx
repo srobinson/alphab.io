@@ -2,8 +2,9 @@
 
 import { motion, type Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { Gradient2 } from "@/components";
 import { Button } from "@/components/ui/button";
+import { useContactDrawer } from "@/contexts/contact-drawer-context";
 
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -11,23 +12,33 @@ const sectionVariants: Variants = {
 };
 
 export function BlogCTA() {
+  const { openContactDrawer } = useContactDrawer();
+
   return (
     <motion.section
-      className="container mx-auto px-6 py-16 text-center max-w-4xl"
+      className="relative blog-background p-6 py-28 text-center"
       initial="hidden"
       whileInView="visible"
       variants={sectionVariants}
       viewport={{ once: true, amount: 0.2 }}
     >
+      <Gradient2 />
       <motion.div
-        className="bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink rounded-2xl p-8 text-white shadow-2xl shadow-neon-blue/30"
+        className="absolute inset-1"
+        initial={{ opacity: 1, scale: 0.95 }}
+        whileInView={{ opacity: 0.75, scale: 1 }}
+        transition={{ duration: 0.25, delay: 0.2 }}
+        viewport={{ once: true }}
+      ></motion.div>
+      <motion.div
+        className="relative inset-1 p-2 text-white"
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.25, delay: 0.2 }}
         viewport={{ once: true }}
       >
         <motion.h2
-          className="text-3xl font-black mb-4"
+          className="text-4xl md:text-5xl lg:text-6xl font-black text-neon-yellow mb-12 tracking-tight leading-none uppercase"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.25, delay: 0.15 }}
@@ -35,32 +46,36 @@ export function BlogCTA() {
         >
           Stay Ahead of the AI Curve
         </motion.h2>
-        <motion.p
-          className="text-xl mb-6 opacity-90"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.25, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          Get daily AI insights delivered to your inbox. Join thousands of AI professionals staying
-          informed.
-        </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.25, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <Button
-            size="lg"
-            className="bg-black/80 text-white border-2 border-white/20 hover:bg-black hover:border-white/40 backdrop-blur-sm font-bold px-8 py-3 transition-all duration-300 hover:scale-105 hover:shadow-xl"
-            asChild
+          <a
+            href="/contact"
+            onClick={(e) => {
+              e.preventDefault();
+              openContactDrawer({ mode: "newsletter", source: "blog_cta" });
+            }}
           >
-            <Link href="/contact">
+            <Button
+              size="lg"
+              className="bg-black/80 uppercase text-white border-2 border-white/20 hover:bg-black hover:border-white/40 backdrop-blur-xs font-bold transition-all duration-300 hover:scale-105 hover:shadow-xl px-20 py-8"
+            >
               Subscribe Now
               <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
+            </Button>
+          </a>
+        </motion.div>
+        <motion.div
+          className="text-xl m-12 opacity-90"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          <p>Get daily AI insights delivered to your inbox</p>
         </motion.div>
       </motion.div>
     </motion.section>

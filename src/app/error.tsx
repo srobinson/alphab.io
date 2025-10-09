@@ -16,7 +16,7 @@ export default function AppError({ error, reset }: ErrorProps) {
   }, [error]);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-50dark:bg-black flex items-center justify-center p-4">
       <div className="max-w-md w-full">
         <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg p-8 text-center">
           <div className="w-16 h-16 bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -35,7 +35,7 @@ export default function AppError({ error, reset }: ErrorProps) {
           <div className="space-y-3">
             <Button
               onClick={reset}
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white"
+              className="w-full bg-linear-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white"
             >
               Try Again
             </Button>

@@ -9,7 +9,7 @@ const PUBLIC_CONTENT_DIR = path.join(__dirname, "../../public/content/blog");
 
 class BlogPublisher {
   constructor() {
-    this.draftsPath = path.join(__dirname, "../../app/blog_generated/drafts");
+    this.draftsPath = path.join(__dirname, "../../src/app/blog_generated/drafts");
     this.contentPath = CONTENT_DIR;
     this.publicContentPath = PUBLIC_CONTENT_DIR;
   }

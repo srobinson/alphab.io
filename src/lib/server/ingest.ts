@@ -81,7 +81,19 @@ export async function fetchMetadata(url: string): Promise<PageMeta> {
     const res = await fetch(url, {
       method: "GET",
       redirect: "follow",
-      headers: { "User-Agent": "alphab-ingest/1.0" },
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+        "Accept-Encoding": "gzip, deflate, br",
+        Connection: "keep-alive",
+        "Upgrade-Insecure-Requests": "1",
+        "Sec-Fetch-Dest": "document",
+        "Sec-Fetch-Mode": "navigate",
+        "Sec-Fetch-Site": "none",
+        "Cache-Control": "max-age=0",
+      },
     });
     if (!res.ok) throw new Error(`status ${res.status}`);
     html = await res.text();
@@ -137,6 +149,25 @@ export type IngestResult = {
   reason?: string;
 };
 
+class RateLimiter {
+  private lastRequest = new Map<string, number>();
+  private minDelay = 2000; // 2 seconds between requests to same domain
+
+  async throttle(url: string): Promise<void> {
+    const domain = new URL(url).hostname;
+    const last = this.lastRequest.get(domain) || 0;
+    const elapsed = Date.now() - last;
+
+    if (elapsed < this.minDelay) {
+      const wait = this.minDelay - elapsed;
+      console.log(`[rate-limit] Waiting ${wait}ms for ${domain}`);
+      await new Promise((resolve) => setTimeout(resolve, wait));
+    }
+
+    this.lastRequest.set(domain, Date.now());
+  }
+}
+
 /**
  * Ingest a single URL into Supabase `articles` table.
  */
@@ -158,7 +189,11 @@ export async function ingestUrl(input: IngestInput, sb: SupabaseClient): Promise
   }
   const exists = Boolean(existing?.id);
 
+  const rateLimiter = new RateLimiter();
+
+  await rateLimiter.throttle(url);
   const meta = await fetchMetadata(url);
+
   // Basic quality gate
   if (!meta.title || meta.title.length < 5) {
     return { id: null, upserted: false, reason: "low_quality_title" };

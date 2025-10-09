@@ -134,6 +134,8 @@ export class ContentSyncService {
       // Fetch RSS feed
       const fetchResult: FetchResult = await this.rssParser.fetchFromSource(source);
 
+      console.log(fetchResult);
+
       if (!fetchResult.success) {
         return {
           sourceId: source.id,
@@ -158,7 +160,7 @@ export class ContentSyncService {
       const itemsToProcess = relevantItems.slice(0, maxItems);
 
       monitor.info(`Processing items from ${source.name}`, {
-        source_id: source.id,
+        source_id: source,
         total_items: fetchResult.items.length,
         relevant_items: itemsToProcess.length,
         filtered_out: fetchResult.items.length - itemsToProcess.length,
@@ -167,6 +169,8 @@ export class ContentSyncService {
       // Ingest items into database
       let ingestedCount = 0;
       for (const item of itemsToProcess) {
+        console.log(item.link);
+
         try {
           // Handle image URL based on disableImages flag
           let imageUrl: string | undefined;

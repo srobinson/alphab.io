@@ -19,12 +19,12 @@ export default function HeroReveal() {
     <div className="relative pt-10 Xmin-h-screen Xoverflow-hidden flex items-center justify-center">
       {/* Subtle Background - Lower z-index so clock shows through */}
       {/* <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-gradient-to-br from-gray-950/30 via-black/20 to-gray-900/30" />
+                <div className="absolute inset-0 bg-linear-to-br from-gray-950/30 via-black/20 to-gray-900/30" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.05),transparent_50%)]" />
             </div> */}
 
       {/* Very Subtle Grid Pattern - Lower opacity */}
-      <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(255,255,255,0.005)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.005)_1px,transparent_1px)] bg-[size:100px_100px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+      <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(255,255,255,0.005)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.005)_1px,transparent_1px)] bg-size-[100px_100px] mask-[radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
       {/* Main Content - Higher z-index, vertically aligned top */}
       <div className="relative z-20 text-center px-6 max-w-7xl mx-auto -mt-2 md:-mt-2">
@@ -45,7 +45,7 @@ export default function HeroReveal() {
             }}
             aria-label="AI: The Time is Now - RADE AI Solutions"
           >
-            <span className="bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-red-500 via-orange-500 to-yellow-500 bg-clip-text text-transparent">
               AI:
             </span>
           </h1>
@@ -87,7 +87,7 @@ export default function HeroReveal() {
                 letterSpacing: "-0.02em",
               }}
             >
-              <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent">
                 Today
               </span>
             </div>
@@ -96,7 +96,7 @@ export default function HeroReveal() {
 
         {/* Elegant Divider - Simultaneous */}
         <div
-          className={`w-24 h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent mx-auto mb-8 transition-all duration-600 ${
+          className={`w-24 h-px bg-linear-to-r from-transparent via-blue-400 to-transparent mx-auto mb-8 transition-all duration-600 ${
             isVisible ? "opacity-60 scale-x-100" : "opacity-0 scale-x-0"
           }`}
         />
@@ -110,7 +110,7 @@ export default function HeroReveal() {
           <Button
             asChild
             size="lg"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 border-0 focus:ring-4 focus:ring-blue-500/50 focus:outline-none"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 border-0 focus:ring-4 focus:ring-blue-500/50 focus:outline-hidden"
             style={{
               fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
               fontWeight: 600,
@@ -145,8 +145,8 @@ export default function HeroReveal() {
       </div>
 
       {/* Very Subtle Ambient Effects - Lower z-index */}
-      <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 w-[40rem] h-[40rem] bg-blue-500/3 rounded-full blur-3xl z-0" />
-      <div className="absolute bottom-1/4 right-1/4 w-[30rem] h-[30rem] bg-purple-500/3 rounded-full blur-3xl z-0" />
+      <div className="absolute top-1/4 left-1/2 transform -translate-x-1/2 w-160 h-160 bg-blue-500/3 rounded-full blur-3xl z-0" />
+      <div className="absolute bottom-1/4 right-1/4 w-120 h-120 bg-purple-500/3 rounded-full blur-3xl z-0" />
     </div>
   );
 }

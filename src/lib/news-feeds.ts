@@ -106,7 +106,7 @@ export const rssFeedSources = [
     category: "breaking" as const,
   },
   // {
-  //   url: "https://venturebeat.com/ai/feed/",
+  //   url: "https://venturebeat.com/category/ai/feed/",
   //   name: "VentureBeat AI",
   //   category: "insight" as const,
   // },
@@ -218,7 +218,8 @@ export async function fetchNewsAPI(query: string, pageSize = 10): Promise<NewsIt
 
     const response = await fetch(url, {
       headers: {
-        "User-Agent": "RADE-AI-News-Aggregator/1.0",
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
       },
       next: { revalidate: 1800 }, // Cache for 30 minutes
     });
@@ -290,7 +291,8 @@ export async function fetchGNewsAPI(query: string, max = 10): Promise<NewsItem[]
 
     const response = await fetch(url, {
       headers: {
-        "User-Agent": "RADE-AI-News-Aggregator/1.0",
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
       },
       next: { revalidate: 1800 }, // Cache for 30 minutes
     });

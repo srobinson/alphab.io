@@ -70,7 +70,11 @@ export interface BlogIndex {
 
 const CONTENT_DIR = path.join(process.cwd(), "content/blog");
 
-// Cached data fetching functions for React Server Components
+/**
+ * Fetches the blog index from the index.json file.
+ * This function is cached using React's cache() wrapper for build-time deduplication.
+ * Used by generateStaticParams() to pre-render all blog pages at build time.
+ */
 export const getBlogIndex = cache(async (): Promise<BlogIndex> => {
   try {
     const indexPath = path.join(CONTENT_DIR, "index.json");
@@ -109,6 +113,14 @@ export const getBlogIndex = cache(async (): Promise<BlogIndex> => {
   }
 });
 
+/**
+ * Fetches a single blog post by slug from MDX and meta.json files.
+ * This function is cached using React's cache() wrapper for build-time deduplication.
+ * Called during static generation to render blog detail pages.
+ *
+ * @param slug - The blog post slug (filename without extension)
+ * @returns The blog post data with rendered HTML content, or null if not found
+ */
 export const getBlogPost = cache(async (slug: string): Promise<BlogPost | null> => {
   const mdxPath = path.join(CONTENT_DIR, `${slug}.mdx`);
   const metaPath = path.join(CONTENT_DIR, `${slug}.meta.json`);
@@ -184,6 +196,11 @@ export const getBlogPost = cache(async (slug: string): Promise<BlogPost | null> 
   };
 });
 
+/**
+ * Returns all blog post slugs from the index.json file.
+ * Used by generateStaticParams() in /src/app/blog/[slug]/page.tsx to determine
+ * which blog pages to pre-render at build time.
+ */
 export const getAllBlogSlugs = cache(async (): Promise<string[]> => {
   try {
     const { posts } = await getBlogIndex();

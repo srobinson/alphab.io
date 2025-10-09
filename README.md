@@ -36,12 +36,21 @@ AlphaB delivers expert AI solutions and consulting services through RADE, our fl
 - **Shared utilities in /lib** directory
 - **src/ directory** for clean separation of code and config
 
+## 🏗️ Blog Architecture
+
+- **Fully Static Generation**: Blog pages are pre-rendered at build time with no server-side rendering
+- **No ISR/Revalidation**: Blog content is static until next deployment - no runtime revalidation
+- **Static Generation**: All blog posts generated during `next build` via `generateStaticParams()`
+- **Pre-build Script**: Blog index regenerated before each build via `generate-blog-index.js`
+- **Post-build Validation**: `validate-blog-build.ts` ensures all pages generated correctly
+- **Build-time Only**: No dynamic blog content updates without deployment
+
 ## 📡 Data Fetching
 
-- Server-side data fetching with React cache()
-- ISR with revalidation times (5 min for blog index, 1 hour for posts)
-- API routes with cache headers
-- generateStaticParams for static generation
+- **Blog Pages**: Static generation with `force-static` and `generateStaticParams()` (no ISR)
+- **API Routes**: Dynamic rendering for forms, subscriptions, and admin functionality
+- **Data Fetching**: React `cache()` for request deduplication in dynamic routes
+- **Cache Headers**: Configured for API routes and dynamic content
 
 ## ⚡ Performance Optimizations
 
@@ -62,10 +71,13 @@ AlphaB delivers expert AI solutions and consulting services through RADE, our fl
 ## 📋 Available Scripts
 
 - `pnpm dev` - Start development server
-- `pnpm build` - Build for production
+- `pnpm build` - Build for production (runs pre-build and post-build scripts)
+- `pnpm postbuild` - Run post-build validation (validate-blog-build.ts)
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint
 - `pnpm type-check` - Run TypeScript type checking
+- `pnpm blog:index` - Manually regenerate blog index from MDX files
+- `pnpm validate:build` - Validate that all blog pages were generated correctly
 
 ## 🔧 Configuration
 
@@ -84,13 +96,25 @@ AlphaB delivers expert AI solutions and consulting services through RADE, our fl
 - **Loading States**: Skeleton loaders for better UX
 - **Responsive Design**: Mobile-first approach
 
+## 🔄 Hybrid Static/Dynamic Architecture
+
+- **Static Blog Pages**: `/blog` and `/blog/[slug]` are fully pre-rendered at build time
+- **Dynamic API Routes**: `/api/*` routes remain server-side for forms and subscriptions
+- **Dynamic Admin Pages**: `/admin/*` routes remain server-side for authentication and data access
+- **Static Hosting Benefits**: Blog pages served as HTML for faster loads and better SEO
+- **Server Functionality Preserved**: Contact forms, newsletter, and admin features still work
+- **Cost Optimization**: Reduced server costs while maintaining essential dynamic features
+
 ## 🚀 Deployment
 
-The application is optimized for deployment on Vercel with:
-- Automatic static optimization
-- ISR for dynamic content
-- API route optimization
-- Image optimization
+The application uses a hybrid static/dynamic architecture optimized for Vercel:
+
+- **Static Blog Pages**: Pre-rendered HTML served from CDN for optimal performance
+- **Dynamic API Routes**: Serverless functions for forms, subscriptions, and admin features
+- **Build Validation**: Post-build script ensures all blog pages generated correctly
+- **Cron Jobs**: Daily content sync runs via `/api/cron/content-sync` (6 AM UTC)
+- **Image Optimization**: Works for both static pages and dynamic routes
+- **Security Headers**: Applied to all routes for comprehensive protection
 
 ## 📖 Next.js 15 Best Practices Implemented
 

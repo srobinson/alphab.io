@@ -60,7 +60,8 @@ export class RSSParser {
     this.parser = new Parser<RawFeed, RawFeedItem>({
       timeout: 15000,
       headers: {
-        "User-Agent": "alphab.io-content-fetcher/1.0 (https://alphab.io)",
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
       },
       customFields: {
         item: [
@@ -334,19 +335,27 @@ export class RSSParser {
   }
 
   async fetchMultipleSources(sources: ContentSource[]): Promise<FetchResult[]> {
-    const promises = sources.map((source) => this.fetchFromSource(source));
-    return Promise.allSettled(promises).then((results) =>
-      results.map((result, index) =>
-        result.status === "fulfilled"
-          ? result.value
-          : {
-              source: sources[index]!,
-              items: [],
-              success: false,
-              error: "Promise rejected",
-              duration: 0,
-            }
-      )
-    );
+    const results: FetchResult[] = [];
+    for (const source of sources) {
+      try {
+        const result = await this.fetchFromSource(source);
+        results.push(result);
+      } catch (error) {
+        // The fetchFromSource already handles retries, so if it throws, it's a final failure.
+        // You might want to push a failed result here too.
+        const errorMessage = error instanceof Error ? error.message : "Unknown error";
+        console.error(`Final failure for source ${source.name}:`, errorMessage);
+        results.push({
+          source,
+          items: [],
+          success: false,
+          error: `Final failure: ${errorMessage}`,
+          duration: 0, // Or calculate time taken until final failure
+        });
+      }
+      // Add a delay between processing each *different* source
+      await new Promise((resolve) => setTimeout(resolve, 2000)); // e.g., 2 seconds delay
+    }
+    return results;
   }
 }

@@ -168,7 +168,7 @@ export function CreatorPillars() {
                   stiffness: 200,
                 },
               }}
-              className="group h-full space-y-4 p-5 bg-gray-50/70 dark:bg-gray-900/50 backdrop-blur-sm rounded-xl shadow-xl border border-gray-200/80 dark:border-gray-700/50 transition-all duration-300 ease-out hover:shadow-2xl dark:hover:shadow-blue-500/30 hover:border-blue-400 dark:hover:border-blue-500/70"
+              className="group h-full space-y-4 p-5 bg-gray-50/70dark:bg-black/50 backdrop-blur-xs rounded-xl shadow-xl border border-gray-200/80 dark:border-gray-700/50 transition-all duration-300 ease-out hover:shadow-2xl dark:hover:shadow-blue-500/30 hover:border-blue-400 dark:hover:border-blue-500/70"
               style={{ perspective: "1000px" }}
             >
               <motion.div

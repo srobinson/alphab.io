@@ -1,0 +1,20 @@
+<svg id="eRWPJuFV9Zk1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 600 600" shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
+  project-id="234acf8ae7d347ba87afb8b92f61bde7" export-id="62fbf4ca1724405c8d1f67dcc948c4ab" cached="false">
+  <defs>
+    <filter id="eRWPJuFV9Zk2-filter" x="-150%" y="-150%" width="400%" height="400%">
+      <feGaussianBlur id="eRWPJuFV9Zk2-filter-drop-shadow-0-blur" in="SourceAlpha" stdDeviation="2,2" />
+      <feOffset id="eRWPJuFV9Zk2-filter-drop-shadow-0-offset" dx="2" dy="2" result="tmp" />
+      <feFlood id="eRWPJuFV9Zk2-filter-drop-shadow-0-flood" flood-color="#000" />
+      <feComposite id="eRWPJuFV9Zk2-filter-drop-shadow-0-composite" operator="in" in2="tmp" />
+      <feMerge id="eRWPJuFV9Zk2-filter-drop-shadow-0-merge" result="result">
+        <feMergeNode id="eRWPJuFV9Zk2-filter-drop-shadow-0-merge-node-1" />
+        <feMergeNode id="eRWPJuFV9Zk2-filter-drop-shadow-0-merge-node-2" in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+  <g transform="matrix(1.299331 0 0 1.299331-63.824338-115.811614)" filter="url(#eRWPJuFV9Zk2-filter)">
+    <ellipse rx="180" ry="180" transform="translate(280.008982 320.019785)" fill="#fff" stroke="#000"
+      stroke-width="14" />
+  </g>
+</svg>

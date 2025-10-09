@@ -42,11 +42,11 @@ export const EmailSignup = () => {
 
   return (
     <div className="text-center max-w-4xl mx-auto">
-      <div className="border border-white/20 bg-black/50 backdrop-blur-sm p-6 sm:p-8 lg:p-12">
+      <div className="border border-white/20 bg-black/50 backdrop-blur-xs p-6 sm:p-8 lg:p-12">
         <Cpu className="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 text-yellow-400 mx-auto mb-6 sm:mb-8 animate-pulse" />
         <h3 className="text-xl sm:text-2xl lg:text-3xl font-black tracking-tighter mb-4 sm:mb-6">
           <span className="text-white">LAUNCHING</span>{" "}
-          <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
             SOON
           </span>
         </h3>
@@ -66,13 +66,13 @@ export const EmailSignup = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   required
-                  className="w-full px-4 py-3 bg-black/70 border border-green-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-green-400 focus:ring-2 focus:ring-green-400/20 text-sm sm:text-base"
+                  className="w-full px-4 py-3 bg-black/70 border border-green-500/30 rounded-lg text-white placeholder-gray-400 focus:outline-hidden focus:border-green-400 focus:ring-2 focus:ring-green-400/20 text-sm sm:text-base"
                 />
               </div>
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full px-6 sm:px-8 py-3 bg-gradient-to-r from-green-500 to-yellow-500 text-black font-bold rounded-lg hover:from-green-400 hover:to-yellow-400 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm sm:text-base"
+                className="w-full px-6 sm:px-8 py-3 bg-linear-to-r from-green-500 to-yellow-500 text-black font-bold rounded-lg hover:from-green-400 hover:to-yellow-400 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm sm:text-base"
               >
                 {isSubmitting ? (
                   <>
@@ -102,11 +102,11 @@ export const EmailSignup = () => {
         )}
 
         <div className="flex items-center justify-center space-x-2 sm:space-x-4 text-green-400">
-          <Zap className="w-4 h-4 sm:w-6 sm:h-6 flex-shrink-0" />
+          <Zap className="w-4 h-4 sm:w-6 sm:h-6 shrink-0" />
           <span className="text-xs sm:text-sm lg:text-lg tracking-wider text-center">
             UNPRECEDENTED DEVELOPMENT VELOCITY
           </span>
-          <Zap className="w-4 h-4 sm:w-6 sm:h-6 flex-shrink-0" />
+          <Zap className="w-4 h-4 sm:w-6 sm:h-6 shrink-0" />
         </div>
       </div>
     </div>

@@ -58,7 +58,7 @@
     "topic": "Anthropic and IBM announce strategic partnership",
     "type": "analysis",
     "style": "analytical",
-    "outline": {
+    "outline-solid": {
       "hook": "While the ink dries on IBM and Anthropic's groundbreaking partnership, the real question emerges: Is this the dawn of a new era in enterprise AI, or just another high-profile tech alliance?",
       "thesis": "The strategic partnership between IBM and Anthropic is set to redefine enterprise AI, focusing on security and governance to ensure robust, scalable solutions for large-scale business applications.",
       "sections": [

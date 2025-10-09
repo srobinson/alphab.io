@@ -2,6 +2,8 @@
 
 import { ArrowRight, CheckCircle, Circle, Mail, Star, Zap } from "lucide-react";
 import { useEffect, useState } from "react";
+import { CyberCard, GradientButton, StatusPill } from "@/components/ui";
+import { useContactDrawer } from "@/contexts/contact-drawer-context";
 
 const Index = () => {
   const [time, setTime] = useState(new Date());
@@ -10,6 +12,7 @@ const Index = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
+  const { openContactDrawer } = useContactDrawer();
 
   useEffect(() => {
     setMounted(true);
@@ -85,12 +88,12 @@ const Index = () => {
     <div className="min-h-screen bg-black text-white overflow-hidden relative">
       {/* Animated background pattern */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,0,150,0.1),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_48%,rgba(255,255,255,0.03)_49%,rgba(255,255,255,0.03)_51%,transparent_52%)] bg-[length:20px_20px] animate-pulse"></div>
+        <div className="absolute inset-0 bg-radial-gradient-pink"></div>
+        <div className="absolute inset-0 bg-grid-pattern animate-pulse"></div>
       </div>
 
       {/* Top bar with time */}
-      <div className="relative z-10 flex justify-between items-center p-6 border-b border-white/10">
+      <div className="relative z-10 flex justify-between items-center p-6 border-b border-white-10">
         <div className="flex items-center space-x-2">
           <Circle className="w-3 h-3 fill-red-500 text-red-500 animate-pulse" />
           <span className="text-xs tracking-widest text-gray-400">LIVE</span>
@@ -105,20 +108,16 @@ const Index = () => {
         <div className="text-center mb-16 w-full">
           <div className="relative overflow-hidden px-2 sm:px-4">
             <h1 className="text-[3.5rem] sm:text-[5rem] md:text-[8rem] lg:text-[12rem] xl:text-[16rem] font-black leading-none tracking-tighter whitespace-nowrap">
-              <span className="block bg-gradient-to-r from-white via-gray-300 to-white bg-clip-text text-transparent">
-                ALPHAB
-              </span>
+              <span className="block gradient-text-white-gray">ALPHAB</span>
             </h1>
             <div className="absolute inset-0 text-[3.5rem] sm:text-[5rem] md:text-[8rem] lg:text-[12rem] xl:text-[16rem] font-black leading-none tracking-tighter whitespace-nowrap px-2 sm:px-4">
-              <span className="block text-transparent bg-gradient-to-r from-red-500 via-pink-500 to-yellow-500 bg-clip-text opacity-30 blur-sm">
-                ALPHAB
-              </span>
+              <span className="block gradient-text-red-pink-yellow opacity-30 blur-xs">ALPHAB</span>
             </div>
           </div>
 
           <div className="mt-6 sm:mt-8 mb-4">
-            <div className="inline-block border border-white/20 rounded-full px-4 sm:px-6 py-2 backdrop-blur-sm">
-              <span className="text-xs sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] text-gray-300 font-light">
+            <div className="inline-block border border-white-20 rounded-full px-4 sm:px-6 py-2 backdrop-blur-xs">
+              <span className="text-xs sm:text-sm text-cyber-subtitle text-gray-300">
                 INNOVATION AT THE SPEED OF THOUGHT
               </span>
             </div>
@@ -126,13 +125,9 @@ const Index = () => {
 
           <h2 className="text-xl sm:text-2xl md:text-4xl font-bold tracking-wider mb-6 sm:mb-8 px-4 sm:px-0">
             <span className="text-white">INTERESTING!</span>{" "}
-            <span className="bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent">
-              LINKS
-            </span>{" "}
+            <span className="gradient-text-red-pink">LINKS</span>{" "}
             <span className="text-white">&</span>{" "}
-            <span className="bg-gradient-to-r from-yellow-400 to-red-400 bg-clip-text text-transparent">
-              EXPERIMENTS
-            </span>
+            <span className="gradient-text-yellow-red">EXPERIMENTS</span>
           </h2>
         </div>
 
@@ -149,31 +144,23 @@ const Index = () => {
             >
               {/* Status indicator */}
               <div className="absolute top-4 right-4 z-20">
-                <div
-                  className={`text-xs px-2 py-1 rounded-full border ${
-                    link.accent === "red"
-                      ? "border-red-500/50 text-red-400"
-                      : link.accent === "blue"
-                        ? "border-blue-500/50 text-blue-400"
-                        : "border-green-500/50 text-green-400"
-                  }`}
-                >
+                <StatusPill variant={link.accent as "red" | "blue" | "green"}>
                   {link.status}
-                </div>
+                </StatusPill>
               </div>
 
               {/* Main card */}
-              <div className="relative h-72 sm:h-80 border border-white/10 bg-black/50 backdrop-blur-sm group-hover:border-white/30 transition-all duration-500 overflow-hidden">
-                {/* Background gradient */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-br ${link.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}
-                ></div>
-
+              <CyberCard
+                variant={link.accent as "red" | "blue" | "green"}
+                hover
+                scanLine
+                className="h-72 sm:h-80"
+              >
                 {/* Content */}
                 <div className="relative p-4 sm:p-6 lg:p-8 h-full flex flex-col justify-between">
                   <div>
                     <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">{link.emoji}</div>
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-black tracking-tighter mb-3 sm:mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-white group-hover:to-gray-400 transition-all duration-300">
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-black tracking-tighter mb-3 sm:mb-4 group-hover-gradient-text-white-gray-400 transition-all duration-300">
                       {link.title}
                     </h3>
                     <p className="text-gray-400 text-xs sm:text-sm tracking-wide leading-relaxed">
@@ -199,10 +186,7 @@ const Index = () => {
                     <ArrowRight className="w-6 h-6 text-white group-hover:translate-x-2 transition-transform duration-300" />
                   </div>
                 </div>
-
-                {/* Scan line effect */}
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent h-20 w-full opacity-0 group-hover:opacity-100 group-hover:animate-pulse transition-opacity duration-500"></div>
-              </div>
+              </CyberCard>
             </a>
           ))}
         </div>
@@ -211,9 +195,9 @@ const Index = () => {
         {/*
                 <div className="mt-16 sm:mt-24 lg:mt-32 w-full max-w-6xl px-4 sm:px-0">
                     <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 blur-3xl"></div>
+                        <div className="absolute inset-0 bg-linear-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 blur-3xl"></div>
 
-                        <div className="relative border border-white/10 bg-black/50 backdrop-blur-sm p-6 sm:p-8 lg:p-12 xl:p-16">
+                        <div className="relative border border-white/10 bg-black/50 backdrop-blur-xs p-6 sm:p-8 lg:p-12 xl:p-16">
                             <div className="text-center mb-8 sm:mb-12">
                                 <div className="inline-flex items-center space-x-2 sm:space-x-3 mb-4 sm:mb-6">
                                     <User className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400" />
@@ -221,7 +205,7 @@ const Index = () => {
                                     <User className="w-6 h-6 sm:w-8 sm:h-8 text-blue-400" />
                                 </div>
                                 <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-black tracking-tighter mb-4 sm:mb-6">
-                                    <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                                    <span className="bg-linear-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                                         AI
                                     </span>{' '}
                                     <span className="text-white">PLAYGROUND</span>
@@ -250,22 +234,22 @@ const Index = () => {
 
                                 <div className="space-y-4 sm:space-y-6">
                                     <div className="grid gap-3 sm:gap-4">
-                                        <div className="flex items-start space-x-3 sm:space-x-4 p-3 sm:p-4 border border-white/10 bg-gradient-to-r from-blue-500/5 to-transparent">
-                                            <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400 mt-1 flex-shrink-0" />
+                                        <div className="flex items-start space-x-3 sm:space-x-4 p-3 sm:p-4 border border-white/10 bg-linear-to-r from-blue-500/5 to-transparent">
+                                            <Lightbulb className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400 mt-1 shrink-0" />
                                             <div>
                                                 <h3 className="text-white font-semibold mb-1 text-sm sm:text-base">Play First</h3>
 								<p className="text-gray-400 text-xs sm:text-sm">Making AI tools so fun you&rsquo;ll forget you&rsquo;re working</p>
                                             </div>
                                         </div>
-                                        <div className="flex items-start space-x-3 sm:space-x-4 p-3 sm:p-4 border border-white/10 bg-gradient-to-r from-purple-500/5 to-transparent">
-                                            <Rocket className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400 mt-1 flex-shrink-0" />
+                                        <div className="flex items-start space-x-3 sm:space-x-4 p-3 sm:p-4 border border-white/10 bg-linear-to-r from-purple-500/5 to-transparent">
+                                            <Rocket className="w-5 h-5 sm:w-6 sm:h-6 text-purple-400 mt-1 shrink-0" />
                                             <div>
                                                 <h3 className="text-white font-semibold mb-1 text-sm sm:text-base">Rapid Experimentation</h3>
                                                 <p className="text-gray-400 text-xs sm:text-sm">From wild idea to working prototype in record time</p>
                                             </div>
                                         </div>
-                                        <div className="flex items-start space-x-3 sm:space-x-4 p-3 sm:p-4 border border-white/10 bg-gradient-to-r from-pink-500/5 to-transparent">
-                                            <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-pink-400 mt-1 flex-shrink-0" />
+                                        <div className="flex items-start space-x-3 sm:space-x-4 p-3 sm:p-4 border border-white/10 bg-linear-to-r from-pink-500/5 to-transparent">
+                                            <Zap className="w-5 h-5 sm:w-6 sm:h-6 text-pink-400 mt-1 shrink-0" />
                                             <div>
                                                 <h3 className="text-white font-semibold mb-1 text-sm sm:text-base">Always Entertaining</h3>
                                                 <p className="text-gray-400 text-xs sm:text-sm">Because the best AI toys are the ones that surprise you</p>
@@ -283,9 +267,9 @@ const Index = () => {
         <div className="mt-16 sm:mt-24 lg:mt-32 w-full max-w-6xl px-4 sm:px-0">
           <div className="relative">
             {/* Background glow */}
-            <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 via-yellow-500/10 to-pink-500/10 blur-3xl"></div>
+            <div className="absolute inset-0 bg-linear-to-r from-red-500/10 via-yellow-500/10 to-pink-500/10 blur-3xl"></div>
 
-            <div className="relative border border-white/10 bg-black/50 backdrop-blur-sm p-6 sm:p-8 lg:p-12 text-center">
+            <div className="relative cyber-card p-6 sm:p-8 lg:p-12 text-center">
               <div className="mb-6 sm:mb-8">
                 <div className="inline-flex items-center space-x-2 sm:space-x-3 mb-4 sm:mb-6">
                   <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400" />
@@ -296,9 +280,7 @@ const Index = () => {
                 </div>
                 <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black tracking-tighter mb-3 sm:mb-4">
                   <span className="text-white">JOIN THE</span>{" "}
-                  <span className="bg-gradient-to-r from-yellow-400 via-red-400 to-pink-400 bg-clip-text text-transparent">
-                    INNOVATION
-                  </span>{" "}
+                  <span className="gradient-text-yellow-red-pink">INNOVATION</span>{" "}
                   <span className="text-white">JOURNEY</span>
                 </h2>
                 <p className="text-gray-400 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto px-4 sm:px-0">
@@ -316,15 +298,17 @@ const Index = () => {
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email"
                       required
-                      className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-black/50 border border-white/20 text-white placeholder-gray-400 focus:border-yellow-400 focus:outline-none transition-colors text-sm sm:text-base"
+                      className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-black/50 border border-white-20 text-white placeholder-gray-400 focus:border-yellow-400 focus:outline-hidden transition-colors text-sm sm:text-base"
                     />
-                    <button
+                    <GradientButton
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-yellow-500 to-red-500 text-black font-bold tracking-wider hover:from-yellow-400 hover:to-red-400 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
+                      variant="yellow-red"
+                      size="lg"
+                      className="w-full"
                     >
                       {isSubmitting ? "JOINING..." : "JOIN NOW"}
-                    </button>
+                    </GradientButton>
                   </div>
                   {error && <p className="text-red-400 text-xs sm:text-sm mt-3 sm:mt-4">{error}</p>}
                 </form>
@@ -344,31 +328,41 @@ const Index = () => {
           </div>
         </div>
 
+        {/* Contact CTA */}
+        <div className="mt-16 text-center">
+          <div className="mb-6">
+            <p className="text-gray-400 text-sm mb-4">Have a project in mind?</p>
+            <GradientButton
+              variant="blue"
+              size="lg"
+              onClick={() => openContactDrawer({ mode: "contact", source: "landing_page_cta" })}
+              className="px-12 py-4"
+            >
+              LET'S TALK
+            </GradientButton>
+          </div>
+        </div>
+
         {/* Bottom CTA */}
         <div className="mt-20 text-center">
           <a
             href="https://rade.alphab.io"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative overflow-hidden border border-white/20 px-12 py-4 bg-black/50 backdrop-blur-sm hover:border-white/40 transition-all duration-300 inline-block"
+            className="transition-all duration-300"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 via-pink-500/20 to-yellow-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <div className="relative flex items-center space-x-3">
-              <Zap className="w-5 h-5 text-yellow-400" />
-              <span className="text-lg tracking-wider font-medium">
-                EXPLORE AI CONSULTING SERVICES
-              </span>
-              <Zap className="w-5 h-5 text-yellow-400" />
-            </div>
+            <CyberCard variant="red" hover className="px-12 py-4 inline-block">
+              <div className="relative flex items-center space-x-3">
+                <Zap className="w-5 h-5 text-yellow-400" />
+                <span className="text-lg tracking-wider font-medium">
+                  EXPLORE AI CONSULTING SERVICES
+                </span>
+                <Zap className="w-5 h-5 text-yellow-400" />
+              </div>
+            </CyberCard>
           </a>
         </div>
       </div>
-
-      {/* Corner decorations */}
-      <div className="absolute top-0 left-0 w-32 h-32 border-l-2 border-t-2 border-white/10"></div>
-      <div className="absolute top-0 right-0 w-32 h-32 border-r-2 border-t-2 border-white/10"></div>
-      <div className="absolute bottom-0 left-0 w-32 h-32 border-l-2 border-b-2 border-white/10"></div>
-      <div className="absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 border-white/10"></div>
     </div>
   );
 };

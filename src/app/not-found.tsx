@@ -1,13 +1,17 @@
+"use client";
+
 import { BookOpen, Briefcase, FileQuestion, Home, Mail } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { useContactDrawer } from "@/contexts/contact-drawer-context";
 
 export default function NotFound() {
+  const { openContactDrawer } = useContactDrawer();
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-50dark:bg-black flex items-center justify-center p-4">
       <div className="max-w-2xl w-full">
         <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg p-12 text-center">
-          <div className="w-20 h-20 bg-gradient-to-r from-blue-600 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-8">
+          <div className="w-20 h-20 bg-linear-to-r from-blue-600 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-8">
             <FileQuestion className="w-10 h-10 text-white" />
           </div>
 
@@ -53,15 +57,14 @@ export default function NotFound() {
               </Button>
             </Link>
 
-            <Link href="/contact">
-              <Button
-                variant="outline"
-                className="w-full h-16 flex flex-col items-center justify-center space-y-2 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-              >
-                <Mail className="w-5 h-5" />
-                <span className="text-sm">Contact</span>
-              </Button>
-            </Link>
+            <Button
+              variant="outline"
+              className="w-full h-16 flex flex-col items-center justify-center space-y-2 hover:bg-blue-50 dark:hover:bg-blue-900/20"
+              onClick={() => openContactDrawer({ mode: "contact", source: "not_found_page" })}
+            >
+              <Mail className="w-5 h-5" />
+              <span className="text-sm">Contact</span>
+            </Button>
           </div>
 
           <div className="text-sm text-gray-500 dark:text-gray-400">
