@@ -188,6 +188,7 @@ show_next_steps() {
   echo ""
   echo "For production deployment:"
   echo "1. Set your Supabase project reference: export SUPABASE_PROJECT_REF=your-project-ref"
+  # shellcheck disable=SC2016
   echo '2. Link to your project: supabase link --project-ref $SUPABASE_PROJECT_REF'
   echo "3. Push to production: supabase db push"
 }

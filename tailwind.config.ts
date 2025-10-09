@@ -3,11 +3,9 @@ import type { Config } from "tailwindcss";
 const config = {
   darkMode: ["class"], // Essential for next-themes
   content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-    "*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   prefix: "",
   theme: {
@@ -53,11 +51,40 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        cyber: {
+          border: "hsl(var(--cyber-border) / var(--cyber-border-opacity))",
+          glow: "hsl(var(--cyber-glow))",
+        },
+        neon: {
+          red: "hsl(var(--neon-red))",
+          pink: "hsl(var(--neon-pink))",
+          yellow: "hsl(var(--neon-yellow))",
+          blue: "hsl(var(--neon-blue))",
+          purple: "hsl(var(--neon-purple))",
+          cyan: "hsl(var(--neon-cyan))",
+          green: "hsl(var(--neon-green))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      fontFamily: {
+        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+      },
+      backgroundImage: {
+        "neon-gradient-1":
+          "linear-gradient(to right, hsl(var(--neon-red)), hsl(var(--neon-pink)), hsl(var(--neon-yellow)))",
+        "neon-gradient-2":
+          "linear-gradient(to right, hsl(var(--neon-blue)), hsl(var(--neon-purple)), hsl(var(--neon-pink)))",
+        "neon-gradient-3":
+          "linear-gradient(to right, hsl(var(--neon-green)), hsl(var(--neon-cyan)), hsl(var(--neon-blue)))",
+        "cyber-radial":
+          "radial-gradient(circle at 50% 50%, hsl(var(--neon-pink) / 0.1), transparent 50%)",
+      },
+      backdropBlur: {
+        cyber: "12px",
       },
       keyframes: {
         "accordion-down": {

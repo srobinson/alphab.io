@@ -7,9 +7,9 @@
 //   pnpm content status - Show system status
 //   pnpm content cache - Update industry moves cache
 
-import { RSSParser } from "../lib/content/rss-parser";
-import { CONTENT_SOURCES, getActiveSourcesByPriority } from "../lib/content/sources";
-import { ContentSyncService } from "../lib/content/sync-service";
+import { RSSParser } from "../src/lib/content/rss-parser";
+import { CONTENT_SOURCES, getActiveSourcesByPriority } from "../src/lib/content/sources";
+import { ContentSyncService } from "../src/lib/content/sync-service";
 
 type Command = "sync" | "test" | "status" | "cache" | "help";
 

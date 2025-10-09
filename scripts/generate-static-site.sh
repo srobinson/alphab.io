@@ -12,7 +12,6 @@ SITE_URL="https://alphab.io"
 GA_MEASUREMENT_ID="${GA_MEASUREMENT_ID:-G-XXXXXXXXXX}"
 
 # Colors for output
-RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
@@ -281,11 +280,11 @@ body {
     .nav-links {
         display: none;
     }
-    
+
     .hero {
         padding: 6rem 0 3rem;
     }
-    
+
     .pillars-grid {
         grid-template-columns: 1fr;
     }
@@ -323,11 +322,11 @@ cat > $OUTPUT_DIR/js/main.js << EOF
 function initTheme() {
     const themeToggle = document.getElementById('theme-toggle');
     const html = document.documentElement;
-    
+
     // Check for saved theme or default to light
     const savedTheme = localStorage.getItem('theme') || 'light';
     html.classList.toggle('dark', savedTheme === 'dark');
-    
+
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
             const isDark = html.classList.contains('dark');
@@ -361,7 +360,7 @@ function initAnalytics() {
         script1.async = true;
         script1.src = 'https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}';
         document.head.appendChild(script1);
-        
+
         const script2 = document.createElement('script');
         script2.innerHTML = \`
             window.dataLayer = window.dataLayer || [];
@@ -370,7 +369,7 @@ function initAnalytics() {
             gtag('config', '${GA_MEASUREMENT_ID}');
         \`;
         document.head.appendChild(script2);
-        
+
         // Make gtag available globally
         window.gtag = function(){dataLayer.push(arguments);};
     }
@@ -392,7 +391,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initTheme();
     initSmoothScroll();
     initAnalytics();
-    
+
     // Add click tracking to CTA buttons
     document.querySelectorAll('.cta-button').forEach(button => {
         button.addEventListener('click', () => {
@@ -414,31 +413,31 @@ cat > $OUTPUT_DIR/index.html << EOF
     <title>${SITE_NAME} | AI Solutions & Consulting</title>
     <meta name="description" content="Expert AI consulting and custom AI development services. Transform your business with ethical AI solutions, strategic implementation, and cutting-edge AI technologies.">
     <meta name="keywords" content="AI consulting, AI solutions, custom AI development, AI strategy, AI implementation, machine learning consulting">
-    
+
     <!-- Open Graph -->
     <meta property="og:title" content="${SITE_NAME} - AI Solutions & Consulting">
     <meta property="og:description" content="Expert AI consulting and custom AI development services. Transform your business with ethical AI solutions.">
     <meta property="og:url" content="${SITE_URL}">
     <meta property="og:type" content="website">
     <meta property="og:image" content="${SITE_URL}/images/og-image.jpg">
-    
+
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${SITE_NAME} - AI Solutions & Consulting">
     <meta name="twitter:description" content="Expert AI consulting and custom AI development services.">
     <meta name="twitter:image" content="${SITE_URL}/images/twitter-image.jpg">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/placeholder-logo.svg">
-    
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-    
+
     <!-- Styles -->
     <link rel="stylesheet" href="/css/styles.css">
-    
+
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -492,7 +491,7 @@ cat > $OUTPUT_DIR/index.html << EOF
         <div class="container">
             <h2 class="section-title">AI Landscape Intelligence</h2>
             <p class="section-subtitle">Navigating AI complexity so you don't have to</p>
-            
+
             <div class="pillars-grid">
                 <div class="pillar-card animate-fade-in-up">
                     <div class="pillar-header">
@@ -503,7 +502,7 @@ cat > $OUTPUT_DIR/index.html << EOF
                         Daily testing and evaluation of new AI tools, separating signal from noise in the rapidly evolving landscape.
                     </p>
                 </div>
-                
+
                 <div class="pillar-card animate-fade-in-up">
                     <div class="pillar-header">
                         <div class="pillar-icon">📊</div>
@@ -513,7 +512,7 @@ cat > $OUTPUT_DIR/index.html << EOF
                         Monitoring AI developments, funding rounds, and strategic moves to identify trends before they become mainstream.
                     </p>
                 </div>
-                
+
                 <div class="pillar-card animate-fade-in-up">
                     <div class="pillar-header">
                         <div class="pillar-icon">💡</div>
@@ -523,7 +522,7 @@ cat > $OUTPUT_DIR/index.html << EOF
                         Distilling complex AI trends into practical takeaways that creators and businesses can immediately implement.
                     </p>
                 </div>
-                
+
                 <div class="pillar-card animate-fade-in-up">
                     <div class="pillar-header">
                         <div class="pillar-icon">⚡</div>
@@ -533,7 +532,7 @@ cat > $OUTPUT_DIR/index.html << EOF
                         Real-world testing of AI integrations and workflows to validate effectiveness before recommending to clients.
                     </p>
                 </div>
-                
+
                 <div class="pillar-card animate-fade-in-up">
                     <div class="pillar-header">
                         <div class="pillar-icon">🎯</div>
@@ -543,7 +542,7 @@ cat > $OUTPUT_DIR/index.html << EOF
                         Bridging the gap between AI potential and practical reality with strategic guidance and implementation support.
                     </p>
                 </div>
-                
+
                 <div class="pillar-card animate-fade-in-up">
                     <div class="pillar-header">
                         <div class="pillar-icon">🌐</div>
@@ -605,7 +604,7 @@ cat > $OUTPUT_DIR/services/index.html << EOF
             <div class="container">
                 <h1 class="section-title">Our Services</h1>
                 <p class="section-subtitle">Comprehensive AI solutions for modern businesses</p>
-                
+
                 <div class="pillars-grid">
                     <div class="pillar-card">
                         <div class="pillar-header">
@@ -616,7 +615,7 @@ cat > $OUTPUT_DIR/services/index.html << EOF
                             Develop clear, actionable AI roadmaps aligned with your business goals and market opportunities.
                         </p>
                     </div>
-                    
+
                     <div class="pillar-card">
                         <div class="pillar-header">
                             <div class="pillar-icon">🔧</div>
@@ -626,7 +625,7 @@ cat > $OUTPUT_DIR/services/index.html << EOF
                             Bespoke AI models and solutions tailored to your unique data, challenges, and requirements.
                         </p>
                     </div>
-                    
+
                     <div class="pillar-card">
                         <div class="pillar-header">
                             <div class="pillar-icon">⚡</div>

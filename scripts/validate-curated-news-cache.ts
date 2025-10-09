@@ -2,17 +2,21 @@
 
 import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
-
 import { createClient } from "@supabase/supabase-js";
+import { GET } from "../src/app/api/curated-news/route";
 
-import { GET } from "../app/api/curated-news/route";
-
-type ArticleRow = {
+type CuratedNewsItem = {
   id: string;
-  title: string;
-  image_url: string | null;
-  published_at: string | null;
-  created_at?: string | null;
+  category: string;
+  text: string;
+  description: string;
+  time: string;
+  timestamp: string;
+  source: string;
+  link: string;
+  image: string;
+  isRSS: boolean;
+  trending: boolean;
 };
 
 function loadEnvExports(file = ".env.local") {
@@ -28,7 +32,7 @@ function loadEnvExports(file = ".env.local") {
     if (!match) continue;
 
     const [, key, rawValue] = match;
-    if (!key) continue;
+    if (!key || !rawValue) continue;
 
     let value = rawValue.trim();
     if (
@@ -63,7 +67,7 @@ const supabaseAdmin = createClient(supabaseUrl, serviceRoleKey, {
 async function findRecentArticlesWithoutImages(limit = 10) {
   const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
   const { data, error } = await supabaseAdmin
-    .from<ArticleRow>("articles")
+    .from("articles")
     .select("id,title,image_url,published_at,created_at")
     .is("image_url", null)
     .gte("published_at", since)
@@ -85,7 +89,7 @@ async function refreshIndustryMoves(pages: number[], pageSize: number) {
 
     const response = await GET(new Request(url.toString()));
     const payload = await response.json();
-    const withImages = payload.items.filter((item: any) => Boolean(item.image));
+    const withImages = payload.items.filter((item: CuratedNewsItem) => Boolean(item.image));
     console.log(
       `Fetched page ${page} (limit ${pageSize}) → ${withImages.length}/${payload.items.length} items already returned an image`
     );
@@ -114,7 +118,7 @@ async function main() {
 
   const refreshedIds = initial.map((article) => article.id);
   const { data: after, error } = await supabaseAdmin
-    .from<ArticleRow>("articles")
+    .from("articles")
     .select("id,image_url")
     .in("id", refreshedIds);
 

@@ -9,7 +9,7 @@
 //   OPENROUTER_API_KEY (for summaries)
 
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import { type IngestResult, ingestUrl } from "../lib/server/ingest";
+import { type IngestResult, ingestUrl } from "../src/lib/server/ingest";
 
 type Args = { _: string[]; flags: Record<string, string> };
 
@@ -18,14 +18,14 @@ function parseArgs(argv: string[]): Args {
   const positional: string[] = [];
   for (let i = 2; i < argv.length; i++) {
     const a = argv[i];
-    if (!a.startsWith("--")) {
-      positional.push(a);
+    if (!a || !a.startsWith("--")) {
+      if (a) positional.push(a);
       continue;
     }
     const [k, v] = a.includes("=")
       ? a.slice(2).split("=")
-      : [a.slice(2), argv[i + 1] && !argv[i + 1].startsWith("--") ? argv[++i] : "true"];
-    flags[k] = v;
+      : [a.slice(2), argv[i + 1] && !argv[i + 1]?.startsWith("--") ? argv[++i] : "true"];
+    if (k && v) flags[k] = v;
   }
   return { _: positional, flags };
 }
@@ -76,7 +76,16 @@ async function main() {
     "tags=",
     tags
   );
-  const res: IngestResult = await ingestUrl({ url, source, tags, doSummarize, doSaveContent }, sb);
+  const res: IngestResult = await ingestUrl(
+    {
+      url,
+      ...(source ? { source } : {}),
+      tags,
+      doSummarize,
+      doSaveContent,
+    },
+    sb
+  );
   console.log("← Result:", res);
 }
 

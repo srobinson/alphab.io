@@ -2,7 +2,7 @@
 // Test dynamic thumbnails
 // Usage: pnpm dlx tsx scripts/test-thumbnails.ts
 
-import { SimpleThumbnailService } from "../lib/content/simple-thumbnails";
+import * as SimpleThumbnailService from "../src/lib/content/simple-thumbnails";
 
 const sampleArticles = [
   {

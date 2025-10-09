@@ -10,7 +10,7 @@ echo ""
 
 # Load environment variables
 if [ -f .env.local ]; then
-  export $(cat .env.local | grep -v '^#' | grep -v '^export' | xargs)
+  export "$(cat .env.local | grep -v '^#' | grep -v '^export' | xargs)"
 fi
 
 if [ -z "$NEXT_PUBLIC_SUPABASE_URL" ] || [ -z "$SUPABASE_SERVICE_ROLE_KEY" ]; then
@@ -25,9 +25,6 @@ if [ ! -f "$MIGRATION_FILE" ]; then
   echo "❌ Error: Migration file not found: $MIGRATION_FILE"
   exit 1
 fi
-
-echo "📄 Reading migration file..."
-MIGRATION_SQL=$(cat "$MIGRATION_FILE")
 
 echo "📊 Current article count:"
 node -e "
@@ -70,10 +67,10 @@ echo "   (This will create optimized indexes)"
 # Apply migration using psql (if available)
 if command -v psql &> /dev/null; then
   # Extract connection details from Supabase URL
-  DB_HOST=$(echo $NEXT_PUBLIC_SUPABASE_URL | sed -E 's/https:\/\/([^.]+).*/\1.supabase.co/')
+  DB_HOST=$(echo "$NEXT_PUBLIC_SUPABASE_URL" | sed -E 's/https:\/\/([^.]+).*/\1.supabase.co/')
   DB_NAME="postgres"
   DB_USER="postgres"
-  
+
   echo ""
   echo "   Using psql to apply migration..."
   echo "   Host: $DB_HOST"
@@ -81,8 +78,8 @@ if command -v psql &> /dev/null; then
   echo "   You'll need the database password (not the API key)"
   echo "   Get it from: Supabase Dashboard > Settings > Database > Connection string"
   echo ""
-  
-  PGPASSWORD="" psql -h $DB_HOST -U $DB_USER -d $DB_NAME -f "$MIGRATION_FILE"
+
+  PGPASSWORD="" psql -h "$DB_HOST" -U "$DB_USER" -d "$DB_NAME" -f "$MIGRATION_FILE"
 else
   echo ""
   echo "❌ psql not found. Please apply the migration manually:"

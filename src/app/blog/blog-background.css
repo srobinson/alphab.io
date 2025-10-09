@@ -1,0 +1,35 @@
+.blog-background {
+  /* Light mode styling */
+  background-color: #fafafa;
+  background-image:
+    /* Subtle radial gradient overlay with low-opacity neon colors */
+    radial-gradient(circle at 30% 20%, hsl(var(--neon-pink) / 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 70% 80%, hsl(var(--neon-blue) / 0.05) 0%, transparent 50%),
+    /* Fine grid pattern with very low opacity borders */
+    linear-gradient(0deg, hsl(var(--cyber-border) / 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--cyber-border) / 0.1) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+}
+
+/* Dark mode styling */
+.dark .blog-background {
+  background-color: #000000;
+  background-image:
+    /* Radial gradient overlay with neon pink/purple at center */
+    radial-gradient(circle at 50% 50%, hsl(var(--neon-pink) / 0.1) 0%, transparent 70%),
+    /* Grid pattern with white borders at very low opacity */
+    linear-gradient(0deg, hsl(var(--cyber-border) / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--cyber-border) / 0.05) 1px, transparent 1px);
+  background-size: 100% 100%, 60px 60px, 60px 60px;
+  /* Optional animated pulse effect on the radial gradient */
+  animation: cyber-pulse 8s ease-in-out infinite;
+}
+
+@keyframes cyber-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}

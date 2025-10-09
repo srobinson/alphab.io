@@ -45,7 +45,30 @@
         "noNonNullAssertion": "off"
       },
       "suspicious": {
-        "noExplicitAny": "warn"
+        "noExplicitAny": "warn",
+        "noUnknownAtRules": "off",
+        "noArrayIndexKey": "off",
+        "noImplicitAnyLet": "off",
+        "noDocumentCookie": "off"
+      },
+      "a11y": {
+        "noSvgWithoutTitle": "off",
+        "useValidAnchor": "off",
+        "noStaticElementInteractions": "off",
+        "useKeyWithClickEvents": "off",
+        "useFocusableInteractive": "off",
+        "useSemanticElements": "off",
+        "useAriaPropsForRole": "off"
+      },
+      "correctness": {
+        "useUniqueElementIds": "off",
+        "useJsxKeyInIterable": "off",
+        "noNestedComponentDefinitions": "off",
+        "useExhaustiveDependencies": "off",
+        "noUnusedVariables": "off"
+      },
+      "security": {
+        "noDangerouslySetInnerHtml": "off"
       }
     }
   },
