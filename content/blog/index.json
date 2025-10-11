@@ -1,6 +1,33 @@
 {
   "posts": [
     {
+      "slug": "openai-sends-police-to-ai-advocates-door-ethics-debate-erupt",
+      "title": "OpenAI Sends Police to AI Advocate's Door: Ethics Debate Erupts",
+      "description": "OpenAI's controversial move to dispatch police to an AI regulation advocate's residence sparks debate about tech oversight, privacy, and the future of AI governance.",
+      "category": "Reality Check",
+      "date": "2025-10-11T00:00:00.000Z",
+      "publishedAt": "2025-10-11T12:41:09.021Z",
+      "readTime": "12 min read",
+      "tags": [
+        "OpenAI police incident",
+        "AI regulation advocacy",
+        "tech industry ethics",
+        "AI governance debate",
+        "OpenAI legal actions"
+      ],
+      "seoKeywords": [
+        "OpenAI police incident",
+        "AI regulation advocacy",
+        "tech industry ethics",
+        "AI governance debate",
+        "OpenAI legal actions",
+        "AI privacy concerns",
+        "tech surveillance ethics"
+      ],
+      "generated": true,
+      "wordCount": 2431
+    },
+    {
       "slug": "google-gemini-enterprise-reshapes-ai-powered-workplaces",
       "title": "Google Gemini Enterprise Reshapes AI-Powered Workplaces",
       "description": "Explore how Google's Gemini Enterprise is transforming workplace AI integration, its impact on business operations, and why 95% of organizations struggle with ROI.",
@@ -297,6 +324,6 @@
       "wordCount": 2631
     }
   ],
-  "lastUpdated": "2025-10-11T07:20:33.795Z",
-  "totalPosts": 11
+  "lastUpdated": "2025-10-11T12:41:13.081Z",
+  "totalPosts": 12
 }
