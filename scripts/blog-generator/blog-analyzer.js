@@ -679,6 +679,16 @@ class BlogAnalyzer {
   }
 
   displayAnalysisSummary(analysis) {
+    console.log("\n🏷️  AVAILABLE TAGS:");
+    console.log("   • reality-check         - Critical analysis, controversies, limitations");
+    console.log("   • technical-deep-dive   - Technical tutorials and deep dives");
+    console.log("   • business-impact       - Business and market analysis");
+    console.log("   • future-forecast       - Emerging trends and predictions");
+    console.log("   • product-analysis      - Product reviews and analysis");
+    console.log("   • industry-analysis     - Industry-specific content");
+    console.log("   • comparison            - Comparison posts (X vs Y)");
+    console.log("   • analysis              - General analysis posts");
+
     console.log("\n🎯 FRESH CONTENT OPPORTUNITIES (excluding existing posts):");
     if (analysis.opportunities.length === 0) {
       console.log("   No new opportunities found. Your existing posts cover current trends well!");

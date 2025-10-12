@@ -20,6 +20,7 @@
     "test-thumbnails": "tsx scripts/test-thumbnails.ts",
     "blog:analyze": "node scripts/blog-generator/blog-analyzer.js",
     "blog:generate": "node scripts/blog-generator/blog-generator.js",
+    "blog:custom": "node scripts/blog-generator/blog-from-outline.js",
     "blog:publish": "node scripts/blog-generator/blog-publisher.js",
     "blog:list": "node scripts/blog-generator/blog-publisher.js list",
     "blog:preview": "node scripts/blog-generator/blog-publisher.js preview",

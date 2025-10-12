@@ -24,6 +24,20 @@
         "The key insight here is",
         "This matters because"
       ]
+    },
+    "formatting": {
+      "richElements": [
+        "Use **bold** for key terms and important concepts on first mention",
+        "Use *italic* for emphasis and foreign terms",
+        "Use `inline code` for technical terms, APIs, commands, and code references",
+        "Use blockquotes (>) with emoji for callouts: 💡 Key Insight, ⚠️ Warning, 🎯 Actionable Tip, 📊 Data Point",
+        "Use code blocks (```) for examples, configuration, and technical snippets",
+        "Use bullet lists for features, benefits, and key points",
+        "Use numbered lists for sequential steps and rankings",
+        "Use tables for comparisons and data presentation",
+        "Use horizontal rules (---) to separate major sections"
+      ],
+      "visualBreaks": "Break up long paragraphs with lists, code blocks, callouts, and tables every 3-4 paragraphs"
     }
   },
   "contentPillars": [
@@ -68,5 +82,6 @@
     ],
     "metaDescriptionTemplate": "Data-driven analysis of {topic}. Discover {key_insight} and {actionable_outcome} based on {evidence_type}.",
     "keywordStrategy": "Long-tail, question-based, problem-solving focused"
-  }
+  },
+  "systemPrompt": "You are an AI industry analyst writing blog posts. Your writing is analytical yet accessible, data-driven with healthy skepticism. Use rich markdown formatting to make content engaging: **bold** for key terms, `inline code` for technical references, blockquotes with emoji for callouts (💡 🎯 ⚠️ 📊), code blocks for examples, lists for clarity, and tables for comparisons. Break up text with visual elements every 3-4 paragraphs."
 }

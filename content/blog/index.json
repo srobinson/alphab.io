@@ -1,6 +1,33 @@
 {
   "posts": [
     {
+      "slug": "ai-copyright-wars-a-developers-guide-to-legal-compliance",
+      "title": "AI Copyright Wars: A Developer's Guide to Legal Compliance",
+      "description": "Navigate the complex landscape of AI copyright laws, compliance challenges, and emerging opportunities in 2025. Essential insights for developers building AI solutions.",
+      "category": "Reality Check",
+      "date": "2025-10-12T00:00:00.000Z",
+      "publishedAt": "2025-10-12T10:46:20.533Z",
+      "readTime": "11 min read",
+      "tags": [
+        "AI copyright compliance",
+        "AI legal battles",
+        "developer copyright guidelines",
+        "AI rights management",
+        "intellectual property AI"
+      ],
+      "seoKeywords": [
+        "AI copyright compliance",
+        "AI legal battles",
+        "developer copyright guidelines",
+        "AI rights management",
+        "intellectual property AI",
+        "AI compliance solutions",
+        "copyright automation"
+      ],
+      "generated": true,
+      "wordCount": 2285
+    },
+    {
       "slug": "openai-sora-2-developers-guide-to-the-next-video-ai-frontier",
       "title": "OpenAI Sora 2: Developer's Guide to the Next Video AI Frontier",
       "description": "Explore Sora 2's groundbreaking AI video capabilities, ethical implications, and impact on content creation. Essential insights for developers navigating the future of AI.",
@@ -351,6 +378,6 @@
       "wordCount": 2631
     }
   ],
-  "lastUpdated": "2025-10-12T10:02:58.507Z",
-  "totalPosts": 13
+  "lastUpdated": "2025-10-12T10:49:12.572Z",
+  "totalPosts": 14
 }
