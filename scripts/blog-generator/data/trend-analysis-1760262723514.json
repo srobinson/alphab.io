@@ -1,0 +1,552 @@
+{
+  "timeframe": "7 days",
+  "articleCount": 180,
+  "generatedAt": "2025-10-12T09:52:03.514Z",
+  "topics": [
+    {
+      "topic": "openai",
+      "count": 47,
+      "percentage": "26.1"
+    },
+    {
+      "topic": "google",
+      "count": 34,
+      "percentage": "18.9"
+    },
+    {
+      "topic": "amazon",
+      "count": 24,
+      "percentage": "13.3"
+    },
+    {
+      "topic": "microsoft",
+      "count": 14,
+      "percentage": "7.8"
+    },
+    {
+      "topic": "gemini",
+      "count": 11,
+      "percentage": "6.1"
+    },
+    {
+      "topic": "anthropic",
+      "count": 10,
+      "percentage": "5.6"
+    },
+    {
+      "topic": "enterprise",
+      "count": 9,
+      "percentage": "5.0"
+    },
+    {
+      "topic": "claude",
+      "count": 5,
+      "percentage": "2.8"
+    },
+    {
+      "topic": "regulation",
+      "count": 4,
+      "percentage": "2.2"
+    },
+    {
+      "topic": "vision",
+      "count": 3,
+      "percentage": "1.7"
+    },
+    {
+      "topic": "policy",
+      "count": 2,
+      "percentage": "1.1"
+    },
+    {
+      "topic": "funding",
+      "count": 2,
+      "percentage": "1.1"
+    },
+    {
+      "topic": "gpt 5",
+      "count": 2,
+      "percentage": "1.1"
+    },
+    {
+      "topic": "bias",
+      "count": 2,
+      "percentage": "1.1"
+    },
+    {
+      "topic": "developer tools",
+      "count": 2,
+      "percentage": "1.1"
+    },
+    {
+      "topic": "valuation",
+      "count": 2,
+      "percentage": "1.1"
+    },
+    {
+      "topic": "series a",
+      "count": 2,
+      "percentage": "1.1"
+    },
+    {
+      "topic": "startup",
+      "count": 2,
+      "percentage": "1.1"
+    },
+    {
+      "topic": "chatbot",
+      "count": 2,
+      "percentage": "1.1"
+    },
+    {
+      "topic": "investment",
+      "count": 2,
+      "percentage": "1.1"
+    }
+  ],
+  "themes": [
+    {
+      "name": "Market Dynamics",
+      "keywords": ["funding", "investment", "competition", "market", "revenue", "growth"],
+      "description": "Business and market developments in AI",
+      "articleCount": 11,
+      "percentage": "6.1",
+      "sampleTitles": [
+        "OpenAI allegedly sent police to an AI regulation advocate’s door",
+        "The billion-dollar infrastructure deals powering the AI boom | TechCrunch",
+        "Prezent raises $30 million to acquire AI services firms -- starting with founder's other company | TechCrunch"
+      ]
+    },
+    {
+      "name": "Challenges & Limitations",
+      "keywords": ["challenge", "limitation", "problem", "issue", "concern"],
+      "description": "Problems and limitations in current AI",
+      "articleCount": 9,
+      "percentage": "5.0",
+      "sampleTitles": [
+        "The fixer's dilemma: Chris Lehane and OpenAI's impossible mission | TechCrunch",
+        "Former UK Prime Minister Rishi Sunak to advise Microsoft and Anthropic  | TechCrunch",
+        "Nothing Ear 3 review: work in progress"
+      ]
+    },
+    {
+      "name": "AI Capability Leap",
+      "keywords": ["breakthrough", "advancement", "capability", "performance", "benchmark"],
+      "description": "Major advances in AI capabilities or performance",
+      "articleCount": 7,
+      "percentage": "3.9",
+      "sampleTitles": [
+        "Gear News of the Week: Intel’s New Chips Arrive, and Apple May Debut iPads and MacBooks This Month",
+        "You can still get the latest AirPods Max at their Prime Day price",
+        "Intel unveils new processor powered by its 18A semiconductor tech  | TechCrunch"
+      ]
+    },
+    {
+      "name": "Practical Applications",
+      "keywords": ["implementation", "deployment", "use case", "application", "adoption"],
+      "description": "Real-world AI implementations and use cases",
+      "articleCount": 6,
+      "percentage": "3.3",
+      "sampleTitles": [
+        "While OpenAI races to build AI data centers, Nadella reminds us that Microsoft already has them | TechCrunch",
+        "Sora hit 1M downloads faster than ChatGPT | TechCrunch",
+        "Anthropic and IBM announce strategic partnership | TechCrunch"
+      ]
+    },
+    {
+      "name": "Industry Impact",
+      "keywords": ["industry", "sector", "transformation", "disruption", "change"],
+      "description": "How AI is affecting different industries",
+      "articleCount": 5,
+      "percentage": "2.8",
+      "sampleTitles": [
+        "Can Cisco's new AI data centre router tackle the industry's biggest infrastructure bottleneck?",
+        "Tuned Global strengthens its leadership in music technology with the acquisition of Figaro.ai",
+        "AI Redaction That Puts Privacy First: CaseGuard Studio Leading The Way"
+      ]
+    },
+    {
+      "name": "Technical Innovation",
+      "keywords": ["architecture", "algorithm", "method", "technique", "approach"],
+      "description": "New technical approaches or methodologies",
+      "articleCount": 1,
+      "percentage": "0.6",
+      "sampleTitles": ["How Verge readers, and writers, are managing our kids’ screen time"]
+    }
+  ],
+  "opportunities": [
+    {
+      "type": "Reality Check",
+      "title": "When AI Companies Fight Back Against Regulation",
+      "description": "Critical analysis of ai regulation and policy conflicts with current examples",
+      "confidence": "high",
+      "reasoning": "5 articles covering this controversy",
+      "sampleArticles": [
+        "Ready or not, enterprises are betting on AI | TechCrunch",
+        "The fixer's dilemma: Chris Lehane and OpenAI's impossible mission | TechCrunch",
+        "Former UK Prime Minister Rishi Sunak to advise Microsoft and Anthropic  | TechCrunch"
+      ],
+      "issue": {
+        "topic": "AI regulation and policy conflicts",
+        "count": 5,
+        "articles": [
+          "Ready or not, enterprises are betting on AI | TechCrunch",
+          "The fixer's dilemma: Chris Lehane and OpenAI's impossible mission | TechCrunch",
+          "Former UK Prime Minister Rishi Sunak to advise Microsoft and Anthropic  | TechCrunch",
+          "OpenAI wasn’t expecting Sora’s copyright drama",
+          "California’s new AI safety law shows regulation and innovation don’t have to clash  | TechCrunch"
+        ],
+        "summaries": [
+          "Major enterprise AI deals were announced this week, including partnerships between Anthropic-IBM and Anthropic-Deloitte, while Zendesk unveiled AI agents for customer service automation, though Deloitte faced criticism for AI-generated errors in a government report.",
+          "OpenAI's VP of global policy Chris Lehane faces challenges defending the company's actions around copyright issues with Sora, its video generation tool, and the environmental impact of its massive data centers in economically challenged areas.",
+          "Former UK Prime Minister Rishi Sunak has taken senior advisory roles at Microsoft and Anthropic, prompting concerns from Parliament's Advisory Committee about potential unfair access and influence in AI regulation and government affairs.",
+          "OpenAI is reversing its copyright policy for Sora after unexpected backlash, with CEO Sam Altman acknowledging they need to give rightsholders more control over how their characters and likenesses are used in AI-generated videos.",
+          "California's new AI safety law SB 53 requires large AI labs to be transparent about safety protocols and prevent catastrophic risks, while mandating compliance with these protocols under state oversight."
+        ]
+      }
+    },
+    {
+      "type": "Reality Check",
+      "title": "Why Your AI Still Hallucinates (And What To Do About It)",
+      "description": "Critical analysis of ai accuracy and reliability problems with current examples",
+      "confidence": "high",
+      "reasoning": "2 articles covering this controversy",
+      "sampleArticles": [
+        "Ready or not, enterprises are betting on AI | TechCrunch",
+        "Can tap-to-pay save public transportation?"
+      ],
+      "issue": {
+        "topic": "AI accuracy and reliability problems",
+        "count": 2,
+        "articles": [
+          "Ready or not, enterprises are betting on AI | TechCrunch",
+          "Can tap-to-pay save public transportation?"
+        ],
+        "summaries": [
+          "Major enterprise AI deals were announced this week, including partnerships between Anthropic-IBM and Anthropic-Deloitte, while Zendesk unveiled AI agents for customer service automation, though Deloitte faced criticism for AI-generated errors in a government report.",
+          "Cities across the US are adopting contactless tap-to-pay systems for public transit following New York's OMNY implementation, though challenges remain around accessibility for unbanked populations and system reliability."
+        ]
+      }
+    },
+    {
+      "type": "Reality Check",
+      "title": "The AI Copyright War: What Developers Need to Know",
+      "description": "Critical analysis of ai copyright and legal battles with current examples",
+      "confidence": "high",
+      "reasoning": "2 articles covering this controversy",
+      "sampleArticles": [
+        "The fixer's dilemma: Chris Lehane and OpenAI's impossible mission | TechCrunch",
+        "OpenAI wasn’t expecting Sora’s copyright drama"
+      ],
+      "issue": {
+        "topic": "AI copyright and legal battles",
+        "count": 2,
+        "articles": [
+          "The fixer's dilemma: Chris Lehane and OpenAI's impossible mission | TechCrunch",
+          "OpenAI wasn’t expecting Sora’s copyright drama"
+        ],
+        "summaries": [
+          "OpenAI's VP of global policy Chris Lehane faces challenges defending the company's actions around copyright issues with Sora, its video generation tool, and the environmental impact of its massive data centers in economically challenged areas.",
+          "OpenAI is reversing its copyright policy for Sora after unexpected backlash, with CEO Sam Altman acknowledging they need to give rightsholders more control over how their characters and likenesses are used in AI-generated videos."
+        ]
+      }
+    },
+    {
+      "type": "Business Impact",
+      "title": "Openai's Latest Product: Is It a Game Changer?",
+      "description": "Deep dive into openai's recent product launches and what they mean",
+      "confidence": "high",
+      "reasoning": "10 articles about product launches and updates",
+      "trendData": {
+        "topic": "openai",
+        "count": 47,
+        "percentage": "26.1"
+      },
+      "storyline": {
+        "angle": "product launches and updates",
+        "title": "Openai's Latest Product: Is It a Game Changer?",
+        "description": "Deep dive into openai's recent product launches and what they mean",
+        "articleCount": 10,
+        "sampleArticles": [
+          "It's not too late for Apple to get AI right | TechCrunch",
+          "OpenAI is trying to clamp down on ‘bias’ in ChatGPT",
+          "Maybe it’s real, maybe it’s Sora"
+        ]
+      }
+    },
+    {
+      "type": "Business Impact",
+      "title": "Google's Latest Product: Is It a Game Changer?",
+      "description": "Deep dive into google's recent product launches and what they mean",
+      "confidence": "high",
+      "reasoning": "6 articles about product launches and updates",
+      "trendData": {
+        "topic": "google",
+        "count": 34,
+        "percentage": "18.9"
+      },
+      "storyline": {
+        "angle": "product launches and updates",
+        "title": "Google's Latest Product: Is It a Game Changer?",
+        "description": "Deep dive into google's recent product launches and what they mean",
+        "articleCount": 6,
+        "sampleArticles": [
+          "Google ramps up its 'AI in the workplace' ambitions with Gemini Enterprise | TechCrunch",
+          "Google launches extensions system for its command-line coding tool | TechCrunch",
+          "Google's Search Live comes to India, AI Mode gets more languages | TechCrunch"
+        ]
+      }
+    },
+    {
+      "type": "Future Forecast",
+      "title": "Claude: The Emerging AI Trend to Watch",
+      "description": "Early analysis of claude and its potential impact",
+      "confidence": "medium",
+      "reasoning": "5 early mentions suggest emerging interest",
+      "emergingTrend": {
+        "topic": "claude",
+        "count": 5,
+        "percentage": "2.8"
+      }
+    },
+    {
+      "type": "Product Analysis",
+      "title": "GPT-5: OpenAI's Latest AI Move Explained",
+      "description": "In-depth look at OpenAI's GPT-5 and what it means for developers",
+      "confidence": "high",
+      "reasoning": "2 articles covering GPT-5",
+      "productData": {
+        "name": "GPT-5",
+        "company": "OpenAI",
+        "articleCount": 2
+      }
+    },
+    {
+      "type": "Product Analysis",
+      "title": "Sora: OpenAI's Latest AI Move Explained",
+      "description": "In-depth look at OpenAI's Sora and what it means for developers",
+      "confidence": "high",
+      "reasoning": "8 articles covering Sora",
+      "productData": {
+        "name": "Sora",
+        "company": "OpenAI",
+        "articleCount": 8
+      }
+    }
+  ],
+  "rawData": [
+    {
+      "title": "Apple ends support for Clips video-editing app",
+      "summary": "Apple is discontinuing its Clips video editing app, removing it from the App Store on October 10th, 2025, though existing users can continue using the app on iOS and iPadOS without future updates.",
+      "tags": ["tech", "featured", "apple"],
+      "source": "The Verge",
+      "published_at": "2025-10-11T19:35:04+00:00",
+      "url": "https://www.theverge.com/news/798676/apple-ends-support-for-clips-video-editing-app"
+    },
+    {
+      "title": "Ready or not, enterprises are betting on AI | TechCrunch",
+      "summary": "Major enterprise AI deals were announced this week, including partnerships between Anthropic-IBM and Anthropic-Deloitte, while Zendesk unveiled AI agents for customer service automation, though Deloitte faced criticism for AI-generated errors in a government report.",
+      "tags": ["ai", "enterprise", "deloitte", "zendesk", "featured", "anthropic"],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-11T17:52:03+00:00",
+      "url": "https://techcrunch.com/2025/10/11/ready-or-not-enterprises-are-betting-on-ai"
+    },
+    {
+      "title": "How Verge readers, and writers, are managing our kids’ screen time",
+      "summary": "A survey by Pew Research shows diverse approaches to managing children's screen time, with parents focusing more on content control and intentional usage than strict time limits, while 86% report having screen rules even if not strictly enforced.",
+      "tags": ["tech", "featured", "ai"],
+      "source": "The Verge",
+      "published_at": "2025-10-11T17:00:00+00:00",
+      "url": "https://www.theverge.com/tech/798648/how-verge-parents-and-readers-manage-kids-screen-time"
+    },
+    {
+      "title": "The AirPods 4 and Lego’s brick-ified Grogu are our favorite deals this week",
+      "summary": "Apple's base AirPods 4 are at their lowest price of $89 ($40 off), while Lego's 1,048-piece Star Wars Grogu set is discounted to $70, both available at major retailers alongside deals on Philips Hue bulbs and Sonos speakers.",
+      "tags": ["tech", "featured", "ai", "apple"],
+      "source": "The Verge",
+      "published_at": "2025-10-11T15:01:53+00:00",
+      "url": "https://www.theverge.com/tech/798362/apple-airpods-4-lego-star-wars-grogu-deal-sale"
+    },
+    {
+      "title": "It's not too late for Apple to get AI right | TechCrunch",
+      "summary": "Despite OpenAI's new ChatGPT app platform launch, Apple could still dominate AI-powered app interactions through an improved Siri and its extensive ecosystem of 1.5 billion iPhone users, though its AI efforts remain delayed.",
+      "tags": [
+        "ai",
+        "tc",
+        "apps",
+        "app industry",
+        "app store",
+        "apple",
+        "artificial inteligence",
+        "openai",
+        "siri",
+        "featured",
+        "gpt",
+        "chatgpt"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-11T15:00:00+00:00",
+      "url": "https://techcrunch.com/2025/10/11/its-not-too-late-for-apple-to-get-ai-right"
+    },
+    {
+      "title": "American politics has devolved into shitposting and aura farming",
+      "summary": "The article analyzes how political discourse in America has evolved into two main modes: 'aura farming' (attempts to look cool through posturing) and 'shitposting' (intentionally incoherent humor), exemplified by incidents like the viral Portland Frog protestor confronting federal agents.",
+      "tags": ["tech", "featured", "ai"],
+      "source": "The Verge",
+      "published_at": "2025-10-11T14:00:00+00:00",
+      "url": "https://www.theverge.com/policy/798491/frog-portland-trump-national-guard"
+    },
+    {
+      "title": "Dreams of Another feels like a fever dream",
+      "summary": "Dreams of Another is a surreal third-person exploration game where players use a gun that creates rather than destroys, navigating through dreamlike vignettes filled with strange conversations and deconstructed landscapes that can suddenly materialize into objects and characters.",
+      "tags": ["tech", "featured"],
+      "source": "The Verge",
+      "published_at": "2025-10-11T13:00:00+00:00",
+      "url": "https://www.theverge.com/games/795553/dreams-of-another-review-ps5-pc"
+    },
+    {
+      "title": "Is the Coros Nomad really an adventure watch?",
+      "summary": "A detailed review of the Coros Nomad adventure watch ($349) on the Tahoe Rim Trail finds it's a good watch at a competitive price point, but lacks specialized features for serious hikers and trail runners while being more oriented toward road runners.",
+      "tags": ["tech", "featured", "ai"],
+      "source": "The Verge",
+      "published_at": "2025-10-11T12:00:00+00:00",
+      "url": "https://www.theverge.com/tech/798613/coros-nomad-thru-hike-rucking"
+    },
+    {
+      "title": "Gear News of the Week: Intel’s New Chips Arrive, and Apple May Debut iPads and MacBooks This Month",
+      "summary": "Intel announced its next-gen Core Ultra Series 3 (Panther Lake) CPUs, promising 50% faster performance and improved efficiency to compete with Qualcomm and Apple, with initial shipments starting by year-end and broader availability in January 2026.",
+      "tags": [
+        "tech",
+        "gear",
+        "gear / gear news and events",
+        "gear / products / computers",
+        "gear / products / tablets",
+        "gear / products / gaming",
+        "gear / products / watches",
+        "gear / products / smart home",
+        "featured",
+        "meta",
+        "apple"
+      ],
+      "source": "Wired Tech",
+      "published_at": "2025-10-11T10:00:00+00:00",
+      "url": "https://www.wired.com/story/gear-news-of-the-week-intels-new-chips-arrive-and-apple-may-debut-ipads-and-macbooks-this-month"
+    },
+    {
+      "title": "The fixer's dilemma: Chris Lehane and OpenAI's impossible mission | TechCrunch",
+      "summary": "OpenAI's VP of global policy Chris Lehane faces challenges defending the company's actions around copyright issues with Sora, its video generation tool, and the environmental impact of its massive data centers in economically challenged areas.",
+      "tags": ["ai", "tc", "chris lehane", "nathan calvin", "openai", "sora 2", "featured"],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-11T06:04:26+00:00",
+      "url": "https://techcrunch.com/2025/10/10/the-fixers-dilemma-chris-lehane-and-openais-impossible-mission"
+    },
+    {
+      "title": "Hollywood has no idea what to do about AI",
+      "summary": "Major Hollywood studios and executives are struggling to formulate a clear response to OpenAI's AI video generation technology Sora, while OpenAI continues to train on copyrighted content without explicit permission from rights holders.",
+      "tags": ["tech", "featured", "ai", "openai"],
+      "source": "The Verge",
+      "published_at": "2025-10-10T23:00:00+00:00",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/798496/hollywood-openai-training-netflix-paramount-warner"
+    },
+    {
+      "title": "OpenAI allegedly sent police to an AI regulation advocate’s door",
+      "summary": "OpenAI reportedly sent sheriff's deputies to serve subpoenas to AI regulation advocates, demanding personal messages and communications with legislators, allegedly to investigate potential connections to Elon Musk's funding.",
+      "tags": ["tech", "featured", "ai", "openai"],
+      "source": "The Verge",
+      "published_at": "2025-10-10T21:31:05+00:00",
+      "url": "https://www.theverge.com/news/798523/openai-ai-regulation-advocates-subpoenas-police"
+    },
+    {
+      "title": "Bose is yanking key features from its SoundTouch speakers",
+      "summary": "Bose will discontinue cloud-based features for its SoundTouch speakers in February 2026, including integrated Spotify access, multi-room playback, and app functionality, though Bluetooth and auxiliary connections will still work.",
+      "tags": ["tech", "featured", "ai"],
+      "source": "The Verge",
+      "published_at": "2025-10-10T21:27:17+00:00",
+      "url": "https://www.theverge.com/news/798501/bose-soundtouch-speakers-cloud-discontinue-shut-down"
+    },
+    {
+      "title": "OpenAI is trying to clamp down on ‘bias’ in ChatGPT",
+      "summary": "OpenAI reports that its new GPT-5 models show 30% less political bias than previous versions, based on internal testing using hundreds of politically charged and neutral questions across various topics.",
+      "tags": ["tech", "featured", "ai", "gpt", "chatgpt", "openai"],
+      "source": "The Verge",
+      "published_at": "2025-10-10T20:11:18+00:00",
+      "url": "https://www.theverge.com/news/798388/openai-chatgpt-political-bias-eval"
+    },
+    {
+      "title": "These Steelseries Earbuds Have Barely Been Out of My Head in Months—and They’re on Sale",
+      "summary": "The SteelSeries Arctis GameBuds, compatible with Xbox/PlayStation/Switch/PC, are on sale for $128 (down from $200) and feature low-latency wireless audio, 40-hour total battery life with case, and game-specific equalizer settings.",
+      "tags": [
+        "tech",
+        "gear",
+        "gear / deals",
+        "gear / products",
+        "gear / products / gaming",
+        "featured"
+      ],
+      "source": "Wired Tech",
+      "published_at": "2025-10-10T18:04:04.405+00:00",
+      "url": "https://www.wired.com/story/steelseries-arctis-gamebuds-deal-1025"
+    },
+    {
+      "title": "The billion-dollar infrastructure deals powering the AI boom | TechCrunch",
+      "summary": "Major tech companies are making massive infrastructure investments to power AI development, with Oracle securing $330B in cloud deals, Microsoft investing $14B in OpenAI, and Nvidia engaging in GPU-for-equity arrangements with AI companies.",
+      "tags": [
+        "ai",
+        "evergreens",
+        "meta",
+        "microsoft",
+        "nvidia",
+        "oracle",
+        "softbank",
+        "stargate",
+        "featured",
+        "openai",
+        "google"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-10T17:55:12+00:00",
+      "url": "https://techcrunch.com/2025/10/10/the-billion-dollar-infrastructure-deals-powering-the-ai-boom"
+    },
+    {
+      "title": "You can still snag LG’s C4 OLED TV at half the price",
+      "summary": "LG's 48-inch C4 OLED TV is on sale for $799.96 ($800 off) at Amazon, while the newer C5 model starts at $899.99, with both models offering excellent display quality, gaming features, and Dolby Vision/Atmos support.",
+      "tags": ["tech", "featured"],
+      "source": "The Verge",
+      "published_at": "2025-10-10T17:34:17+00:00",
+      "url": "https://www.theverge.com/tech/798322/lg-c4-c5-oled-tv-deal-sale"
+    },
+    {
+      "title": "Prezent raises $30 million to acquire AI services firms -- starting with founder's other company | TechCrunch",
+      "summary": "AI presentation builder Prezent has raised $30M to acquire AI services firms, starting with Prezentium, a presentation services company co-founded by Prezent's own founder Rajat Mishra, as part of its enterprise-focused growth strategy.",
+      "tags": [
+        "ai",
+        "fundraising",
+        "greycroft",
+        "india",
+        "zoom ventures",
+        "ai presentations",
+        "prezent",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-10T17:11:29+00:00",
+      "url": "https://techcrunch.com/2025/10/10/prezent-raises-30-million-to-acquire-ai-services-firms-starting-with-founders-other-company"
+    },
+    {
+      "title": "Chrome will automatically disable web notifications you don’t care about",
+      "summary": "Google Chrome is introducing an automatic feature that disables notifications from websites users consistently ignore, with less than 1% of web notifications currently receiving any user interaction.",
+      "tags": ["tech", "featured", "google"],
+      "source": "The Verge",
+      "published_at": "2025-10-10T17:00:00+00:00",
+      "url": "https://www.theverge.com/news/798122/google-chrome-website-notifications-disable-feature"
+    },
+    {
+      "title": "Boox’s new smartphone-sized e-readers come with a steep price hike",
+      "summary": "Boox has announced new P6 Pro e-readers in China featuring 6.13-inch displays, with the color model using E Ink Kaleido 3 technology and priced at $463, marking a significant price increase from previous models.",
+      "tags": ["tech", "featured", "ai"],
+      "source": "The Verge",
+      "published_at": "2025-10-10T16:34:50+00:00",
+      "url": "https://www.theverge.com/news/798298/onyx-boox-p6-pro-color-e-ink-color-kaleido-3-5g-sim-card"
+    }
+  ]
+}

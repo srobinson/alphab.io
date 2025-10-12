@@ -5,9 +5,17 @@
     <link>https://rade.alphab.io/blog</link>
     <description>AI insights and analysis from RADE AI Solutions</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 Oct 2025 12:41:09 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 12 Oct 2025 09:58:34 GMT</lastBuildDate>
     <atom:link href="https://rade.alphab.io/blog/rss.xml" rel="self" type="application/rss+xml"/>
     
+    <item>
+      <title>OpenAI Sora 2: Developer&#39;s Guide to the Next Video AI Frontier</title>
+      <link>https://rade.alphab.io/blog/openai-sora-2-developers-guide-to-the-next-video-ai-frontier</link>
+      <description>Explore Sora 2&#39;s groundbreaking AI video capabilities, ethical implications, and impact on content creation. Essential insights for developers navigating the future of AI.</description>
+      <pubDate>Sun, 12 Oct 2025 09:58:34 GMT</pubDate>
+      <guid>https://rade.alphab.io/blog/openai-sora-2-developers-guide-to-the-next-video-ai-frontier</guid>
+      <category>AI Insights</category>
+    </item>
     <item>
       <title>OpenAI Sends Police to AI Advocate&#39;s Door: Ethics Debate Erupts</title>
       <link>https://rade.alphab.io/blog/openai-sends-police-to-ai-advocates-door-ethics-debate-erupt</link>

@@ -1,6 +1,33 @@
 {
   "posts": [
     {
+      "slug": "openai-sora-2-developers-guide-to-the-next-video-ai-frontier",
+      "title": "OpenAI Sora 2: Developer's Guide to the Next Video AI Frontier",
+      "description": "Explore Sora 2's groundbreaking AI video capabilities, ethical implications, and impact on content creation. Essential insights for developers navigating the future of AI.",
+      "category": "AI Insights",
+      "date": "2025-10-12T00:00:00.000Z",
+      "publishedAt": "2025-10-12T09:58:34.190Z",
+      "readTime": "12 min read",
+      "tags": [
+        "Sora 2 AI",
+        "OpenAI video generation",
+        "AI content creation",
+        "developer AI tools",
+        "video AI technology"
+      ],
+      "seoKeywords": [
+        "Sora 2 AI",
+        "OpenAI video generation",
+        "AI content creation",
+        "developer AI tools",
+        "video AI technology",
+        "content authenticity AI",
+        "AI creative development"
+      ],
+      "generated": true,
+      "wordCount": 2395
+    },
+    {
       "slug": "openai-sends-police-to-ai-advocates-door-ethics-debate-erupt",
       "title": "OpenAI Sends Police to AI Advocate's Door: Ethics Debate Erupts",
       "description": "OpenAI's controversial move to dispatch police to an AI regulation advocate's residence sparks debate about tech oversight, privacy, and the future of AI governance.",
@@ -324,6 +351,6 @@
       "wordCount": 2631
     }
   ],
-  "lastUpdated": "2025-10-11T12:41:13.081Z",
-  "totalPosts": 12
+  "lastUpdated": "2025-10-12T10:02:58.507Z",
+  "totalPosts": 13
 }
