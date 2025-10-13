@@ -126,7 +126,7 @@ export default function MyApproachPage() {
           </Suspense>
         </div>
 
-        <div className="blog-background">
+        <div className="alphab-background">
           <section className="container mx-auto px-6 pb-0 pt-10 lg:pb-24">
             <div className="space-y-16">
               {pillarDetails.map((pillar) => {

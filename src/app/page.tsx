@@ -157,7 +157,7 @@ export default function HomePage() {
           </Suspense>
         </div>
 
-        <div className="blog-background">
+        <div className="alphab-background">
           <section className="container mx-auto px-6 pt-6 pb-16 lg:pb-24">
             <Masonry
               breakpointCols={{

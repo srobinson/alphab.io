@@ -210,106 +210,108 @@ export default function NewsFeedPage() {
           </Suspense>
 
           {/* Main Content Grid */}
-          <div className="container mx-auto px-6 py-12">
-            <div className="grid grid-cols-1 2xl:grid-cols-[1fr_350px] gap-8">
-              {/* Main Column */}
-              <main className="space-y-12">
-                {/* Featured Posts Section */}
-                {blogData && blogData.posts.length > 0 && (
-                  <section>
-                    <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-8">
-                      {featuredPosts.map((post, index) => (
-                        <motion.div
-                          key={post.slug}
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: index * 0.1 }}
-                        >
-                          <BlogPostCard post={post} index={index} variant="featured" />
-                        </motion.div>
-                      ))}
-                    </div>
-                  </section>
-                )}
+          <div className="alphab-background">
+            <div className="container mx-auto px-6 py-12">
+              <div className="grid grid-cols-1 2xl:grid-cols-[1fr_350px] gap-8">
+                {/* Main Column */}
+                <main className="space-y-12">
+                  {/* Featured Posts Section */}
+                  {blogData && blogData.posts.length > 0 && (
+                    <section>
+                      <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-8">
+                        {featuredPosts.map((post, index) => (
+                          <motion.div
+                            key={post.slug}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 }}
+                          >
+                            <BlogPostCard post={post} index={index} variant="featured" />
+                          </motion.div>
+                        ))}
+                      </div>
+                    </section>
+                  )}
 
-                {/* Blog Error Message */}
-                {blogError && (
-                  <section>
-                    <div className="cyber-card p-6 border-red-500/20 bg-red-500/5">
-                      <p className="text-red-400 text-sm">
-                        Unable to load featured analysis. Please try refreshing the page.
-                      </p>
-                    </div>
-                  </section>
-                )}
+                  {/* Blog Error Message */}
+                  {blogError && (
+                    <section>
+                      <div className="cyber-card p-6 border-red-500/20 bg-red-500/5">
+                        <p className="text-red-400 text-sm">
+                          Unable to load featured analysis. Please try refreshing the page.
+                        </p>
+                      </div>
+                    </section>
+                  )}
 
-                {/* Recent Posts Section */}
-                {blogData && blogData.posts.length > 0 && recentPosts.length > 0 && (
-                  <section>
-                    <div className="space-y-6">
-                      {recentPosts.map((post, index) => (
-                        <motion.div
-                          key={post.slug}
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true }}
-                          transition={{ delay: index * 0.05 }}
-                        >
-                          <BlogPostCard post={post} index={index} variant="recent" />
-                        </motion.div>
-                      ))}
-                    </div>
-                  </section>
-                )}
+                  {/* Recent Posts Section */}
+                  {blogData && blogData.posts.length > 0 && recentPosts.length > 0 && (
+                    <section>
+                      <div className="space-y-6">
+                        {recentPosts.map((post, index) => (
+                          <motion.div
+                            key={post.slug}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.05 }}
+                          >
+                            <BlogPostCard post={post} index={index} variant="recent" />
+                          </motion.div>
+                        ))}
+                      </div>
+                    </section>
+                  )}
 
-                {/* Industry Moves Section */}
-                <motion.section
-                  className="space-y-8"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                >
+                  {/* Industry Moves Section */}
+                  <motion.section
+                    className="space-y-8"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <Suspense
+                      fallback={
+                        <div className="cyber-card p-8 animate-pulse">
+                          <div className="h-8 bg-gray-800 rounded w-1/3 mb-4"></div>
+                          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                            {[...Array(4)].map((_, i) => (
+                              <div key={i} className="h-32 bg-gray-800 rounded"></div>
+                            ))}
+                          </div>
+                        </div>
+                      }
+                    >
+                      <IndustryMoves />
+                    </Suspense>
+                  </motion.section>
+                </main>
+
+                {/* Sidebar */}
+                <aside className="lg:sticky lg:top-24 lg:self-start">
                   <Suspense
                     fallback={
-                      <div className="cyber-card p-8 animate-pulse">
-                        <div className="h-8 bg-gray-800 rounded w-1/3 mb-4"></div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                          {[...Array(4)].map((_, i) => (
-                            <div key={i} className="h-32 bg-gray-800 rounded"></div>
-                          ))}
+                      <div className="space-y-6">
+                        <div className="cyber-card p-6 animate-pulse">
+                          <div className="h-6 bg-gray-800 rounded w-1/2 mb-4"></div>
+                          <div className="space-y-3">
+                            {[...Array(5)].map((_, i) => (
+                              <div key={i} className="h-16 bg-gray-800 rounded"></div>
+                            ))}
+                          </div>
                         </div>
                       </div>
                     }
                   >
-                    <IndustryMoves />
+                    <QuickUpdatesSidebar
+                      newsItems={newsItems.slice(0, 8)}
+                      isLoading={isLoadingNews}
+                    />
                   </Suspense>
-                </motion.section>
-              </main>
-
-              {/* Sidebar */}
-              <aside className="lg:sticky lg:top-24 lg:self-start">
-                <Suspense
-                  fallback={
-                    <div className="space-y-6">
-                      <div className="cyber-card p-6 animate-pulse">
-                        <div className="h-6 bg-gray-800 rounded w-1/2 mb-4"></div>
-                        <div className="space-y-3">
-                          {[...Array(5)].map((_, i) => (
-                            <div key={i} className="h-16 bg-gray-800 rounded"></div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  }
-                >
-                  <QuickUpdatesSidebar
-                    newsItems={newsItems.slice(0, 8)}
-                    isLoading={isLoadingNews}
-                  />
-                </Suspense>
-              </aside>
+                </aside>
+              </div>
             </div>
           </div>
         </div>

@@ -1,6 +1,33 @@
 {
   "posts": [
     {
+      "slug": "openai-vs-google-the-strategic-battle-reshaping-ais-future",
+      "title": "OpenAI vs Google: The Strategic Battle Reshaping AI's Future",
+      "description": "Dive deep into OpenAI and Google's competing AI strategies, examining investment trends, real-world impact, and future implications for business and society in 2025.",
+      "category": "AI Insights",
+      "date": "2025-10-13T00:00:00.000Z",
+      "publishedAt": "2025-10-13T22:09:10.719Z",
+      "readTime": "12 min read",
+      "tags": [
+        "OpenAI vs Google",
+        "AI strategy comparison",
+        "enterprise AI adoption",
+        "AI market leadership",
+        "AI investment returns"
+      ],
+      "seoKeywords": [
+        "OpenAI vs Google",
+        "AI strategy comparison",
+        "enterprise AI adoption",
+        "AI market leadership",
+        "AI investment returns",
+        "AI business impact",
+        "AI technology trends"
+      ],
+      "generated": true,
+      "wordCount": 2358
+    },
+    {
       "slug": "ai-copyright-wars-a-developers-guide-to-legal-compliance",
       "title": "AI Copyright Wars: A Developer's Guide to Legal Compliance",
       "description": "Navigate the complex landscape of AI copyright laws, compliance challenges, and emerging opportunities in 2025. Essential insights for developers building AI solutions.",
@@ -378,6 +405,6 @@
       "wordCount": 2631
     }
   ],
-  "lastUpdated": "2025-10-12T10:49:12.572Z",
-  "totalPosts": 14
+  "lastUpdated": "2025-10-13T22:12:36.908Z",
+  "totalPosts": 15
 }

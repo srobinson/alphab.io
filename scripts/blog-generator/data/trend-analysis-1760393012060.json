@@ -1,0 +1,361 @@
+{
+  "timeframe": "2 days",
+  "articleCount": 26,
+  "generatedAt": "2025-10-13T22:03:32.059Z",
+  "topics": [
+    {
+      "topic": "openai",
+      "count": 4,
+      "percentage": "15.4"
+    },
+    {
+      "topic": "startup",
+      "count": 3,
+      "percentage": "11.5"
+    },
+    {
+      "topic": "enterprise",
+      "count": 2,
+      "percentage": "7.7"
+    },
+    {
+      "topic": "google",
+      "count": 2,
+      "percentage": "7.7"
+    },
+    {
+      "topic": "compliance",
+      "count": 2,
+      "percentage": "7.7"
+    },
+    {
+      "topic": "investment",
+      "count": 1,
+      "percentage": "3.8"
+    },
+    {
+      "topic": "meta",
+      "count": 1,
+      "percentage": "3.8"
+    },
+    {
+      "topic": "programming",
+      "count": 1,
+      "percentage": "3.8"
+    },
+    {
+      "topic": "amazon",
+      "count": 1,
+      "percentage": "3.8"
+    }
+  ],
+  "themes": [
+    {
+      "name": "Market Dynamics",
+      "keywords": ["funding", "investment", "competition", "market", "revenue", "growth"],
+      "description": "Business and market developments in AI",
+      "articleCount": 3,
+      "percentage": "11.5",
+      "sampleTitles": [
+        "Is the AI Conveyor Belt of Capital About to Stop?",
+        "Salesforce announces Agentforce 360 as enterprise AI competition heats up | TechCrunch",
+        "Nvidia's AI empire: A look at its top startup investments | TechCrunch"
+      ]
+    },
+    {
+      "name": "AI Capability Leap",
+      "keywords": ["breakthrough", "advancement", "capability", "performance", "benchmark"],
+      "description": "Major advances in AI capabilities or performance",
+      "articleCount": 2,
+      "percentage": "7.7",
+      "sampleTitles": [
+        "Is the AI Conveyor Belt of Capital About to Stop?",
+        "Analysis | China now leads the U.S. in this key part of the AI race"
+      ]
+    },
+    {
+      "name": "Practical Applications",
+      "keywords": ["implementation", "deployment", "use case", "application", "adoption"],
+      "description": "Real-world AI implementations and use cases",
+      "articleCount": 2,
+      "percentage": "7.7",
+      "sampleTitles": [
+        "Is the AI Conveyor Belt of Capital About to Stop?",
+        "Analysis | China now leads the U.S. in this key part of the AI race"
+      ]
+    },
+    {
+      "name": "Challenges & Limitations",
+      "keywords": ["challenge", "limitation", "problem", "issue", "concern"],
+      "description": "Problems and limitations in current AI",
+      "articleCount": 2,
+      "percentage": "7.7",
+      "sampleTitles": [
+        "Is the AI Conveyor Belt of Capital About to Stop?",
+        "Why Signal’s post-quantum makeover is an amazing engineering achievement"
+      ]
+    },
+    {
+      "name": "Technical Innovation",
+      "keywords": ["architecture", "algorithm", "method", "technique", "approach"],
+      "description": "New technical approaches or methodologies",
+      "articleCount": 0,
+      "percentage": "0.0",
+      "sampleTitles": []
+    },
+    {
+      "name": "Industry Impact",
+      "keywords": ["industry", "sector", "transformation", "disruption", "change"],
+      "description": "How AI is affecting different industries",
+      "articleCount": 0,
+      "percentage": "0.0",
+      "sampleTitles": []
+    }
+  ],
+  "opportunities": [
+    {
+      "type": "Future Forecast",
+      "title": "Startup: The Emerging AI Trend to Watch",
+      "description": "Early analysis of startup and its potential impact",
+      "confidence": "medium",
+      "reasoning": "3 early mentions suggest emerging interest",
+      "emergingTrend": {
+        "topic": "startup",
+        "count": 3,
+        "percentage": "11.5"
+      }
+    },
+    {
+      "type": "Comparison",
+      "title": "openai vs google: Which AI Strategy Will Win?",
+      "description": "Head-to-head analysis of competing AI approaches",
+      "confidence": "high",
+      "reasoning": "Both heavily discussed (4 vs 2 mentions)",
+      "comparison": {
+        "a": {
+          "topic": "openai",
+          "count": 4,
+          "percentage": "15.4"
+        },
+        "b": {
+          "topic": "google",
+          "count": 2,
+          "percentage": "7.7"
+        }
+      }
+    },
+    {
+      "type": "Industry Analysis",
+      "title": "How AI is Transforming sales",
+      "description": "Industry-specific AI applications and impact in sales",
+      "confidence": "medium",
+      "reasoning": "2 articles mention sales",
+      "industryData": {
+        "name": "sales",
+        "count": 2,
+        "articles": [
+          "Tesla Cybertruck sales are flatlining",
+          "Salesforce announces Agentforce 360 as enterprise AI competition heats up | TechCrunch"
+        ]
+      }
+    }
+  ],
+  "rawData": [
+    {
+      "title": "Hackers can steal 2FA codes and private messages from Android phones",
+      "summary": "A new attack called 'Pixnapping' allows malicious Android apps to steal 2FA codes, private messages, and other sensitive data by exploiting screen rendering timing, requiring no permissions and working in under 30 seconds.",
+      "tags": [
+        "tech",
+        "biz & it",
+        "google",
+        "security",
+        "android",
+        "pixnapping",
+        "privacy",
+        "side channel"
+      ],
+      "source": "Ars Technica AI",
+      "published_at": "2025-10-13T21:36:35+00:00",
+      "url": "https://arstechnica.com/security/2025/10/no-fix-yet-for-attack-that-lets-hackers-pluck-2fa-codes-from-android-phones"
+    },
+    {
+      "title": "Is the AI Conveyor Belt of Capital About to Stop?",
+      "summary": "Recent major AI investment deals between tech giants (Nvidia, OpenAI, Oracle) show potentially circular money movements, raising concerns about artificial value creation. While these companies claim the investments will drive AI advancement and adoption, current enterprise ROI remains low despite soaring stock valuations.",
+      "tags": ["ai"],
+      "source": "Hacker News AI",
+      "published_at": "2025-10-13T19:40:03+00:00",
+      "url": "https://gizmodo.com/is-the-ai-conveyor-belt-of-capital-about-to-stop-2000671017"
+    },
+    {
+      "title": "Google will let you hide sponsored results in search — after you’ve seen them",
+      "summary": "Google is introducing a new feature that allows users to collapse sponsored search results under a single heading, though users must first scroll past the ads to access the hide button.",
+      "tags": ["tech", "featured", "ai", "google"],
+      "source": "The Verge",
+      "published_at": "2025-10-13T19:21:38+00:00",
+      "url": "https://www.theverge.com/tech/798901/google-will-let-you-hide-sponsored-results-in-search-after-youve-seen-them"
+    },
+    {
+      "title": "Tesla Cybertruck sales are flatlining",
+      "summary": "Tesla Cybertruck sales dropped 63% in Q3 2025 with only 5,385 units sold, while competing electric trucks from Rivian, Ford, and GMC saw significant sales increases during the same period.",
+      "tags": ["tech", "featured"],
+      "source": "The Verge",
+      "published_at": "2025-10-13T19:03:24+00:00",
+      "url": "https://www.theverge.com/news/798889/tesla-cybertruck-sales-decrease-q3-2025"
+    },
+    {
+      "title": "New California law requires AI to tell you it’s AI",
+      "summary": "California has passed SB 243, requiring AI chatbots to clearly disclose their artificial nature when users might reasonably believe they're interacting with humans, and mandating annual reports about suicide prevention safeguards starting next year.",
+      "tags": ["tech", "featured", "ai"],
+      "source": "The Verge",
+      "published_at": "2025-10-13T17:12:12+00:00",
+      "url": "https://www.theverge.com/news/798875/california-just-passed-a-new-law-requiring-ai-to-tell-you-its-ai"
+    },
+    {
+      "title": "California enacts its own internet age-gating law",
+      "summary": "California has enacted the Digital Age Assurance Act requiring device operating systems and app stores to verify users' ages during device setup, with enforcement beginning January 2027 and potential fines up to $7,500 per child for intentional violations.",
+      "tags": ["tech", "featured", "google", "apple"],
+      "source": "The Verge",
+      "published_at": "2025-10-13T17:11:14+00:00",
+      "url": "https://www.theverge.com/news/798871/california-governor-newsom-age-gating-ab-1043"
+    },
+    {
+      "title": "Apple TV Plus is being rebranded to… Apple TV",
+      "summary": "Apple is rebranding its streaming service Apple TV Plus to simply 'Apple TV', though this may cause confusion with the existing Apple TV hardware and app of the same name.",
+      "tags": ["tech", "featured", "apple"],
+      "source": "The Verge",
+      "published_at": "2025-10-13T16:38:44+00:00",
+      "url": "https://www.theverge.com/news/798857/apple-tv-plus-rebrand-streaming-service"
+    },
+    {
+      "title": "Why Signal’s post-quantum makeover is an amazing engineering achievement",
+      "summary": "Signal has implemented a quantum-resistant upgrade to its encryption protocol using ML-KEM-768, addressing the challenge of larger key sizes while maintaining forward secrecy and post-compromise security features in its messaging system.",
+      "tags": [
+        "tech",
+        "biz & it",
+        "features",
+        "security",
+        "diffie-hellman elliptic curve",
+        "ml-kem",
+        "post-quantum encryption",
+        "signal messenger"
+      ],
+      "source": "Ars Technica AI",
+      "published_at": "2025-10-13T16:15:53+00:00",
+      "url": "https://arstechnica.com/security/2025/10/why-signals-post-quantum-makeover-is-an-amazing-engineering-achievement"
+    },
+    {
+      "title": "EcoFlow’s Delta Pro Ultra X can power a home for weeks",
+      "summary": "EcoFlow announced the Delta Pro Ultra X home battery backup system with 12kW continuous output (up to 36kW in parallel) and scalable capacity from 12kWh to 180kWh, capable of powering a typical US home for up to six days at full capacity.",
+      "tags": ["tech", "featured"],
+      "source": "The Verge",
+      "published_at": "2025-10-13T15:00:00+00:00",
+      "url": "https://www.theverge.com/news/798772/ecoflow-delta-pro-ultra-x-battery-system"
+    },
+    {
+      "title": "OpenAI partners with Broadcom to produce its own AI chips",
+      "summary": "OpenAI is partnering with Broadcom to develop custom AI chips for its data centers, aiming to deploy 10 gigawatts of custom AI accelerators by 2029 as part of its strategy to reduce dependence on Nvidia.",
+      "tags": ["tech", "featured", "ai", "gpt", "chatgpt", "openai", "nvidia"],
+      "source": "The Verge",
+      "published_at": "2025-10-13T14:59:44+00:00",
+      "url": "https://www.theverge.com/news/798827/openai-broadcom-custom-ai-chips"
+    },
+    {
+      "title": "California becomes first state to regulate AI companion chatbots | TechCrunch",
+      "summary": "California has passed SB 243, becoming the first US state to regulate AI companion chatbots, requiring companies to implement safety protocols including age verification, suicide prevention measures, and content restrictions to protect children and vulnerable users.",
+      "tags": ["ai"],
+      "source": "Hacker News AI",
+      "published_at": "2025-10-13T14:50:53+00:00",
+      "url": "https://techcrunch.com/2025/10/13/california-becomes-first-state-to-regulate-ai-companion-chatbots"
+    },
+    {
+      "title": "Palmer Luckey’s Anduril launches EagleEye military helmet with help from buddy Zuck",
+      "summary": "Anduril, founded by Oculus creator Palmer Luckey, has partnered with Meta to launch EagleEye, an AI-powered mixed-reality helmet system for military use that includes heads-up display, spatial audio, and drone control capabilities.",
+      "tags": ["tech", "featured", "ai", "meta"],
+      "source": "The Verge",
+      "published_at": "2025-10-13T14:44:49+00:00",
+      "url": "https://www.theverge.com/news/798821/anduril-eagleeye-palmer-luckey-mark-zuckerberg-meta-military-mr"
+    },
+    {
+      "title": "Vivo X300 Pro launches with an Ultra-rivaling camera",
+      "summary": "Vivo launches X300 and X300 Pro flagship phones with advanced camera systems featuring a 200MP Samsung HPB sensor and support for a snap-on telephoto extender lens, previously exclusive to their Ultra model.",
+      "tags": ["tech", "featured"],
+      "source": "The Verge",
+      "published_at": "2025-10-13T13:37:44+00:00",
+      "url": "https://www.theverge.com/news/798803/vivo-x300-pro-samsung-hpb-telephoto-extender-launch"
+    },
+    {
+      "title": "UK fines 4Chan over online safety compliance",
+      "summary": "UK regulator Ofcom has fined 4Chan £20,000 for ignoring legally-binding information requests related to Online Safety Act investigations, with additional daily penalties of £100 to be imposed until compliance.",
+      "tags": ["tech", "featured", "ai"],
+      "source": "The Verge",
+      "published_at": "2025-10-13T12:53:52+00:00",
+      "url": "https://www.theverge.com/news/798797/uk-ofcom-fines-4chan-online-safety-act"
+    },
+    {
+      "title": "Salesforce announces Agentforce 360 as enterprise AI competition heats up | TechCrunch",
+      "summary": "Salesforce unveiled Agentforce 360, an upgraded AI agent platform featuring new agent programming tools, a unified building platform, and enhanced Slack integration, with the beta release of key features scheduled for November.",
+      "tags": [
+        "ai",
+        "enterprise",
+        "tc",
+        "dreamforce",
+        "salesforce",
+        "ai agents",
+        "artificial intelligence",
+        "agentforce",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-13T12:00:00+00:00",
+      "url": "https://techcrunch.com/2025/10/13/salesforce-announces-agentforce-360-as-enterprise-ai-competition-heats-up"
+    },
+    {
+      "title": "Analysis | China now leads the U.S. in this key part of the AI race",
+      "summary": "Chinese companies are now leading in open-source AI models that can be freely used and modified, surpassing U.S. rivals in both capability and adoption according to Washington Post analysis.",
+      "tags": ["ai"],
+      "source": "Hacker News AI",
+      "published_at": "2025-10-13T10:05:00.098+00:00",
+      "url": "https://www.washingtonpost.com/technology/2025/10/13/china-us-open-source-ai"
+    },
+    {
+      "title": "Marvel details upcoming slate of shows at New York Comic Con",
+      "summary": null,
+      "tags": ["tech", "featured", "ai"],
+      "source": "The Verge",
+      "published_at": "2025-10-12T20:44:10+00:00",
+      "url": "https://www.theverge.com/news/798740/marvels-upcoming-shows-new-york-comic-con-spider-man-x-men-daredevil-visionquest"
+    },
+    {
+      "title": "You need to watch the bonkers Japanese fantasy horror film House",
+      "summary": null,
+      "tags": ["tech", "featured"],
+      "source": "The Verge",
+      "published_at": "2025-10-12T18:00:00+00:00",
+      "url": "https://www.theverge.com/entertainment/798719/watch-japanese-horror-fantasy-film-house-halloween"
+    },
+    {
+      "title": "Nvidia's AI empire: A look at its top startup investments | TechCrunch",
+      "summary": "Nvidia has dramatically increased its startup investments since 2023, participating in over 100 AI startup deals including major investments in OpenAI, xAI, Mistral AI, and others, with many investments exceeding $100 million per round.",
+      "tags": [
+        "ai",
+        "startups",
+        "fundraising",
+        "nvidia",
+        "corporate venture arms",
+        "evergreens",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-12T15:30:28+00:00",
+      "url": "https://techcrunch.com/2025/10/12/nvidias-ai-empire-a-look-at-its-top-startup-investments"
+    },
+    {
+      "title": "Amazon awkwardly edited the guns out of James Bond art",
+      "summary": null,
+      "tags": ["tech", "featured", "ai"],
+      "source": "The Verge",
+      "published_at": "2025-10-12T15:26:55+00:00",
+      "url": "https://www.theverge.com/news/798712/amazon-awkwardly-edited-the-guns-out-of-james-bond-art"
+    }
+  ]
+}
