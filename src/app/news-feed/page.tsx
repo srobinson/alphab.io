@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Suspense, useEffect, useState } from "react";
-import { Intro, ProgressBar } from "@/components";
+import { ProgressBar } from "@/components";
 import { IndustryMoves } from "@/components/industry-moves";
 import { BlogPostCard } from "../blog/_components/blog-post-card";
 import { NewsFeedHero } from "./_components/news-feed-hero";
@@ -188,7 +188,7 @@ export default function NewsFeedPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(newsFeedStructuredData) }}
       />
-      <Intro />
+      {/* <Intro /> */}
 
       <div className="max-w-9xl">
         <div className="min-h-screen bg-black text-white">

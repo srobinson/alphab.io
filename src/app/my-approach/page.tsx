@@ -4,7 +4,7 @@ import { motion, type Variants } from "framer-motion";
 import { Brain, Cog, Shield, Target, TrendingUp, Zap } from "lucide-react";
 import { Suspense } from "react";
 import { ConversationCTA } from "@/components/cta/conversation";
-import { Intro } from "@/components/intro";
+// import { Intro } from "@/components/intro";
 import { HeroSection } from "./_components";
 
 const pillarDetails = [
@@ -106,7 +106,7 @@ const pillarCardVariants: Variants = {
 export default function MyApproachPage() {
   return (
     <>
-      <Intro />
+      {/* <Intro /> */}
       <div className="max-w-9xl">
         <div className="bg-black text-white">
           {/* Hero Section */}

@@ -1,12 +1,67 @@
 {
   "posts": [
     {
+      "slug": "nvidias-ai-dominance-innovation-or-market-disruption",
+      "title": "Nvidia's AI Dominance: Innovation or Market Disruption?",
+      "description": "Explore Nvidia's 41% market surge and AI infrastructure leadership in 2025. Uncover emerging competition and market shifts reshaping the future of AI technology.",
+      "category": "AI Analysis",
+      "date": "2025-10-15T00:00:00.000Z",
+      "publishedAt": "2025-10-15T16:58:01.547Z",
+      "readTime": "11 min read",
+      "tags": [
+        "Nvidia AI dominance",
+        "AI infrastructure market",
+        "GPU market competition",
+        "AI chip innovation",
+        "semiconductor industry trends"
+      ],
+      "seoKeywords": [
+        "Nvidia AI dominance",
+        "AI infrastructure market",
+        "GPU market competition",
+        "AI chip innovation",
+        "semiconductor industry trends",
+        "AI technology disruption",
+        "Nvidia market analysis"
+      ],
+      "generated": true,
+      "wordCount": 2289
+    },
+    {
+      "slug": "openai-vs-google-gemini-the-trillion-dollar-ai-strategy-batt",
+      "title": "OpenAI vs Google Gemini: The Trillion-Dollar AI Strategy Battle",
+      "description": "Analyze the strategic race between OpenAI and Google Gemini as AI market growth shows signs of cooling. Latest data reveals surprising trends in tech investment and adoption.",
+      "category": "AI Insights",
+      "date": "2025-10-15T00:00:00.000Z",
+      "publishedAt": "2025-10-15T15:16:15.250Z",
+      "readTime": "12 min read",
+      "tags": [
+        "OpenAI vs Google Gemini",
+        "AI market growth 2025",
+        "generative AI investment",
+        "AI business strategy",
+        "AI industry competition"
+      ],
+      "seoKeywords": [
+        "OpenAI vs Google Gemini",
+        "AI market growth 2025",
+        "generative AI investment",
+        "AI business strategy",
+        "AI industry competition",
+        "tech investment trends",
+        "enterprise AI adoption"
+      ],
+      "generated": true,
+      "wordCount": 2398
+    },
+    {
       "slug": "ai-startup-revolution-analyzing-todays-most-impactful-trends",
       "title": "AI Startup Revolution: Analyzing Today's Most Impactful Trends",
       "description": "Discover how AI startups are reshaping industries in 2025, from healthcare innovations to business transformation. Analysis of current impact and future potential.",
-      "date": "2025-10-14",
-      "publishedAt": "2025-10-14T10:05:14.487Z",
       "category": "AI Insights",
+      "date": "2025-10-14T00:00:00.000Z",
+      "publishedAt": "2025-10-14T10:05:14.487Z",
+      "readTime": "12 min read",
       "tags": [
         "AI startup trends 2025",
         "artificial intelligence impact",
@@ -14,9 +69,17 @@
         "AI business transformation",
         "emerging AI technologies"
       ],
-      "readTime": "12 min read",
+      "seoKeywords": [
+        "AI startup trends 2025",
+        "artificial intelligence impact",
+        "startup innovation",
+        "AI business transformation",
+        "emerging AI technologies",
+        "AI industry analysis",
+        "sustainable AI solutions"
+      ],
       "generated": true,
-      "draftId": "startup-the-emerging-ai-trend-to-watch-e-222382"
+      "wordCount": 2439
     },
     {
       "slug": "openai-vs-google-the-strategic-battle-reshaping-ais-future",
@@ -423,6 +486,6 @@
       "wordCount": 2631
     }
   ],
-  "lastUpdated": "2025-10-14T10:05:14.489Z",
-  "totalPosts": 16
+  "lastUpdated": "2025-10-15T19:42:40.022Z",
+  "totalPosts": 18
 }

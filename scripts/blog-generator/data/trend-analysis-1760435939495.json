@@ -57,13 +57,7 @@
   "themes": [
     {
       "name": "AI Capability Leap",
-      "keywords": [
-        "breakthrough",
-        "advancement",
-        "capability",
-        "performance",
-        "benchmark"
-      ],
+      "keywords": ["breakthrough", "advancement", "capability", "performance", "benchmark"],
       "description": "Major advances in AI capabilities or performance",
       "articleCount": 4,
       "percentage": "11.8",
@@ -75,14 +69,7 @@
     },
     {
       "name": "Market Dynamics",
-      "keywords": [
-        "funding",
-        "investment",
-        "competition",
-        "market",
-        "revenue",
-        "growth"
-      ],
+      "keywords": ["funding", "investment", "competition", "market", "revenue", "growth"],
       "description": "Business and market developments in AI",
       "articleCount": 4,
       "percentage": "11.8",
@@ -94,13 +81,7 @@
     },
     {
       "name": "Challenges & Limitations",
-      "keywords": [
-        "challenge",
-        "limitation",
-        "problem",
-        "issue",
-        "concern"
-      ],
+      "keywords": ["challenge", "limitation", "problem", "issue", "concern"],
       "description": "Problems and limitations in current AI",
       "articleCount": 4,
       "percentage": "11.8",
@@ -112,13 +93,7 @@
     },
     {
       "name": "Practical Applications",
-      "keywords": [
-        "implementation",
-        "deployment",
-        "use case",
-        "application",
-        "adoption"
-      ],
+      "keywords": ["implementation", "deployment", "use case", "application", "adoption"],
       "description": "Real-world AI implementations and use cases",
       "articleCount": 3,
       "percentage": "8.8",
@@ -130,29 +105,15 @@
     },
     {
       "name": "Technical Innovation",
-      "keywords": [
-        "architecture",
-        "algorithm",
-        "method",
-        "technique",
-        "approach"
-      ],
+      "keywords": ["architecture", "algorithm", "method", "technique", "approach"],
       "description": "New technical approaches or methodologies",
       "articleCount": 1,
       "percentage": "2.9",
-      "sampleTitles": [
-        "Four Ways to Solve AI's Heat Problem"
-      ]
+      "sampleTitles": ["Four Ways to Solve AI's Heat Problem"]
     },
     {
       "name": "Industry Impact",
-      "keywords": [
-        "industry",
-        "sector",
-        "transformation",
-        "disruption",
-        "change"
-      ],
+      "keywords": ["industry", "sector", "transformation", "disruption", "change"],
       "description": "How AI is affecting different industries",
       "articleCount": 1,
       "percentage": "2.9",
@@ -234,10 +195,7 @@
     {
       "title": "TiVo no longer makes DVRs",
       "summary": "TiVo has officially ended production and sales of DVR hardware after 26 years, with the company now focusing on software for smart TVs and vehicle infotainment systems while continuing to support existing hardware.",
-      "tags": [
-        "tech",
-        "featured"
-      ],
+      "tags": ["tech", "featured"],
       "source": "The Verge",
       "published_at": "2025-10-14T09:45:49+00:00",
       "url": "https://www.theverge.com/news/798997/tivo-stops-dvr-hardware-production-sales"
@@ -245,12 +203,7 @@
     {
       "title": "Facebook is adding job listings, again",
       "summary": "Facebook is reintroducing free job listings in its Marketplace section, focusing on local entry-level, service, and trade work positions in the US, after previously retiring the feature in 2023.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai",
-        "meta"
-      ],
+      "tags": ["tech", "featured", "ai", "meta"],
       "source": "The Verge",
       "published_at": "2025-10-13T21:50:21+00:00",
       "url": "https://www.theverge.com/tech/798921/facebook-local-jobs-us"
@@ -275,12 +228,7 @@
     {
       "title": "Microsoft AI announces first image generator created in-house",
       "summary": "Microsoft has announced MAI-Image-1, its first in-house text-to-image generator, which specializes in photorealistic imagery and has already ranked in the top 10 on AI benchmark site LMArena.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai",
-        "microsoft"
-      ],
+      "tags": ["tech", "featured", "ai", "microsoft"],
       "source": "The Verge",
       "published_at": "2025-10-13T21:24:05+00:00",
       "url": "https://www.theverge.com/news/798923/microsoft-ai-image-generator-in-house"
@@ -303,9 +251,7 @@
     {
       "title": "Is the AI Conveyor Belt of Capital About to Stop?",
       "summary": "Recent major AI investment deals between tech giants (Nvidia, OpenAI, Oracle) show potentially circular money movements, raising concerns about artificial value creation. While these companies claim the investments will drive AI advancement and adoption, current enterprise ROI remains low despite soaring stock valuations.",
-      "tags": [
-        "ai"
-      ],
+      "tags": ["ai"],
       "source": "Hacker News AI",
       "published_at": "2025-10-13T19:40:03+00:00",
       "url": "https://gizmodo.com/is-the-ai-conveyor-belt-of-capital-about-to-stop-2000671017"
@@ -313,12 +259,7 @@
     {
       "title": "Google will let you hide sponsored results in search — after you’ve seen them",
       "summary": "Google is introducing a new feature that allows users to collapse sponsored search results after viewing them, with paid results now grouped under a single collapsible section with a prominent 'sponsored' label.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai",
-        "google"
-      ],
+      "tags": ["tech", "featured", "ai", "google"],
       "source": "The Verge",
       "published_at": "2025-10-13T19:21:38+00:00",
       "url": "https://www.theverge.com/tech/798901/google-will-let-you-hide-sponsored-results-in-search-after-youve-seen-them"
@@ -326,10 +267,7 @@
     {
       "title": "Tesla Cybertruck sales are flatlining",
       "summary": "Tesla Cybertruck sales dropped 63% in Q3 2025 with only 5,385 units sold, while competing electric trucks from Rivian, Ford, and GMC saw significant sales increases during the same period.",
-      "tags": [
-        "tech",
-        "featured"
-      ],
+      "tags": ["tech", "featured"],
       "source": "The Verge",
       "published_at": "2025-10-13T19:03:24+00:00",
       "url": "https://www.theverge.com/news/798889/tesla-cybertruck-sales-decrease-q3-2025"
@@ -337,11 +275,7 @@
     {
       "title": "New California law requires AI to tell you it’s AI",
       "summary": "California has passed SB 243, requiring AI chatbots to clearly disclose their artificial nature when users might reasonably believe they're interacting with humans, and mandating annual reports to the Office of Suicide Prevention about user safety measures.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai"
-      ],
+      "tags": ["tech", "featured", "ai"],
       "source": "The Verge",
       "published_at": "2025-10-13T17:12:12+00:00",
       "url": "https://www.theverge.com/news/798875/california-just-passed-a-new-law-requiring-ai-to-tell-you-its-ai"
@@ -349,12 +283,7 @@
     {
       "title": "California enacts its own internet age-gating law",
       "summary": "California has enacted a new law requiring device operating systems and app stores to verify users' ages during device setup, with enforcement beginning January 2027 and potential fines up to $7,500 per child for intentional violations.",
-      "tags": [
-        "tech",
-        "featured",
-        "google",
-        "apple"
-      ],
+      "tags": ["tech", "featured", "google", "apple"],
       "source": "The Verge",
       "published_at": "2025-10-13T17:11:14+00:00",
       "url": "https://www.theverge.com/news/798871/california-governor-newsom-age-gating-ab-1043"
@@ -362,12 +291,7 @@
     {
       "title": "Nvidia’s ‘personal AI supercomputer’ goes on sale October 15th",
       "summary": "Nvidia's DGX Spark, a desktop-sized AI supercomputer capable of running sophisticated AI models with up to 200 billion parameters, will launch October 15th for $3,999. The device delivers a petaflop of AI performance while running on standard power and will be available both directly from Nvidia and through major PC manufacturers offering customized versions.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai",
-        "nvidia"
-      ],
+      "tags": ["tech", "featured", "ai", "nvidia"],
       "source": "The Verge",
       "published_at": "2025-10-13T17:00:00+00:00",
       "url": "https://www.theverge.com/news/798775/nvidia-spark-personal-ai-supercomputer"
@@ -375,11 +299,7 @@
     {
       "title": "Apple TV Plus is being rebranded to… Apple TV",
       "summary": "Apple is rebranding its streaming service Apple TV Plus to simply 'Apple TV', though this may cause confusion with its existing hardware and app of the same name.",
-      "tags": [
-        "tech",
-        "featured",
-        "apple"
-      ],
+      "tags": ["tech", "featured", "apple"],
       "source": "The Verge",
       "published_at": "2025-10-13T16:38:44+00:00",
       "url": "https://www.theverge.com/news/798857/apple-tv-plus-rebrand-streaming-service"
@@ -404,9 +324,7 @@
     {
       "title": "Four Ways to Solve AI's Heat Problem",
       "summary": "As AI chips consume increasingly more power (up to 1,200W for newest GPUs), data centers are shifting from traditional air cooling to liquid cooling solutions. Four main approaches are emerging: single-phase direct-to-chip water cooling, two-phase direct-to-chip cooling, single-phase immersion, and two-phase immersion cooling.",
-      "tags": [
-        "ai"
-      ],
+      "tags": ["ai"],
       "source": "Hacker News AI",
       "published_at": "2025-10-13T15:00:03+00:00",
       "url": "https://spectrum.ieee.org/data-center-liquid-cooling"
@@ -414,10 +332,7 @@
     {
       "title": "EcoFlow’s Delta Pro Ultra X can power a home for weeks",
       "summary": "EcoFlow announced the Delta Pro Ultra X home battery backup system with 12kW continuous output (up to 36kW in parallel) and scalable capacity from 12kWh to 180kWh, capable of powering a home for up to six days at full capacity.",
-      "tags": [
-        "tech",
-        "featured"
-      ],
+      "tags": ["tech", "featured"],
       "source": "The Verge",
       "published_at": "2025-10-13T15:00:00+00:00",
       "url": "https://www.theverge.com/news/798772/ecoflow-delta-pro-ultra-x-battery-system"
@@ -425,15 +340,7 @@
     {
       "title": "OpenAI partners with Broadcom to produce its own AI chips",
       "summary": "OpenAI is partnering with Broadcom to develop custom AI chips for its data centers, aiming to deploy 10 gigawatts of custom AI accelerators by 2029 as part of its strategy to reduce dependence on Nvidia.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai",
-        "gpt",
-        "chatgpt",
-        "openai",
-        "nvidia"
-      ],
+      "tags": ["tech", "featured", "ai", "gpt", "chatgpt", "openai", "nvidia"],
       "source": "The Verge",
       "published_at": "2025-10-13T14:59:44+00:00",
       "url": "https://www.theverge.com/news/798827/openai-broadcom-custom-ai-chips"
@@ -458,12 +365,7 @@
     {
       "title": "Palmer Luckey’s Anduril launches EagleEye military helmet with help from buddy Zuck",
       "summary": "Anduril, founded by Oculus creator Palmer Luckey, has partnered with Meta to launch EagleEye, an AI-powered mixed-reality helmet system for military use that includes heads-up display, spatial audio, and drone control capabilities.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai",
-        "meta"
-      ],
+      "tags": ["tech", "featured", "ai", "meta"],
       "source": "The Verge",
       "published_at": "2025-10-13T14:44:49+00:00",
       "url": "https://www.theverge.com/news/798821/anduril-eagleeye-palmer-luckey-mark-zuckerberg-meta-military-mr"
@@ -471,10 +373,7 @@
     {
       "title": "Vivo X300 Pro launches with an Ultra-rivaling camera",
       "summary": "Vivo launches X300 and X300 Pro flagship phones with advanced camera systems featuring a 200MP Samsung HPB sensor and support for a snap-on telephoto extender lens, previously exclusive to their Ultra model.",
-      "tags": [
-        "tech",
-        "featured"
-      ],
+      "tags": ["tech", "featured"],
       "source": "The Verge",
       "published_at": "2025-10-13T13:37:44+00:00",
       "url": "https://www.theverge.com/news/798803/vivo-x300-pro-samsung-hpb-telephoto-extender-launch"
@@ -482,11 +381,7 @@
     {
       "title": "UK fines 4Chan over online safety compliance",
       "summary": "UK regulator Ofcom has fined 4Chan £20,000 for ignoring legally-binding information requests related to Online Safety Act investigations, with additional daily penalties of £100 to be imposed until compliance.",
-      "tags": [
-        "tech",
-        "featured",
-        "ai"
-      ],
+      "tags": ["tech", "featured", "ai"],
       "source": "The Verge",
       "published_at": "2025-10-13T12:53:52+00:00",
       "url": "https://www.theverge.com/news/798797/uk-ofcom-fines-4chan-online-safety-act"

@@ -136,7 +136,15 @@ export default function HomePage() {
           __html: JSON.stringify(servicesStructuredData),
         }}
       />
-      <Intro />
+      <Suspense
+        fallback={
+          <div className="alphab-background relative z-10 flex flex-col items-center justify-center h-[100vh] px-4 sm:px-6">
+            <div className="animate-pulse space-y-6"></div>
+          </div>
+        }
+      >
+        <Intro />
+      </Suspense>
 
       <div className="max-w-9xl">
         <div className="bg-black text-white">

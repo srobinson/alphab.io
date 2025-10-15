@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import { ContactDrawerForm } from "@/components/contact/contact-drawer-form";
-import { Intro } from "@/components/intro";
+// import { Intro } from "@/components/intro";
 
 export default function ContactPage() {
   return (
     <>
-      <Intro />
+      {/* <Intro /> */}
       <div className="alphab-background min-h-screen flex items-center justify-center py-12 px-1 sm:px-6 lg:px-8 transition-colors duration-300 bg-background">
         <motion.div
           className="max-w-2xl w-full p-2 py-8 space-y-10 sm:p-8 md:p-12

@@ -27,9 +27,14 @@ export function Intro() {
     );
     await animate(
       "#ALPHAB",
-      { opacity: 0, scale: 10, letterSpacing: "1em" },
+      { opacity: 0, scale: 6, letterSpacing: "1em" },
       { duration: 0.25, ease: EasingDefinition.anticipate, delay: 1 }
     );
+    // await animate(
+    //   "#ALPHAB",
+    //   { y: -5000 },
+    //   { duration: 0.25, ease: EasingDefinition.anticipate, delay: 1 }
+    // );
   };
 
   useEffect(() => {
