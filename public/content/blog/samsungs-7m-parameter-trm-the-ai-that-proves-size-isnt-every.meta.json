@@ -1,0 +1,58 @@
+{
+  "title": "Samsung's 7M Parameter TRM: The AI That Proves Size Isn't Everything",
+  "description": "Discover how Samsung SAIL Montreal's Tiny Recursive Model (TRM) achieves breakthrough AI performance with just 7 million parameters, challenging the bigger-is-better paradigm.",
+  "date": "2025-10-18",
+  "category": "AI Insights",
+  "tags": [
+    "Tiny Recursive Model",
+    "TRM AI",
+    "Samsung SAIL Montreal",
+    "efficient AI models",
+    "7 million parameters"
+  ],
+  "author": "RADE AI Solutions",
+  "readTime": "12 min read",
+  "seo": {
+    "keywords": [
+      "Tiny Recursive Model",
+      "TRM AI",
+      "Samsung SAIL Montreal",
+      "efficient AI models",
+      "7 million parameters",
+      "AI efficiency",
+      "small language models"
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Samsung's 7M Parameter TRM: The AI That Proves Size Isn't Everything",
+      "description": "Samsung SAIL Montreal challenges AI industry norms with their Tiny Recursive Model (TRM), achieving breakthrough performance using just 7 million parameters and setting new benchmarks for AI efficiency.",
+      "keywords": "Tiny Recursive Model, TRM AI, Samsung SAIL Montreal, efficient AI models, 7 million parameters",
+      "datePublished": "2025-10-18",
+      "dateModified": "2025-10-18",
+      "author": {
+        "@type": "Organization",
+        "name": "Samsung SAIL Montreal"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Samsung SAIL Montreal"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://example.com/blog/7m-parameter-trm"
+      },
+      "articleSection": "technical-deep-dive",
+      "about": {
+        "@type": "Thing",
+        "name": "Artificial Intelligence"
+      }
+    }
+  },
+  "generated": true,
+  "generatedAt": "2025-10-18T01:24:14.860Z",
+  "slug": "samsungs-7m-parameter-trm-the-ai-that-proves-size-isnt-every",
+  "published": true,
+  "publishedAt": "2025-10-18T01:45:50.584Z",
+  "draftId": "7-million-parameters-tiny-recursive-mode-654860"
+}

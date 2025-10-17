@@ -5,9 +5,41 @@
     <link>https://rade.alphab.io/blog</link>
     <description>AI insights and analysis from RADE AI Solutions</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 15 Oct 2025 16:58:01 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 18 Oct 2025 02:07:54 GMT</lastBuildDate>
     <atom:link href="https://rade.alphab.io/blog/rss.xml" rel="self" type="application/rss+xml"/>
     
+    <item>
+      <title>GitHub Copilot vs Microsoft Copilot: Enterprise AI Compared</title>
+      <link>https://rade.alphab.io/blog/github-copilot-vs-microsoft-copilot-enterprise-ai-compared</link>
+      <description>Discover how GitHub Copilot and Microsoft Copilot impact enterprise productivity in 2025. Analysis of adoption rates, real-world effectiveness, and implementation challenges.</description>
+      <pubDate>Sat, 18 Oct 2025 02:07:54 GMT</pubDate>
+      <guid>https://rade.alphab.io/blog/github-copilot-vs-microsoft-copilot-enterprise-ai-compared</guid>
+      <category>AI Insights</category>
+    </item>
+    <item>
+      <title>Samsung&#39;s 7M Parameter TRM: The AI That Proves Size Isn&#39;t Everything</title>
+      <link>https://rade.alphab.io/blog/samsungs-7m-parameter-trm-the-ai-that-proves-size-isnt-every</link>
+      <description>Discover how Samsung SAIL Montreal&#39;s Tiny Recursive Model (TRM) achieves breakthrough AI performance with just 7 million parameters, challenging the bigger-is-better paradigm.</description>
+      <pubDate>Sat, 18 Oct 2025 01:45:50 GMT</pubDate>
+      <guid>https://rade.alphab.io/blog/samsungs-7m-parameter-trm-the-ai-that-proves-size-isnt-every</guid>
+      <category>AI Insights</category>
+    </item>
+    <item>
+      <title>World Models: The Next Evolution in Artificial Intelligence</title>
+      <link>https://rade.alphab.io/blog/world-models-the-next-evolution-in-artificial-intelligence</link>
+      <description>Explore how world models are revolutionizing AI in 2025, with $89.4B in global investments. Learn why these holistic systems are reshaping the future of technology.</description>
+      <pubDate>Fri, 17 Oct 2025 15:20:53 GMT</pubDate>
+      <guid>https://rade.alphab.io/blog/world-models-the-next-evolution-in-artificial-intelligence</guid>
+      <category>AI Analysis</category>
+    </item>
+    <item>
+      <title>Claude Haiku 4.5: Matching Top AI Models at 1/3 the Cost</title>
+      <link>https://rade.alphab.io/blog/claude-haiku-45-matching-top-ai-models-at-13-the-cost</link>
+      <description>Discover how Anthropic&#39;s Claude Haiku 4.5 achieves frontier model performance while delivering 2x speed and 70% cost savings. A deep dive into AI efficiency breakthroughs.</description>
+      <pubDate>Fri, 17 Oct 2025 12:14:01 GMT</pubDate>
+      <guid>https://rade.alphab.io/blog/claude-haiku-45-matching-top-ai-models-at-13-the-cost</guid>
+      <category>AI Insights</category>
+    </item>
     <item>
       <title>Nvidia&#39;s AI Dominance: Innovation or Market Disruption?</title>
       <link>https://rade.alphab.io/blog/nvidias-ai-dominance-innovation-or-market-disruption</link>
@@ -135,22 +167,6 @@
       <pubDate>Thu, 02 Oct 2025 14:21:00 GMT</pubDate>
       <guid>https://rade.alphab.io/blog/the-rise-of-energy-efficient-ai-a-game-changing-trend</guid>
       <category>AI Analysis</category>
-    </item>
-    <item>
-      <title>What Recent AI Developments Mean for Business Leaders in 2025</title>
-      <link>https://rade.alphab.io/blog/the-hidden-truth-about-ai-adoption-in-2025-leaders-take-note</link>
-      <description>While 78% of businesses use AI, most struggle with strategic deployment. Discover how to bridge the AI adoption-impact gap and drive real business outcomes in 2025.</description>
-      <pubDate>Thu, 02 Oct 2025 13:42:28 GMT</pubDate>
-      <guid>https://rade.alphab.io/blog/the-hidden-truth-about-ai-adoption-in-2025-leaders-take-note</guid>
-      <category>AI Analysis</category>
-    </item>
-    <item>
-      <title>The Hidden Truth About AI&#39;s 42% Project Failure Rate in 2025</title>
-      <link>https://rade.alphab.io/blog/the-hidden-truth-about-ais-42-project-failure-rate-in-2025</link>
-      <description>Explore why 42% of AI projects fail despite $500B market projections. Uncover the critical success factors behind AI implementation and why investments don&#39;t guarantee results.</description>
-      <pubDate>Thu, 02 Oct 2025 10:52:26 GMT</pubDate>
-      <guid>https://rade.alphab.io/blog/the-hidden-truth-about-ais-42-project-failure-rate-in-2025</guid>
-      <category>Reality Check</category>
     </item>
   </channel>
 </rss>

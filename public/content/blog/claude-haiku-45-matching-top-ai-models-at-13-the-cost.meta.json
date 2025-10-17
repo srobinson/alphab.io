@@ -1,0 +1,49 @@
+{
+  "title": "Claude Haiku 4.5: Matching Top AI Models at 1/3 the Cost",
+  "description": "Discover how Anthropic's Claude Haiku 4.5 achieves frontier model performance while delivering 2x speed and 70% cost savings. A deep dive into AI efficiency breakthroughs.",
+  "date": "2025-10-17",
+  "category": "AI Insights",
+  "tags": [
+    "Claude Haiku 4.5",
+    "AI model efficiency",
+    "Anthropic AI",
+    "cost-effective AI",
+    "AI performance optimization"
+  ],
+  "author": "RADE AI Solutions",
+  "readTime": "12 min read",
+  "seo": {
+    "keywords": [
+      "Claude Haiku 4.5",
+      "AI model efficiency",
+      "Anthropic AI",
+      "cost-effective AI",
+      "AI performance optimization",
+      "frontier AI models",
+      "AI infrastructure costs"
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Claude Haiku 4.5: Matching Top AI Models at 1/3 the Cost",
+      "description": "An in-depth analysis of how Anthropic's Claude Haiku 4.5 achieves frontier model performance levels while significantly reducing computational costs and increasing speed.",
+      "datePublished": "2025",
+      "author": {
+        "@type": "Organization",
+        "name": "Technical Deep Dive"
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "Artificial Intelligence"
+      },
+      "articleSection": "technical-deep-dive",
+      "keywords": "Claude Haiku 4.5, AI efficiency, Anthropic, frontier models, AI cost optimization, model performance, AI infrastructure"
+    }
+  },
+  "generated": true,
+  "generatedAt": "2025-10-17T11:40:51.683Z",
+  "slug": "claude-haiku-45-matching-top-ai-models-at-13-the-cost",
+  "published": true,
+  "publishedAt": "2025-10-17T12:14:01.550Z",
+  "draftId": "anthropics-claude-haiku-45-matches-mays--251684"
+}

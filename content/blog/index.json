@@ -1,6 +1,114 @@
 {
   "posts": [
     {
+      "slug": "github-copilot-vs-microsoft-copilot-enterprise-ai-compared",
+      "title": "GitHub Copilot vs Microsoft Copilot: Enterprise AI Compared",
+      "description": "Discover how GitHub Copilot and Microsoft Copilot impact enterprise productivity in 2025. Analysis of adoption rates, real-world effectiveness, and implementation challenges.",
+      "category": "AI Insights",
+      "date": "2025-10-18T00:00:00.000Z",
+      "publishedAt": "2025-10-18T02:07:54.889Z",
+      "readTime": "12 min read",
+      "tags": [
+        "github copilot enterprise",
+        "microsoft copilot productivity",
+        "AI enterprise adoption",
+        "copilot comparison",
+        "enterprise AI tools"
+      ],
+      "seoKeywords": [
+        "github copilot enterprise",
+        "microsoft copilot productivity",
+        "AI enterprise adoption",
+        "copilot comparison",
+        "enterprise AI tools",
+        "AI productivity analysis",
+        "copilot implementation"
+      ],
+      "generated": true,
+      "wordCount": 2358
+    },
+    {
+      "slug": "samsungs-7m-parameter-trm-the-ai-that-proves-size-isnt-every",
+      "title": "Samsung's 7M Parameter TRM: The AI That Proves Size Isn't Everything",
+      "description": "Discover how Samsung SAIL Montreal's Tiny Recursive Model (TRM) achieves breakthrough AI performance with just 7 million parameters, challenging the bigger-is-better paradigm.",
+      "category": "AI Insights",
+      "date": "2025-10-18T00:00:00.000Z",
+      "publishedAt": "2025-10-18T01:45:50.584Z",
+      "readTime": "12 min read",
+      "tags": [
+        "Tiny Recursive Model",
+        "TRM AI",
+        "Samsung SAIL Montreal",
+        "efficient AI models",
+        "7 million parameters"
+      ],
+      "seoKeywords": [
+        "Tiny Recursive Model",
+        "TRM AI",
+        "Samsung SAIL Montreal",
+        "efficient AI models",
+        "7 million parameters",
+        "AI efficiency",
+        "small language models"
+      ],
+      "generated": true,
+      "wordCount": 2397
+    },
+    {
+      "slug": "world-models-the-next-evolution-in-artificial-intelligence",
+      "title": "World Models: The Next Evolution in Artificial Intelligence",
+      "description": "Explore how world models are revolutionizing AI in 2025, with $89.4B in global investments. Learn why these holistic systems are reshaping the future of technology.",
+      "category": "AI Analysis",
+      "date": "2025-10-17T00:00:00.000Z",
+      "publishedAt": "2025-10-17T15:20:53.838Z",
+      "readTime": "11 min read",
+      "tags": [
+        "world models AI",
+        "AI world simulation",
+        "future of artificial intelligence",
+        "holistic AI systems",
+        "AI investment trends"
+      ],
+      "seoKeywords": [
+        "world models AI",
+        "AI world simulation",
+        "future of artificial intelligence",
+        "holistic AI systems",
+        "AI investment trends",
+        "predictive AI technology",
+        "AI world modeling"
+      ],
+      "generated": true,
+      "wordCount": 2308
+    },
+    {
+      "slug": "claude-haiku-45-matching-top-ai-models-at-13-the-cost",
+      "title": "Claude Haiku 4.5: Matching Top AI Models at 1/3 the Cost",
+      "description": "Discover how Anthropic's Claude Haiku 4.5 achieves frontier model performance while delivering 2x speed and 70% cost savings. A deep dive into AI efficiency breakthroughs.",
+      "category": "AI Insights",
+      "date": "2025-10-17T00:00:00.000Z",
+      "publishedAt": "2025-10-17T12:14:01.550Z",
+      "readTime": "12 min read",
+      "tags": [
+        "Claude Haiku 4.5",
+        "AI model efficiency",
+        "Anthropic AI",
+        "cost-effective AI",
+        "AI performance optimization"
+      ],
+      "seoKeywords": [
+        "Claude Haiku 4.5",
+        "AI model efficiency",
+        "Anthropic AI",
+        "cost-effective AI",
+        "AI performance optimization",
+        "frontier AI models",
+        "AI infrastructure costs"
+      ],
+      "generated": true,
+      "wordCount": 2356
+    },
+    {
       "slug": "nvidias-ai-dominance-innovation-or-market-disruption",
       "title": "Nvidia's AI Dominance: Innovation or Market Disruption?",
       "description": "Explore Nvidia's 41% market surge and AI infrastructure leadership in 2025. Uncover emerging competition and market shifts reshaping the future of AI technology.",
@@ -486,6 +594,6 @@
       "wordCount": 2631
     }
   ],
-  "lastUpdated": "2025-10-15T19:42:40.022Z",
-  "totalPosts": 18
+  "lastUpdated": "2025-10-18T02:07:58.165Z",
+  "totalPosts": 22
 }

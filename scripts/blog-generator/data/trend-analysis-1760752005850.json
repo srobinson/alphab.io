@@ -1,0 +1,515 @@
+{
+  "timeframe": "2 days",
+  "articleCount": 28,
+  "generatedAt": "2025-10-18T01:46:45.850Z",
+  "topics": [
+    {
+      "topic": "meta",
+      "count": 4,
+      "percentage": "14.3"
+    },
+    {
+      "topic": "microsoft",
+      "count": 4,
+      "percentage": "14.3"
+    },
+    {
+      "topic": "startup",
+      "count": 4,
+      "percentage": "14.3"
+    },
+    {
+      "topic": "openai",
+      "count": 3,
+      "percentage": "10.7"
+    },
+    {
+      "topic": "claude",
+      "count": 2,
+      "percentage": "7.1"
+    },
+    {
+      "topic": "anthropic",
+      "count": 2,
+      "percentage": "7.1"
+    },
+    {
+      "topic": "amazon",
+      "count": 2,
+      "percentage": "7.1"
+    },
+    {
+      "topic": "google",
+      "count": 2,
+      "percentage": "7.1"
+    },
+    {
+      "topic": "funding",
+      "count": 2,
+      "percentage": "7.1"
+    },
+    {
+      "topic": "enterprise",
+      "count": 1,
+      "percentage": "3.6"
+    },
+    {
+      "topic": "chatbot",
+      "count": 1,
+      "percentage": "3.6"
+    },
+    {
+      "topic": "alignment",
+      "count": 1,
+      "percentage": "3.6"
+    },
+    {
+      "topic": "vision",
+      "count": 1,
+      "percentage": "3.6"
+    }
+  ],
+  "themes": [
+    {
+      "name": "Technical Innovation",
+      "keywords": [
+        "architecture",
+        "algorithm",
+        "method",
+        "technique",
+        "approach"
+      ],
+      "description": "New technical approaches or methodologies",
+      "articleCount": 3,
+      "percentage": "10.7",
+      "sampleTitles": [
+        "The Bourbon Industry Is in Turmoil. Could Tech Provide the Shot It Needs?",
+        "New York bans AI-enabled rent price fixing",
+        "Nation-state hackers deliver malware from “bulletproof” blockchains"
+      ]
+    },
+    {
+      "name": "Challenges & Limitations",
+      "keywords": [
+        "challenge",
+        "limitation",
+        "problem",
+        "issue",
+        "concern"
+      ],
+      "description": "Problems and limitations in current AI",
+      "articleCount": 3,
+      "percentage": "10.7",
+      "sampleTitles": [
+        "The real reason Google DeepMind is working with a fusion energy startup | TechCrunch",
+        "We Will Not Trust Autonomous AI Agents Anytime Soon - Pawel Brodzinski on Leadership in Technology",
+        "Jack & Jill raises $20M to bring conversational AI to job-hunting | TechCrunch"
+      ]
+    },
+    {
+      "name": "Market Dynamics",
+      "keywords": [
+        "funding",
+        "investment",
+        "competition",
+        "market",
+        "revenue",
+        "growth"
+      ],
+      "description": "Business and market developments in AI",
+      "articleCount": 2,
+      "percentage": "7.1",
+      "sampleTitles": [
+        "General Intuition lands $134M seed to teach agents spatial reasoning using video game clips | TechCrunch",
+        "Jack & Jill raises $20M to bring conversational AI to job-hunting | TechCrunch"
+      ]
+    },
+    {
+      "name": "Practical Applications",
+      "keywords": [
+        "implementation",
+        "deployment",
+        "use case",
+        "application",
+        "adoption"
+      ],
+      "description": "Real-world AI implementations and use cases",
+      "articleCount": 2,
+      "percentage": "7.1",
+      "sampleTitles": [
+        "Why world models are the next big thing in AI",
+        "Jack & Jill raises $20M to bring conversational AI to job-hunting | TechCrunch"
+      ]
+    },
+    {
+      "name": "Industry Impact",
+      "keywords": [
+        "industry",
+        "sector",
+        "transformation",
+        "disruption",
+        "change"
+      ],
+      "description": "How AI is affecting different industries",
+      "articleCount": 2,
+      "percentage": "7.1",
+      "sampleTitles": [
+        "The Bourbon Industry Is in Turmoil. Could Tech Provide the Shot It Needs?",
+        "Ars Live recap: Is the AI bubble about to pop? Ed Zitron weighs in."
+      ]
+    },
+    {
+      "name": "AI Capability Leap",
+      "keywords": [
+        "breakthrough",
+        "advancement",
+        "capability",
+        "performance",
+        "benchmark"
+      ],
+      "description": "Major advances in AI capabilities or performance",
+      "articleCount": 0,
+      "percentage": "0.0",
+      "sampleTitles": []
+    }
+  ],
+  "opportunities": [
+    {
+      "type": "Future Forecast",
+      "title": "Startup: The Emerging AI Trend to Watch",
+      "description": "Early analysis of startup and its potential impact",
+      "confidence": "medium",
+      "reasoning": "4 early mentions suggest emerging interest",
+      "emergingTrend": {
+        "topic": "startup",
+        "count": 4,
+        "percentage": "14.3"
+      }
+    },
+    {
+      "type": "Comparison",
+      "title": "meta vs microsoft: Which AI Strategy Will Win?",
+      "description": "Head-to-head analysis of competing AI approaches",
+      "confidence": "high",
+      "reasoning": "Both heavily discussed (4 vs 4 mentions)",
+      "comparison": {
+        "a": {
+          "topic": "meta",
+          "count": 4,
+          "percentage": "14.3"
+        },
+        "b": {
+          "topic": "microsoft",
+          "count": 4,
+          "percentage": "14.3"
+        }
+      }
+    },
+    {
+      "type": "Industry Analysis",
+      "title": "How AI is Transforming energy",
+      "description": "Industry-specific AI applications and impact in energy",
+      "confidence": "medium",
+      "reasoning": "2 articles mention energy",
+      "industryData": {
+        "name": "energy",
+        "count": 2,
+        "articles": [
+          "Amazon shares a ‘first look’ at new nuclear facility",
+          "The real reason Google DeepMind is working with a fusion energy startup | TechCrunch"
+        ]
+      }
+    }
+  ],
+  "rawData": [
+    {
+      "title": "Meta finally announces parental controls for teen AI use on Instagram",
+      "summary": "Meta is introducing parental controls on Instagram that will allow parents to restrict or block their teens' interactions with AI chatbots, with features rolling out in early 2024 for English-speaking users in select countries.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai",
+        "meta"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-17T10:00:00+00:00",
+      "url": "https://www.theverge.com/news/801505/meta-ai-chatbot-parental-controls-instagram"
+    },
+    {
+      "title": "Meta previews new parental controls for its AI experiences | TechCrunch",
+      "summary": "Meta is introducing new parental control features for teens' interactions with AI characters on its platforms, including the ability to block characters, monitor conversation topics, and set time limits, rolling out in early 2025 across select English-speaking countries.",
+      "tags": [
+        "ai",
+        "social",
+        "instagram",
+        "meta",
+        "teen safety",
+        "meta ai",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-17T10:00:00+00:00",
+      "url": "https://techcrunch.com/2025/10/17/meta-previews-new-parental-controls-for-its-ai-experiences"
+    },
+    {
+      "title": "The Bourbon Industry Is in Turmoil. Could Tech Provide the Shot It Needs?",
+      "summary": "A new Kentucky distillery called Whiskey House is pioneering a high-tech, automated approach to bourbon production, using sensors and real-time analytics to ensure consistency while the broader industry faces declining sales and bankruptcies.",
+      "tags": [
+        "tech",
+        "gear",
+        "gear / trends",
+        "featured",
+        "automation"
+      ],
+      "source": "Wired Tech",
+      "published_at": "2025-10-17T10:00:00+00:00",
+      "url": "https://www.wired.com/story/whiskey-house-bourbon"
+    },
+    {
+      "title": "Anthropic connects Claude to Microsoft Teams, Outlook, and OneDrive",
+      "summary": "Anthropic is integrating its Claude AI assistant with Microsoft 365 services, allowing it to access and analyze content from Word documents, Teams messages, Outlook emails, SharePoint, and OneDrive for enterprise users.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai",
+        "anthropic",
+        "claude",
+        "microsoft"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-17T08:53:02+00:00",
+      "url": "https://www.theverge.com/news/801487/anthropic-claude-microsoft-365-connector-ai"
+    },
+    {
+      "title": "AT&T is raising home internet prices for the second year in a row",
+      "summary": "AT&T is implementing a $5 monthly price increase on all home internet plans starting December 2025, following similar $5 increases in 2024 and 2023, though customers who signed up in the last year and low-income households will be exempt.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-17T06:01:20+00:00",
+      "url": "https://www.theverge.com/news/801423/att-fiber-home-internet-december-2025-price-raise-hike"
+    },
+    {
+      "title": "OpenAI pauses Sora video generations of Martin Luther King Jr. | TechCrunch",
+      "summary": "OpenAI has suspended the ability to generate AI videos of Martin Luther King Jr. using its Sora platform at the request of his estate, following reports of disrespectful depictions being created by users.",
+      "tags": [
+        "ai",
+        "openai",
+        "mlk",
+        "sora",
+        "ai video",
+        "ai copyright",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-17T03:21:06+00:00",
+      "url": "https://techcrunch.com/2025/10/16/openai-pauses-sora-video-generations-of-martin-luther-king-jr"
+    },
+    {
+      "title": "Why world models are the next big thing in AI",
+      "summary": "General Intuition, a new AI startup spun out from gaming platform Medal, has raised $133.7M to develop world models that help AI agents interact with physical spaces using gaming data, with initial applications planned for search and rescue drones.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-17T01:30:00+00:00",
+      "url": "https://www.theverge.com/column/801370/ai-world-models-general-intuition-medal"
+    },
+    {
+      "title": "MacBook Pro rumor points to OLED, touchscreen upgrades next year",
+      "summary": "According to Bloomberg reports, Apple's 2026 MacBook Pro lineup will feature OLED touchscreens, a thinner design, and M6 processors, with prices expected to increase by several hundred dollars.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai",
+        "apple"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-17T00:46:04+00:00",
+      "url": "https://www.theverge.com/news/801363/apple-macbook-pro-2026-rumor-oled-touchscreen"
+    },
+    {
+      "title": "Amazon shares a ‘first look’ at new nuclear facility",
+      "summary": "Amazon revealed plans for the Cascade Advanced Energy Facility in Washington State, which will deploy up to 12 small modular nuclear reactors by early 2030s, with the first phase generating 320 megawatts of carbon-free electricity.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-16T22:35:54+00:00",
+      "url": "https://www.theverge.com/news/801257/amazon-nuclear-energy-reactor-first-look"
+    },
+    {
+      "title": "New York bans AI-enabled rent price fixing",
+      "summary": "New York has become the first state to ban the use of algorithmic pricing software by landlords for setting rental rates, with violators being considered as engaging in price collusion under the new law.",
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-16T21:24:52+00:00",
+      "url": "https://www.theverge.com/news/801205/new-york-rent-price-fixing-ban-software"
+    },
+    {
+      "title": "Nation-state hackers deliver malware from “bulletproof” blockchains",
+      "summary": "Nation-state hackers, including North Korean groups, are using public cryptocurrency blockchains like Ethereum and BNB to store and distribute malware through smart contracts, making the malicious payloads immune to takedowns and costing less than traditional hosting methods.",
+      "tags": [
+        "tech",
+        "biz & it",
+        "security",
+        "blockchain",
+        "hacking",
+        "malware",
+        "ai"
+      ],
+      "source": "Ars Technica AI",
+      "published_at": "2025-10-16T20:40:49+00:00",
+      "url": "https://arstechnica.com/security/2025/10/hackers-bullet-proof-hosts-deliver-malware-from-blockchains"
+    },
+    {
+      "title": "Ars Live recap: Is the AI bubble about to pop? Ed Zitron weighs in.",
+      "summary": "Tech critic Ed Zitron discusses the economics of generative AI, describing it as a $50 billion industry masquerading as a trillion-dollar one, while pointing to OpenAI's massive losses and unsustainable infrastructure costs as evidence of a potential bubble.",
+      "tags": [
+        "tech",
+        "ai",
+        "biz & it",
+        "ai agents",
+        "ai chips",
+        "ai criticism",
+        "ai economics",
+        "ai infrastructure",
+        "benj edwards",
+        "bubble",
+        "openai"
+      ],
+      "source": "Ars Technica AI",
+      "published_at": "2025-10-16T20:25:08+00:00",
+      "url": "https://arstechnica.com/ai/2025/10/ars-live-recap-is-the-ai-bubble-about-to-pop-ed-zitron-weighs-in"
+    },
+    {
+      "title": "Kayak launches an 'AI Mode' for travel questions, search, and bookings | TechCrunch",
+      "summary": "Kayak has launched an AI Mode feature that lets users research and book travel through an integrated chatbot powered by ChatGPT, allowing natural language queries for flight deals, destination recommendations, and trip planning.",
+      "tags": [
+        "ai",
+        "apps",
+        "ai mode",
+        "chatgpt",
+        "kayak",
+        "travel",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-16T19:23:07+00:00",
+      "url": "https://techcrunch.com/2025/10/16/kayak-launches-an-ai-mode-for-travel-questions-search-and-bookings"
+    },
+    {
+      "title": "Unions are trying to stop Trump from kicking out immigrants over social media posts",
+      "summary": null,
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-16T19:21:10+00:00",
+      "url": "https://www.theverge.com/policy/801110/eff-catch-and-revoke-visa-social-media-surveillance-lawsuit"
+    },
+    {
+      "title": "Judge orders immigration agents in Chicago to use body cams",
+      "summary": null,
+      "tags": [
+        "tech",
+        "featured",
+        "ai"
+      ],
+      "source": "The Verge",
+      "published_at": "2025-10-16T19:08:33+00:00",
+      "url": "https://www.theverge.com/news/801112/judge-orders-chicago-ice-agents-use-body-cams"
+    },
+    {
+      "title": "Why AI startups are taking data into their own hands | TechCrunch",
+      "summary": "AI companies are shifting away from web-scraped training data towards carefully curated proprietary datasets, with firms like Turing and Fyxer directly hiring specialists to generate high-quality training data as a competitive advantage.",
+      "tags": [
+        "ai",
+        "artificial intelligence",
+        "fyxer",
+        "training data",
+        "vision model",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-16T19:08:00+00:00",
+      "url": "https://techcrunch.com/2025/10/16/why-ai-startups-are-taking-data-into-their-own-hands"
+    },
+    {
+      "title": "The real reason Google DeepMind is working with a fusion energy startup | TechCrunch",
+      "summary": "Google DeepMind is partnering with Commonwealth Fusion Systems (CFS) to use AI software Torax to simulate and optimize plasma behavior in fusion reactors, aiming to solve one of fusion power's biggest challenges - maintaining stable plasma conditions.",
+      "tags": [
+        "ai",
+        "climate",
+        "commonwealth fusion systems",
+        "fusion power",
+        "google deepmind",
+        "nuclear fusion",
+        "featured",
+        "google"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-16T18:06:08+00:00",
+      "url": "https://techcrunch.com/2025/10/16/the-real-reason-google-deepmind-is-working-with-a-fusion-energy-startup"
+    },
+    {
+      "title": "Niantic’s Peridot, the Augmented Reality Alien Dog, Is Now a Talking Tour Guide",
+      "summary": "Niantic is adding voice capabilities to its AR companion app Peridot, allowing digital pets to act as tour guides and provide location-specific information through Snap Spectacles AR glasses.",
+      "tags": [
+        "tech",
+        "gear",
+        "gear / gear news and events",
+        "featured"
+      ],
+      "source": "Wired Tech",
+      "published_at": "2025-10-16T17:00:00+00:00",
+      "url": "https://www.wired.com/story/niantic-peridot-augmented-reality-snap-spectacles"
+    },
+    {
+      "title": "Pinterest adds controls to let you limit the amount of 'AI slop' in your feed | TechCrunch",
+      "summary": "Pinterest is introducing new controls that allow users to limit AI-generated content in their feeds and make AI content labels more visible, responding to user complaints about excessive AI-generated imagery on the platform.",
+      "tags": [
+        "ai",
+        "apps",
+        "social",
+        "pinterest",
+        "featured"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-16T15:15:50+00:00",
+      "url": "https://techcrunch.com/2025/10/16/pinterest-adds-controls-to-let-you-limit-the-amount-of-ai-slop-in-your-feed"
+    },
+    {
+      "title": "Final 2 days to claim your exhibit table at Disrupt 2025 | TechCrunch",
+      "summary": "TechCrunch Disrupt 2025, taking place October 27-29 in San Francisco, is offering final opportunities to secure exhibit tables for startups to showcase their innovations to 10,000 attendees including investors, founders, and tech leaders.",
+      "tags": [
+        "ai",
+        "apps",
+        "climate",
+        "fintech",
+        "fundraising",
+        "media & entertainment",
+        "robotics",
+        "startups",
+        "transportation",
+        "techcrunch disrupt 2025"
+      ],
+      "source": "TechCrunch AI",
+      "published_at": "2025-10-16T14:30:00+00:00",
+      "url": "https://techcrunch.com/2025/10/16/final-2-days-to-claim-your-exhibit-table-at-techcrunch-disrupt-2025"
+    }
+  ]
+}
