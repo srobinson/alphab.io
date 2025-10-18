@@ -65,7 +65,7 @@ class BlogGenerator {
   async generateBlogPost(options = {}) {
     const {
       topic,
-      type = "analysis", // analysis, tutorial, prediction, reality-check
+      type = "analysis", // analysis, tutorial, prediction, reality-check, technical-deep-dive, personalities
       style = "analytical",
     } = options;
 
@@ -548,6 +548,8 @@ IMPORTANT: Return ONLY valid JSON with no additional text. Start with { and end 
       tutorial: "Technical Guide",
       prediction: "Future Forecast",
       "reality-check": "Reality Check",
+      "technical-deep-dive": "Technical Deep Dive",
+      personalities: "Personalities",
     };
     return mapping[type] || "AI Insights";
   }
@@ -822,7 +824,7 @@ if (require.main === module) {
 
   if (!topic) {
     console.log('Usage: node blog-generator.js "Topic" [type]');
-    console.log("Types: analysis, tutorial, prediction, reality-check");
+    console.log("Types: analysis, tutorial, prediction, reality-check, technical-deep-dive, personalities");
     process.exit(1);
   }
 

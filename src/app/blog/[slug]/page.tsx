@@ -203,26 +203,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 								prose-img:rounded-xl prose-img:shadow-lg prose-img:my-8"
                 dangerouslySetInnerHTML={{ __html: post.contentHtml }}
               />
-
-              {/* Tags */}
-              {post.tags.length > 0 && (
-                <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                    <span className="w-1 h-5 bg-linear-to-b from-blue-500 to-purple-500 rounded-full" />
-                    Related Topics
-                  </h3>
-                  <div className="flex flex-wrap gap-2.5">
-                    {post.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-4 py-2 bg-linear-to-br from-gray-100 to-gray-50 dark:from-gray-800 dark:to-gray-850 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-full border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 transition-colors shadow-xs"
-                      >
-                        #{tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
             </main>
           </div>
         </div>

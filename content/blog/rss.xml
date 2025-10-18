@@ -5,9 +5,17 @@
     <link>https://rade.alphab.io/blog</link>
     <description>AI insights and analysis from RADE AI Solutions</description>
     <language>en-us</language>
-    <lastBuildDate>Sat, 18 Oct 2025 02:07:54 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 18 Oct 2025 17:20:49 GMT</lastBuildDate>
     <atom:link href="https://rade.alphab.io/blog/rss.xml" rel="self" type="application/rss+xml"/>
     
+    <item>
+      <title>Andrej Karpathy: AI&#39;s Prophet of Pragmatic Progress</title>
+      <link>https://rade.alphab.io/blog/andrej-karpathy-ais-prophet-of-pragmatic-progress</link>
+      <description>Explore how Andrej Karpathy, former Tesla AI Director, challenges AI hype with data-driven insights on autonomous systems and the real timeline for AGI advancement.</description>
+      <pubDate>Sat, 18 Oct 2025 17:20:49 GMT</pubDate>
+      <guid>https://rade.alphab.io/blog/andrej-karpathy-ais-prophet-of-pragmatic-progress</guid>
+      <category>Personalities</category>
+    </item>
     <item>
       <title>GitHub Copilot vs Microsoft Copilot: Enterprise AI Compared</title>
       <link>https://rade.alphab.io/blog/github-copilot-vs-microsoft-copilot-enterprise-ai-compared</link>
@@ -158,14 +166,6 @@
       <description>Former Stripe CTO Rahul Patil joins Anthropic as new chief technical officer, signaling strategic expansion of AI capabilities and infrastructure development.</description>
       <pubDate>Fri, 03 Oct 2025 02:21:50 GMT</pubDate>
       <guid>https://rade.alphab.io/blog/anthropic-names-ex-stripe-cto-to-lead-ai-infrastructure-push</guid>
-      <category>AI Analysis</category>
-    </item>
-    <item>
-      <title>The Rise of Energy-Efficient AI: A Game-Changing Trend</title>
-      <link>https://rade.alphab.io/blog/the-rise-of-energy-efficient-ai-a-game-changing-trend</link>
-      <description>Discover how localized, energy-efficient AI models are reshaping technology&#39;s future. New data reveals why smaller, smarter AI deployment is outperforming traditional approaches.</description>
-      <pubDate>Thu, 02 Oct 2025 14:21:00 GMT</pubDate>
-      <guid>https://rade.alphab.io/blog/the-rise-of-energy-efficient-ai-a-game-changing-trend</guid>
       <category>AI Analysis</category>
     </item>
   </channel>

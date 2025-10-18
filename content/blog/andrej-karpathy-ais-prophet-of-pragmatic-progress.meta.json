@@ -1,0 +1,59 @@
+{
+  "title": "Andrej Karpathy: AI's Prophet of Pragmatic Progress",
+  "description": "Explore how Andrej Karpathy, former Tesla AI Director, challenges AI hype with data-driven insights on autonomous systems and the real timeline for AGI advancement.",
+  "date": "2025-10-18",
+  "category": "Personalities",
+  "tags": [
+    "Andrej Karpathy",
+    "AI development timeline",
+    "Tesla AI leadership",
+    "autonomous systems future",
+    "AI industry predictions"
+  ],
+  "author": "RADE AI Solutions",
+  "readTime": "10 min read",
+  "seo": {
+    "keywords": [
+      "Andrej Karpathy",
+      "AI development timeline",
+      "Tesla AI leadership",
+      "autonomous systems future",
+      "AI industry predictions",
+      "vibe coding",
+      "artificial general intelligence"
+    ],
+    "schema": {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Andrej Karpathy: AI's Prophet of Pragmatic Progress",
+      "description": "An in-depth analysis of Andrej Karpathy's perspective on AI development, examining his insights from Tesla leadership and recent speaking engagements that challenge popular AI advancement narratives.",
+      "author": {
+        "@type": "Person",
+        "name": "Andrej Karpathy"
+      },
+      "datePublished": "2025",
+      "image": {
+        "@type": "ImageObject",
+        "url": "[URL_TO_FEATURED_IMAGE]"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "[PUBLISHER_NAME]",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "[PUBLISHER_LOGO_URL]"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "[ARTICLE_URL]"
+      }
+    }
+  },
+  "generated": true,
+  "generatedAt": "2025-10-18T14:44:42.329Z",
+  "slug": "andrej-karpathy-ais-prophet-of-pragmatic-progress",
+  "published": true,
+  "publishedAt": "2025-10-18T17:20:49.768Z",
+  "draftId": "andrej-karpathy-the-man-the-legend-the-p-682329"
+}

@@ -1,6 +1,33 @@
 {
   "posts": [
     {
+      "slug": "andrej-karpathy-ais-prophet-of-pragmatic-progress",
+      "title": "Andrej Karpathy: AI's Prophet of Pragmatic Progress",
+      "description": "Explore how Andrej Karpathy, former Tesla AI Director, challenges AI hype with data-driven insights on autonomous systems and the real timeline for AGI advancement.",
+      "category": "Personalities",
+      "date": "2025-10-18T00:00:00.000Z",
+      "publishedAt": "2025-10-18T17:20:49.768Z",
+      "readTime": "10 min read",
+      "tags": [
+        "Andrej Karpathy",
+        "AI development timeline",
+        "Tesla AI leadership",
+        "autonomous systems future",
+        "AI industry predictions"
+      ],
+      "seoKeywords": [
+        "Andrej Karpathy",
+        "AI development timeline",
+        "Tesla AI leadership",
+        "autonomous systems future",
+        "AI industry predictions",
+        "vibe coding",
+        "artificial general intelligence"
+      ],
+      "generated": true,
+      "wordCount": 1940
+    },
+    {
       "slug": "github-copilot-vs-microsoft-copilot-enterprise-ai-compared",
       "title": "GitHub Copilot vs Microsoft Copilot: Enterprise AI Compared",
       "description": "Discover how GitHub Copilot and Microsoft Copilot impact enterprise productivity in 2025. Analysis of adoption rates, real-world effectiveness, and implementation challenges.",
@@ -594,6 +621,6 @@
       "wordCount": 2631
     }
   ],
-  "lastUpdated": "2025-10-18T02:07:58.165Z",
-  "totalPosts": 22
+  "lastUpdated": "2025-10-18T17:20:56.979Z",
+  "totalPosts": 23
 }
