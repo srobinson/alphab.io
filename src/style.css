@@ -1,0 +1,225 @@
+/* ═══════════════════════════════════════════════
+   alphab.io — Stuart Robinson
+   ═══════════════════════════════════════════════ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #08080a;
+  --surface: #0e0e11;
+  --border: #1a1a1f;
+  --text: #e2ddd5;
+  --text-dim: #7a746c;
+  --text-muted: #3d3a36;
+  --accent: #c9a84c;
+  --accent-dim: rgba(201, 168, 76, 0.15);
+
+  --serif: 'Instrument Serif', Georgia, serif;
+  --mono: 'Martian Mono', 'SF Mono', monospace;
+
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 300;
+  line-height: 1.7;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+main {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* ── CARD ────────────────────────────────────── */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ── AVATAR ──────────────────────────────────── */
+
+.avatar-wrap {
+  position: relative;
+  margin-bottom: 2rem;
+  animation: fadeIn 1.2s var(--ease-out) forwards;
+  opacity: 0;
+}
+
+.avatar-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    var(--accent-dim) 60deg,
+    transparent 120deg,
+    var(--accent-dim) 200deg,
+    transparent 260deg,
+    var(--accent-dim) 340deg,
+    transparent 360deg
+  );
+  animation: rotate 20s linear infinite;
+}
+
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  position: relative;
+  border: 2px solid var(--bg);
+  display: block;
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+/* ── NAME ────────────────────────────────────── */
+
+.name {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(1.8rem, 1.5rem + 2vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  animation: fadeUp 1s var(--ease-out) 0.1s forwards;
+  opacity: 0;
+}
+
+/* ── BIO ─────────────────────────────────────── */
+
+.bio {
+  font-size: clamp(0.7rem, 0.65rem + 0.3vw, 0.8rem);
+  color: var(--text-dim);
+  max-width: 32ch;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  line-height: 1.8;
+  animation: fadeUp 1s var(--ease-out) 0.2s forwards;
+  opacity: 0;
+}
+
+.helioy-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 400;
+  transition: opacity 0.2s;
+}
+
+.helioy-link:hover {
+  opacity: 0.8;
+}
+
+/* ── LINKS ───────────────────────────────────── */
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  animation: fadeUp 1s var(--ease-out) 0.35s forwards;
+  opacity: 0;
+}
+
+.link,
+.link-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1.5rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  margin-top: -1px;
+  transition: all 0.25s var(--ease);
+}
+
+.link:first-child,
+.link-primary:first-child {
+  margin-top: 0;
+}
+
+.link:hover {
+  color: var(--text);
+  border-color: var(--text-muted);
+  background: var(--surface);
+  z-index: 1;
+}
+
+.link-primary {
+  color: var(--accent);
+  border-color: var(--accent-dim);
+  font-weight: 500;
+}
+
+.link-primary:hover {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+  z-index: 1;
+}
+
+.link svg,
+.link-primary svg {
+  flex-shrink: 0;
+  transition: transform 0.25s var(--ease);
+}
+
+.link:hover svg,
+.link-primary:hover svg {
+  transform: scale(1.1);
+}
+
+/* ── ANIMATIONS ──────────────────────────────── */
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ──────────────────────────────── */
+
+@media (max-width: 380px) {
+  .avatar {
+    width: 110px;
+    height: 110px;
+  }
+}
