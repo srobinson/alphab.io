@@ -100,6 +100,16 @@ main {
   to { transform: rotate(360deg); }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* ── NAME ────────────────────────────────────── */
 
 .name {
@@ -123,8 +133,11 @@ main {
   margin-bottom: 2.5rem;
   font-weight: 300;
   line-height: 1.8;
-  animation: fadeUp 1s var(--ease-out) 0.2s forwards;
   opacity: 0;
+}
+
+.bio.visible {
+  opacity: 1;
 }
 
 .helioy-link {
@@ -138,6 +151,23 @@ main {
   opacity: 0.8;
 }
 
+/* ── CURSOR ──────────────────────────────────── */
+
+.cursor::after {
+  content: '';
+  display: inline-block;
+  width: 1.5px;
+  height: 1em;
+  background: var(--accent);
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  animation: blink 0.6s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
 /* ── LINKS ───────────────────────────────────── */
 
 .links {
@@ -145,8 +175,6 @@ main {
   flex-direction: column;
   gap: 0;
   width: 100%;
-  animation: fadeUp 1s var(--ease-out) 0.35s forwards;
-  opacity: 0;
 }
 
 .link,
@@ -164,7 +192,20 @@ main {
   color: var(--text-dim);
   border: 1px solid var(--border);
   margin-top: -1px;
-  transition: all 0.25s var(--ease);
+  opacity: 0;
+  transform: translateY(6px);
+  transition:
+    opacity 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out),
+    color 0.25s var(--ease),
+    background 0.25s var(--ease),
+    border-color 0.25s var(--ease);
+}
+
+.link.revealed,
+.link-primary.revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .link:first-child,
@@ -201,18 +242,6 @@ main {
 .link:hover svg,
 .link-primary:hover svg {
   transform: scale(1.1);
-}
-
-/* ── ANIMATIONS ──────────────────────────────── */
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* ── RESPONSIVE ──────────────────────────────── */
