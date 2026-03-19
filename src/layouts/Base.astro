@@ -26,9 +26,9 @@ const { title, description, image, type, jsonLd } = Astro.props;
       jsonLd={jsonLd}
     />
   </head>
-  <body class="bg-surface text-white/80 font-sans min-h-screen flex flex-col">
+  <body class="text-text font-sans min-h-screen flex flex-col">
     <Nav />
-    <main class="flex-1">
+    <main class="flex-1 max-w-3xl mx-auto px-6 w-full">
       <slot />
     </main>
     <Footer />

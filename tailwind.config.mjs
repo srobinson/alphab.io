@@ -8,31 +8,22 @@ export default {
       },
       colors: {
         surface: {
-          DEFAULT: "#0a0a0a",
-          raised: "#141414",
-          overlay: "#1a1a1a",
+          DEFAULT: "#ffffff",
+          raised: "#f8f8fa",
+          muted: "#f0eef5",
+        },
+        text: {
+          DEFAULT: "#1a1a2e",
+          secondary: "#555566",
+          tertiary: "#888899",
+        },
+        accent: {
+          DEFAULT: "#7c5cbf",
+          light: "#e8e0f3",
         },
         border: {
-          subtle: "rgba(255, 255, 255, 0.06)",
-          DEFAULT: "rgba(255, 255, 255, 0.1)",
-        },
-      },
-      typography: {
-        DEFAULT: {
-          css: {
-            "--tw-prose-body": "rgba(255, 255, 255, 0.7)",
-            "--tw-prose-headings": "rgba(255, 255, 255, 0.9)",
-            "--tw-prose-links": "rgba(255, 255, 255, 0.9)",
-            "--tw-prose-bold": "rgba(255, 255, 255, 0.9)",
-            "--tw-prose-code": "rgba(255, 255, 255, 0.8)",
-            "--tw-prose-pre-bg": "#141414",
-            "--tw-prose-pre-code": "rgba(255, 255, 255, 0.8)",
-            "--tw-prose-quotes": "rgba(255, 255, 255, 0.6)",
-            "--tw-prose-quote-borders": "rgba(255, 255, 255, 0.1)",
-            "--tw-prose-counters": "rgba(255, 255, 255, 0.4)",
-            "--tw-prose-bullets": "rgba(255, 255, 255, 0.3)",
-            "--tw-prose-hr": "rgba(255, 255, 255, 0.06)",
-          },
+          subtle: "rgba(0, 0, 0, 0.06)",
+          DEFAULT: "rgba(0, 0, 0, 0.1)",
         },
       },
     },

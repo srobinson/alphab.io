@@ -28,66 +28,53 @@ const jsonLd = {
   jsonLd={jsonLd}
 >
   <!-- Hero -->
-  <section class="max-w-2xl mx-auto px-6 pt-16 pb-12">
-    <div class="flex items-start gap-6">
-      <img
-        src="/stu.portrait.png"
-        alt="Stuart Robinson"
-        width="80"
-        height="80"
-        class="rounded-full grayscale opacity-90 ring-1 ring-white/10 flex-shrink-0"
-      />
-      <div>
-        <h1 class="text-2xl font-bold text-white/90 tracking-tight">
-          Stuart Robinson
+  <section class="pt-14 pb-16">
+    <div class="flex flex-col md:flex-row items-start gap-10">
+      <!-- Left: Bio -->
+      <div class="flex-1 order-2 md:order-1">
+        <h1 class="text-3xl sm:text-4xl font-bold text-text tracking-tight">
+          Hi, I'm Stuart.
         </h1>
-        <p class="mt-1 text-white/50 font-medium">
-          Dev, infra and AI researcher.
+        <p class="mt-4 text-lg text-text-secondary leading-relaxed">
+          This is where I share what I learn, read, build, and think.
         </p>
-        <p class="mt-3 text-white/60 leading-relaxed">
-          Building <a
-            href="https://helioy.com"
-            class="text-white/80 hover:text-white transition-colors"
-            >Helioy</a
-          > — infrastructure for AI agents that waste less and remember more.
+        <ul class="mt-6 space-y-2.5 text-text-secondary">
+          <li class="flex items-start gap-2.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent mt-0.5 flex-shrink-0"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+            <span>I build AI agents, infrastructure, and multi-agent systems</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent mt-0.5 flex-shrink-0"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            <span>I am building <a href="https://helioy.com" class="text-accent font-medium hover:underline">Helioy</a>, an autocatalytic closure of specialized context tools that transform raw environments into high-signal representations for finite-context AI agents.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent mt-0.5 flex-shrink-0"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+            <span>Bangkok. Building in public.</span>
+          </li>
+        </ul>
+        <p class="mt-6 text-sm text-text-tertiary">
+          Follow me on <a href="https://x.com/srobinson" class="text-accent hover:underline">X (@srobinson)</a>
         </p>
+      </div>
+
+      <!-- Right: Photo -->
+      <div class="order-1 md:order-2 flex-shrink-0">
+        <img
+          src="/stu.portrait.png"
+          alt="Stuart Robinson"
+          width="180"
+          height="180"
+          class="rounded-full object-cover w-36 h-36 sm:w-44 sm:h-44 ring-1 ring-border shadow-lg"
+        />
       </div>
     </div>
   </section>
 
   <!-- Articles -->
-  <section class="max-w-2xl mx-auto px-6 pb-20">
-    <h2 class="text-xs font-bold text-white/30 uppercase tracking-widest mb-6">
-      Articles
-    </h2>
-    {
-      posts.length > 0 ? (
-        <ul class="space-y-1">
-          {posts.map((post) => (
-            <li>
-              <a
-                href={`/blog/${post.id}`}
-                class="group flex items-baseline justify-between gap-4 py-3 border-b border-border-subtle hover:border-white/10 transition-colors"
-              >
-                <span class="text-white/70 group-hover:text-white/90 transition-colors font-medium">
-                  {post.data.title}
-                </span>
-                <time
-                  datetime={post.data.date.toISOString()}
-                  class="text-sm text-white/25 tabular-nums flex-shrink-0"
-                >
-                  {post.data.date.toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </time>
-              </a>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p class="text-white/30 text-sm">Writing starts soon.</p>
-      )
-    }
+  <section class="pb-20">
+    <div class="bg-white rounded-2xl shadow-sm border border-border-subtle p-8 text-center">
+      <h2 class="text-xl font-bold text-text">Articles</h2>
+      <p class="mt-3 text-text-tertiary">Coming soon. A 30-day series on building AI agent infrastructure.</p>
+    </div>
   </section>
 </Base>
