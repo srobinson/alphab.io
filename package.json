@@ -1,15 +1,21 @@
 {
-  "name": "alphab-io",
+  "name": "srobinson-org",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 5174",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.7.0",
+    "@astrojs/tailwind": "^6.0.2",
+    "@astrojs/sitemap": "^3.3.1",
+    "@tailwindcss/typography": "^0.5.16",
+    "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
-    "typescript": "^5.7.0",
-    "vite": "^6.0.0"
+    "typescript": "^5.7.0"
   }
 }

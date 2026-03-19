@@ -1,0 +1,50 @@
+---
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+];
+
+const socialLinks = [
+  { href: "https://github.com/srobinson", label: "GitHub" },
+  { href: "https://x.com/srobinson", label: "X" },
+  { href: "https://www.linkedin.com/in/stu-uk", label: "LinkedIn" },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav class="border-b border-border-subtle">
+  <div class="max-w-2xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-6">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class:list={[
+              "text-sm font-medium transition-colors",
+              currentPath === link.href
+                ? "text-white/90"
+                : "text-white/40 hover:text-white/70",
+            ]}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+    <div class="flex items-center gap-4">
+      {
+        socialLinks.map((link) => (
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm text-white/30 hover:text-white/70 transition-colors"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,36 @@
+---
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import Head from "../components/Head.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: string;
+  jsonLd?: Record<string, unknown>;
+}
+
+const { title, description, image, type, jsonLd } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head
+      title={title}
+      description={description}
+      image={image}
+      type={type}
+      jsonLd={jsonLd}
+    />
+  </head>
+  <body class="bg-surface text-white/80 font-sans min-h-screen flex flex-col">
+    <Nav />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

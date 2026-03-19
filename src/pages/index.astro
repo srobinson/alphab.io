@@ -1,0 +1,93 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../layouts/Base.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Stuart Robinson",
+  url: "https://srobinson.org",
+  sameAs: [
+    "https://github.com/srobinson",
+    "https://x.com/srobinson",
+    "https://www.linkedin.com/in/stu-uk/",
+  ],
+  knowsAbout: ["AI agents", "infrastructure"],
+  description:
+    "Building Helioy — infrastructure for AI agents that waste less and remember more.",
+};
+---
+
+<Base
+  title="Stuart Robinson"
+  description="Building Helioy — infrastructure for AI agents that waste less and remember more."
+  jsonLd={jsonLd}
+>
+  <!-- Hero -->
+  <section class="max-w-2xl mx-auto px-6 pt-16 pb-12">
+    <div class="flex items-start gap-6">
+      <img
+        src="/stu.portrait.png"
+        alt="Stuart Robinson"
+        width="80"
+        height="80"
+        class="rounded-full grayscale opacity-90 ring-1 ring-white/10 flex-shrink-0"
+      />
+      <div>
+        <h1 class="text-2xl font-bold text-white/90 tracking-tight">
+          Stuart Robinson
+        </h1>
+        <p class="mt-1 text-white/50 font-medium">
+          Dev, infra and AI researcher.
+        </p>
+        <p class="mt-3 text-white/60 leading-relaxed">
+          Building <a
+            href="https://helioy.com"
+            class="text-white/80 hover:text-white transition-colors"
+            >Helioy</a
+          > — infrastructure for AI agents that waste less and remember more.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Articles -->
+  <section class="max-w-2xl mx-auto px-6 pb-20">
+    <h2 class="text-xs font-bold text-white/30 uppercase tracking-widest mb-6">
+      Articles
+    </h2>
+    {
+      posts.length > 0 ? (
+        <ul class="space-y-1">
+          {posts.map((post) => (
+            <li>
+              <a
+                href={`/blog/${post.id}`}
+                class="group flex items-baseline justify-between gap-4 py-3 border-b border-border-subtle hover:border-white/10 transition-colors"
+              >
+                <span class="text-white/70 group-hover:text-white/90 transition-colors font-medium">
+                  {post.data.title}
+                </span>
+                <time
+                  datetime={post.data.date.toISOString()}
+                  class="text-sm text-white/25 tabular-nums flex-shrink-0"
+                >
+                  {post.data.date.toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </time>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="text-white/30 text-sm">Writing starts soon.</p>
+      )
+    }
+  </section>
+</Base>

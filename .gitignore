@@ -1,4 +1,10 @@
-node_modules
-dist
-.vercel
-.env*.local
+node_modules/
+dist/
+.astro/
+.vercel/
+.env
+.env.local
+.DS_Store
+.fmm.db
+.fmm.db-shm
+.fmm.db-wal
